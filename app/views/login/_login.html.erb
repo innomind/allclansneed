@@ -1,0 +1,29 @@
+
+<% if flash[:notice] %><div style="background:yellow;"><%= flash[:notice] %></div><% end %>
+
+<%unless session['user']%>
+  <br/>
+
+
+  <% form_tag 'login' do -%>
+    <div>
+      <%= label_tag 'nick' %>
+      <%= text_field_tag 'nick' %>
+    </div>
+    <br/>
+    <div>
+      <%= label_tag 'password' %>
+      <%= password_field_tag 'password' %>
+    </div>
+    <br/>
+    <%= submit_tag 'log in' %>
+  <%end%>
+
+
+
+  <br/>
+  <%= link_to 'account erstellen', :action => 'create' %>
+
+<% else %>
+  logged in
+<% end %>

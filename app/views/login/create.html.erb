@@ -1,0 +1,24 @@
+<% if flash[:errors] %>
+    <% flash[:errors].each_full do |msg| %>
+  <div style="background:yellow;">
+      <%=  msg %>
+    </div>
+  <% end %>
+<% end %>
+
+
+<% form_for(Account.new) do |acc| %>
+  <%= acc.label :nick, 'nick' %>
+  <%= acc.text_field :nick %>
+  <br/>
+  <%= acc.label :password, 'password' %>
+  <%= acc.password_field :password %>
+  <br/>
+  <%= acc.label :email, 'email' %>
+  <%= acc.text_field :email %>
+  <%  options = String.new ;@pages.each do |page|%>
+    <% options << "\n<option value="+page.id.to_s+">"+page.title+" </option>" %>
+  <%end%>
+  <%= select_tag 'site_id', options%>
+  <%= button_to 'send' %>
+<%end%>

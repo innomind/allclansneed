@@ -3,7 +3,7 @@ class ClassifiedController < ApplicationController
   def list
 #    @classifieds = Classified.find(:all)
      # einzige umsetzung der pageid. aber analog für alles andere einsetzbar
-     @classifieds = Page.find(params[:page_id]).classifieds
+     @classifieds = Site.find(params[:site_id]).classifieds
   end
 
   def show
@@ -19,7 +19,7 @@ class ClassifiedController < ApplicationController
     @classified = Classified.new(params[:classified])
     # pageid wird einfach angehängt und unschön aus dem parameter geholt
     # besser wäre eine variable im ApplicationController
-    @classified.page_id = params[:page_id]
+    @classified.page_id = params[:site_id]
     @categories = Category.find(:all)
     if @classified.save
       redirect_to :action => 'list'
