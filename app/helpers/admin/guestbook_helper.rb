@@ -1,0 +1,2 @@
+module Admin::GuestbookHelper
+end

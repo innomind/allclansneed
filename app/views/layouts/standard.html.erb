@@ -1,33 +1,12 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html;➥
-charset=iso-8859-1" />
-<meta http-equiv="Content-Language" content="en-us" />
-<title>railslist</title>
-<%= stylesheet_link_tag "style" %>
-<%= javascript_include_tag :defaults%>
-</head>
-<body id="rails-list">
-<div id="container">
-<div id="header">
-<h1>Railslist</h1>
-<h3>Classifieds powered by Ruby on Rails</h3>
-<p>list: 
-<%= link_to "classified", :controller => "classified", :action => "list" -%> <%= link_to "category", :controller => "category", :action => "list" -%>
-hallo
-</p>
-</div>
-<div id="content">
-	<ul id="categories">
-		<% Category.find(:all).each do |c| %>
-			<li><%= link_to c.name, :controller => "category", :action => "show", :id => c.id %></li>
-		<% end %>
-	</ul>
-<%= yield -%>
-</div>
-<div id="sidebar"></div>
-</div>
-</body>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <meta http-equiv="Content-Language" content="en-us" />
+	<%= javascript_include_tag :defaults%>
+    <title>standard</title>
+  </head>
+  <body id="standard">
+    <%= yield -%>
+  </body>
 </html>

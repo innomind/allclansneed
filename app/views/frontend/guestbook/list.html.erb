@@ -1,0 +1,17 @@
+<h1>Guestbook</h1>
+
+<p id="add_link"><%= link_to_function("Add a Entry",
+	"Element.remove('add_link');Element.show('add_guestbook')")%>
+</p>
+
+<div id="add_guestbook" style="display:none;">
+	<% form_remote_tag :url => {:action => 'new'}, :html => {:id => 'guestbook_form'} do%>
+		Name: <%= text_field :guestbooks, "name" %><br>
+		entry: <%= text_area :guestbooks, "entry", :rows => 2, :cols => 25 %>
+		<%= submit_tag 'Add' %>
+	<% end %>
+</div>
+
+<ul id="guestbook_list">
+<%= render :partial => 'guestbook', :collection => @guestbook %>
+</ul>

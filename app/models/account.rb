@@ -1,5 +1,7 @@
 class Account < ActiveRecord::Base
   
+  has_many :guestbooks
+  
   #attr_accessor :password
   #attr_accessible :password, :nick, :email
   validates_presence_of :nick

@@ -1,0 +1,7 @@
+if  @guestbook.new_record?
+  page.alert @guestbook.errors.full_messages.join("\n")
+else
+  page.insert_html :top, 'guestbook_list', :partial => 'guestbook'
+  page.visual_effect :pulsate, "guestbook_#{@guestbook.id}"
+  page.form.reset 'guestbook_form'
+end
