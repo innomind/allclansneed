@@ -1,3 +1,16 @@
-<li id="guestbook_<%= guestbook.id %>">
-	<%= guestbook.name %> - <%= guestbook.entry %>
-</li>
+<div id="guestbook_<%= guestbook.id %>">
+	<h2><%= guestbook.name %> am <%= german_date_with_time(guestbook.created_at) %></h2>
+	<%= guestbook.entry %><br>
+	<%= link_to_function image_tag("comment_add.png", :border => 0),
+				"Element.toggle('add_comment_#{guestbook.id}')" %>
+	<% if guestbook.comment %>			
+		<%= render :partial => 'comment', :object => guestbook %>
+	<% else %>
+	<div id="add_comment_<%= guestbook.id %>" style="display:none;">
+		<% form_tag :action => 'add_comment', :id => guestbook.id do%>
+			<%= text_area :guestbooks, "comment", :rows => 2, :cols => 25 %>
+			<%= submit_tag 'Add' %>
+		<% end %>
+	</div>
+	<% end %>
+</div>

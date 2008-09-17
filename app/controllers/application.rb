@@ -13,7 +13,26 @@ class ApplicationController < ActionController::Base
   # Uncomment this to filter the contents of submitted sensitive data parameters
   # from your application log (in this case, all fields with names like "password"). 
   # filter_parameter_logging :password
+  
+  before_filter :init_site_id
+  
+  @site_id
+  
+  def init_site_id
+    @site_id = 1
+  end
+  
+  protected
+  
+  def show()
+      Guestbook.show_model(params[:page], @site_id)
+  end
+end
 
+
+
+def user
+  
   def initialize
     $session = 2
   end

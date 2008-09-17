@@ -1,0 +1,4 @@
+page.alert @guestbook.errors.full_messages.join("\n")
+page.insert_html :top, "guestbook_comment_@guestbook.id", :partial => 'comment'
+page.visual_effect :pulsate, "guestbook_#{@guestbook.id}"
+page.hide "add_comment_#{@guestbook.id}"

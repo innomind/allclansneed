@@ -12,6 +12,8 @@
 	<% end %>
 </div>
 
-<ul id="guestbook_list">
+<div id="guestbook_list">
 <%= render :partial => 'guestbook', :collection => @guestbook %>
-</ul>
+</div>
+
+<%= will_paginate @guestbook %>
