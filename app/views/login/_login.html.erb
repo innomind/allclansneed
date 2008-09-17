@@ -1,7 +1,7 @@
 
 <% if flash[:notice] %><div style="background:yellow;"><%= flash[:notice] %></div><% end %>
 
-<%unless session['user']%>
+<%unless session['user_id'] || session['site_id']%>
   <br/>
 
 

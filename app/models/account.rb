@@ -13,6 +13,7 @@ class Account < ActiveRecord::Base
   validates_uniqueness_of :nick
   validates_uniqueness_of :email
   
+  belongs_to :site
   before_save :encrypt_password
   
   
