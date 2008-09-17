@@ -53,9 +53,6 @@ ActionController::Routing::Routes.draw do |map|
   map.accounts 'register', :controller => 'login', :action => 'create'
   map.login 'login', :controller => 'login', :action => 'login'
   
-  # Gästebuch
-  map.connect 'frontend/:controller/:action/:id'
-  map.connect 'frontend/guestbook', :controller => 'frontend/guestbook', :action => 'list'
   
   map.connect ':controller/:action/:id', :site_id => 1
   map.connect ':controller/:action/:id.:format'
