@@ -1,0 +1,12 @@
+<div id="news_<%= news.id %>">
+	Überschrift: <%= link_to news.title, :action => 'show', :id => news.id %> <br />
+  Kategorie: <%= news.news_category.name %> <br /> 
+	created: <%= german_date_with_time(news.created_at) %> <br />
+	updated: <%= german_date_with_time(news.updated_at) %><br />
+	Teaser: <%= news.subtext %> <br />
+
+	<%= link_to_remote image_tag('delete.png', :border => 0), :url => { :action  => 'delete', :id  => news.id} -%>
+	
+	<%= link_to image_tag("page_edit.png", :border => 0), :action => 'edit', :id => news.id %>
+	<br /><br />
+</div>

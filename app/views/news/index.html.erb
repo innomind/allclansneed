@@ -1,0 +1,8 @@
+<h1>News</h1>
+
+<ul id="news_list">
+<%= render :partial => "news", :collection => @news %>
+</ul>
+
+<%= link_to "Neue News erstellen", :action => "new" %>
+<%= link_to "Kategorien verwalten", :controller => "News_Category", :action => "list" %>

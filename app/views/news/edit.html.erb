@@ -1,0 +1,21 @@
+<%= error_messages_for 'news' -%>
+
+<h1>edit News</h1>
+<% form_tag :action => 'update', :id => @news do %>
+
+	<p><label for="news_title">Title</label>
+	<%= text_field 'news', 'title' %></p>
+
+	<p><label for="news_subtext">Subtext</label>
+	<%= text_field 'news', 'subtext' %></p>
+	
+	<p><label for="news_news">Text</label>
+	<%= text_field 'news', 'news' %></p>
+	
+	<p><label for="news_category">Category</label><br>
+  <%= collection_select(:news, :news_category_id, @news_categories, :id, :name) %></p>
+	
+	<%= submit_tag "update" %>
+<% end %>
+
+<%= link_to "Back", :action => "index" %>

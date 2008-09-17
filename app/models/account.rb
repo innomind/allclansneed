@@ -1,6 +1,7 @@
 class Account < ActiveRecord::Base
   
   has_many :guestbooks
+  has_many :news
   
   #attr_accessor :password
   #attr_accessible :password, :nick, :email
