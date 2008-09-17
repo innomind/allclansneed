@@ -1,2 +1,0 @@
-module Frontend::GuestbookHelper
-end
