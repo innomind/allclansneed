@@ -6,11 +6,9 @@ class CreateUsers < ActiveRecord::Migration
       t.column :email, :string
       t.timestamps
     end
-    add_column :classifieds, :user_id, :integer
   end
 
   def self.down
     drop_table :users
-    remove_column :classifieds, :user_id
   end
 end
