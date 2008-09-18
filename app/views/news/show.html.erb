@@ -1,5 +1,4 @@
 <h1><%= @news.title %></h1>
 <h2><%= @news.news %><h2>
-<h3><%= @news.news_category.name%></h3>
 
 <%= render :partial => "comments", :collection => @news.news_comments %>

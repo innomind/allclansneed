@@ -13,7 +13,6 @@
 	<%= text_field 'news', 'news' %></p>
 	
 	<p><label for="news_category">Category</label><br>
-  <%= collection_select(:news, :news_category_id, @news_categories, :id, :name) %></p>
 	
 	<%= submit_tag "update" %>
 <% end %>

@@ -12,8 +12,7 @@
 	<p><label for="news_news">Text</label>
 	<%= text_field 'news', 'news' %></p>
 	
-	<p><label for="news_category">Category</label><br>
-  <%= collection_select(:news, :news_category_id, @news_categories, :id, :name) %></p>
+	<%= text_field_with_auto_complete 'news', 'tags', { :size => 50 }, {:tokens => ','} %>
 	
 	<%= submit_tag "Create" %>
 <% end %>

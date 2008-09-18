@@ -1,7 +1,7 @@
 class NewsController < ApplicationController
   def index
-    @categories = NewsCategory.all
-    @news = News.all
+     @news = News.all
+     @tags = News.tag_counts :order => 'count desc'
   end
   
   def show
@@ -10,8 +10,6 @@ class NewsController < ApplicationController
   
   def new
     @news = News.new
-    @news_categories = NewsCategory.all
-
   end
   
   def create
@@ -33,7 +31,6 @@ class NewsController < ApplicationController
   
   def edit
     @news = News.find(params[:id])
-    @news_categories = NewsCategory.all
   end
   
   def update
@@ -44,4 +41,14 @@ class NewsController < ApplicationController
       render :action => 'edit'
     end
   end
+  
+  def findByTag
+    @news = News.find_tagged_with(params[:id])
+  end
+  
+  def auto_complete_for_news_tags
+    @tags = Tag.find(:all, :conditions => ['name LIKE ?', "#{params[:news][:tags]}%"])
+    render :inline => "<%= auto_complete_result(@tags, 'name') %>", :layout => false
+  end
+  
 end

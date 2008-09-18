@@ -21,7 +21,6 @@ class AddSomeDummyDateToDatabase < ActiveRecord::Migration
     Site.create     :title => "erste page"
     Site.create     :title => "zweite page"     
     
-    remove_column :news, :news_category_id  
   end
 
   def self.down
