@@ -7,8 +7,8 @@ class CreateNews < ActiveRecord::Migration
       t.timestamps
     end
     
-    News.create :title => "Meine erste News", :subtext => "Mein erster Subtext", :news => "Mein erster Newstext"
-    News.create :title => "Meine zweite News", :subtext => "Mein zweiter Subtext", :news => "Mein zweiter Newstext"
+ #   News.create :title => "Meine erste News", :subtext => "Mein erster Subtext", :news => "Mein erster Newstext"
+ #   News.create :title => "Meine zweite News", :subtext => "Mein zweiter Subtext", :news => "Mein zweiter Newstext"
     
   end
 

@@ -8,8 +8,8 @@ class CreateNewsCategories < ActiveRecord::Migration
     
     add_column :news, :news_category_id, :integer
     
-    NewsCategory.create :name => "Allgemeines"
-    NewsCategory.create :name => "Spezielles"
+#    NewsCategory.create :name => "Allgemeines"
+#    NewsCategory.create :name => "Spezielles"
     
     News.all.each do |n|
       n.update_attribute(:news_category_id, 1)

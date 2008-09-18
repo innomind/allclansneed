@@ -6,7 +6,7 @@ class LoginController < ApplicationController
     unless (nick.nil? || pw.nil?)
       acc = Account.first :conditions => {:nick => nick}
       if !acc.nil? && acc.check_pw(pw)
-        session['user_id'] = acc.id;
+        session['account_id'] = acc.id;
         session['site_id'] = acc.site_id;
       else
         flash[:notice] = 'login failed'+' for '+params[:nick]

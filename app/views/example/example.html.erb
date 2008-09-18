@@ -1,0 +1,20 @@
+<h1>Example</h1>
+
+<% if @examples.nil? %>
+  <%= "nil" %>
+<%else%>
+  <% @examples.class %>
+  <% @examples.each do |e| %>
+    
+    <%= e.title %>
+    <br/>
+    <%= e.site_id.to_s %>
+
+    <%=  'form_tag'  %>
+  <%end%>
+
+<%= @userid.inspect %>
+<br/>
+<%= session[:account_id].inspect %>
+<%end%>
+
