@@ -1,7 +1,7 @@
 <%= error_messages_for 'news' -%>
 
 <h1>edit News</h1>
-<% form_tag :action => 'update', :id => @news do %>
+<% form_tag :action => 'update', :id => @news.id do %>
 
 	<p><label for="news_title">Title</label>
 	<%= text_field 'news', 'title' %></p>
@@ -12,9 +12,18 @@
 	<p><label for="news_news">Text</label>
 	<%= text_field 'news', 'news' %></p>
 	
-	<p><label for="news_category">Category</label><br>
-	
+	<%= text_field_with_auto_complete :news,
+	                                  :tags,
+	                                  { :size  => '20', 
+	                                    :tokens => ','},
+	                                  :indicator => 'status-indicator' %>
+                    <span id="status-indicator" style="display: none"><%= image_tag("loading.gif", :border  => "0") %></span>
+	<br /><br />
+	vorhandene Tags:<br />
+	<%= cloud(@tags) %>
+	<br /><br />
 	<%= submit_tag "update" %>
 <% end %>
-
+ 
+<br />
 <%= link_to "Back", :action => "index" %>

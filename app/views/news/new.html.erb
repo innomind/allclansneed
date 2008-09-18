@@ -12,11 +12,17 @@
 	<p><label for="news_news">Text</label>
 	<%= text_field 'news', 'news' %></p>
 	
-	<%= text_field_with_auto_complete 'news', 'tags', { :size => 50 }, {:tokens => ','} %>
+	<%= text_field_with_auto_complete :news,
+	                                  :tags,
+	                                  { :value  => 'tags',
+	                                    :size  => '20', 
+	                                    :tokens => ','},
+	                                  :indicator => 'status-indicator' %>
+                    <span id="status-indicator" style="display: none"><%= image_tag("loading.gif", :border  => "0") %></span>
 	<br /><br />
 	vorhandene Tags:<br />
 	<%= cloud(@tags) %>
-	<br /><br />Å
+	<br /><br />
 	<%= submit_tag "Create" %>
 <% end %>
  

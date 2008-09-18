@@ -39,11 +39,18 @@ class NewsController < ApplicationController
   
   def edit
     @news = News.find(params[:id])
+    @tags = News.tag_counts :order => 'count desc'
   end
   
   def update
+    @_post = params[:news]
     @news = News.find(params[:id])
-    if @news.update_attributes(params[:news])
+    @news.title = @_post['title']
+    @news.subtext = @_post['title']
+    @news.news = @_post['title']
+    @news.tag_list = @_post['tags']
+    
+    if @news.save
       redirect_to :action => 'index'
     else
       render :action => 'edit'
