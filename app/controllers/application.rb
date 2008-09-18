@@ -19,22 +19,16 @@ class ApplicationController < ActionController::Base
   @site_id
   
   def init_site_id
-    @site_id = 1
+    $site_id = params['site_id'].nil? ? 1 : params['site_id'] 
   end
+
+  #def initialize
+    
+  #end
   
   protected
   
   def show()
       Guestbook.show_model(params[:page], @site_id)
   end
-end
-
-
-
-def user
-  
-  def initialize
-    $session = 2
-  end
-
 end

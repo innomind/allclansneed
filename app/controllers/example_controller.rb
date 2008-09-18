@@ -4,9 +4,10 @@ class ExampleController < ApplicationController
 
   def index
     #@examples = Example.find :all
-    @examples = Example.find :all
+    #$site_id = 2
+    @examples = Example.find_for_site :all
     
-    @userid = session.data[:account_id]
+    @userid = session.data[:user_id]
     render :action => 'example'
   end
 

@@ -1,20 +1,18 @@
 <h1>Example</h1>
 
 <% if @examples.nil? %>
-  <%= "nil" %>
+  <%= "<H1>nil</H1>" %>
 <%else%>
-  <% @examples.class %>
+  <%= @examples.class %>
   <% @examples.each do |e| %>
-    
+    example
     <%= e.title %>
     <br/>
     <%= e.site_id.to_s %>
-
-    <%=  'form_tag'  %>
   <%end%>
 
+    <%= 'form_tag'  %>
 <%= @userid.inspect %>
 <br/>
 <%= session[:account_id].inspect %>
 <%end%>
-
