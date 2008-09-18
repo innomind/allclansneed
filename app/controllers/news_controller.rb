@@ -13,8 +13,15 @@ class NewsController < ApplicationController
   end
   
   def create
-    @news = News.new(params[:news])
+    @_post = params[:news]
+    
+    @news = News.new( :title => @_post['title'],
+                      :subtext => @_post['subtext'],
+                      :news => @_post['news'])
+                      
+                      
     @news.author_id = session['user_id']
+    @news.tag_list = @_post['tags']
     
     if @news.save
       redirect_to :action => 'index'
