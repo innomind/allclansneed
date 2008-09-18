@@ -1,6 +1,7 @@
 class Account < ActiveRecord::Base
 
-    
+  has_many :forum_threads
+  has_many :forum_messages
   has_many :guestbooks
   has_many :news
   has_one  :user_right

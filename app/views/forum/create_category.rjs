@@ -1,9 +1,8 @@
 if  @new_category.new_record?
-  page.alert "fehler"
   page.alert @new_category.errors.full_messages.join("\n")
 else
-  page.insert_html :after, "forum_category_#{params[:id]}", :partial => 'create_category'
+  page.insert_html :after, "forum_category_#{params[:id]}", :partial => 'create_category_for_ajax'
   page.visual_effect :pulsate, "forum_category_#{@new_category.id}"
   page.form.reset "create_category_#{params[:id]}"
-  page.hide "add_category_#{params[:id]}"
+  page.hide "create_category_space_#{params[:id]}"
 end

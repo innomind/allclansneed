@@ -1,0 +1,10 @@
+<% form_tag :action => "create_thread", :id => params[:id] do %>
+    <p><label for="forum_thread_title">Title</label>
+    <%= text_field 'forum_thread', 'title' %></p>
+
+    <p><label for="forum_thread_message">message</label>
+    <%= text_area 'forum_thread', 'message' %></p>
+    
+      <%= submit_tag "eintragen" %>
+<% end %>
+

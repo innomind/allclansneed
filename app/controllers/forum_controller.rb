@@ -21,4 +21,17 @@ class ForumController < ApplicationController
   def create_category_form
     return if request.xhr? 
   end
+  
+  def category
+    @subcategories = ForumCategory.find_all_by_parent_id(params[:id])
+    @category = ForumCategory.find(params[:id])
+  end
+  
+  def new_thread
+
+  end
+  
+  def create_thread
+    @thread = ForumThread.new(params[:forum_thread])
+  end
 end

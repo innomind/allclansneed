@@ -1,10 +1,11 @@
 <li id="forum_category_<%=  category.id %>">
     
-        <%= link_to h(category.title), :controller => 'forum', :action => 'index', :id => category.id %>
-   
+        <%= link_to h(category.title), :controller => 'forum', :action => 'category', :id => category.id %>
+
   <span id="create_category_link_<%= category.id %>">
     <%= link_to_remote(image_tag("folder_add.png", :border => "0", :id => "folder_add_img_#{category.id}"), :url => {:action => "create_category_form", :id => category.id},
-                    :loading => "Element.show('loading');")%>
+                    :loading => "Element.show('loading');",
+                    :loaded => "Element.hide('loading')")%>
   </span>
   <br><small><%= category.subtitle %> </small>
   <span id="create_category_space_<%= category.id %>" style="display:none;" class="add_folder">
