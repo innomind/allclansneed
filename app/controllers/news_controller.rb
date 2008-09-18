@@ -10,6 +10,7 @@ class NewsController < ApplicationController
   
   def new
     @news = News.new
+    @tags = News.tag_counts :order => 'count desc'
   end
   
   def create

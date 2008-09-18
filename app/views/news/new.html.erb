@@ -13,8 +13,12 @@
 	<%= text_field 'news', 'news' %></p>
 	
 	<%= text_field_with_auto_complete 'news', 'tags', { :size => 50 }, {:tokens => ','} %>
-	
+	<br /><br />
+	vorhandene Tags:<br />
+	<%= cloud(@tags) %>
+	<br /><br />Å
 	<%= submit_tag "Create" %>
 <% end %>
-
+ 
+<br />
 <%= link_to "Back", :action => "index" %>
