@@ -1,6 +1,6 @@
 class News < ActiveRecord::Base
+  has_and_belongs_to_many :news_categories
   belongs_to :account, :foreign_key => "author_id"
-  belongs_to :news_category
   has_many :news_comments
   
   validates_presence_of :title

@@ -1,5 +1,5 @@
 class NewsCategory < ActiveRecord::Base
-  has_many :news
+  has_and_belongs_to_many :news
   
   validates_presence_of :name
 end
