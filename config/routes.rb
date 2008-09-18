@@ -55,8 +55,9 @@ ActionController::Routing::Routes.draw do |map|
   
   map.connect ":site_id/:controller/:action/page/:page"
   map.connect ':site_id/:controller/:action/:id'
+  map.connect ':site_id/:controller/:action'
   
   map.connect ':controller/:action'
-  map.connect ':controller/:action/:id', :site_id => 1
+  map.connect ':controller/:action/:id'
   map.connect ':controller/:action/:id.:format'
 end

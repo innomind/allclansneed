@@ -14,6 +14,13 @@ class GuestbookController < ApplicationController
     end
   end
   
+  def delete
+    @guestbook = Guestbook.find(params[:id])
+    @guestbook.destroy
+    return if request.xhr?
+    render :nothing, :status => 200
+  end
+  
   def add_comment
     @guestbook = Guestbook.find(params[:id])
     @guestbook.update_attribute(:comment, params[:guestbooks][:comment])

@@ -1,0 +1,11 @@
+    <% form_remote_tag :url => {:action => "create_category", :id => params[:id]}, 
+                       :html => {:id => "create_category_#{params[:id]}"} do  %>
+
+          <p><label for="forum_category_title">Title</label>
+          <%= text_field(:forum_category, :title) %></p>
+          
+          <p><label for="forum_category_subtitle">Subtitle</label>
+          <%= text_field(:forum_category, :subtitle) %></p>
+          
+            <%= submit_tag "create"%>
+    <% end %>

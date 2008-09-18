@@ -1,0 +1,3 @@
+page.insert_html :top, "create_category_space_#{params[:id]}", :partial => 'create_category_form'
+page.show "create_category_space_#{params[:id]}"
+page.remove "create_category_link_#{params[:id]}"

@@ -3,7 +3,8 @@
 	<%= guestbook.entry %><br>
 	<%= link_to_function image_tag("comment_add.png", :border => 0),
 				"Element.toggle('add_comment_#{guestbook.id}')" %>
-	<% if guestbook.comment %>			
+        <%= link_to_remote image_tag("delete.png", :border => 0), :url => {:action => "delete", :id => guestbook.id} %>
+	<% if guestbook.comment %>
 		<%= render :partial => 'comment', :object => guestbook %>
 	<% else %>
 	<div id="add_comment_<%= guestbook.id %>" style="display:none;">

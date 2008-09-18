@@ -16,8 +16,6 @@ class ApplicationController < ActionController::Base
   
   before_filter :init_site_id
   
-  @site_id
-  
   def init_site_id
     $site_id = params['site_id'].nil? ? 1 : params['site_id'] 
   end
@@ -27,7 +25,7 @@ class ApplicationController < ActionController::Base
   #end
   
   protected
-  
+ 
   def show()
       Guestbook.show_model(params[:page], @site_id)
   end
