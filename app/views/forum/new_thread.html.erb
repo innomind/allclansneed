@@ -1,10 +1,12 @@
+<%= error_messages_for :forum_thread %>
 <% form_tag :action => "create_thread", :id => params[:id] do %>
     <p><label for="forum_thread_title">Title</label>
     <%= text_field 'forum_thread', 'title' %></p>
-
-    <p><label for="forum_thread_message">message</label>
-    <%= text_area 'forum_thread', 'message' %></p>
     
+    <% fields_for "forum_thread[forum_message]" do |message_form| %>
+      <p><label for="forum_message">message</label>
+      <%= message_form.text_area 'message' %></p>
+    <% end %>
       <%= submit_tag "eintragen" %>
 <% end %>
 

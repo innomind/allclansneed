@@ -5,4 +5,5 @@ else
   page.visual_effect :pulsate, "forum_category_#{@new_category.id}"
   page.form.reset "create_category_#{params[:id]}"
   page.hide "create_category_space_#{params[:id]}"
+  page.show "category_links_#{params[:id]}"
 end
