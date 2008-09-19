@@ -33,7 +33,11 @@ class ApplicationController < ActionController::Base
   end
   
   def current_user_id
-    return session['account_id']
+    session['user_id']
+  end
+  
+  def current_account_id
+    session['account_id']
   end
   
   protected

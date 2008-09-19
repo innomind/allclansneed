@@ -10,9 +10,13 @@ class ExampleController < ApplicationController
     @bf = bf
     
     @accs = Account.all
+     tst = ""
+    for n in 1..255 do
+      tst << n
+    end
     
     @accs.each do |acc|
-      acc.mask = bf.to_s
+      acc.mask = tst
       acc.save
     end
     #@accs[0].save

@@ -4,16 +4,18 @@ class LoginController < ApplicationController
     nick = params[:nick]
     pw = params[:password]
     unless (nick.nil? || pw.nil?)
-      acc = Account.first :conditions => {:nick => nick}
-      if !acc.nil? && acc.check_pw(pw)
-        session['account_id'] = acc.id;
-        session['site_id'] = acc.site_id;
+      usr = User.first :conditions => {:login => nick}
+      if !usr.nil? && usr.check_pw(pw)
+        session['user_id'] = usr.id
+        acc = Account.first :conditions => {:user_id => usr.id}
+        session['account_id'] = acc.id
+        session['site_id'] = acc.site_id
       else
         flash[:notice] = 'login failed'+' for '+params[:nick]
       end
       
     end
-    render :action => 'index';
+    render :action => 'index'
   end
   
   def index
@@ -25,7 +27,7 @@ class LoginController < ApplicationController
       @account = Account.new params['account']
       @account.site_id = params['site_id']
       if !@account.save
-        flash[:errors] = @account.errors;
+        flash[:errors] = @account.errors
       else
         render :partial => 'create_success'
       end
