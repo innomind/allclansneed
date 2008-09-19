@@ -19,8 +19,6 @@ class SomeDefaultRightsInserts < ActiveRecord::Migration
     usr0.save
     usr1.save
     usr2.save
-    
-    
   end
 
   def self.down

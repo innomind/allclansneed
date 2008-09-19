@@ -10,6 +10,7 @@ class LoginController < ApplicationController
         acc = Account.first :conditions => {:user_id => usr.id}
         session['account_id'] = acc.id
         session['site_id'] = acc.site_id
+        session['rights'] = acc.right
       else
         flash[:notice] = 'login failed'+' for '+params[:nick]
       end

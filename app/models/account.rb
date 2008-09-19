@@ -6,6 +6,27 @@ class Account < ActiveRecord::Base
   has_many :news
   belongs_to :user
   
+  ALL_RIGHTS =  #News
+  
+                'News/create '+
+                'News/edit '+
+                'News/new '+
+                'News/update '+
+                'News/delete '+
+                
+                #Guestbook
+                'Guestbook/add_comment '+
+                'Guestbook/new '+
+                'Guestbook/delete '+
+                
+                #Forum
+                'Forum/delete '+
+                'Forum/create_thread '+
+                'Forum/new_thread '+
+                'Froum/create_category'+
+                
+                #
+                ''
   
   #attr_accessor :password
   #attr_accessible :password, :nick, :email
