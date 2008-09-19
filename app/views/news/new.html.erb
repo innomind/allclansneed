@@ -18,6 +18,13 @@
 	                                    :size  => '20', 
 	                                    :tokens => ','},
 	                                  :indicator => 'status-indicator' %>
+	                                  
+	<%= text_field_with_auto_complete 'news',
+	                                  'tags',
+	                                  { :size => 50 },
+	                                  { :tokens => ','}%>
+  
+  
                     <span id="status-indicator" style="display: none"><%= image_tag("loading.gif", :border  => "0") %></span>
 	<br /><br />
 	vorhandene Tags:<br />

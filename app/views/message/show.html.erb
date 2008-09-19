@@ -1,0 +1,6 @@
+<h1>Nachricht</h1>
+
+<h1><%= @message.subject %></h1>
+<h2><%= @message.message %><h2>
+
+<%= link_to "beantworten", :action => "answer", :id  => @message.id %>
