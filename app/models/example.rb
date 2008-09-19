@@ -46,5 +46,7 @@ class Example < ActiveRecord::Base
       @field.inject(0) { |a, byte| a += byte & 1 and byte >>= 1 until byte == 0; a }
     end
   end
+  
+  
     
 end

@@ -3,6 +3,10 @@
 <% if @examples.nil? %>
   <%= "<H1>nil</H1>" %>
 <%else%>
+    <% @accs.each do |acc|%>
+<%= acc['mask'] %><br/>
+<%end%>
+<%= "Bitfield: #{@bf}" %>
   <%= @examples.class %>
   <% @examples.each do |e| %>
     example
