@@ -3,7 +3,7 @@
 
 class ApplicationController < ActionController::Base
   helper :all # include all helpers, all the time
-  layout 'standard'
+  #layout 'standard'
   #model :account
   # See ActionController::RequestForgeryProtection for details
   # Uncomment the :secret if you're not using the cookie session store
@@ -39,7 +39,7 @@ class ApplicationController < ActionController::Base
   end
   
   def rights
-    session['rights']
+    user_is_guest? ? [] : session['rights'].split(' ')
   end
   
   def current_account_id
@@ -49,11 +49,13 @@ class ApplicationController < ActionController::Base
   
   #denylist is a whitespace seperated string of Controller/action
   def check_query
-    #complete_list =  Account::ALL_RIGHTS.split ' '
-    #request = params[:controller]+'/'+params[:actions]
-    #if complete_list.include?(request) && !rights.include?(request)
-    #  redirect_to root_path
-    #end
+    complete_list =  Account::ALL_RIGHTS.split ' '
+    
+    request = params['controller'].capitalize+'/'+params['action']
+    #render :text => 'complete: '+complete_list.inspect+'<br/><br/>'+'right:'+rights.inspect+'<br/><br/>'+'req: '+request
+    if complete_list.include?(request) && !rights.include?(request)
+      redirect_to root_path
+    end
     
   end
 end

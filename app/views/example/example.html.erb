@@ -4,7 +4,6 @@
   <%= "<H1>nil</H1>" %>
 <%else%>
     <% @accs.each do |acc|%>
-<%= acc['mask'] %><br/>
 <%end%>
 <%= "Bitfield: #{@bf}" %>
   <%= @examples.class %>
@@ -18,5 +17,11 @@
     <%= 'form_tag'  %>
 <%= @userid.inspect %>
 <br/>
+<br/>
+<br/>
+<% @accs do |acc|%>
+<%= 'hallo' %>
+<%= acc.inspect %>
+<%end%>
 <%= session[:account_id].inspect %>
 <%end%>

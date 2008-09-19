@@ -16,8 +16,8 @@ class ExampleController < ApplicationController
     end
     
     @accs.each do |acc|
-      acc.mask = tst
-      acc.save
+      #acc.mask = tst
+      #acc.save
     end
     #@accs[0].save
     @examples = Example.find_for_site :all
