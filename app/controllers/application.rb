@@ -14,13 +14,9 @@ class ApplicationController < ActionController::Base
   # from your application log (in this case, all fields with names like "password"). 
   # filter_parameter_logging :password
   
-  before_filter :init_site_id, :checkQuery
+  before_filter :init_site_id, :check_query
   
-  def check_query
-    if user_is_guest?
-      
-    end
-  end
+  protected
   
   def init_site_id
     $site_id = params['site_id'].nil? ? 1 : params['site_id'] 
@@ -42,19 +38,22 @@ class ApplicationController < ActionController::Base
     session['user_id']
   end
   
+  def rights
+    session['rights']
+  end
+  
   def current_account_id
     session['account_id']
   end
   
-  protected
   
   #denylist is a whitespace seperated string of Controller/action
-  def deny denylist
-    complete_list =  Account::ALL_RIGHTS.split ' '
-    list = denylist.split ' '
-    request = params[:controller]+'/'+params[:actions]
-    if complete_list.include?(request) && 
-      action
-    end
+  def check_query
+    #complete_list =  Account::ALL_RIGHTS.split ' '
+    #request = params[:controller]+'/'+params[:actions]
+    #if complete_list.include?(request) && !rights.include?(request)
+    #  redirect_to root_path
+    #end
+    
   end
 end
