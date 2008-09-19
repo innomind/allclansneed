@@ -25,15 +25,15 @@ class ApplicationController < ActionController::Base
   #end
   
   def user_is_guest?
-    session['accout_id'].nil?
+    session['account_id'].nil?
   end
   
   def current_user_site_id
-    user_is_guest? ? 1 : session['accout_id']
+    user_is_guest? ? 1 : session['account_id']
   end
   
   def current_user_id
-    return session['accout_id']
+    return session['account_id']
   end
   
   protected
