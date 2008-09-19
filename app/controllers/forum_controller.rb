@@ -1,4 +1,9 @@
 class ForumController < ApplicationController
+  
+  #
+  # show index and categories
+  #
+  
   def index
     if params[:id].nil?
       @categories = ForumCategory.find_all_by_parent_id(nil)
@@ -13,6 +18,17 @@ class ForumController < ApplicationController
     end
   end
   
+  #
+  # Category Create, Update, Delete Functions
+  #
+  def create_category_form
+    return if request.xhr? 
+  end
+  
+  def test
+    
+  end
+  
   def create_category
     @category = ForumCategory.find_by_id(params[:id])
     @new_category = @category.children.create(params[:forum_category])
@@ -21,21 +37,27 @@ class ForumController < ApplicationController
     end
   end
   
-  def create_category_form
-    return if request.xhr? 
+  def delete_category_form
+    return if request.xhr?
   end
   
-  def category
-    @subcategories = ForumCategory.find_all_by_parent_id(params[:id])
-    @category = ForumCategory.find(params[:id])
-    @threads = ForumThread.find(:all, :conditions => {:forum_category_id => params[:id]})
+  #
+  # Thread Functions
+  #
+  
+  #show thread
+  def thread
+    @thread = ForumThread.find(params[:id]);
+    @messages = ForumMessage.find(:all, :conditions => { :forum_thread_id => params[:id] } )
   end
   
+  #show new thread form
   def new_thread
     @forum_thread = ForumThread.new
     @forum_thread.forum_messages.build
   end
   
+  #save new thread
   def create_thread
     @forum_thread = ForumThread.new(params[:forum_thread])
     @forum_thread.forum_category_id = params[:id]
@@ -46,10 +68,5 @@ class ForumController < ApplicationController
     else
       render :action => "new_thread"
     end
-  end
-  
-  def thread
-    @thread = ForumThread.find(params[:id]);
-    @messages = ForumMessage.find(:all, :conditions => { :forum_thread_id => params[:id] } )
   end
 end

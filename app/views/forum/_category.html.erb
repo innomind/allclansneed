@@ -5,11 +5,16 @@
 
   <span id="category_links_<%= category.id %>">
     <%= link_to_remote(image_tag("folder_add.png", :border => "0", :id => "folder_add_img_#{category.id}"), :url => {:action => "create_category_form", :id => category.id},
+                    :loading => "Element.show('loading_#{category.id}');",
+                    :loaded => "Element.hide('loading_#{category.id}')")%>
+    <%= link_to_remote(image_tag("folder_edit.png", :border => "0", :id => "folder_update_img_#{category.id}"), :url => {:action => "create_category_form", :id => category.id},
                     :loading => "Element.show('loading');",
                     :loaded => "Element.hide('loading')")%>
+    <%= link_to_remote(image_tag("folder_delete.png", :border => "0", :id => "folder_del_img_#{category.id}"), :url => {:action => "delete_category_form", :id => category.id},
+                    :loading => "Element.show('loading');",
+                    :loaded => "Element.hide('loading')")%>
+    <span id="loading_<%= category.id %>" style="display:none;"><%= image_tag("loading.gif", :border => 0) %></span>
   </span>
-  
-  
   
   <br><small><%= category.subtitle %> </small>
   <span id="create_category_space_<%= category.id %>" style="display:none;" class="add_folder">
