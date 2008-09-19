@@ -1,0 +1,4 @@
+page.alert @news.errors.full_messages.join("\n")
+page.insert_html :top, "news_comment_@news.id", :partial => 'comment'
+page.visual_effect :pulsate, "guestbook_#{@news.id}"
+page.hide "add_comment_#{@news.id}"
