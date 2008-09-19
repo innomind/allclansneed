@@ -23,4 +23,16 @@ module ApplicationHelper
         end
         return output
   end
+  
+  def nl2br(text)
+    text.gsub!(/\n/, '<br />')
+  end
+  
+  def render_reply_text(text)
+    str = ''
+    text.each_line do |s|
+      str << '>>'+s
+    end
+    str
+  end
 end

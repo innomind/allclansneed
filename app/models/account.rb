@@ -1,5 +1,6 @@
 class Account < ActiveRecord::Base
-
+  acts_as_delegatable
+  
   has_many :forum_threads
   has_many :forum_messages
   has_many :guestbooks
