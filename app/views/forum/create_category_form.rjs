@@ -1,3 +1,4 @@
+page.alert "test"
 page.insert_html :top, "create_category_space_#{params[:id]}", :partial => 'create_category_form'
 page.show "create_category_space_#{params[:id]}"
 page.hide "category_links_#{params[:id]}"

@@ -25,10 +25,6 @@ class ForumController < ApplicationController
     return if request.xhr? 
   end
   
-  def test
-    
-  end
-  
   def create_category
     @category = ForumCategory.find_by_id(params[:id])
     @new_category = @category.children.create(params[:forum_category])

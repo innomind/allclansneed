@@ -1,7 +1,7 @@
 class GuestbookController < ApplicationController
   def list
     #@guestbook = Guestbook.find(:all, :order => "created_at DESC")
-    @guestbook = show()
+    @guestbook = Guestbook.show_model(params[:page], $site_id)
     #@guestbook = test(:all)
   end
   

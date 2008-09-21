@@ -4,6 +4,23 @@ font-color: #000;
 background-color: #fff;
 }
 
-.add_folder {
+.category_form_title {
     
+  background-color: #6dc847;
+}
+
+.category_form{
+  background-color: #dbfeb9;
+  border-top-style: solid;
+  border-bottom-style: solid;
+  border-left-style: solid;
+  border-right-style: solid;
+  border-top-width: 1px;
+  border-bottom-width: 1px;
+  border-left-width: 1px;
+  border-right-width: 1px;
+  border-top-color: #acacac;
+  border-bottom-color: #acacac;
+  border-left-color: #acacac;
+  border-right-color: #acacac;
 }
