@@ -21,7 +21,7 @@ class ForumController < ApplicationController
   #
   # Category Create, Update, Delete Functions
   #
-  def create_category_form
+  def new_category
     return if request.xhr? 
   end
   
@@ -30,6 +30,16 @@ class ForumController < ApplicationController
     @new_category = @category.children.create(params[:forum_category])
     if @new_category
       return if request.xhr?
+    end
+  end
+  
+  def edit_category
+    @category = ForumCategory.find_by_id(params[:id])
+  end
+  
+  def update_category
+    @category = ForumCategory.find_by_id(params[:id])
+    if @category.update_attributes(params[:forum_category])
     end
   end
   
