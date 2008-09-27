@@ -1,6 +1,6 @@
 <div class ="category_form" id="category_form_container_<%= params[:id] %>"> 
     <div class="category_form_title">
-        <%= link_to_function "[x]" do |page|
+        <%= link_to_function image_tag("cross.png") do |page|
             page.remove "category_form_container_#{params[:id]}"
             page.show "category_links_#{params[:id]}"
         end %>

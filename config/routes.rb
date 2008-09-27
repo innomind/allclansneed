@@ -53,6 +53,9 @@ ActionController::Routing::Routes.draw do |map|
   map.accounts 'register', :controller => 'login', :action => 'create'
   map.login 'login', :controller => 'login', :action => 'login'
   
+  map.forum_message 'forum/thread/new_message/:id', :controller => 'forum_message', :action => "new" 
+  #map.forum_message 'forum/thread/:id/new', :controller => 'forum_message', :action => "new" 
+  map.forum_thread 'forum/thread/:id', :controller => 'forum_thread', :action => "index" 
   map.forum_category 'forum/:id', :controller => 'forum', :action => 'index'
   map.forum_root 'forum', :controller => 'forum', :action => 'index'
   

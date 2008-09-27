@@ -1,0 +1,8 @@
+<%= error_messages_for :forum_message %>
+<% form_tag :action => "create", :id => params[:id] do %>
+      <p><label for="forum_message">message</label>
+      <%= text_area 'forum_message', 'message' %></p>
+      
+      <%= submit_tag "eintragen" %>
+<% end %>
+

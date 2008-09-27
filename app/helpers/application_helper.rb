@@ -4,9 +4,18 @@ module ApplicationHelper
   #some stuff for tag-clouding :)
   include TagsHelper
   
+  #popup
+  def popup(partial, popup_space)
+    #page.alert "hallo :-)"
+  end    
+  
   #returns a formated date-string  
   def german_date_with_time(datum)     
-    datum.strftime("%d.%m%.%Y %H:%M")
+    datum.strftime("%d.%m.%Y %H:%M")
+  end
+  
+    def german_date(datum)     
+    datum.strftime("%d.%m.%Y")
   end
   
   def cloud(tags)
@@ -31,7 +40,7 @@ module ApplicationHelper
   def render_reply_text(text)
     str = ''
     text.each_line do |s|
-      str << '>>'+s
+      str << '>'+s
     end
     str
   end

@@ -1,0 +1,8 @@
+<%= render :partial => "category_history", :object => @thread.forum_category_id %>
+
+<h1><%= @thread.title %> </h1>
+<%= link_to "reply", forum_message_path(params[:id]) %><br>
+<%= will_paginate @messages %><br>
+<%= render :partial => "message", :collection => @messages %>
+
+<%= will_paginate @messages %>

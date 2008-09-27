@@ -35,7 +35,8 @@ class ApplicationController < ActionController::Base
   end
   
   def current_user_id
-    session['user_id']
+    return 1
+    #session['user_id']
   end
   
   def rights
