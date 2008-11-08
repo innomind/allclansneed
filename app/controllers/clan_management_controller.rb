@@ -1,4 +1,5 @@
 class ClanManagementController < ApplicationController
+  ACTION_LEVELS={'index' => LEVEL_SITE_MEMBER}
   before_filter :init_clan
   
   def clan_management
@@ -52,6 +53,7 @@ class ClanManagementController < ApplicationController
   end
   
   def init_clan
+    
     @clan  = Clan.find_for_site :first
   end
 

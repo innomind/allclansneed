@@ -25,7 +25,7 @@ class ApplicationController < ActionController::Base
   protected
   
   #the global variable site_id should be the ONLY exception in usage of global vars
-  #we will try to remove even this, as soon we have found a proper alternative
+  #we should try to remove even this, as soon we have found a proper alternative
   def init_site_id
     if params[:site_id] == ""
       render :text => 'strange request: site_id set, but empty'
@@ -35,9 +35,10 @@ class ApplicationController < ActionController::Base
   end
   
   def init_rights
-    unless self.class::ACTION_LEVELS == {}
+    levels = self.class::ACTION_LEVELS
+    unless levels == {}
       request = params[:action]
-      req_level = self.class::ACTION_LEVELS[request]
+      req_level = levels[request].nil? ? levels['all'] : levels[request]
       unless req_level.nil?
         if user_has_right_ge? req_level
           return
@@ -48,6 +49,7 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  
   #def initialize
     
   #end
@@ -82,26 +84,7 @@ class ApplicationController < ActionController::Base
     end
   end
   
-=begin
-  def rights
-    user_is_guest? ? [] : session['rights'].split(' ')
+  def current_site_id
+    $site_id
   end
-  
-  def current_user_id
-    session['user_id']
-  end
-=end
-  
-=begin  
-  #denylist is a whitespace seperated string of Controller/action
-  def check_query
-    complete_list =  Account::ALL_RIGHTS.split ' '
-    
-    request = params['controller'].capitalize+'/'+params['action']
-    render :text => 'complete: '+complete_list.inspect+'<br/><br/>'+'right:'+rights.inspect+'<br/><br/>'+'req: '+request
-    if complete_list.include?(request) && !rights.include?(request)
-      redirect_to root_path
-    end 
-  end
-=end
 end

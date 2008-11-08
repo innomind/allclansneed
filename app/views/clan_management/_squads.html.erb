@@ -1,7 +1,8 @@
 
-  
-  <%= "squads: " %>
 
+<%= "squads: " %>
+<%unless @squads.nil?%>
   <%@squads.each do |squad| %>
-      <%= squad.name %> <br/>
+    <%= squad.name %> <br/>
   <%end%>
+<%end%>
