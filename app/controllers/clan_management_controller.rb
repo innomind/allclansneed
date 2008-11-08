@@ -37,7 +37,7 @@ class ClanManagementController < ApplicationController
   end
 
   def show_members
-    
+    @members = @clan.members
   end
   
   def update

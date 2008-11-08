@@ -3,7 +3,15 @@ class Clan < ActiveRecord::Base
   belongs_to :site
   has_many :squads
   
-  def members
+  def squad_members
     SquadUser.all :conditions => {:squad => self.squads}
+  end
+  
+  def members
+    self.site.users
+  end
+  
+  def non_squad_members
+    
   end
 end

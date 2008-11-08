@@ -1,5 +1,5 @@
 class NewsCategoryController < ApplicationController
-  
+    ACTION_LEVELS = {:all => LEVEL_SITE_ADMIN}
   def index
     redirect_to :action => "list"
   end

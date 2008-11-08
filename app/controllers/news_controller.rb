@@ -1,5 +1,5 @@
 class NewsController < ApplicationController
-  
+  ACTION_LEVELS = {:new => LEVEL_SITE_ADMIN}
   def index
      @news = News.find_for_site(:all)
      @tags = News.tag_counts(:order => 'count desc', :conditions  => {:site_id  => current_site_id})

@@ -56,7 +56,7 @@ ActionController::Routing::Routes.draw do |map|
   
   map.users 'register', :controller => 'login', :action => 'create'
   map.login 'login', :controller => 'login', :action => 'login'
-  map.squads 'create_squad', :controller => 'clan_management', :action => 'create_squad'
+  map.squads ':site_id/create_squad', :controller => 'clan_management', :action => 'create_squad'
   
   map.forum_message 'forum/thread/new_message/:id', :controller => 'forum_message', :action => "new" 
   #map.forum_message 'forum/thread/:id/new', :controller => 'forum_message', :action => "new" 
@@ -67,7 +67,6 @@ ActionController::Routing::Routes.draw do |map|
   map.connect ":site_id/:controller/:action/page/:page"
   map.connect ':site_id/:controller/:action/:id'
   map.connect ':site_id/:controller/:action'
-  
   map.connect ':controller/:action'
   map.connect ':controller/:action/:id'
   map.connect ':controller/:action/:id.:format'

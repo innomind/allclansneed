@@ -44,4 +44,9 @@ module ApplicationHelper
     end
     str
   end
+  
+  def div_encapsulate string, id=nil
+    "<div #{id.nil? ? "" : id.to_s}>"+string.to_s+'</div>'
+  end
+  
 end

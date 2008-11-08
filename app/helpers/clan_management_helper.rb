@@ -3,7 +3,11 @@ module ClanManagementHelper
       page.replace_html 'squads', :partial => 'squads', :locals => {:@squads => squads}
   end
   
-  def list_members members
-      page.replace_html 'members', :partial => 'members', :locals => {:@members => members}
+  def list_members
+      clan = Clan.find_for_site :first
+      #page.replace_html 'members', :partial => 'members', :locals => {:@members => members}
+      clan.members
   end
+  
+  
 end

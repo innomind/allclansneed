@@ -18,6 +18,13 @@ Clan: <%= @clan.name  %>
 &nbsp;
 </div>
 </div>
+<div>
+  clan members: <br/>
+    <%list_members.each do |member|%>
+        <%=div_encapsulate member.nick, dom_id(member)%> <br/>
+    <%end%>
+  
+</div>
 <!-- <a onclick="<%#= remote_function :update => 'squads', :url => {:action => 'update_lists'} %>" >test</a>
 <div style="border-color:black;border-width:1px;border-style:solid;width:30%;float:left">
   ttt
