@@ -14,7 +14,6 @@ class ApplicationController < ActionController::Base
   # from your application log (in this case, all fields with names like "password"). 
   # filter_parameter_logging :password
   
-  
   ACTION_LEVELS = {}
   LEVEL_ACN_MEMBER = 0
   LEVEL_SITE_MEMBER = 1
@@ -48,7 +47,7 @@ class ApplicationController < ActionController::Base
         end
       end
     end
-    @logged_in = !session['user'].id.nil?
+    @logged_in = !session['user'].nil?
   end
 
     #deprecated, don't use

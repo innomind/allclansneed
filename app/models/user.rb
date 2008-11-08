@@ -19,13 +19,6 @@ class User < ActiveRecord::Base
   has_many :user_rights # much better ;)
   has_many :squads, :through => :squad_users
   has_many :sites, :through => :user_rights
-
-
-  def before_destroy 
-    user_rights.each do |r|
-      r.destroy
-    end
-  end
   
   validates_presence_of :login
   validates_presence_of :password
@@ -34,7 +27,13 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :login
   validates_uniqueness_of :email
   #validates_presence_of :site
-    
+   
+  def before_destroy 
+    user_rights.each do |r|
+      r.destroy
+    end
+  end
+  
   def password= pw
     self[:password] = encrypt pw
   end
