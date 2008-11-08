@@ -2,8 +2,9 @@ class News < ActiveRecord::Base
   acts_as_taggable
   acts_as_delegatable
 
-  belongs_to :user, :foreign_key => "author_id"
+  belongs_to :user
   belongs_to :news_category
+  belongs_to :site
   
   #deprecated
   has_many :news_comments

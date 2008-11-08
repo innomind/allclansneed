@@ -16,7 +16,7 @@ class User < ActiveRecord::Base
   
 
   has_many :squad_users #??? i don't want this line :( sounds strange: a user has squad_users
-  has_many :user_rights # much better ;)
+  has_many :user_rights, :dependent => :destroy # much better ;)
   has_many :squads, :through => :squad_users
   has_many :sites, :through => :user_rights
   
@@ -28,10 +28,14 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :email
   #validates_presence_of :site
    
-  def before_destroy 
-    user_rights.each do |r|
-      r.destroy
-    end
+  
+  
+  def nick= nickname
+    self[:login] = nickname
+  end
+  
+  def nick
+    self[:login]
   end
   
   def password= pw

@@ -2,7 +2,7 @@ class NewsController < ApplicationController
   
   def index
      @news = News.find_for_site(:all)
-     @tags = News.tag_counts (:order => 'count desc', :conditions  => {"site_id"  => $site_id})
+     @tags = News.tag_counts(:order => 'count desc', :conditions  => {:site_id  => current_site_id})
   end
   
   def show
@@ -21,8 +21,8 @@ class NewsController < ApplicationController
                       :subtext => @_post['subtext'],
                       :news => @_post['news'])
                       
-    @news.user_id = current_user_id
-    @news.site_id = $site_id
+    @news.user = current_user
+    @news.site = current_site
     @news.tag_list = @_post['tags']
     
     if @news.save
@@ -40,17 +40,17 @@ class NewsController < ApplicationController
   
   def edit
     @news = News.find_for_site(params[:id])
-    @tags = News.tag_counts (:order => 'count desc', :conditions  => {"site_id" => $site_id})
+    @tags = News.tag_counts(:order => 'count desc', :conditions  => {:site_id  => current_site_id})
   end
   
   def update
-    @_post = params[:news]
+    #@_post = params[:news]
     @news = News.find_for_site(params[:id])
-    @news.title = @_post['title']
-    @news.subtext = @_post['title']
-    @news.news = @_post['title']
-    @news.tag_list = @_post['tags']
-    
+    #@news.title = @_post['title']
+    #@news.subtext = @_post['title']
+    #@news.news = @_post['title']
+    #@news.tag_list = @_post['tags']
+    @news.update_attributes(params[:news])
     if @news.save
       redirect_to :action => 'index'
     else
@@ -59,7 +59,7 @@ class NewsController < ApplicationController
   end
   
   def findByTag
-    @news = News.find_tagged_with(params[:id], :conditions  => {"site_id"  => $site_id})
+    @news = News.find_tagged_with(params[:id], :conditions  => {:site_id  => current_site_id})
   end
   
   def auto_complete_for_news_tags
