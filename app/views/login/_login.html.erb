@@ -1,7 +1,7 @@
 
 <% if flash[:notice] %><div style="background:yellow;"><%= flash[:notice] %></div><% end %>
 
-<%unless session['user_id']%>
+<%unless @logged_in%>
   <br/>
 
 

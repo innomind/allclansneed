@@ -1,5 +1,7 @@
 class ClanManagementController < ApplicationController
-  ACTION_LEVELS={'index' => LEVEL_SITE_MEMBER}
+  
+  ACTION_LEVELS={:index => LEVEL_SITE_MEMBER}
+  
   before_filter :init_clan
   
   def clan_management
