@@ -1,0 +1,28 @@
+
+Clan: <%= @clan.name  %>
+
+<%# javascript_tag do %>
+<%#=  remote_function :update => 'squads', :url => {:action => 'squads'}%>
+<%#end%>
+
+<div>
+<div style="width:49%;float:left">
+<% form_for Squad.new do |f| %>
+    <%=f.label :name, 'Name' %>:
+    <%=f.text_field :name %><br/>
+
+    <%=f.submit 'create squad'%>
+<%end%>
+</div>
+<div style="width:30%;border-width:1px;border-color:green;border-style:solid;float:right" id="squads">
+&nbsp;
+</div>
+</div>
+<!-- <a onclick="<%#= remote_function :update => 'squads', :url => {:action => 'update_lists'} %>" >test</a>
+<div style="border-color:black;border-width:1px;border-style:solid;width:30%;float:left">
+  ttt
+</div>hallo
+<div style="border-color:black;border-width:1px;border-style:solid;width:30%">
+  ttt_right
+</div>
+-->

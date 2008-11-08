@@ -14,12 +14,38 @@ class ApplicationController < ActionController::Base
   # from your application log (in this case, all fields with names like "password"). 
   # filter_parameter_logging :password
   
-  before_filter :init_site_id#, :check_query
+  
+  ACTION_LEVELS = {}
+  LEVEL_ACN_MEMBER = 0
+  LEVEL_SITE_MEMBER = 1
+  LEVEL_SITE_ADMIN = 2
+  
+  before_filter :init_site_id, :init_rights #:init_site_id#, :check_query
   
   protected
   
+  #the global variable site_id should be the ONLY exception in usage of global vars
+  #we will try to remove even this, as soon we have found a proper alternative
   def init_site_id
-    $site_id = params['site_id'].nil? ? 1 : params['site_id'] 
+    if params[:site_id] == ""
+      render :text => 'strange request: site_id set, but empty'
+      return
+    end
+    $site_id = params[:site_id].nil? ? 1 : params[:site_id]
+  end
+  
+  def init_rights
+    unless self.class::ACTION_LEVELS == {}
+      request = params[:action]
+      req_level = self.class::ACTION_LEVELS[request]
+      unless req_level.nil?
+        if user_has_right_ge? req_level
+          return
+        else
+          render :text => 'access denied'
+        end
+      end
+    end
   end
 
   #def initialize
@@ -27,36 +53,55 @@ class ApplicationController < ActionController::Base
   #end
   
   def user_is_guest?
-    session['account_id'].nil?
-  end
-  
-  def current_user_site_id
-    user_is_guest? ? 1 : session['account_id']
+    session['user_id'].nil?
   end
   
   def current_user_id
-    return 1
-    #session['user_id']
+    session['user_id']
   end
   
+  def user_belongs_to_site?
+    if session['user_sites'].nil?
+      false
+    else
+      session['user_sites'].include?($site_id)
+    end
+  end
+  
+  # user has right greater than/equal to level?
+  def user_has_right_ge? level
+    unless user_is_guest?
+      right = UserRight.find :first, :conditions => {:site_id => $site_id, :user_id => current_user_id}
+      if right.nil?
+        (level >= LEVEL_ACN_MEMBER)
+      else
+        (right.level >= level)
+      end
+    else
+      false
+    end
+  end
+  
+=begin
   def rights
     user_is_guest? ? [] : session['rights'].split(' ')
   end
   
-  def current_account_id
-    session['account_id']
+  def current_user_id
+    session['user_id']
   end
+=end
   
-  
+=begin  
   #denylist is a whitespace seperated string of Controller/action
   def check_query
     complete_list =  Account::ALL_RIGHTS.split ' '
     
     request = params['controller'].capitalize+'/'+params['action']
-    #render :text => 'complete: '+complete_list.inspect+'<br/><br/>'+'right:'+rights.inspect+'<br/><br/>'+'req: '+request
+    render :text => 'complete: '+complete_list.inspect+'<br/><br/>'+'right:'+rights.inspect+'<br/><br/>'+'req: '+request
     if complete_list.include?(request) && !rights.include?(request)
       redirect_to root_path
-    end
-    
+    end 
   end
+=end
 end

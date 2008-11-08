@@ -1,12 +1,12 @@
 class Account < ActiveRecord::Base
-  acts_as_delegatable
+  #acts_as_delegatable
   
-  has_many :forum_threads
-  has_many :forum_messages
-  has_many :guestbooks
-  has_many :news
-  has_many :messages
-  belongs_to :user
+  #has_many :forum_threads
+  #has_many :forum_messages
+  #has_many :guestbooks
+  #has_many :news
+  #has_many :messages
+  #belongs_to :user
   
   ALL_RIGHTS =  #News
   
@@ -35,11 +35,11 @@ class Account < ActiveRecord::Base
   #validates_presence_of :nick
   #validates_presence_of :password
   #validates_presence_of :email
-  validates_presence_of :site_id
+  #validates_presence_of :site_id
   
   #validates_confirmation_of :email
   #validates_uniqueness_of :nick
   #validates_uniqueness_of :email
   
-  belongs_to :site
+  #belongs_to :site
 end

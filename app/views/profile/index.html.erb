@@ -1,0 +1,9 @@
+vorname: <%= @user.firstname %> <br>
+nachname: <%= @user.lastname %> <br><br>
+  
+<%# @user.squads.each { |s|
+    s.name }  %>
+  
+  <br>
+<%= render :partial => "pinwall/index",
+            :locals => { :ident => params[:id] }%>

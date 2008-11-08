@@ -1,4 +1,5 @@
 class GuestbookController < ApplicationController
+  
   def list
     #@guestbook = Guestbook.find(:all, :order => "created_at DESC")
     @guestbook = Guestbook.show_model(params[:page], $site_id)
@@ -7,7 +8,7 @@ class GuestbookController < ApplicationController
   
   def new
     @guestbook = Guestbook.new(params[:guestbooks])
-    @guestbook.site_id = @site_id
+    @guestbook.site_id = $site_id
     if @guestbook.save
       return if request.xhr?
       render :partial => 'guestbook', :object => @guestbook

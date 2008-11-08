@@ -1,4 +1,8 @@
 class LoginController < ApplicationController
+  ACTION_LEVELS = { 'test1' => LEVEL_SITE_MEMBER,
+    'test2' => LEVEL_SITE_ADMIN,
+    'test3' => 3
+  }
   
   def login
     nick = params[:nick]
@@ -7,12 +11,9 @@ class LoginController < ApplicationController
       usr = User.first :conditions => {:login => nick}
       if !usr.nil? && usr.check_pw(pw)
         session['user_id'] = usr.id
-        acc = Account.first :conditions => {:user_id => usr.id}
-        session['account_id'] = acc.id
-        session['site_id'] = acc.site_id
-        session['rights'] = acc.right
+        session['user_sites'] = usr.site_ids
       else
-        flash[:notice] = 'login failed'+' for '+params[:nick]
+        flash.now[:notice] = 'login failed'+' for "'+params[:nick]+'"'
       end
       
     end
@@ -24,15 +25,27 @@ class LoginController < ApplicationController
   end
 
   def create
-    unless params['account'].nil?
-      @account = Account.new params['account']
-      @account.site_id = params['site_id']
-      if !@account.save
-        flash[:errors] = @account.errors
+    unless params['user'].nil?
+      @user = User.new params[:user]
+      @user.user_rights[0] = UserRight.new(:user_id => @user.id, :site_id => params[:site_id], :level => 1)
+      if !@user.save
+        flash[:errors] = @user.errors
       else
         render :partial => 'create_success'
       end
     end
     @pages = Site.all
+  end
+  
+  def test1
+    render :text => "Test1"
+  end
+  
+  def test2
+    render :text => "Test2"
+  end
+  
+  def test3
+    render :text => "Test3"   
   end
 end

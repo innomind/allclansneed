@@ -2,7 +2,7 @@ class CreateForumMessages < ActiveRecord::Migration
   def self.up
     create_table :forum_messages do |t|
       t.column :message, :text
-      t.belongs_to :account
+      t.belongs_to :user
       t.belongs_to :forum_thread
       t.timestamps
     end

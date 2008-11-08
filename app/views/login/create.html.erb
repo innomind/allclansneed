@@ -7,15 +7,15 @@
 <% end %>
 
 
-<% form_for(Account.new) do |acc| %>
-  <%= acc.label :nick, 'nick' %>
-  <%= acc.text_field :nick %>
+<% form_for(User.new) do |usr| %>
+  <%= usr.label :login, 'nick' %>
+  <%= usr.text_field :login %>
   <br/>
-  <%= acc.label :password, 'password' %>
-  <%= acc.password_field :password %>
+  <%= usr.label :password, 'password' %>
+  <%= usr.password_field :password %>
   <br/>
-  <%= acc.label :email, 'email' %>
-  <%= acc.text_field :email %>
+  <%= usr.label :email, 'email' %>
+  <%= usr.text_field :email %>
   <%  options = String.new ;@pages.each do |page|%>
     <% options << "\n<option value="+page.id.to_s+">"+page.title+" </option>" %>
   <%end%>
