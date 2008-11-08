@@ -6,7 +6,7 @@ module ApplicationHelper
   
   #popup
   def popup(partial, popup_space)
-    #page.alert "hallo :-)"
+    page.alert "hallo :-)"
   end    
   
   #returns a formated date-string  
@@ -14,7 +14,7 @@ module ApplicationHelper
     datum.strftime("%d.%m.%Y %H:%M")
   end
   
-    def german_date(datum)     
+  def german_date(datum)     
     datum.strftime("%d.%m.%Y")
   end
   

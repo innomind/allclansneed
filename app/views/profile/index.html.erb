@@ -1,9 +1,9 @@
-vorname: <%= @user.firstname %> <br>
-nachname: <%= @user.lastname %> <br><br>
+vorname: <%= @profile.firstname %> <br>
+nachname: <%= @profile.lastname %> <br><br>
   
 <%# @user.squads.each { |s|
     s.name }  %>
   
   <br>
-<%= render :partial => "pinwall/index",
-            :locals => { :ident => params[:id] }%>
+<%= render :partial => "comment/index",
+            :locals => { :model => @profile }%>

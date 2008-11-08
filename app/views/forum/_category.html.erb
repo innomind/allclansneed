@@ -13,12 +13,15 @@
     <%= link_to_remote(image_tag("folder_delete.png", :border => "0", :id => "folder_del_img_#{category.id}"), :url => {:action => "delete", :id => category.id},
                      :loading => "Element.show('loading');",
                      :loaded => "Element.hide('loading')")%>
-  <%= popup("create_category_form", "category_popup_space_#{category.id}") %>
+  <%= popup("create_category_form", "category_popup_test_#{category.id}") %>
     <span id="loading_<%= category.id %>" style="display:none;"><%= image_tag("loading.gif", :border => 0) %></span>
     
   </span>
   
   <br><small><%= category.subtitle %> </small>
+  <span id="category_popup_test_<%= category.id %>" style="display:none;">
+  
+  </span>
   <span id="category_popup_space_<%= category.id %>" style="display:none;">
   
   </span>

@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
   has_many :guestbooks
   has_many :news
   has_many :messages
+  has_many :comments
   
   has_one :profile
   

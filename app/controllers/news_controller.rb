@@ -21,7 +21,8 @@ class NewsController < ApplicationController
                       :subtext => @_post['subtext'],
                       :news => @_post['news'])
                       
-    @news.author_id = current_user_id
+    @news.user_id = current_user_id
+    @news.site_id = $site_id
     @news.tag_list = @_post['tags']
     
     if @news.save
