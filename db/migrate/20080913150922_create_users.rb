@@ -2,7 +2,7 @@ class CreateUsers < ActiveRecord::Migration
   def self.up
     create_table :users do |t|
       t.column :login, :string
-      t.column :password, :string
+      t.column :password, :string, :limit => 64
       t.column :email, :string
       t.timestamps
     end

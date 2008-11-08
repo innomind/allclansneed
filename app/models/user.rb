@@ -9,6 +9,8 @@ class User < ActiveRecord::Base
   has_many :news
   has_many :messages
   
+  has_one :profile
+  
   #before_save :encrypt_password
   
 

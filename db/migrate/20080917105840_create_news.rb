@@ -4,6 +4,7 @@ class CreateNews < ActiveRecord::Migration
       t.column :title, :string
       t.column :subtext, :text
       t.column :news, :text
+      t.belongs_to :site, :user, :news_category
       t.timestamps
     end
     

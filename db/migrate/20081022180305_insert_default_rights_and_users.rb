@@ -1,4 +1,4 @@
-class CreateDefaultRightsAndUsers < ActiveRecord::Migration
+class InsertDefaultRightsAndUsers < ActiveRecord::Migration
   
   MAIN_TITLE="Mainpage"
   
@@ -6,19 +6,17 @@ class CreateDefaultRightsAndUsers < ActiveRecord::Migration
   
   def self.generate_users
     @users = [
+      User.new(  :login  => "philipp",
+        :password => "test",
+        :email => "pw@allclansneed.de"
+      ),
       User.new(  :login  => "ben",
         :password  => "test",
         :email => "ben@test.de"
       ),
-      
-      User.new(  :login  => "tester",
-        :password => "123",
-        :email => "tester@test.de"
-      ),
-      
-      User.new(  :login  => "philipp",
+      User.new(  :login  => "valentin",
         :password => "test",
-        :email => "pw@test.de"
+        :email => "valentin.schulte@gmx.de"
       )
     ]    
   end

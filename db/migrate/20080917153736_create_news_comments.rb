@@ -3,6 +3,7 @@ class CreateNewsComments < ActiveRecord::Migration
     create_table :news_comments do |t|
       t.column :comment, :text
       t.column :author_id, :integer
+      t.belongs_to :news
       t.timestamps
     end
   end

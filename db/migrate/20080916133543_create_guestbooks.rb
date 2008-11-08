@@ -1,8 +1,10 @@
 class CreateGuestbooks < ActiveRecord::Migration
   def self.up
     create_table :guestbooks do |t|
-      t.column :name, :string
-      t.column :entry, :text
+      t.string :name, :email
+      t.text :entry, :comment
+      t.belongs_to :site
+      t.integer :comment_author_id
       t.timestamps
     end
   end
