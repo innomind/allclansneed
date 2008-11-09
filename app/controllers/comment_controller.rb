@@ -1,4 +1,5 @@
 class CommentController < ApplicationController
+  uses_tiny_mce
   def index
     
   end
