@@ -1,0 +1,12 @@
+Profil bearbeiten
+<%= error_messages_for @profile -%>
+
+<% form_tag :action => 'update' do %>
+	<p><label for="profile_firstname">Firstname</label>
+	<%= text_field 'profile', 'firstname' %></p>
+
+	<p><label for="profile_lastname">Lastname</label>
+	<%= text_field 'profile', 'lastname' %></p>
+        
+        <%= submit_tag "Änderungen übernehmen" %>
+<% end %>

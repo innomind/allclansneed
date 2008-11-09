@@ -6,7 +6,7 @@ module ApplicationHelper
   
   #popup
   def popup(partial, popup_space)
-    page.alert "hallo :-)"
+    #alert "hallo :-)"
   end    
   
   #returns a formated date-string  

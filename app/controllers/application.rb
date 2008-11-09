@@ -3,7 +3,7 @@
 
 class ApplicationController < ActionController::Base
   helper :all # include all helpers, all the time
-  layout 'standard'
+  layout 'dnp'
   #model :account
   # See ActionController::RequestForgeryProtection for details
   # Uncomment the :secret if you're not using the cookie session store
@@ -19,10 +19,10 @@ class ApplicationController < ActionController::Base
   LEVEL_SITE_MEMBER = 1
   LEVEL_SITE_ADMIN = 2
   
-  before_filter :init_site, :init_rights #:init_site_id#, :check_query
+  before_filter :init_site, :init_rights, :pagination_defaults #:init_site_id#, :check_query
   
   protected
-  
+    
   #the global variable site_id should be the ONLY exception in usage of global vars
   #we should try to remove even this, as soon we have found a proper alternative
   def init_site
@@ -58,7 +58,6 @@ class ApplicationController < ActionController::Base
   def current_site
     @site
   end
-  
   
   def logged_in?
     @logged_in
@@ -96,6 +95,12 @@ class ApplicationController < ActionController::Base
     else
       false
     end
+  end
+  
+  def pagination_defaults
+    @page = (params[:page] || 1).to_i
+    @page = 1 if @page < 1
+    @per_page = (10 if params[:per_page].nil?).to_i
   end
     
 end

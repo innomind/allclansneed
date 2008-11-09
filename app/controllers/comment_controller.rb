@@ -8,7 +8,12 @@ class CommentController < ApplicationController
   end
   
   def create
-    
+    @comment = Comment.new(params[:comment])
+    @comment.update_attribute(params[:model].downcase + "_id", params[:id])
+    @comment.user = current_user
+    if @comment.save
+      return if request.xhr?
+    end
   end
   
   def edit

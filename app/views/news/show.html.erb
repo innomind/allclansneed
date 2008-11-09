@@ -1,12 +1,4 @@
 <h1><%= @news.title %></h1>
 <h2><%= @news.news %><h2>
-<%= render :partial => "comment", :collection => @news.news_comments %>
 
-<%= link_to_function image_tag("comment_add.png", :border => 0), "Element.toggle('add_comment_#{@news.id}')" %>
-
-<div id="add_comment_<%= @news.id %>" style="display:none;">
-	<% form_tag :controller  => 'news_comment', :action => 'create', :id => @news.id do%>
-		<%= text_area :news_comment, "comment", :rows => 2, :cols => 25 %>
-		<%= submit_tag 'Add' %>
-	<% end %>
-</div>
+<%= render :partial => "comment/index", :locals => { :model => @news } %>
