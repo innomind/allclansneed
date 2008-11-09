@@ -7,4 +7,15 @@ class Site < ActiveRecord::Base
   has_one :clan
   
   #validates_uniqueness_of :title
+  
+  PORTAL_ID = 1
+  PORTAL_NAME = "A * C * N - Portalseite"
+  
+  def is_portal?
+    (id == SITE_PORTAL_ID)
+  end
+  
+  def portal_name
+    PORTAL_NAME
+  end
 end

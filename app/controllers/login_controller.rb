@@ -1,4 +1,5 @@
 class LoginController < ApplicationController
+
   ACTION_LEVELS = { 'test1' => LEVEL_SITE_MEMBER,
     'test2' => LEVEL_SITE_ADMIN,
     'test3' => 3
@@ -12,6 +13,7 @@ class LoginController < ApplicationController
       if !usr.nil? && usr.check_pw(pw)
         session['user'] = usr
         session['user_sites'] = usr.site_ids
+        @logged_in = true
       else
         flash.now[:notice] = 'login failed'+' for "'+params[:nick]+'"'
       end

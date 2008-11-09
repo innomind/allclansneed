@@ -1,6 +1,6 @@
 class InsertDeveloperRightsUsersClans < ActiveRecord::Migration
   
-  MAIN_TITLE="Mainpage"
+  #MAIN_TITLE="Mainpage"
   
   #FIXME: site_id of @main_site should be 1, this is not working for rake migrate:redo without SQL-HACK!
   
@@ -23,7 +23,7 @@ class InsertDeveloperRightsUsersClans < ActiveRecord::Migration
   
   def self.generate_sites
     @sites = []
-    @main_site = Site.new(:title => MAIN_TITLE)
+    @main_site = Site.new(:title => Site::PORTAL_NAME)
     #@main_site.id=1
     2.upto(@users.length+1) { |i|
       @sites.push Site.new(:title => "page #{i}", :id => i) 
@@ -63,7 +63,7 @@ class InsertDeveloperRightsUsersClans < ActiveRecord::Migration
       #@sites[i].save
     }
     #very ugly SQL-HACK
-    execute "UPDATE sites SET id=1 WHERE title='#{MAIN_TITLE}'"
+    execute "UPDATE sites SET id=#{Site::PORTAL_ID} WHERE title='#{Site::PORTAL_NAME}'"
   end
 
   def self.down

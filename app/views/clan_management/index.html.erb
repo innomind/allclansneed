@@ -5,6 +5,8 @@ Clan: <%= @clan.name  %>
 <%#=  remote_function :update => 'squads', :url => {:action => 'squads'}%>
 <%#end%>
 
+
+<%#= error_messages_for @squad %>
 <div>
 <div style="width:49%;float:left">
 <% form_for Squad.new do |f| %>
@@ -22,9 +24,19 @@ Clan: <%= @clan.name  %>
   clan members: <br/>
     <%list_members.each do |member|%>
         <%=div_encapsulate member.nick, dom_id(member)%> <br/>
+        <%=draggable_element dom_id(member)%>
     <%end%>
   
 </div>
+<p>&nbsp;</p>
+
+<div id=dropMember style="border-style:solid">
+&nbsp;  
+  
+</div>
+
+<%=drop_receiving_element "dropMember", :url => {:action => 'add_to_Squad'}%>
+
 <!-- <a onclick="<%#= remote_function :update => 'squads', :url => {:action => 'update_lists'} %>" >test</a>
 <div style="border-color:black;border-width:1px;border-style:solid;width:30%;float:left">
   ttt

@@ -12,6 +12,7 @@
 <body onload="<%= remote_function :url => {:action => 'update_lists'} %>">
 
 <p style="color: green"><%= flash[:notice] %></p>
+<p style="color: red"><%= show_verbose_messages %></p>
 
 <%= yield  %>
 

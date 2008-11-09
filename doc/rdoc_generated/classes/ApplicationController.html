@@ -1,0 +1,342 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Class: ApplicationController</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href=".././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Class</strong></td>
+          <td class="class-name-in-header">ApplicationController</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../files/app/controllers/application_rb.html">
+                app/controllers/application.rb
+                </a>
+        <br />
+            </td>
+        </tr>
+
+        <tr class="top-aligned-row">
+            <td><strong>Parent:</strong></td>
+            <td>
+                ActionController::Base
+            </td>
+        </tr>
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <p>
+Filters added to this controller apply to all controllers in the
+application. Likewise, all the methods added will be available for all
+controllers.
+</p>
+
+    </div>
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M000037">current_site</a>&nbsp;&nbsp;
+      <a href="#M000036">current_site_id</a>&nbsp;&nbsp;
+      <a href="#M000041">current_user</a>&nbsp;&nbsp;
+      <a href="#M000040">current_user_id</a>&nbsp;&nbsp;
+      <a href="#M000035">init_rights</a>&nbsp;&nbsp;
+      <a href="#M000034">init_site</a>&nbsp;&nbsp;
+      <a href="#M000038">logged_in?</a>&nbsp;&nbsp;
+      <a href="#M000044">save_and_show_errors_for</a>&nbsp;&nbsp;
+      <a href="#M000042">user_belongs_to_site?</a>&nbsp;&nbsp;
+      <a href="#M000043">user_has_right_ge?</a>&nbsp;&nbsp;
+      <a href="#M000039">user_is_guest?</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+    <div id="constants-list">
+      <h3 class="section-bar">Constants</h3>
+
+      <div class="name-list">
+        <table summary="Constants">
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">ACTION_LEVELS</td>
+          <td>=</td>
+          <td class="context-item-value">{}</td>
+          <td width="3em">&nbsp;</td>
+          <td class="context-item-desc">
+See ActionController::Base for details Uncomment this to filter the
+contents of submitted sensitive data parameters from your application log
+(in this case, all fields with names like &quot;password&quot;).
+filter_parameter_logging :password
+
+</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">LEVEL_ACN_MEMBER</td>
+          <td>=</td>
+          <td class="context-item-value">0</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">LEVEL_SITE_MEMBER</td>
+          <td>=</td>
+          <td class="context-item-value">1</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">LEVEL_SITE_ADMIN</td>
+          <td>=</td>
+          <td class="context-item-value">2</td>
+        </tr>
+        </table>
+      </div>
+    </div>
+
+
+
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Protected Instance methods</h3>
+
+      <div id="method-M000037" class="method-detail">
+        <a name="M000037"></a>
+
+        <div class="method-heading">
+          <a href="ApplicationController.src/M000037.html" target="Code" class="method-signature"
+            onclick="popupCode('ApplicationController.src/M000037.html');return false;">
+          <span class="method-name">current_site</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000036" class="method-detail">
+        <a name="M000036"></a>
+
+        <div class="method-heading">
+          <a href="ApplicationController.src/M000036.html" target="Code" class="method-signature"
+            onclick="popupCode('ApplicationController.src/M000036.html');return false;">
+          <span class="method-name">current_site_id</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+deprecated, don&#8216;t use
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000041" class="method-detail">
+        <a name="M000041"></a>
+
+        <div class="method-heading">
+          <a href="ApplicationController.src/M000041.html" target="Code" class="method-signature"
+            onclick="popupCode('ApplicationController.src/M000041.html');return false;">
+          <span class="method-name">current_user</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000040" class="method-detail">
+        <a name="M000040"></a>
+
+        <div class="method-heading">
+          <a href="ApplicationController.src/M000040.html" target="Code" class="method-signature"
+            onclick="popupCode('ApplicationController.src/M000040.html');return false;">
+          <span class="method-name">current_user_id</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000035" class="method-detail">
+        <a name="M000035"></a>
+
+        <div class="method-heading">
+          <a href="ApplicationController.src/M000035.html" target="Code" class="method-signature"
+            onclick="popupCode('ApplicationController.src/M000035.html');return false;">
+          <span class="method-name">init_rights</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000034" class="method-detail">
+        <a name="M000034"></a>
+
+        <div class="method-heading">
+          <a href="ApplicationController.src/M000034.html" target="Code" class="method-signature"
+            onclick="popupCode('ApplicationController.src/M000034.html');return false;">
+          <span class="method-name">init_site</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+the global variable site_id should be the ONLY exception in usage of global
+vars we should try to remove even this, as soon we have found a proper
+alternative
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000038" class="method-detail">
+        <a name="M000038"></a>
+
+        <div class="method-heading">
+          <a href="ApplicationController.src/M000038.html" target="Code" class="method-signature"
+            onclick="popupCode('ApplicationController.src/M000038.html');return false;">
+          <span class="method-name">logged_in?</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000044" class="method-detail">
+        <a name="M000044"></a>
+
+        <div class="method-heading">
+          <a href="ApplicationController.src/M000044.html" target="Code" class="method-signature"
+            onclick="popupCode('ApplicationController.src/M000044.html');return false;">
+          <span class="method-name">save_and_show_errors_for</span><span class="method-args">(obj)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000042" class="method-detail">
+        <a name="M000042"></a>
+
+        <div class="method-heading">
+          <a href="ApplicationController.src/M000042.html" target="Code" class="method-signature"
+            onclick="popupCode('ApplicationController.src/M000042.html');return false;">
+          <span class="method-name">user_belongs_to_site?</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000043" class="method-detail">
+        <a name="M000043"></a>
+
+        <div class="method-heading">
+          <a href="ApplicationController.src/M000043.html" target="Code" class="method-signature"
+            onclick="popupCode('ApplicationController.src/M000043.html');return false;">
+          <span class="method-name">user_has_right_ge?</span><span class="method-args">(level)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+user has right greater than/equal to level?
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000039" class="method-detail">
+        <a name="M000039"></a>
+
+        <div class="method-heading">
+          <a href="ApplicationController.src/M000039.html" target="Code" class="method-signature"
+            onclick="popupCode('ApplicationController.src/M000039.html');return false;">
+          <span class="method-name">user_is_guest?</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

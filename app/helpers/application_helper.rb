@@ -45,8 +45,16 @@ module ApplicationHelper
     str
   end
   
+  def show_verbose_messages
+    str = ''
+    until (obj = session['error_objects'].pop).nil? 
+      str << (error_messages_for obj)
+    end
+    str
+  end
+ 
   def div_encapsulate string, id=nil
-    "<div #{id.nil? ? "" : id.to_s}>"+string.to_s+'</div>'
+    "<div #{id.nil? ? "" : 'id="'+id.to_s+'"'}>"+string.to_s+'</div>'
   end
   
 end

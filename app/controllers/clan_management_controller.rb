@@ -28,7 +28,7 @@ class ClanManagementController < ApplicationController
   def create_squad
     @squad = Squad.new(params[:squad])
     @squad.clan = @clan
-    if @squad.save
+    if save_verbose @squad
       flash[:notice] = 'Clan successfully created.'
     else
       flash[:error] = "Clan couldn't be created"

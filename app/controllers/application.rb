@@ -47,8 +47,12 @@ class ApplicationController < ActionController::Base
         end
       end
     end
+    #some useful variables
     @logged_in = !session['user'].nil?
+    session['error_objects'] = []
   end
+  
+
 
     #deprecated, don't use
   def current_site_id
@@ -96,11 +100,21 @@ class ApplicationController < ActionController::Base
       false
     end
   end
+
+  
+  def save_verbose obj
+    unless (saved = obj.save)
+      session['error_objects'].push obj
+    end
+    saved
+  end
+
   
   def pagination_defaults
     @page = (params[:page] || 1).to_i
     @page = 1 if @page < 1
     @per_page = (10 if params[:per_page].nil?).to_i
   end
+
     
 end
