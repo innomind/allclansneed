@@ -1,4 +1,4 @@
 <h1><%= @news.title %></h1>
 <h2><%= @news.news %><h2>
 
-<%= render :partial => "comment/index", :locals => { :model => @news } %>
+<% render :partial => "comment/index", :locals => { :model => @news } %>

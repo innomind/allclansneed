@@ -9,6 +9,8 @@ class User < ActiveRecord::Base
   has_many :news
   has_many :messages
   has_many :comments
+  has_many :gallery_categories
+  has_many :gallery_pics
   
   has_one :profile
   

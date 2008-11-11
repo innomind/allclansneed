@@ -1,6 +1,8 @@
 class Site < ActiveRecord::Base
   has_many :guestbooks
   has_many :news_categories
+  has_many :gallery_categories
+  has_many :gallery_pics
   
   has_many :user_rights
   has_many :users, :through => :user_rights
