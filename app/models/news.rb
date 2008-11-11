@@ -6,9 +6,6 @@ class News < ActiveRecord::Base
   belongs_to :news_category
   belongs_to :site
   
-  #deprecated
-  has_many :news_comments
-  
   has_many :comments
   
   validates_presence_of :title

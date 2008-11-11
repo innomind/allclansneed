@@ -1,8 +1,5 @@
 class User < ActiveRecord::Base
 
-  #has_many :accounts
-  
-  has_many :pinwalls
   has_many :forum_threads
   has_many :forum_messages
   has_many :guestbooks
