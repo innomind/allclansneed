@@ -7,7 +7,7 @@ class GalleryPic < ActiveRecord::Base
       :small  => "150x150>" }
 
   belongs_to :site
-  belongs_to :gallery_category
+  belongs_to :gallery
   belongs_to :user
   
   has_many :comments

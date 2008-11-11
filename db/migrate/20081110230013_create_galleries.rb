@@ -1,6 +1,6 @@
-class CreateGalleryCategories < ActiveRecord::Migration
+class CreateGalleries < ActiveRecord::Migration
   def self.up
-    create_table :gallery_categories do |t|
+    create_table :galleries do |t|
       t.string :name
       t.text :description
       t.belongs_to :user
@@ -11,6 +11,6 @@ class CreateGalleryCategories < ActiveRecord::Migration
   end
 
   def self.down
-    drop_table :gallery_categories
+    drop_table :galleries
   end
 end

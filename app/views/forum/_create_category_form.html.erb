@@ -5,7 +5,7 @@
             page.show "category_links_#{params[:id]}"
         end %>
     </div>
-        <% form_remote_tag :url => {:action => "create_category", :id => params[:id]}, 
+        <% form_remote_tag :url => {:action => "create", :id => params[:id]}, 
                        :html => {:id => "create_category_#{params[:id]}"} do  %>
 
           <p><label for="forum_category_title">Title</label>
