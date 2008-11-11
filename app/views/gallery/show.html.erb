@@ -1,2 +1,5 @@
-<%= render :partial => "pic", :collection => @gallery.gallery_pics %>
-<%= link_to "upload pic", :action => "new" %>
+<% unless @gallery.gallery_pics.nil? %>
+  <%= render :partial => "pic", :collection => @gallery.gallery_pics %>
+<% end %>
+<br>
+<%= link_to "upload pic", :controller => "gallery_pic",  :action => "new", :id => @gallery.id  %>

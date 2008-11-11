@@ -7,7 +7,7 @@ class CreateGalleryPics < ActiveRecord::Migration
       t.string :name
       t.text :description
       t.belongs_to :site
-      t.belongs_to :gallery_category
+      t.belongs_to :gallery
       t.belongs_to :user
       t.timestamp :pic_updated_at
       t.timestamps

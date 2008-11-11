@@ -1,2 +1,4 @@
-<%= render :partial => "gallery", :collection => @galleries %>
+<% unless @galleries.nil? %>
+  <%= render :partial => "gallery", :collection => @galleries %><br>
+<% end %>
 <%= link_to "add gallery", :action => "new" %>

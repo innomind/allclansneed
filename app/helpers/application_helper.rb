@@ -9,6 +9,10 @@ module ApplicationHelper
     #alert "hallo :-)"
   end    
   
+  def username(user)
+    user.login
+  end
+  
   #returns a formated date-string  
   def german_date_with_time(datum)     
     datum.strftime("%d.%m.%Y %H:%M")

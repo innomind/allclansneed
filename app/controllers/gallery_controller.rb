@@ -4,7 +4,7 @@ class GalleryController < ApplicationController
   end
   
   def show
-    @galleries = Gallery.find_for_site(:all, :id => params[:id]).first
+    @gallery = Gallery.find_for_site(:all, :id => params[:id]).first
   end
   
   def new
@@ -13,6 +13,13 @@ class GalleryController < ApplicationController
   
   def create
     @gallery = Gallery.new(params[:gallery])
+    @gallery.site = current_site
+    @gallery.user = current_user
+    if @gallery.save
+      redirect_to :action => "index"
+    else
+      render :action => "new"
+    end
   end
   
   def edit
