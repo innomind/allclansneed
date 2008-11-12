@@ -4,9 +4,22 @@ module ApplicationHelper
   #some stuff for tag-clouding :)
   include TagsHelper
   
+  def error_handling_form_for(record_or_name_or_array, *args, &proc)
+    options = args.detect { |argument| argument.is_a?(Hash) }
+    if options.nil?
+      options = {:builder => ErrorHandlingFormBuilder}
+      args << options
+    end
+    options[:builder] = ErrorHandlingFormBuilder unless options.nil?
+    form_for(record_or_name_or_array, *args, &proc)
+  end
+
+  
   #popup
-  def popup(partial, popup_space)
-    #alert "hallo :-)"
+  #def popup(partial, popup_space)
+  def test123
+    #@template.alert "hallo :-)"
+    
   end    
   
   def username(user)

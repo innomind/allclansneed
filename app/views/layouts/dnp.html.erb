@@ -19,7 +19,10 @@ function ctRosterClean()
 } 
 // --> 
 </script>
-<link rel="stylesheet" type="text/css" href="stylesheets/dnp.css" />
+    <%= javascript_include_tag :defaults%>
+    <%= stylesheet_link_tag "dnp" %>
+    <%= javascript_include_tiny_mce_if_used %>
+    <%= tiny_mce if using_tiny_mce? %>
 </head>
 <!--	CODED BY OPSERTY.COM 
 		ALL RIGHTS RESERVED
@@ -63,54 +66,26 @@ function ctRosterClean()
 				<p>
 				Enter Search String:
 				<input type="text" class="text" name="search" value="Search" /><br />
-				<input type="image" src="images/dnp/search_button.gif" class="button" />
+				<input type="submit" class="button" value="suchen" />
 				</p>
 			</form>
 			<h1>Official<small>Sponsors</small></h1>
 			
-			<img src="images/dnp/sponsor_image_1.gif" alt="Sponsor Image" />
-			<img src="images/dnp/sponsor_image_2.gif" alt="Sponsor Image" />
+                        <%= image_tag "dnp/sponsor_image_2.gif" %>
+			<%= image_tag "dnp/sponsor_image_1.gif" %>
+			
 			
 			
 		</div>
 		<!-- END LEFT COLUMN -->
 		<div id="middle" >
-			<div id="division_select">
-				<h1><span>Select Division</span></h1>
-				<a href="#"><img src="images/dnp/division_dod.gif" alt="Day of Defeat" /></a>
-				<a href="#"><img src="images/dnp/division_cs.gif" alt="Day of Defeat" /></a>
-				<a href="#"><img src="images/dnp/division_wow.gif" alt="Day of Defeat" /></a>
-				<a href="#"><img src="images/dnp/division_quake.gif" alt="Day of Defeat" /></a> 
-			</div>
+			
 			<div id="breadcrum">Home > Demos >> DOD</div>
 			<h1>Welcome to OurSite</h1>
 			<!-- ENTER MAIN CONTENT HERE -->
+                        
 			<div class="content">
-				
-				<h2>Depiction Template by Knightmare at ClanTemplates.com </h2>
-				<p>
-					Firstly	thank	you for downloading this wonderful template we hope you enjoy using it. Please ensure the link in the footer remains in place else you will not be allowed to use this template for free. Thats the only requirement we ask for and well for a design its a bargin. We want to keep it that way so please leave it there!</p>
-				<p>If you would like to edit the clan name or text in the header we have included a blank_header.gif file. You can edit it in your favourite graphics editing program such as  Photoshop/GIMP/Paint Shop Pro. In order to edit the text you will need a WYSIWYG editor such as Adobe/Marcomedia Dreamweaver or Microsoft FrontPage. Most of the tags have been labelled. In order to add more items to the menu simply press the enter buttons whilst you have one of the other menu items selected. You can use the Format menu in Dreamweaver to change text to side headings etc. For the white text you will need to wrap the text in &lt;small&gt;TEXT&lt;/small&gt; tags. </p>
-				<p>Make sure you upload all the images to a folder called<strong> 'images'</strong> its a common thing many people for get. Also just a small note to warn you that the login and search boxes are placed there merely for visual effects they do <strong>not</strong> actually work.</p>
-				<p>Thank you for using our template if you require addition help don't hesitate to visit our forums at http://forums.clantemplates.com/forumdisplay.php?f=9 there you can recieve help from our dedicated support staff. </p>
-				<p>Good Luck! </p>
-			</div>
-			<div class="content">
-				<h2>Unde Omnis Iste Natus</h2>
-				<p>
-					In id justo. Proin nec justo eu nunc pellentesque ultricies. Aliquam orci. Morbi diam est, sagittis id, faucibus ut, elementum ut, velit. Morbi vel neque. Nullam vehicula diam id diam. Nulla facilisi. Quisque vel risus. Mauris sodales orci eget ante. Morbi fermentum luctus dui. Sed odio tortor, fermentum id, blandit id, interdum quis, nisl.
-				</p>
-				<p>
-					Etiam tempus nulla vel urna fermentum pellentesque. Sed adipiscing, justo ut aliquet blandit, elit nulla elementum arcu, sed ullamcorper ipsum mauris sit amet metus. Etiam odio metus, consequat sit amet, faucibus non, luctus ut, velit. Vestibulum at erat et odio pulvinar porttitor. Nam condimentum. In bibendum, mi non bibendum feugiat, neque ligula sollicitudin arcu, dictum dictum mi nunc eget pede.
-				</p>
-			</div>
-			<div class="content">
-				<h2>Heading 2 </h2>
-				<p>
-				Paragraph text</p>
-				<p>
-					Etiam tempus nulla vel urna fermentum pellentesque. Sed adipiscing, justo ut aliquet blandit, elit nulla elementum arcu, sed ullamcorper ipsum mauris sit amet metus. Etiam odio metus, consequat sit amet, faucibus non, luctus ut, velit. Vestibulum at erat et odio pulvinar porttitor. Nam condimentum. In bibendum, mi non bibendum feugiat, neque ligula sollicitudin arcu, dictum dictum mi nunc eget pede.
-				</p>
+                          <%= yield %>
 			</div>
 			<!-- END MAIN CONTENT -->
 		</div>
@@ -121,20 +96,12 @@ function ctRosterClean()
 				<input type="text" class="text" name="uname" value="Username" /><br />
 				<input type="password" class="text" name="upass" value="Password" /><br />
 				<label for="remember"><input type="checkbox"  class="check" id="remember" name="remember" value="1" /> Remember Me</label>
-				<input type="image" src="images/dnp/login_button.gif" class="button" />
+				<input type="submit" class="button" value="abschicken" />
 				</p>
 			</form>
 			<h1>Current<small>Roster</small></h1>
 			<div id="roster">
-				<a href="#"><img src="images/dnp/roster_image.gif" alt="TerrorKalle" onmouseover="ctRoster('TerrorKalle');" onmouseout="ctRosterClean();" /></a>
-				<a href="#"><img src="images/dnp/roster_image.gif" alt="TerrorKalle" onmouseover="ctRoster('TerrorKalle_1');" onmouseout="ctRosterClean();" /></a>
-				<a href="#"><img src="images/dnp/roster_image.gif" alt="TerrorKalle" onmouseover="ctRoster('TerrorKalle_2');" onmouseout="ctRosterClean();" /></a>
 				
-				<a href="#"><img src="images/dnp/roster_image.gif" alt="TerrorKalle" onmouseover="ctRoster('TerrorKalle_3');" onmouseout="ctRosterClean();" /></a>
-				<a href="#"><img src="images/dnp/roster_image.gif" alt="TerrorKalle" onmouseover="ctRoster('TerrorKalle_4');" onmouseout="ctRosterClean();" /></a>
-				<a href="#"><img src="images/dnp/roster_image.gif" alt="TerrorKalle" onmouseover="ctRoster('TerrorKalle_5');" onmouseout="ctRosterClean();" /></a>
-				<div id="roster_data"></div>
-				<img src="images/dnp/view_button.gif" alt="button" />
 			</div>
 			<h1>Heading<small>1</small></h1>
 			<ul>

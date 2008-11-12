@@ -1,6 +1,6 @@
-<% form_for :gallery_pic, :url => {:action => "create", :id => params[:id]}, :html => { :multipart => true } do |form| %>
-  Bild: <%= form.file_field :pic %><br>
-  Name: <%= form.text_field :name %>
-  Beschreibung: <%= form.text_area :description, :rows => "5", :cols => "15" %><br>
+<% error_handling_form_for :gallery_pic, @gallery_pic, :url => {:action => "create", :id => params[:id]}, :html => { :multipart => true } do |form| %>
+  <%= form.file_field :pic %>
+  <%= form.text_field :name %>
+  <%= form.text_area :description, :rows => "5", :cols => "15" %>
   <%= form.submit "abschicken" %>
 <% end %>
