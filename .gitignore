@@ -7,4 +7,7 @@ nbproject/**/*
 nbproject/build-impl.xml
 nbproject/genfiles.properties
 nbproject/platform.properties
-nbproject/private
+nbproject/project.xml
+nbproject/project.properties
+nbproject/private/private.properties
+nbproject/private/rake-t.txt
