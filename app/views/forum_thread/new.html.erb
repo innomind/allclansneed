@@ -1,5 +1,5 @@
 <%= error_messages_for :forum_thread %>
-<% form_tag :action => "create_thread", :id => params[:id] do %>
+<% form_tag :action => "create", :id => params[:id] do %>
     <p><label for="forum_thread_title">Title</label>
     <%= text_field 'forum_thread', 'title' %></p>
     

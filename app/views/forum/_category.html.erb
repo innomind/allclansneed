@@ -1,6 +1,6 @@
 <li id="forum_category_<%=  category.id %>">
     
-        <%= link_to category.title, forum_category_path(category.id) %>
+        <%= link_to category.title, forum_category_path($site_id, category.id) %>
         (<%= category.forum_threads.count %>)
 
   <span id="category_links_<%= category.id %>">

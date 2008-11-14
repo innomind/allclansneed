@@ -1,8 +1,8 @@
 <div>
    
-    <% unless message.account.nil? %>
-        author: <%= message.account.nick  %> 
-    <% end %>
+    <%# unless message.user? %>
+        author: <%= username(message.user)  %> 
+    <%# end %>
   at <%= german_date_with_time(message.created_at) %> <br>
   message: <%= message.message %><br>
 </div>

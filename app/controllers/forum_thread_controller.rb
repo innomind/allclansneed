@@ -16,12 +16,12 @@ class ForumThreadController < ApplicationController
   def create
     @forum_thread = ForumThread.new(params[:forum_thread])
     @forum_thread.forum_category_id = params[:id]
-    @forum_thread.account_id = current_user_id
-    @forum_thread.forum_messages[0].account_id = current_user_id
+    @forum_thread.user = current_user
+    @forum_thread.forum_messages[0].user = current_user
     if @forum_thread.save
-      redirect_to :action => "thread", :id => @forum_thread.id
+      redirect_to forum_thread_path(@forum_thread.id)
     else
-      render :action => "new_thread"
+      render :action => "new"
     end
   end
 end

@@ -7,6 +7,6 @@ subcategories:
     <%= link_to s.title, :id => s.id %>
 <% end %>
 <br>
-<%= link_to "New Thread", :action => "new_thread", :id => @category.id  %>
+<%= link_to "New Thread", :controller => "forum_thread", :action => "new", :id => @category.id  %>
 <h2>Threads:</h2>
 <%= render :partial => "thread", :collection => @threads %>

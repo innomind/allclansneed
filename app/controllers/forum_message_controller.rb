@@ -6,7 +6,7 @@ class ForumMessageController < ApplicationController
   def create
     @forum_message = ForumMessage.new(params[:forum_message])
     @forum_message.forum_thread_id = params[:id]
-    @forum_message.account_id = current_user_id
+    @forum_message.user = current_user
     if @forum_message.save
       redirect_to :controller => "forum_thread", :action => "index", :id => params[:id]
     else
