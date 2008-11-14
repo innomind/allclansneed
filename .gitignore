@@ -4,3 +4,7 @@ tmp/**/*
 config/database.yml
 db/*.sqlite3
 nbproject/**/*
+nbproject/build-impl.xml
+nbproject/genfiles.properties
+nbproject/platform.properties
+nbproject/private
