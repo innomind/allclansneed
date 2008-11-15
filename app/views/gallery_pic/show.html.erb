@@ -5,4 +5,4 @@ Beschreibung: <%= @gallery_pic.description %><br>
 Hochgeladen von:<%= username(@gallery_pic.user) %><br>
 Hochgeladen am: <%= german_date_with_time(@gallery_pic.created_at) %>
 <br>
-<%= render :partial => "comment/index", :locals => { :model => @gallery_pic, :modelname => "gallery_pic"} %>
+<%= render :partial => "comment/index", :locals => { :model => @gallery_pic} %>

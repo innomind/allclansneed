@@ -12,12 +12,9 @@ class CreateGalleryPics < ActiveRecord::Migration
       t.timestamp :pic_updated_at
       t.timestamps
     end
-    
-    add_column :comments, :gallery_pic_id, :integer
   end
 
   def self.down
     drop_table :gallery_pics
-    remove_column :comments, :gallery_pic_id
   end
 end

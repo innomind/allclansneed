@@ -1,5 +1,7 @@
 <%= link_to_function image_tag("comment_add.png", :border => 0), "Element.toggle('add_comment')" %>
-<% modelname = :modelname.nil? ? model.class.name : modelname %>
+<%# modelname = :modelname.nil? ? model.class.name : modelname %>
+<% modelname = model.class.name %>
+
 <div id="add_comment" style="display:none;">
 	<% form_remote_tag :url => {:controller  => 'comment', :action => 'create', :model => modelname, :id => model.id}, :html => {:id => "create_comment"} do%>
 		<%= text_area :comment, "entry", :rows => 2, :cols => 25 %>

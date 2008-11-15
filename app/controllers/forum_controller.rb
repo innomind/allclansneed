@@ -11,8 +11,8 @@ class ForumController < ApplicationController
       end
     else
       @subforums = Forum.find_for_site(:all, :conditions => {:parent_id => params[:id]} )
-      @forum = Forum.find_for_site(:first, :conditions => { :forum_id => params[:id]})
-      @threads = ForumThread.find(:all, :conditions => {:forum_id => params[:id]})
+      @forum = Forum.find_for_site(:first, :conditions => { :id => params[:id]})
+      @threads = ForumThread.find_for_site(:all, :conditions => {:forum_id => params[:id]})
       render :template => "forum/forum"
     end
   end

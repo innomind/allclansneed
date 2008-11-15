@@ -4,7 +4,7 @@ class GalleryController < ApplicationController
   end
   
   def show
-    @gallery = Gallery.find_for_site(:all, :id => params[:id]).first
+    @gallery = Gallery.find_for_site(:all, :conditions => {:id => params[:id]}).first
   end
   
   def new

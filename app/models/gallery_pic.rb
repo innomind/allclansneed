@@ -11,7 +11,7 @@ class GalleryPic < ActiveRecord::Base
   belongs_to :gallery
   belongs_to :user
   
-  has_many :comments
+  has_many :comments, :as => :commentable
   
   validates_presence_of :name
 end

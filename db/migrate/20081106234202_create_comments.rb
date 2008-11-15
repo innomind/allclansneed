@@ -2,7 +2,8 @@ class CreateComments < ActiveRecord::Migration
   def self.up
     create_table :comments do |t|
       t.string :entry
-      t.belongs_to :site, :user, :news, :guestbook, :profile
+      t.belongs_to :user, :site#, :news, :guestbook, :profile
+      t.references :commentable, :polymorphic => true
       t.timestamps
     end
   end
