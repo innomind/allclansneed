@@ -1,4 +1,4 @@
-<%= render :partial => "category_history", :object => @thread.forum_category_id %>
+<%= render :partial => "forum_history", :object => @thread.forum_id %>
 
 <h1><%= @thread.title %> </h1>
 <%= link_to "reply", forum_message_path($site_id, params[:id]) %><br>
