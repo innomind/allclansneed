@@ -1,0 +1,9 @@
+<% if forum_history %>
+  <% current_forum = Forum.find(forum_history)  %>
+  <% if current_forum.parent_id? %>
+      <%= render :partial => "forum_history", :object => current_forum.parent_id %>
+      <%= link_to current_forum.title, forum_category_path(current_forum.id) %>
+  <% else %>
+      <%= link_to current_forum.title, forum_root_path %>
+  <%  end %>
+<% end %>

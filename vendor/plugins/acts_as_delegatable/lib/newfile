@@ -1,0 +1,5 @@
+        new_args = args
+        #if new_args.conditions.nil? 
+        #  new_args.push :conditions => {:site_id => $site_id}
+        #end
+        new_args.conditions.push :site_id => $site_id
