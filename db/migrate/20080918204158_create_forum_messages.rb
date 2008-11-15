@@ -4,6 +4,7 @@ class CreateForumMessages < ActiveRecord::Migration
       t.column :message, :text
       t.belongs_to :user
       t.belongs_to :forum_thread
+      t.belongs_to :site
       t.timestamps
     end
   end

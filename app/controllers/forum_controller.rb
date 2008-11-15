@@ -2,15 +2,18 @@ class ForumController < ApplicationController
   
   def index
     if params[:id].nil?
-      @categories = ForumCategory.find_all_by_parent_id(nil)
-      if @categories.count == 0
-        ForumCategory.create("title" => "root")
+      #@categories = ForumCategory.find_all_by_parent_id(nil)
+      @forums = Forum.find_for_site(:all, :conditions => ["parent_id IS NULL"] )
+      if @forums.count == 0
+        newforum = Forum.new(:title => "root")
+        newforum.site = current_site
+        newforum.save
       end
     else
-      @subcategories = ForumCategory.find_all_by_parent_id(params[:id])
-      @category = ForumCategory.find(params[:id])
-      @threads = ForumThread.find(:all, :conditions => {:forum_category_id => params[:id]})
-      render :template => "forum/category"
+      @subforums = Forum.find_for_site(:all, :conditions => {:parent_id => params[:id]} )
+      @forum = Forum.find_for_site(:first, :conditions => { :forum_id => params[:id]})
+      @threads = ForumThread.find(:all, :conditions => {:forum_id => params[:id]})
+      render :template => "forum/forum"
     end
   end
   
@@ -19,19 +22,20 @@ class ForumController < ApplicationController
   end
   
   def create
-    @category = ForumCategory.find_by_id(params[:id])
-    @new_category = @category.children.create(params[:forum_category])
-    if @new_category
+    @category = Forum.find_by_id(params[:id])
+    @new_category = @category.children.new(params[:forum_category])
+    @new_category.site = current_site
+    if @new_category.save
       return if request.xhr?
     end
   end
   
   def edit
-    @category = ForumCategory.find_by_id(params[:id])
+    @category = Forum.find_by_id(params[:id])
   end
   
   def update
-    @category = ForumCategory.find_by_id(params[:id])
+    @category = Forum.find_by_id(params[:id])
     if @category.update_attributes(params[:forum_category])
     end
   end

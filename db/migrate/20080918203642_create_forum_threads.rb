@@ -3,7 +3,8 @@ class CreateForumThreads < ActiveRecord::Migration
     create_table :forum_threads do |t|
       t.column :title, :string
       t.belongs_to :user
-      t.belongs_to :forum_category
+      t.belongs_to :forum
+      t.belongs_to :site
       t.timestamps
     end
     

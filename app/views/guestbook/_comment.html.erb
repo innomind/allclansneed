@@ -1,1 +1,5 @@
-<div id="guestbook_comment_<%= comment.id %>"><%= comment.account.nick %> meint: <%= comment.comment %></div>
+<div id="guestbook_comment_<%= comment.id %>">
+<% unless comment.user.nil? %>
+  <%= username(comment.user)%>
+<% end %> 
+meint: <%= comment.comment %></div>

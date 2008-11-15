@@ -23,7 +23,7 @@ module ApplicationHelper
   end    
   
   def username(user)
-    user.login
+    link_to user.login, :controller => "profile", :action => "show", :id => user.id
   end
   
   #returns a formated date-string  

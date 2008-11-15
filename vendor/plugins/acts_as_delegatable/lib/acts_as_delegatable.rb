@@ -18,8 +18,10 @@ module ActiveRecord::Acts::ActsAsDelegatable
       
       def self.find_for_site *args
         new_args = args
+        if (new_args[:conditions].nil?)
+        end
         new_args.push :conditions => {:site_id => $site_id }
-        find *new_args
+        find(*new_args)
       end
       
       #def self.find(*args)

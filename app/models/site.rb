@@ -3,6 +3,9 @@ class Site < ActiveRecord::Base
   has_many :news_categories
   has_many :gallery_categories
   has_many :gallery_pics
+  has_many :forums
+  has_many :forum_threads
+  has_many :forum_messages
   
   has_many :user_rights
   has_many :users, :through => :user_rights

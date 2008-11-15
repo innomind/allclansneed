@@ -25,7 +25,7 @@ class GuestbookController < ApplicationController
   def add_comment
     @guestbook = Guestbook.find(params[:id])
     @guestbook.update_attribute(:comment, params[:guestbooks][:comment])
-    @guestbook.update_attribute(:comment_author_id, session['user_id'])
+    @guestbook.update_attribute(:comment_author_id, current_user_id)
     redirect_to :action => "list"
     #return if request.xhr?
   end
