@@ -1,0 +1,2 @@
+class ClanwarmapController < ApplicationController
+end
