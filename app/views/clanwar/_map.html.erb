@@ -1,0 +1,9 @@
+Map: <%= map.name %><br />
+Score: <% if map.score > map.score_opponent %>
+  <font color="green">Ergebnis: <%= map.score %> : <%= map.score_opponent %> </font><br />
+<% elsif map.score < map.score_opponent%>
+  <font color="red">Ergebnis: <%= map.score %> : <%= map.score_opponent %> </font><br />
+<% else %>
+  <font color="yellow">Ergebnis: <%= map.score %> : <%= map.score_opponent %> </font><br />
+<% end %>
+<br />

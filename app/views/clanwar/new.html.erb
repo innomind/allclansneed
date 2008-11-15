@@ -1,0 +1,14 @@
+<%= error_messages_for 'clanwar' -%>
+
+<h1>Insert new Clanwar</h1>
+
+
+<% error_handling_form_for :clanwar, @clanwar, :url => {:action => "create", :id => params[:id]}, :html => { :multipart => false } do |form| %>
+  <%= form.text_field :opponent, :label => "Gegner" %>
+  <%= form.collection_select("squad_id", @squads, :id, :name)%>
+  <div id="clanwar_maps">
+    <%= render :partial => 'newmap', :collection => @clanwar.clanwar_maps %>
+  </div>
+    <p><%= add_map_link "Add a map" %></p>
+  <%= form.submit "abschicken" %>
+<% end %>

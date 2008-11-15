@@ -1,7 +1,14 @@
 <div id="clanwar_<%= clanwar.id %>">
 	Squad: <%= clanwar.squad.name %> <br />
 	Gegner: <%= clanwar.opponent %> <br />
-	Ergebnis: <%= clanwar.score %> : <%= clanwar.score_opponent %> <br />
+	<% if clanwar.score > clanwar.score_opponent %>
+	  <font color="green">Ergebnis: <%= clanwar.score %> : <%= clanwar.score_opponent %> </font><br />
+  <% elsif clanwar.score < clanwar.score_opponent%>
+    <font color="red">Ergebnis: <%= clanwar.score %> : <%= clanwar.score_opponent %> </font><br />
+  <% else %>
+    <font color="yellow">Ergebnis: <%= clanwar.score %> : <%= clanwar.score_opponent %> </font><br />
+  <% end %>
   gespielt am: <%= german_date_with_time(clanwar.played_at) %> <br />
+  <%= link_to("details", :action => "show", :id => clanwar.id) %>
 	<br /><br />
 </div>
