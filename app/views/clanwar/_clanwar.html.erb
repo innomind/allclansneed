@@ -1,0 +1,7 @@
+<div id="clanwar_<%= clanwar.id %>">
+	Squad: <%= clanwar.squad.name %> <br />
+	Gegner: <%= clanwar.opponent %> <br />
+	Ergebnis: <%= clanwar.score %> : <%= clanwar.score_opponent %> <br />
+  gespielt am: <%= german_date_with_time(clanwar.played_at) %> <br />
+	<br /><br />
+</div>

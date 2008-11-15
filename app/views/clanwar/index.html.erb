@@ -1,0 +1,7 @@
+<h1>Clanwars</h1>
+
+<ul id="clanwar_list">
+<%= render :partial => "clanwar", :collection => @clanwars %>
+</ul>
+<%= will_paginate @clanwars %>
+<br /><br />

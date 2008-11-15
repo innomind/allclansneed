@@ -3,6 +3,7 @@ log/*.log
 tmp/**/*
 config/database.yml
 db/*.sqlite3
+public/pics/**/*
 nbproject/**/*
 nbproject/build-impl.xml
 nbproject/genfiles.properties
@@ -11,3 +12,4 @@ nbproject/project.xml
 nbproject/project.properties
 nbproject/private/private.properties
 nbproject/private/rake-t.txt
+db/schema.rb

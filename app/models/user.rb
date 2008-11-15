@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
   has_many :comments
   has_many :gallery_categories
   has_many :gallery_pics
+  has_many :clanwars
   
   has_one :profile
   
