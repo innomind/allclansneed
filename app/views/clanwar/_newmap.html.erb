@@ -1,0 +1,6 @@
+<div class="clanwarmap">
+<% fields_for "clanwar[clanwarmap_attributes][]", newmap, :builder => ErrorHandlingFormBuilder do |clanwarmap_form| %>
+    <%= clanwarmap_form.text_field :name, :label => "Map" %>
+    <%= link_to_function "remove", "$(this).up('.clanwarmap').remove()" %>
+<% end %>
+</div>
