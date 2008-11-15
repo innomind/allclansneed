@@ -16,6 +16,7 @@ class ErrorHandlingFormBuilder < ActionView::Helpers::FormBuilder
   end
 
   def build_shell(field, options)
+    partial = options[:style].nil? ? 'forms/field' : 'forms/' + options[:style]
     @template.capture do
       locals = {
         :element => yield,
@@ -24,10 +25,10 @@ class ErrorHandlingFormBuilder < ActionView::Helpers::FormBuilder
       
       if has_errors_on?(field)
         locals.merge!(:error => error_message(field, options))
-        @template.render :partial => 'forms/field_with_errors',
+        @template.render :partial => partial + '_with_errors',
                          :locals  => locals
       else
-        @template.render :partial => 'forms/field',
+        @template.render :partial => partial,
                          :locals  => locals
       end
     end
