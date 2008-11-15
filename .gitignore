@@ -13,3 +13,5 @@ nbproject/project.properties
 nbproject/private/private.properties
 nbproject/private/rake-t.txt
 db/schema.rb
+public/javascript/cache/**/*
+public/stylesheets/cache/**/*
