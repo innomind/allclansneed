@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  name: MyString
+  position: 1
+  controller: MyString
+  action: MyString
+
+two:
+  name: MyString
+  position: 1
+  controller: MyString
+  action: MyString
