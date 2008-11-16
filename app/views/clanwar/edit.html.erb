@@ -1,7 +1,7 @@
 <%= error_messages_for 'clanwar' -%>
 <h1>Insert new Clanwar</h1>
 
-<% error_handling_form_for :clanwar, @clanwar, :url => {:action => "create", :id => params[:id]}, :html => { :multipart => false } do |form| %>
+<% error_handling_form_for :clanwar, @clanwar, :url => {:action => "update", :id => params[:id]}, :html => { :multipart => false } do |form| %>
   <%= form.text_field :opponent, :label => "Gegner" %>
   Score: <%= form.text_field :score, :style => "blank", :size => "5" %>:<%= form.text_field :score_opponent, :style => "blank", :size => "5" %>
   

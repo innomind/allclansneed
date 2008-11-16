@@ -20,10 +20,26 @@ class ClanwarController < ApplicationController
     @clanwar.site = current_site
     @clanwar.user = current_user
     
+   # @clanwar.calculate_score()
+    
     if @clanwar.save
       redirect_to :action => 'index'
     else
       render :action => "new"
+    end
+  end
+  
+  def edit
+    @clanwar = Clanwar.find_by_id(params[:id])
+    @squads = Clan.find_for_site(:first).squads
+  end
+  
+  def update
+    @clanwar = Clanwar.find_by_id(params[:id])
+    if @clanwar.update_attributes(params[:clanwar])
+      redirect_to :action => 'index'
+    else
+      render :action => "edit"
     end
   end
 end
