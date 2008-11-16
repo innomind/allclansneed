@@ -5,4 +5,5 @@ class Comment < ActiveRecord::Base
   belongs_to :guestbook
   belongs_to :profile
   belongs_to :gallery_pic
+  belongs_to :clanwar
 end
