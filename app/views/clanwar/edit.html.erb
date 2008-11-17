@@ -7,7 +7,7 @@
   
   <%= form.collection_select("squad_id", @squads, :id, :name)%>
   
-  gespielt am: <%= form.calendar_date_select :played_at %>
+  gespielt am: <%= form.text_field :played_at, :style => "blank" % <%= calendar_for('clanwar_played_at') %>
   <div id="clanwar_maps">
     <%= render :partial => 'newmap', :collection => @clanwar.clanwar_maps %>
   </div>
