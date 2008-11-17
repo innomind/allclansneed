@@ -76,4 +76,19 @@ module ApplicationHelper
     "<div #{id.nil? ? "" : 'id="'+id.to_s+'"'}>"+string.to_s+'</div>'
   end
   
+  #building popup calendar
+  def calendar_for(field_id)
+    include_calendar_headers_tags
+    image_tag("calendar.png", {:id => "#{field_id}_trigger",:class => "calendar-trigger"}) +
+    javascript_tag("Calendar.setup({inputField : '#{field_id}', ifFormat : '%Y-%m-%d', button : '#{field_id}_trigger' });")
+  end
+  
+  def include_calendar_headers_tags
+    content_for :header_tags do
+      javascript_include_tag('calendar/calendar.js') +
+      javascript_include_tag("calendar/lang/calendar-de.js") +
+      javascript_include_tag('calendar/calendar-setup.js') +
+      stylesheet_link_tag('calendar')
+    end
+  end
 end

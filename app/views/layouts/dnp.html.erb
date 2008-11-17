@@ -19,15 +19,15 @@ function ctRosterClean()
 } 
 // --> 
 </script>
-<% bundle do %>
+<%# bundle do %>
 
     <%= javascript_include_tag :defaults%>
-    <%= calendar_date_select_includes %>
+    <%= stylesheet_link_tag "calendar/grey/style.css" %>
     <%= stylesheet_link_tag "dnp" %>
     <%# javascript_include_tiny_mce_if_used %>
     <%# tiny_mce if using_tiny_mce? %>
-
-<% end %>
+    <!-- page specific tags --><%= yield :header_tags %>
+<%# end %>
 </head>
 <!--	CODED BY OPSERTY.COM 
 		ALL RIGHTS RESERVED

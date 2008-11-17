@@ -7,6 +7,7 @@ class Site < ActiveRecord::Base
   has_many :forum_threads
   has_many :forum_messages
   has_many :clanwars
+  has_many :events
   
   belongs_to :template
   
