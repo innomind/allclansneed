@@ -22,10 +22,10 @@ class ForumController < ApplicationController
   end
   
   def create
-    @category = Forum.find_by_id(params[:id])
-    @new_category = @category.children.new(params[:forum_category])
-    @new_category.site = current_site
-    if @new_category.save
+    @forum = Forum.find_by_id(params[:id])
+    @new_forum = @forum.children.new(params[:forum])
+    @new_forum.site = current_site
+    if @new_forum.save
       return if request.xhr?
     end
   end

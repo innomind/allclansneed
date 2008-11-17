@@ -13,17 +13,19 @@ module ApplicationHelper
     options[:builder] = ErrorHandlingFormBuilder unless options.nil?
     form_for(record_or_name_or_array, *args, &proc)
   end
-
+  
+  def template_boxes_for intern_name
+    #area = TemplateArea.find(:all, :conditions => { :intern_name => intern_name})
+  end
   
   #popup
   #def popup(partial, popup_space)
   def test123
     #@template.alert "hallo :-)"
-    
   end    
   
   def username(user)
-    link_to user.login, :controller => "profile", :action => "show", :id => user.id
+    link_to user.login, :controller => "profile", :action => "index", :id => user.id
   end
   
   #returns a formated date-string  

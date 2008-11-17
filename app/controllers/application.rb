@@ -20,7 +20,7 @@ class ApplicationController < ActionController::Base
   LEVEL_SITE_MEMBER = 1
   LEVEL_SITE_ADMIN = 2
   
-  before_filter :init_site, :init_rights, :pagination_defaults #:init_site_id#, :check_query
+  before_filter :init_site, :init_rights, :pagination_defaults, :init_areas #:init_site_id#, :check_query
   
   protected
     
@@ -32,6 +32,8 @@ class ApplicationController < ActionController::Base
       return
     end
     $site_id = params[:site_id].nil? ? 1 : params[:site_id]
+    #### ahhhhh blöööödddd!!! FIX ME ---- wird in acts_as_delegatable als std wert gebraucht
+    $page = params[:page].nil? ? 1 : params[:page]
     @site = Site.find_by_id $site_id
   end
   
@@ -53,7 +55,10 @@ class ApplicationController < ActionController::Base
     session['error_objects'] = []
   end
   
-
+  def init_areas
+    @area_list = TemplateArea.find(:all, :select => "internal_name", :conditions => {:template_id => current_site.template_id})
+    
+  end
 
     #deprecated, don't use
   def current_site_id

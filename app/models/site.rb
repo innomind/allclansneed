@@ -8,6 +8,11 @@ class Site < ActiveRecord::Base
   has_many :forum_messages
   has_many :clanwars
   
+  belongs_to :template
+  
+  has_many :template_boxes
+  has_many :template_areas, :through => :template_boxes
+  
   has_many :user_rights
   has_many :users, :through => :user_rights
   has_one :clan
