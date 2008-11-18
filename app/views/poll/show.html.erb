@@ -1,0 +1,7 @@
+<h1>show details for a special poll</h1>
+Poll: <%= @poll.title %><br />
+Beschreibung: <%= @poll.description %><br />
+
+<ul id="poll">
+<%= render :partial => "polloption", :collection => @polloptions %>
+</ul>

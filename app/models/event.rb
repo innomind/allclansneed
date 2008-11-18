@@ -2,6 +2,7 @@ class Event < ActiveRecord::Base
   acts_as_delegatable
   belongs_to :site
 
+  #before saving the event, expire_at must be build together
   def before_save
     self[:expire_at] = Time.parse(date + " " + time)  
   end
@@ -24,6 +25,8 @@ class Event < ActiveRecord::Base
     end
   end
   
+  # setting the date-part to expire_at
+  # if time is nil, it will be set to to 00:00
   def date=(date)
     if time.nil?
       self.expire_at = Time.parse(date + " 00:00")
@@ -32,6 +35,8 @@ class Event < ActiveRecord::Base
     end
   end
   
+  #setting the time-part to expire_at
+  # if date is nil, it will be set to "today"
   def time=(time)
     if date.nil?
       self.expire_at = Time.parse([Time.today.year, Time.today.month, Time.today.day].join("-") + " " + time)
