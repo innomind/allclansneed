@@ -38,18 +38,17 @@ module ApplicationHelper
   end
   
   def cloud(tags)
-     return if tags.blank?
-        output = ""
-         mid = tags.first.count / 1.5
-         
-         tags.each do |t|
-             size = 100 * t.count / mid
-             size = 75 if size < 75
-             output << link_to(t.name, { :action  => "findByTag",
-                                         :id  => t.name},
-                                         :style => "font-size: #{size}%") << " "
-        end
-        return output
+    return if tags.blank?
+    output = ""
+    mid = tags.first.count / 1.5
+    tags.each do |t|
+      size = 100 * t.count / mid
+      size = 75 if size < 75
+      output << link_to(t.name, { :action  => "findByTag",
+                                  :id  => t.name},
+                                  :style => "font-size: #{size}%") << " "
+    end
+    return output
   end
   
   def nl2br(text)

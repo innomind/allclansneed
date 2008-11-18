@@ -3,8 +3,6 @@ module ActiveRecord
   module Acts; end
 end;
 
-
-
 module ActiveRecord::Acts::ActsAsDelegatable
   
   def self.included(base)
