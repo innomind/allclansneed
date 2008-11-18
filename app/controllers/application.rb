@@ -32,7 +32,7 @@ class ApplicationController < ActionController::Base
       return
     end
     $site_id = params[:site_id].nil? ? 1 : params[:site_id]
-    #### ahhhhh blöööödddd!!! FIX ME ---- wird in acts_as_delegatable als std wert gebraucht
+    ####FIXME  ahhhhh blöööödddd!!!  ---- wird in acts_as_delegatable als std wert gebraucht
     $page = params[:page].nil? ? 1 : params[:page]
     @site = Site.find_by_id $site_id
   end
@@ -74,7 +74,7 @@ class ApplicationController < ActionController::Base
   end
   
   def user_is_guest?
-    session['user'].id.nil?
+    session['user'].nil?
   end
   
   def current_user_id
