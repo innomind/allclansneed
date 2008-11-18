@@ -1,4 +1,5 @@
 class Guestbook < ActiveRecord::Base
+  acts_as_delegatable
   validates_presence_of :name
   validates_presence_of :entry
   #validates_presence_of :comment
@@ -7,7 +8,6 @@ class Guestbook < ActiveRecord::Base
   belongs_to :user, :foreign_key => "comment_author_id"
   
   def self.show_model(page, site_id)
-    paginate :per_page => 2, :page => page, :order => 'created_at DESC',
-             :conditions => { :site_id => site_id }
+    paginate_for_site
   end
 end
