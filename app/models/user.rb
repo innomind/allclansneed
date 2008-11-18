@@ -9,12 +9,12 @@ class User < ActiveRecord::Base
   has_many :gallery_categories
   has_many :gallery_pics
   has_many :clanwars
+  has_many :polls
   
   has_one :profile
   
   #before_save :encrypt_password
   
-
   has_many :squad_users #??? i don't want this line :( sounds strange: a user has squad_users
   has_many :user_rights, :dependent => :destroy # much better ;)
   has_many :squads, :through => :squad_users

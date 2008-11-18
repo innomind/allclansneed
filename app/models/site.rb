@@ -8,6 +8,7 @@ class Site < ActiveRecord::Base
   has_many :forum_messages
   has_many :clanwars
   has_many :events
+  has_many :polls
   
   has_many :user_rights
   has_many :users, :through => :user_rights
