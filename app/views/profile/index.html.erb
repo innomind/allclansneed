@@ -6,4 +6,5 @@ nachname: <%= @profile.lastname %> <br><br>
     s.name }  %>
   
   <br>
-  <%= show_comments @profile %>
+<%= render :partial => "comment/index",
+            :locals => { :model => @profile }%>

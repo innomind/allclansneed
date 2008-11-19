@@ -1,3 +1,3 @@
-page.insert_html :top, "forum_popup_space_#{params[:id]}", :partial => 'create_forum_form'
-page.show "forum_popup_space_#{params[:id]}"
-page.hide "forum_links_#{params[:id]}"
+page.insert_html :top, "category_popup_space_#{params[:id]}", :partial => 'create_category_form'
+page.show "category_popup_space_#{params[:id]}"
+page.hide "category_links_#{params[:id]}"

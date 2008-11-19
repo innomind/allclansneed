@@ -3,7 +3,7 @@
         <%= link_to forum.title, forum_category_path($site_id, forum.id) %>
         (<%= forum.forum_threads.count %>)
 
-  <span id="forum_links_<%= forum.id %>">
+  <span id="category_links_<%= forum.id %>">
     <%= link_to_remote(image_tag("folder_add.png", :border => "0", :id => "folder_add_img_#{forum.id}"), :url => {:action => "new", :id => forum.id},
                      :loading => "Element.show('loading_#{forum.id}');",
                      :loaded => "Element.hide('loading_#{forum.id}')")%>
@@ -19,10 +19,10 @@
   </span>
   
   <br><small><%= forum.subtitle %> </small>
-  <span id="forum_popup_test_<%= forum.id %>" style="display:none;">
+  <span id="category_popup_test_<%= forum.id %>" style="display:none;">
   
   </span>
-  <span id="forum_popup_space_<%= forum.id %>" style="display:none;">
+  <span id="category_popup_space_<%= forum.id %>" style="display:none;">
   
   </span>
 <br>

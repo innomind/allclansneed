@@ -19,7 +19,9 @@ class ClanwarController < ApplicationController
     @clanwar = Clanwar.new(params[:clanwar])
     @clanwar.site = current_site
     @clanwar.user = current_user
-     
+    
+   # @clanwar.calculate_score()
+    
     if @clanwar.save
       redirect_to :action => 'index'
     else

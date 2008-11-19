@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>user_has_right_ge? (ApplicationController)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File app/controllers/application.rb, line 91</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">user_has_right_ge?</span> <span class="ruby-identifier">level</span>
+    <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">user_is_guest?</span>
+      <span class="ruby-identifier">right</span> = <span class="ruby-constant">UserRight</span>.<span class="ruby-identifier">find</span> <span class="ruby-identifier">:first</span>, <span class="ruby-identifier">:conditions</span> =<span class="ruby-operator">&gt;</span> {<span class="ruby-identifier">:site_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">current_site_id</span>, <span class="ruby-identifier">:user_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">current_user_id</span>}
+      <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">right</span>.<span class="ruby-identifier">nil?</span>
+        (<span class="ruby-identifier">level</span> <span class="ruby-operator">==</span> <span class="ruby-constant">LEVEL_ACN_MEMBER</span>)
+      <span class="ruby-keyword kw">else</span>
+        (<span class="ruby-identifier">right</span>.<span class="ruby-identifier">level</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-identifier">level</span>)
+      <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">else</span>
+      <span class="ruby-keyword kw">false</span>
+    <span class="ruby-keyword kw">end</span>
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>
