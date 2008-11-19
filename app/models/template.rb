@@ -1,4 +1,5 @@
 class Template < ActiveRecord::Base
-  belongs_to :site
+  acts_as_delegatable
+  has_many :sites
   has_many :template_areas
 end

@@ -1,0 +1,5 @@
+show polls for the current site
+<ul id="poll_list">
+<%= render :partial => "poll", :collection => @polls %>
+</ul>
+<%= link_to("new poll", :action => "new") %>

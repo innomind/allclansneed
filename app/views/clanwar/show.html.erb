@@ -1,4 +1,5 @@
 <h1>Clanwar</h1>
+<%= link_to("edit clanwar", :action => "edit", :id => @clanwar.id) %>
 <div id="clanwar_<%= @clanwar.id %>">
 	Squad: <%= @clanwar.squad.name %> <br />
 	Gegner: <%= @clanwar.opponent %> <br />
@@ -14,4 +15,6 @@
   <%= render :partial => "map", :collection => @clanwar.clanwar_maps %>
 	<br /><br />
 </div>
-<%= render :partial => "comment/index", :collection => @clanwar.comments %>
+
+<%= show_comments @clanwar %>
+

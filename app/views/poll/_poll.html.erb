@@ -1,0 +1,6 @@
+<div id="poll<%= poll.id %>">
+	Titel: <%= poll.title %> <br />
+	Beschreibung: <%= poll.description %> <br />
+  <%= link_to("details", :action => "show", :id => poll.id) %>
+	<br /><br />
+</div>
