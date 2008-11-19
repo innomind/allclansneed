@@ -1,7 +1,9 @@
 <h1>show details for a special poll</h1>
-Poll: <%= @poll.title %><br />
-Beschreibung: <%= @poll.description %><br />
-
-<ul id="poll">
-<%= render :partial => "polloption", :collection => @polloptions %>
-</ul>
+<% error_handling_form_for :result, @poll, :url => {:action => "vote", :id => params[:id]}, :html => { :multipart => false } do |form| %>
+  Poll: <%= @poll.title %><br />
+  Beschreibung: <%= @poll.description %><br />
+  <ul id="poll">
+    <%= render :partial => "polloption", :collection => @polloptions %>
+  </ul>
+  <%= form.submit "abschicken" %>
+<% end %>

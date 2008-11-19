@@ -1,0 +1,13 @@
+<div class="polloption">
+<% fields_for "poll[polloption_attributes][]", newoption, :builder => ErrorHandlingFormBuilder do |polloption_form| %>
+    <%= polloption_form.text_field :name, :index => nil, :label => "Name" %>
+   
+    <% if newoption.new_record? %>
+      <%= link_to_function "remove", "$(this).up('.polloption').remove()" %>
+    <% else %>
+      <%= link_to_function "remove", "mark_poll_for_destroy(this)" %>
+      <%= polloption_form.hidden_field :id, :style => "blank", :index => nil %>
+      <%= polloption_form.hidden_field :should_destroy, :style => "blank", :index => nil, :class => 'should_destroy' %>
+    <% end %>
+<% end %>
+</div>

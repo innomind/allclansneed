@@ -6,7 +6,7 @@
     <% if newmap.new_record? %>
       <%= link_to_function "remove", "$(this).up('.clanwarmap').remove()" %>
     <% else %>
-      <%= link_to_function "remove", "mark_for_destroy(this)" %>
+      <%= link_to_function "remove", "mark_map_for_destroy(this)" %>
       <%= clanwarmap_form.hidden_field :id, :style => "blank", :index => nil %>
       <%= clanwarmap_form.hidden_field :should_destroy, :style => "blank", :index => nil, :class => 'should_destroy' %>
     <% end %>
