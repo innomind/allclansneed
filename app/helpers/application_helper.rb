@@ -9,7 +9,7 @@ module ApplicationHelper
     if options.nil?
       options = {:builder => ErrorHandlingFormBuilder}
       args << options
-    end
+    end 
     options[:builder] = ErrorHandlingFormBuilder unless options.nil?
     form_for(record_or_name_or_array, *args, &proc)
   end
