@@ -13,6 +13,10 @@ module ClanManagementHelper
       clan.members 
   end
   
+  def list_members
+    
+  end
+  
   #def list_squad_members squad
   #  squad.nil? ? [] : squad.members
   #end

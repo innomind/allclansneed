@@ -3,15 +3,24 @@ class Clan < ActiveRecord::Base
   belongs_to :site
   has_many :squads
   
+  
   def squad_members
-    SquadUser.all :conditions => {:squad => self.squads}
+    ((SquadUser.all :conditions => {:squad_id => self.squads.collect {|s| s.id}}).collect {|su| su.user}).uniq
   end
   
-  def members
+  def site_members
     self.site.users
   end
   
-  def non_squad_members
-    
+  def members opt = {:through => :squads}
+    if opt[:through] == :squads
+      squad_members
+    else if opt[:through] == :site
+        site_members
+      else
+      nil
+      end
+    end
   end
+  
 end

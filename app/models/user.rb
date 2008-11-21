@@ -76,7 +76,7 @@ class User < ActiveRecord::Base
 
   
   def clans_with_site
-    (sites.collect {|s| s.clan}).compact!
+    (sites.collect {|s| s.clan}).compact
   end
   
 end
