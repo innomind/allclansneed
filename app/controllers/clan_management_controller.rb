@@ -87,8 +87,8 @@ class ClanManagementController < ApplicationController
           return
         end
       else
-        render :text => 'strange request'
-        return
+        #render :text => 'strange request'
+        #return
       end
     end
 

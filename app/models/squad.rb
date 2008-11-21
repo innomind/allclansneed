@@ -16,7 +16,7 @@ class Squad < ActiveRecord::Base
   
   
   #TODO: make this a real _transaction_, if something goes wrong, revert it (like migration up/down)
-  def self.transfer_user user, src_squad, dst_squad
+  def self.move_user user, src_squad, dst_squad
     user.squads.push dst_squad
     user.squads.delete src_squad
     user.save
