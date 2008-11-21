@@ -63,14 +63,19 @@ module ApplicationHelper
     str
   end
   
+
   def show_verbose_messages
     str = ''
     until (obj = session['error_objects'].pop).nil? 
-      str << (error_messages_for obj)
+      #TODO: the following line would be cleaner, but i only want the specific error string
+      #str << (error_messages_for obj.class.to_s.downcase, :object => obj)
+      
+      obj.errors.each {|i,j| j.each {|e| str << e}} #(error_messages_for obj.class, :object => obj)
     end
     str
   end
  
+  #TODO: use the code2block wiki-entry!
   def div_encapsulate string, id=nil
     "<div #{id.nil? ? "" : 'id="'+id.to_s+'"'}>"+string.to_s+'</div>'
   end

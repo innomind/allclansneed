@@ -28,7 +28,30 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :email
   #validates_presence_of :site
    
+  def password= pw
+    self[:password] = encrypt pw
+  end
   
+  
+  def encrypt str
+    (Digest::SHA256.new << str).hexdigest!
+  end
+  
+  #don't change the position, it must be located AFTER def password=...
+  ACN_DEV_USERS = [
+    User.new(  :login  => "philipp",
+      :password => "test",
+      :email => "pw@allclansneed.de"
+    ),
+    User.new(  :login  => "ben",
+      :password  => "test",
+      :email => "ben@test.de"
+    ),
+    User.new(  :login  => "valentin",
+      :password => "test",
+      :email => "valentin.schulte@gmx.de"
+    )
+  ]
   
   def nick= nickname
     self[:login] = nickname
@@ -42,9 +65,6 @@ class User < ActiveRecord::Base
     self[:password] = encrypt pw
   end
   
-  #def encrypt_password
-  #  self[:password] = encrypt self[:password]
-  #end
   
   def encrypt str
     (Digest::SHA256.new << str).hexdigest!
@@ -54,4 +74,9 @@ class User < ActiveRecord::Base
     (encrypt pw) == (self[:password])
   end
 
+  
+  def clans_with_site
+    (sites.collect {|s| s.clan}).compact
+  end
+  
 end

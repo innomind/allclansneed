@@ -1,0 +1,10 @@
+
+<select name="squad1" size="1" onchange="this.form.submit()">
+  <%@clan.squads.each do |squad|%>
+    <%unless squad == @squad2%>
+      <option value="<%=squad.id.to_s%>" <% if @squad1.id == squad.id %> selected="selected"<%end%> >
+              <%= squad.name %>
+              </option>
+    <%end%>
+  <%end%>
+</select>

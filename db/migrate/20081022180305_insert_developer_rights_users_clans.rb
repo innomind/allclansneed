@@ -5,20 +5,7 @@ class InsertDeveloperRightsUsersClans < ActiveRecord::Migration
   #FIXME: site_id of @main_site should be 1, this is not working for rake migrate:redo without SQL-HACK!
   
   def self.generate_users
-    @users = [
-      User.new(  :login  => "philipp",
-        :password => "test",
-        :email => "pw@allclansneed.de"
-      ),
-      User.new(  :login  => "ben",
-        :password  => "test",
-        :email => "ben@test.de"
-      ),
-      User.new(  :login  => "valentin",
-        :password => "test",
-        :email => "valentin.schulte@gmx.de"
-      )
-    ]    
+    @users = User::ACN_DEV_USERS
   end
   
   def self.generate_sites

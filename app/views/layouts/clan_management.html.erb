@@ -7,11 +7,13 @@
   <title>Squads: <%= controller.action_name %></title>
     
   <%= javascript_include_tag  :defaults %>
-
+  <%#=active_scaffold_includes%>
 </head>
-<body onload="<%= remote_function :url => {:action => 'update_lists'} %>">
+<!--<body onload="<%= remote_function :url => {:action => 'update_lists'} %>"> -->
+<body>
 
 <p style="color: green"><%= flash[:notice] %></p>
+<p style="color: red"><%= flash[:error] %></p>
 <p style="color: red"><%= show_verbose_messages %></p>
 
 <%= yield  %>
