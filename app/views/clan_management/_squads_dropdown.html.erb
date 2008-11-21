@@ -1,0 +1,8 @@
+
+  <select name="squad" size="1" onchange="this.form.submit()">
+    <%(list_squads @clan).each do |squad|%>
+      <option value="<%=squad.id.to_s%>"  >
+        <%= squad.name %>
+      </option>
+    <%end%>
+  </select>

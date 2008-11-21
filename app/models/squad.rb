@@ -10,4 +10,15 @@ class Squad < ActiveRecord::Base
       :too_short => 'Name ist zu kurz, bitte mindestens %d Buchstaben verwenden',
       :too_long => 'Der Squadname darf nicht mehr als %d Buchstaben haben'
   
+  def members
+    users
+  end
+  
+  
+  #TODO: make this a real _transaction_, if something goes wrong, revert it (like migration up/down)
+  def self.transfer_user user, src_squad, dst_squad
+    user.squads.push dst_squad
+    user.squads.delete src_squad
+    user.save
+  end
 end

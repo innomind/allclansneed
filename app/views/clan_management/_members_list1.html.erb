@@ -1,0 +1,13 @@
+
+<select name="member" size="10" style="width:100%">
+  <%unless @squad1.nil?%>
+    <% @squad1.members.each do |member|%>
+      <option value="<%=member.id.to_s%>" onchange="alert('changed')">
+        <%= member.nick %>
+      </option>
+    <%end%>
+  <%else%>
+    
+  <%end%>
+</select>
+

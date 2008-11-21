@@ -106,7 +106,6 @@ class ApplicationController < ActionController::Base
       false
     end
   end
-
   
   def save_verbose obj
     unless (saved = obj.save)
@@ -114,7 +113,6 @@ class ApplicationController < ActionController::Base
     end
     saved
   end
-
   
   def pagination_defaults
     @page = (params[:page] || 1).to_i

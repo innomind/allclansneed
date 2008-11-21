@@ -25,7 +25,7 @@ class Site < ActiveRecord::Base
   PORTAL_NAME = "A * C * N - Portalseite"
   
   def is_portal?
-    (id == SITE_PORTAL_ID)
+    (id == PORTAL_ID)
   end
   
   def portal_name
