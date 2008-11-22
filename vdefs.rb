@@ -8,10 +8,11 @@ def db_stop
 end
 
 # haha, "meta"-programming
-def get attr, model
-    str = model.to_s.capitalize+".all.collect{|o| "
-    attr.each {|a| str << " o."+a.to_s}
+# usage: get_all [:attr1, :attr2...], :model
+def get_all attr, model
+    str = model.to_s.capitalize+".all.collect{|o| "+"[] "
+    attr.each {|a| str << " << o."+a.to_s}
     str << '}'
-    puts str
-    #eval str
+    #puts str
+    eval str
 end
