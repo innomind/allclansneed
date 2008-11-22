@@ -31,12 +31,36 @@ class Site < ActiveRecord::Base
   def portal_name
     PORTAL_NAME
   end
+
+  #possibly slower / uglier alternatives for areas
+  #areas = self.template.template_areas.select {|ta| ta.internal_name == ta_name.to_s}
+  #areas = TemplateArea.find :all, :conditions => {:template_id => self.template_id, :internal_name => ta_name}
   
-  def get_boxes
-    boxes = TemplateBox.find :all, :conditions => {:site_id => self.id}
+  def get_boxes ta_name
+    areas = TemplateArea.all :conditions => {:internal_name => ta_name.to_s}
+    TemplateBox.all :conditions => ["site_id = ? AND template_area_id IN (?)", self.id, areas]
+  end
+  
+  def get_box_hash
     hash = {}
-    self.template.template_areas.each {|ta| hash[ta.internal_name.to_sym] = boxes.select {|b| ta.template_boxes.include? b}}
+    def hash.[](ta)
+      get_boxes ta
+    end
+    
+    #mmmh, bad
+    #def hash.each
+    #end
     hash
+  end
+  
+  # hey, this is fun :)
+  #let's try another
+  # KrAnK
+  def getbs
+    hash = {}
+    areas = self.template.template_areas
+    boxes = TemplateBox.all :conditions => ["site_id = ? AND template_area_id IN (?)", self.id, areas]
+    areas.each {|a| hash[a.to_sym] = boxes[lambda{@i=0 if @i.nil?;@i+=1}.call]}
   end
   
 end

@@ -21,3 +21,4 @@ public/javascripts/cache/*
 public/stylesheets/cache/*
 .autotest
 models.pdf
+*.rb~

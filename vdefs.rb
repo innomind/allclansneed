@@ -8,9 +8,11 @@ def db_stop
 end
 
 # haha, "meta"-programming
-# usage: get_all [:attr1, :attr2...], :model
+# usage: get_all [:attr1, :attr2...], :model <- double_names with undescore-notation
 def get_all attr, model
-    str = model.to_s.capitalize+".all.collect{|o| "+"[] "
+    str = model.to_s.split('_').collect{|part| part.capitalize}.join
+    str << ".all.collect{|o| [] "
+    #str[0,1] = str[0,1].capitalize # :( ugly
     attr.each {|a| str << " << o."+a.to_s}
     str << '}'
     #puts str
