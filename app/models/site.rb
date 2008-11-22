@@ -33,9 +33,10 @@ class Site < ActiveRecord::Base
   end
   
   def get_boxes
-    boxes = TemplateBox.find_by_site_id(self.id)
+    boxes = TemplateBox.find :all, :conditions => {:site_id => self.id}
     hash = {}
-    self.template.template_areas.collect {|ta| hash[ta.internal_name.to_sym] = boxes.collect {|b| ta.template_boxes.include? b}}
+    self.template.template_areas.each {|ta| hash[ta.internal_name.to_sym] = boxes.select {|b| ta.template_boxes.include? b}}
+    hash
   end
   
 end
