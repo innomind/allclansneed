@@ -38,4 +38,15 @@ class PollController < ApplicationController
     @polloptions = PollOption.find(:all, :conditions => {:poll_id => @poll.id})
     @result = PollResult.new
   end
+  
+  def vote
+    @result = PollResult.new(params[:poll_result])
+    @result.user = current_user
+    #@result.site = current_site
+    if @result.save
+      redirect_to :action => show, :id => params[:id]
+    else
+      render :action => "show", :id => params[:id]
+    end
+  end
 end
