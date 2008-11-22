@@ -54,8 +54,8 @@ class ClanManagementController < ApplicationController
     if (task == '->' || task == '<-')
       unless @member.nil?
         if (task == '->')? 
-            Squad.transfer_user(@member, @squad1, @squad2) : 
-            Squad.transfer_user(@member, @squad2, @squad1)
+            Squad.move_user(@member, @squad1, @squad2) : 
+            Squad.move_user(@member, @squad2, @squad1)
     
           flash.now[:notice] = "user #{@member.nick} moved"
         else
@@ -120,7 +120,7 @@ class ClanManagementController < ApplicationController
   def init_clan
     @clan  = Clan.find_for_site :first
     if @clan.nil?
-      render :text => 'no clan given'
+      render :text => 'no clan given'+'  '+params.inspect
       return
     end
     @squad1 = @clan.squads[0] if @squad1.nil?
