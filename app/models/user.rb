@@ -10,6 +10,7 @@ class User < ActiveRecord::Base
   has_many :gallery_pics
   has_many :clanwars
   has_many :polls
+  has_many :poll_results
   
   has_one :profile
   

@@ -1,5 +1,5 @@
 <h1>show details for a special poll</h1>
-<% error_handling_form_for :result, @poll, :url => {:action => "vote", :id => params[:id]}, :html => { :multipart => false } do |form| %>
+<% error_handling_form_for :poll, @poll, :url => {:action => "vote", :id => params[:id]} do |form| %>
   Poll: <%= @poll.title %><br />
   Beschreibung: <%= @poll.description %><br />
   <ul id="poll">

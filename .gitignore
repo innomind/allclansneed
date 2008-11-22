@@ -19,3 +19,5 @@ public/javascripts/cache/*
 #public/stylesheets/cache/bundle.css
 #public/stylesheets/cache/bundle.css.filelist
 public/stylesheets/cache/*
+.autotest
+models.pdf
