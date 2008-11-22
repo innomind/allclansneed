@@ -31,4 +31,11 @@ class Site < ActiveRecord::Base
   def portal_name
     PORTAL_NAME
   end
+  
+  def get_boxes
+    boxes = TemplateBox.find_by_site_id(self.id)
+    hash = {}
+    self.template.template_areas.collect {|ta| hash[ta.internal_name.to_sym] = boxes.collect {|b| ta.template_boxes.include? b}}
+  end
+  
 end
