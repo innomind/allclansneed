@@ -36,7 +36,6 @@ class User < ActiveRecord::Base
     self[:password] = encrypt pw
   end
   
-  
   def encrypt str
     (Digest::SHA256.new << str).hexdigest!
   end
@@ -69,7 +68,6 @@ class User < ActiveRecord::Base
     self[:password] = encrypt pw
   end
   
-  
   def encrypt str
     (Digest::SHA256.new << str).hexdigest!
   end
@@ -77,7 +75,6 @@ class User < ActiveRecord::Base
   def check_pw pw
     (encrypt pw) == (self[:password])
   end
-
   
   def clans_with_site
     (sites.collect {|s| s.clan}).compact

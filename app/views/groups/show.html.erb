@@ -1,16 +1,19 @@
 <h1>Gruppe <%= @group.name %></h1>
 
-Beschreibung: <%= @group.description %><br />
+<h3>Beschreibung</h3>
+  <%= @group.description %><br />
+
+<h3>Gründer</h3>
+  <%= @group.founder.login %>
 
 <h3>Status</h3>
-<% if (@user.status_for_group @group) == "active" %>
-  Du bist Mitglied
-<% elsif (@user.status_for_group @group) == "pending" %>
-  Deine Mitgliedschaft wird überprüft
-<% else %>
-  <%= link_to ("Mitglied werden", :action => "join", :id => @group.id) %> 
-<% end %>
+  <% if (@user.status_for_group @group) == "active" %>
+    Du bist Mitglied
+  <% elsif (@user.status_for_group @group) == "pending" %>
+    Deine Mitgliedschaft wird überprüft
+  <% else %>
+    <%= link_to ("Mitglied werden", :action => "join", :id => @group.id) %> 
+  <% end %>
 
 <h3>Mitglieder</h3>
-
-<%= render :partial => 'user', :collection => @group.users %>
+  <%= render :partial => 'user', :collection => @active_memberships %>

@@ -98,7 +98,6 @@ class ClanManagementController < ApplicationController
   end
   
   def update
-
     respond_to do |format|
       if @clan.update_attributes(params[:clan])
         flash.now[:notice] = 'Clan was successfully updated.'
