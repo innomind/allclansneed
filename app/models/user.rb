@@ -14,6 +14,9 @@ class User < ActiveRecord::Base
   
   has_one :profile
   
+  has_many :groupmemberships
+  has_many :groups, :through => :groupmemberships
+  
   #before_save :encrypt_password
   
   has_many :squad_users #??? i don't want this line :( sounds strange: a user has squad_users
@@ -80,4 +83,11 @@ class User < ActiveRecord::Base
     (sites.collect {|s| s.clan}).compact
   end
   
+  def membership group
+    Groupmembership.find(:first, :conditions => {:group_id  => group.id})
+  end
+  
+  def status_for_group group
+    (membership group).status
+  end
 end
