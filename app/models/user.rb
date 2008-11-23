@@ -84,7 +84,12 @@ class User < ActiveRecord::Base
   end
   
   def membership group
-    Groupmembership.find(:first, :conditions => {:group_id  => group.id})
+    mship = Groupmembership.find(:first, :conditions => {:group_id  => group.id, :user_id => self[:id]})
+    if mship.nil?
+      mship = Groupmembership.new
+      mship.status = "false"
+    end
+      mship
   end
   
   def status_for_group group

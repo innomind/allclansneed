@@ -1,5 +1,6 @@
 <% form_for :group, :url => {:action => "create"} do |form| %>
-      Name: <%= form.text_field :name %><br>
+      Name: <%= form.text_field :name %><br />
+      moderiert: <%= form.check_box(:moderated, {}, "true", "false") %><br />
       Beschreibung: <%= form.text_area :description %>
       <%= form.submit "erstellen" %>
 <% end %>

@@ -3,6 +3,8 @@ class CreateGroups < ActiveRecord::Migration
     create_table :groups do |t|
       t.string :name
       t.text :description
+      t.boolean :moderated, :default => false
+      t.integer :founder_id
       t.timestamps
     end
   end
