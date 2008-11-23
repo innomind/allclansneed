@@ -1,7 +1,0 @@
-<h1>beantworten</h1>
-<p><label>Empfänger</label>: <%= @message.sender.nick %></p>
-<p><label for="message_subject">Betreff</label>
-<%= text_field(:message, :subject, :value  => "Re: " + @message.subject) %></p>
-
-<p><label for="message_message">Text</label>
-<%= text_area(:message, :message, :value  => render_reply_text(@message.message)) %></p>

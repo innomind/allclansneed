@@ -1,10 +1,11 @@
-class MessageController < ApplicationController
+class MessagesController < ApplicationController
   def index
-    @messages = Message.find(:all, :conditions => { :receiver_id => current_account_id })
+    @messages = Message.find(:all, :conditions => { :receiver_id => current_user_id })
   end
   
   def new
-    @possible_receiver = Account.find_for_site(:all)
+    @message = Message.new
+    @possible_receiver = User.find(:all)
   end
   
   def show
@@ -19,7 +20,7 @@ class MessageController < ApplicationController
   
   def create
     @message = Message.new(params[:message])
-    @message.sender_id = current_account_id
+    @message.sender = current_user
     @message.read = FALSE
     @message.answered = FALSE
     @message.save
