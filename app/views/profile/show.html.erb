@@ -1,0 +1,16 @@
+<%= link_to "edit", :action => "edit" %><br>
+vorname: <%= @profile.firstname %> <br>
+nachname: <%= @profile.lastname %> <br><br>
+
+<h3>Squads</h3>
+<% @profile.user.squads.each do  |s| %>
+    <%= s.name %> 
+<% end %>
+<br />
+<h3>Gruppen</h3>
+<% @profile.user.groups.each do  |g| %>
+    <%= show_group g %> 
+<% end %>
+  
+<br>
+<%= show_comments @profile %>
