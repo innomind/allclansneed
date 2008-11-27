@@ -1,0 +1,6 @@
+<% error_handling_form_for :group, @group, :url => {:action => "update", :id => params[:id]}, :html => { :multipart => false } do |form| %>
+      <%= form.text_field :name %>
+      <%= form.check_box(:moderated, {}, "true", "false") %>
+      <%= form.text_area :description %>
+      <%= form.submit "aktualisieren" %>
+<% end %>

@@ -14,6 +14,9 @@ class User < ActiveRecord::Base
   
   has_one :profile
   
+  has_many :groupmemberships
+  has_many :groups, :through => :groupmemberships
+  
   #before_save :encrypt_password
   
   has_many :squad_users
@@ -33,7 +36,6 @@ class User < ActiveRecord::Base
   def password= pw
     self[:password] = encrypt pw
   end
-  
   
   def encrypt str
     (Digest::SHA256.new << str).hexdigest!
@@ -81,7 +83,6 @@ class User < ActiveRecord::Base
     self[:password] = encrypt pw
   end
   
-  
   def encrypt str
     (Digest::SHA256.new << str).hexdigest!
   end
@@ -90,10 +91,12 @@ class User < ActiveRecord::Base
     (encrypt pw) == (self[:password])
   end
 
+  
   def clans_with_site
     (sites.collect {|s| s.clan}).compact
   end
   
+
   def rights
     self.user_rights
   end
@@ -114,6 +117,17 @@ class User < ActiveRecord::Base
     local_right.components
   end
   
-#rescue #ActiveRecordError #PGError
-#  puts "hacked: "+$!
+  def membership group
+    mship = Groupmembership.find(:first, :conditions => {:group_id  => group.id, :user_id => self[:id]})
+    if mship.nil?
+      mship = Groupmembership.new
+      mship.status = "false"
+    end
+      mship
+  end
+  
+  def status_for_group group
+    (membership group).status
+  end
+
 end
