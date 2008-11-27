@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-
+  
   has_many :forum_threads
   has_many :forum_messages
   has_many :guestbooks
@@ -16,10 +16,11 @@ class User < ActiveRecord::Base
   
   #before_save :encrypt_password
   
-  has_many :squad_users #??? i don't want this line :( sounds strange: a user has squad_users
-  has_many :user_rights, :dependent => :destroy # much better ;)
+  has_many :squad_users
+  has_many :user_rights, :dependent => :destroy
   has_many :squads, :through => :squad_users
   has_many :sites, :through => :user_rights
+  has_many :right_components, :through => :user_rights
   
   validates_presence_of :login
   validates_presence_of :password
@@ -38,8 +39,17 @@ class User < ActiveRecord::Base
     (Digest::SHA256.new << str).hexdigest!
   end
   
+  #access types
+  PUBLIC = 0
+  ACN_MEMBER = 1
+  SITE_MEMBER = 2
+  COMPONENT_RIGHT_OWNER = 4
   #don't change the position, it must be located AFTER def password=...
-  ACN_DEV_USERS = [
+  #migrate 20081022180305 & 20081119122051 down&up, to insert new users
+ #... i don't find the right citeria (very strange migration behaviour)
+  
+  def self.acn_dev_users
+    return [
     User.new(  :login  => "philipp",
       :password => "test",
       :email => "pw@allclansneed.de"
@@ -51,8 +61,13 @@ class User < ActiveRecord::Base
     User.new(  :login  => "valentin",
       :password => "test",
       :email => "valentin.schulte@gmx.de"
+    ),
+    User.new(  :login => "superadmin",
+      :password => "supertest",
+      :email => "superadmin@devinnomind.info"
     )
-  ]
+  ] #if table_exists?
+  end
   
   def nick= nickname
     self[:login] = nickname
@@ -75,9 +90,30 @@ class User < ActiveRecord::Base
     (encrypt pw) == (self[:password])
   end
 
-  
   def clans_with_site
     (sites.collect {|s| s.clan}).compact
   end
   
+  def rights
+    self.user_rights
+  end
+  
+  def right_for_site site_id
+    UserRight.first :conditions => {:user_id => self.id, :site_id => site_id}
+  end
+  
+  def local_right
+    right_for_site $site_id
+  end
+  
+  def components_for_site site_id
+    (right_for_site site_id).components
+  end
+  
+  def components
+    local_right.components
+  end
+  
+#rescue #ActiveRecordError #PGError
+#  puts "hacked: "+$!
 end

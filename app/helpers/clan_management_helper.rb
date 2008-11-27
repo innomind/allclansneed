@@ -3,6 +3,7 @@ module ClanManagementHelper
   #  clan.squads
   #end
   
+  #this works, don't delete, will probably be uses later...
   def list_squads_xhr
     page.replace_html 'squads', :partial => 'squads', :locals => {:@squads => squads}
   end
@@ -13,9 +14,10 @@ module ClanManagementHelper
       clan.members 
   end
   
-  def list_members
-    
-  end
+  #defined in rights_mgmt_helper
+  #def list_members
+  #  
+  #end
   
   #def list_squad_members squad
   #  squad.nil? ? [] : squad.members

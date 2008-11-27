@@ -2,7 +2,7 @@
   <select name="member" size="10" style="width:100%">
   <%unless @squad2.nil?%>
     <% @squad2.members.each do |member|%>
-      <option value="<%=member.id.to_s%>" onchange="alert('changed')">
+      <option value="<%=member.id.to_s%>">
         <%= member.nick %>
       </option>
     <%end%>
