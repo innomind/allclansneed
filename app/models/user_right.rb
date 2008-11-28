@@ -5,5 +5,5 @@ class UserRight < ActiveRecord::Base
   has_many :right_components
   has_many :components, :through => :right_components
   
-  validates_presence_of :type
+  validates_presence_of :right_type
 end

@@ -11,7 +11,7 @@ module ClanManagementHelper
   def list_site_members
       clan = Clan.find_for_site :first
       #page.replace_html 'members', :partial => 'members', :locals => {:@members => members}
-      clan.members 
+      clan.members :through => :site
   end
   
   #defined in rights_mgmt_helper
