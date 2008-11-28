@@ -1,8 +1,9 @@
 class ClanManagementController < ApplicationController
   
   CONTROLLER_ACCESS = ACN_MEMBER
-  ACTION_ACCESS_TYPES={:index => SITE_MEMBER}
-  
+  ACTION_ACCESS_TYPES={
+    :index => COMPONENT_RIGHT_OWNER
+  }
   before_filter :init_clan
   
   def clan_management

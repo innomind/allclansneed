@@ -51,7 +51,7 @@ class ApplicationController < ActionController::Base
     # rights
     needed = self.class::ACTION_ACCESS_TYPES
     action = params[:action].to_sym
-    controller = params[:controller].to_sym
+    #controller = params[:controller].to_sym
     
     right = needed[action].nil? ? self.class::CONTROLLER_ACCESS : needed[action]
     return if right == PUBLIC
@@ -129,12 +129,13 @@ class ApplicationController < ActionController::Base
   
   
   def user_has? right
+    return false if user_is_guest?
     user_right = current_user.local_right
     return false if user_right.nil?
     unless right == COMPONENT_RIGHT_OWNER
       true if user_right.right_type == right
     else
-      true if session[:rights][current_site_id] == self.class.to_s
+      true if session[:rights][current_site.id].include? self.class.to_s
     end
   end
   
