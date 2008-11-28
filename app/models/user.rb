@@ -62,6 +62,7 @@ class User < ActiveRecord::Base
     self[:login]
   end
   
+  
   def password= pw
     self[:password] = encrypt pw
   end
@@ -80,4 +81,7 @@ class User < ActiveRecord::Base
     (sites.collect {|s| s.clan}).compact
   end
   
+  def self.all_dev_users
+    find :all, :conditions => {:login => User::ACN_DEV_USERS.collect {|u| u.login}}
+  end
 end

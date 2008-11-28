@@ -17,6 +17,7 @@ class ForumController < ApplicationController
     end
   end
   
+  
   def new
     return if request.xhr? 
   end
