@@ -1,7 +1,9 @@
 class ClanManagementController < ApplicationController
   
-  ACTION_LEVELS={:index => LEVEL_SITE_MEMBER}
-  
+  CONTROLLER_ACCESS = ACN_MEMBER
+  ACTION_ACCESS_TYPES={
+    :index => COMPONENT_RIGHT_OWNER
+  }
   before_filter :init_clan
   
   def clan_management
@@ -98,7 +100,6 @@ class ClanManagementController < ApplicationController
   end
   
   def update
-
     respond_to do |format|
       if @clan.update_attributes(params[:clan])
         flash.now[:notice] = 'Clan was successfully updated.'
@@ -112,8 +113,6 @@ class ClanManagementController < ApplicationController
   end
   
   private
-  
-
   
   
   #TODO: get clan by id

@@ -52,6 +52,7 @@ Rails::Initializer.run do |config|
     :secret      => '4c050fbe9184a5354ad1b9b5bb90c86dee3f4322127d898dc236b8e54d47aa83caa4813e513b472c50d33c688d5b69b4428d83199e0c8eb6d7060a06244ba4be'
   }
 
+    config.action_controller.session_store = :p_store
   # Use the database for sessions instead of the cookie-based default,
   # which shouldn't be used to store highly confidential information
   # (create the session table with "rake db:sessions:create")

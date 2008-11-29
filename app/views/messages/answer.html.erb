@@ -1,0 +1,11 @@
+<h1>beantworten</h1>
+
+<% error_handling_form_for :message, @message, :url => {:action => "create", :id => params[:id]}, :html => { :multipart => false } do |form| %>
+  <p><label>Empfänger</label>: <%= @message.sender.nick %></p>
+  <%= form.hidden_field :receiver_id, :style => "blank" %>
+
+  <%= form.text_field :subject, :value  => "Re: " + @message.subject, :label => "Betreff" %>
+  <%= form.text_area :message, :value  => render_reply_text(@message.message), :label => "Nachricht" %>
+  
+  <%= form.submit "abschicken" %>
+<% end %>

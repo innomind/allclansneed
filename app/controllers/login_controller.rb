@@ -1,8 +1,10 @@
 class LoginController < ApplicationController
-
-  ACTION_LEVELS = { 'test1' => LEVEL_SITE_MEMBER,
-    'test2' => LEVEL_SITE_ADMIN,
-    'test3' => 3
+  layout 'standard'
+  
+  ACTION_ACCESS_TYPES = {
+    :test1 => SITE_MEMBER,
+    :test2 => COMPONENT_RIGHT_OWNER,
+    'test3' => 8
   }
   
   def login
@@ -12,7 +14,9 @@ class LoginController < ApplicationController
       usr = User.first :conditions => {:login => nick}
       if !usr.nil? && usr.check_pw(pw)
         session['user'] = usr
-        session['user_sites'] = usr.site_ids
+        session['user_sites'] = usr.sites
+        put_rights_into_session usr
+        session['']
         @logged_in = true
       else
         flash.now[:notice] = 'login failed'+' for "'+params[:nick]+'"'
@@ -49,5 +53,15 @@ class LoginController < ApplicationController
   
   def test3
     render :text => "Test3"   
+  end
+  
+  private
+  
+  def put_rights_into_session usr
+    hash = {}
+    usr.rights.each do |right|
+      hash[right.site.id] = right.components.collect {|c| c.controller}
+    end
+    session[:rights] = hash
   end
 end

@@ -1,5 +1,5 @@
 class ProfileController < ApplicationController
-  def index
+  def show
     @profile = Profile.find_by_user_id(params[:id]);
   end
   
