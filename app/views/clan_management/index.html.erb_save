@@ -1,0 +1,105 @@
+
+Clan: <%= @clan.name  %>
+
+<%# javascript_tag do %>
+<%#=  remote_function :update => 'squads', :url => {:action => 'squads'}%>
+<%#end%>
+
+
+<div>
+  <div style="width:49%;float:left">
+    <% form_for Squad.new do |f| %>
+      <%=f.label :name, 'Name' %>:
+      <%=f.text_field :name %><br/>
+    
+      <%=f.submit 'create squad'%>
+    <%end%>
+  </div>
+  <!--<div style="width:30%;border-width:1px;border-color:green;border-style:solid;float:right" id="squads">
+&nbsp;
+  </div>-->
+</div>
+<br/>
+<br/>
+<p>
+  <% form_tag :action => 'squad_member' do -%>
+    <%=hidden_field_tag 'form', '1'%>
+  
+    <div style="float:left;width:30%;border-style:solid">
+      squad 1: 
+    
+
+    
+      <%=render :partial => 'squads_dropdown1'%>
+      <%if @squad1.members == [] %>
+        <%= submit_tag 'delete squad'%>
+
+      <%end%>
+                      
+      <br/> members: <br/>
+      <div style="float:left">
+        <%=render :partial => 'members_list1'%>
+      </div>
+      <%= submit_tag 'del'%> <%#'[x]', {:name => 'del'} %>
+      <div style="float:right">
+      <div >
+        <%= submit_tag 'copy ->' unless @squad2.nil?%>
+      </div>
+      <div >
+        <%= submit_tag 'move ->' unless @squad2.nil?%>
+      </div>
+      </div>
+    </div>
+  <%end%>
+
+  <% form_tag :action => 'squad_member' do -%>
+    <%=hidden_field_tag 'form', '2'%>
+  
+    <div style="float:left;width:30%;border-style:solid">
+      <% unless @squad2.nil? %>
+        squad 2:
+    
+
+    
+        <%=render :partial => 'squads_dropdown2'%>
+        <%if @squad2.members == [] %>
+          <%= submit_tag 'delete squad' %>
+        <%end%>
+            
+        <br/> members: <br/>
+        <div style="float:left">
+        <div >
+          <%= submit_tag '<- copy' %>
+        </div>
+        <div >
+          <%= submit_tag '<- move' %>
+        </div>
+        </div>
+        <div style="float:right">
+          <%=render :partial => 'members_list2'%>
+        </div>
+        <%= submit_tag 'del'%>
+      <% else %>
+        only one squad available
+      <% end %>
+    
+    </div>
+  <%end%>
+</p>
+<p>&nbsp;</p>
+
+<!--<div id=dropMember style="border-style:solid">
+&nbsp;  
+
+</div>
+
+<%=drop_receiving_element "dropMember", :url => {:action => 'add_to_Squad'}%>
+-->
+<!-- <a onclick="<%#= remote_function :update => 'squads', :url => {:action => 'update_lists'} %>" >test</a>
+<div style="border-color:black;border-width:1px;border-style:solid;width:30%;float:left">
+ttt
+</div>hallo
+<div style="border-color:black;border-width:1px;border-style:solid;width:30%">
+ttt_right
+</div>
+-->

@@ -1,0 +1,3 @@
+
+<%= select 'user', 'id', list_site_members.collect {|m| [m.nick, m.id]}, {}, {:size => 15, :onchange => 'this.form.submit()'}%>
+
