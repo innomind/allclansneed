@@ -32,8 +32,8 @@ class InsertDeveloperRightsUsersClans < ActiveRecord::Migration
     @main_site.save
     #every user gets main and other site
     @users.each do |usr|
-      usr.user_rights.push UserRight.create(:user => usr, :site_id => 1, :right_type => 1)
-      usr.user_rights.push UserRight.create(:user => usr, :site => @sites.pop, :right_type => 2)
+      usr.user_rights.push UserRight.create(:user => usr, :site_id => 1, :right_type => User::ACN_MEMBER)
+      usr.user_rights.push UserRight.create(:user => usr, :site => @sites.pop, :right_type => User::SITE_MEMBER)
       
       #FIXME: ok, i would say, this is an exaggeration of "ruby-feature" usage ;)
       # i promise, i will never use unnecessary lambdas again :)   

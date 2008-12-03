@@ -44,8 +44,10 @@ class User < ActiveRecord::Base
   #access types
   PUBLIC = 0
   ACN_MEMBER = 1
-  SITE_MEMBER = 2
+  SITE_MEMBER_ = 2
+  SITE_MEMBER = ACN_MEMBER | SITE_MEMBER_
   COMPONENT_RIGHT_OWNER = 4
+  
   #don't change the position, it must be located AFTER def password=...
   #migrate 20081022180305 & 20081119122051 down&up, to insert new users
  #... i don't find the right citeria (very strange migration behaviour)
@@ -66,7 +68,7 @@ class User < ActiveRecord::Base
     ),
     User.new(  :login => "superadmin",
       :password => "supertest",
-      :email => "superadmin@devinnomind.info"
+      :email => "superadmin@dev.innomind.info"
     )
   ] #if table_exists?
   end

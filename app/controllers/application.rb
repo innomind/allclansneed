@@ -133,7 +133,7 @@ class ApplicationController < ActionController::Base
     user_right = current_user.local_right
     return false if user_right.nil?
     unless right == COMPONENT_RIGHT_OWNER
-      true if user_right.right_type == right
+      true if (user_right.right_type & right) == right
     else
       true if session[:rights][current_site.id].include? self.class.to_s
     end
