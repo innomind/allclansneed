@@ -1,7 +1,9 @@
 class ClanManagementController < ApplicationController
   
-  ACTION_LEVELS={:index => LEVEL_SITE_MEMBER}
-  
+  CONTROLLER_ACCESS = ACN_MEMBER
+  ACTION_ACCESS_TYPES={
+    :index => COMPONENT_RIGHT_OWNER
+  }
   before_filter :init_clan
   
   def clan_management
@@ -43,6 +45,8 @@ class ClanManagementController < ApplicationController
     @members = @clan.members
   end
   
+  #TODO: clean up this shit, it's the opposite of dry (and toooo big)
+  # bit it's structured a little bit and i'm very proud of it ;)
   def squad_member
     @squad1 = Squad.find params[:squad1] unless params[:squad1].nil?
     @squad2 = Squad.find params[:squad2] unless params[:squad2].nil?
@@ -51,9 +55,9 @@ class ClanManagementController < ApplicationController
     task = params[:commit]
     
     #TASK: move
-    if (task == '->' || task == '<-')
+    if (task == 'move ->' || task == '<- move')
       unless @member.nil?
-        if (task == '->')? 
+        if (task == 'move ->')? 
             Squad.move_user(@member, @squad1, @squad2) : 
             Squad.move_user(@member, @squad2, @squad1)
     
@@ -64,34 +68,62 @@ class ClanManagementController < ApplicationController
       else
         flash.now[:error] = "no member selected"
       end
-      
-      #TASK: delete
-    else if (task=='delete')
-        unless (form = params[:form]).nil?
-          if @clan.squads.length > 1
-            if ((form == "1") ? @squad1 : @squad2).members == []
-              ((form == "1") ? @squad1 : @squad2).destroy
-              @clan.reload
-              if @squad1.frozen?
-                @squad1 = @clan.squads[0]
-              end
-              if @squad2.frozen? || @clan.squads.length == 1
-                @squad2 = nil
-              end
-            end
+
+      #TASK: copy
+    else if (task == 'copy ->' || task == '<- copy')
+        unless @member.nil?
+          if (task == 'copy ->')? 
+              Squad.copy_user(@member, @squad1, @squad2) : 
+              Squad.copy_user(@member, @squad2, @squad1)
+    
+            flash.now[:notice] = "user #{@member.nick} copied"
           else
-            flash.now[:error] = "can't remove last squad!"           
+            flash.now[:error] = "tranfer error"        
           end
         else
-          render :text => 'delete non-empty squad request'
-          return
+          flash.now[:error] = "no member selected"
         end
-      else
-        #render :text => 'strange request'
-        #return
+      
+        #TASK: delete squad
+      else if (task=='delete squad')
+          unless (form = params[:form]).nil?
+            if @clan.squads.length > 1
+              if ((form == "1") ? @squad1 : @squad2).members == []
+                ((form == "1") ? @squad1 : @squad2).destroy
+                @clan.reload
+                if @squad1.frozen?
+                  @squad1 = @clan.squads[0]
+                end
+                if @squad2.frozen? || @clan.squads.length == 1
+                  @squad2 = nil
+                end
+              end
+            else
+              flash.now[:error] = "can't remove last squad!"
+            end
+          else
+            render :text => 'delete non-empty squad request'
+            return
+          end
+          
+          #TASK: delete user
+        else if (task=='del')
+            unless @member.nil?
+              unless @member.squads.length == 1
+                @member.squads.delete((form == "1") ? @squad1 : @squad2)
+              else
+                flash.now[:error] = "can't remove user from his last squad"
+              end
+            else
+              flash.now[:error] = "no member selected"
+            end
+          else
+            #render :text => 'strange request'
+            #return
+          end
+        end
       end
     end
-
     render :action => 'index'
   rescue NoMethodError
     render :text => 'certain post-value is missing... param-error:<br/>'+$!
@@ -111,8 +143,6 @@ class ClanManagementController < ApplicationController
   end
   
   private
-  
-
   
   
   #TODO: get clan by id

@@ -1,7 +1,7 @@
 class InsertDeveloperSquads < ActiveRecord::Migration
   # ok, all this is ugly c-like imperative style (and too complicated), sorry
   def self.up
-     (User.find :all, :conditions => {:login => User::ACN_DEV_USERS.collect {|u| u.login}}).each do |user|
+     (User.find :all, :conditions => {:login => User.acn_dev_users.collect {|u| u.login}}).each do |user|
       user.squads.push(squad = Squad.create(:name => (name_squad user)))
       user.clans_with_site.each do |clan|
         squad.clan = clan unless clan.site.id == Site::PORTAL_ID

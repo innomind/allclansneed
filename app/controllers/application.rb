@@ -2,7 +2,7 @@
 # Likewise, all the methods added will be available for all controllers.
 
 class ApplicationController < ActionController::Base
-####TEST
+  ####TEST
 
   helper :all # include all helpers, all the time
   #layout 'standard'
@@ -17,10 +17,14 @@ class ApplicationController < ActionController::Base
   # from your application log (in this case, all fields with names like "password"). 
   # filter_parameter_logging :password
   
-  ACTION_LEVELS = {}
-  LEVEL_ACN_MEMBER = 0
-  LEVEL_SITE_MEMBER = 1
-  LEVEL_SITE_ADMIN = 2
+  #Access constants
+  CONTROLLER_ACCESS = 0
+  ACTION_ACCESS_TYPES = {}
+  
+  PUBLIC = User::PUBLIC
+  ACN_MEMBER = User::ACN_MEMBER
+  SITE_MEMBER = User::SITE_MEMBER
+  COMPONENT_RIGHT_OWNER = User::COMPONENT_RIGHT_OWNER
   
   before_filter :init_site, :init_rights, :pagination_defaults, :init_areas #:init_site_id#, :check_query
   
@@ -40,7 +44,23 @@ class ApplicationController < ActionController::Base
   end
   
   def init_rights
-    levels = self.class::ACTION_LEVELS
+    #some useful variables
+    @logged_in = !session['user'].nil?
+    session['error_objects'] = []
+    
+    # rights
+    needed = self.class::ACTION_ACCESS_TYPES
+    action = params[:action].to_sym
+    #controller = params[:controller].to_sym
+    
+    right = needed[action].nil? ? self.class::CONTROLLER_ACCESS : needed[action]
+    return if right == PUBLIC
+    return if user_has? right
+    
+    denied_msg = RAILS_ENV == "production" ? "access denied!" :  "access denied: you don't have right -> #{verbose_right right}"
+    render :text => denied_msg
+    
+=begin
     unless levels == {}
       request = :"#{params[:action]}"
       req_level = levels[request].nil? ? levels[:all] : levels[request]
@@ -52,17 +72,14 @@ class ApplicationController < ActionController::Base
         end
       end
     end
-    #some useful variables
-    @logged_in = !session['user'].nil?
-    session['error_objects'] = []
+=end
   end
   
   def init_areas
     @area_list = TemplateArea.find(:all, :select => "internal_name", :conditions => {:template_id => current_site.template_id})
-    
   end
 
-    #deprecated, don't use
+  #deprecated, don't use
   def current_site_id
     $site_id
   end
@@ -96,6 +113,7 @@ class ApplicationController < ActionController::Base
   end
   
   # user has right greater than/equal to level?
+  #!! deprecated !! use user_has_right?
   def user_has_right_ge? level
     unless user_is_guest?
       right = UserRight.find :first, :conditions => {:site_id => current_site_id, :user_id => current_user_id}
@@ -106,6 +124,18 @@ class ApplicationController < ActionController::Base
       end
     else
       false
+    end
+  end
+  
+  
+  def user_has? right
+    return false if user_is_guest?
+    user_right = current_user.local_right
+    return false if user_right.nil?
+    unless right == COMPONENT_RIGHT_OWNER
+      true if (user_right.right_type & right) == right
+    else
+      true if session[:rights][current_site.id].include? self.class.to_s
     end
   end
   
@@ -122,5 +152,12 @@ class ApplicationController < ActionController::Base
     @per_page = (10 if params[:per_page].nil?).to_i
   end
 
-    
+  # since these consts should only be visible for development purposes
+  # and i don't like fix lists, i search for them with simple regexps
+  # not failsafe of course
+  def verbose_right right
+    User.constants.select{ |c| c =~ /MEMBER|RIGHT|SITE|PUBLIC|PRIVATE/ }.each do |r|
+      return r if (eval "User::#{r}") == right
+    end
+  end
 end

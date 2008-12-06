@@ -1,7 +1,7 @@
 ActionController::Routing::Routes.draw do |map|
-  map.resources :squads
+  #map.resources :squads
 
-  map.resources :clans
+  #map.resources :clans
 
   
   #map.connect '', :pageid => 1, :controller => 'classified', :action => 'list'
@@ -57,6 +57,7 @@ ActionController::Routing::Routes.draw do |map|
   map.users 'register', :controller => 'login', :action => 'create'
   map.login 'login', :controller => 'login', :action => 'login'
   map.squads ':site_id/create_squad', :controller => 'clan_management', :action => 'create_squad'
+  map.rights ':site_id/rights_management', :controller => 'rights_management', :action => 'rights_management'
   
   map.forum_message ':site_id/forum/thread/new_message/:id', :controller => 'forum_message', :action => "new" 
   #map.forum_message 'forum/thread/:id/new', :controller => 'forum_message', :action => "new" 
