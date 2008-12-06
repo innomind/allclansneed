@@ -1,5 +1,7 @@
 class User < ActiveRecord::Base
-
+  
+  has_many_friends
+  
   has_many :forum_threads
   has_many :forum_messages
   has_many :guestbooks

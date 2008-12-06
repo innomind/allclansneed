@@ -26,8 +26,7 @@ class GroupsController < ApplicationController
       redirect_to :action => 'index'
     else
       flash[:notice] = "Gruppe konnte nicht angelegt werden"
-      render :action => "new"
-      #redirect_to :action => 'new'
+      redirect_to :action => 'new'
     end
   end
   
