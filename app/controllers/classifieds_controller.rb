@@ -1,0 +1,2 @@
+class ClassifiedsController < ApplicationController
+end
