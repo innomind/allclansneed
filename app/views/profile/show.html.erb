@@ -1,16 +1,40 @@
-<%= link_to "edit", :action => "edit" %><br>
-vorname: <%= @profile.firstname %> <br>
-nachname: <%= @profile.lastname %> <br><br>
+BILD
+
+<% if @profile.user == @current_user %>
+  <h3>Dies bist du selber</h3>
+  <%= link_to "Profile bearbeiten", :action => "edit" %><br>
+<% end %>
+<br />
+Vorname: <%= @profile.firstname %> <br />
+Nachname: <%= @profile.lastname %> <br />
 
 <h3>Squads</h3>
 <% @profile.user.squads.each do  |s| %>
-    <%= s.name %> 
+  <%= s.name %>
 <% end %>
 <br />
+
 <h3>Gruppen</h3>
 <% @profile.user.groups.each do  |g| %>
-    <%= show_group g %> 
-<% end %>
-  
+  <%= show_group g %> 
+<% end %>  
 <br>
+
+<h3>Verbindung</h3>
+<% if @connection == "direct" %>
+  <%= @profile.user.login %> -> <%= @current_user.login %>
+<% elsif @connection == "indirect" %>
+  <%= link_to "Freund werden", :controller => "friends", :action => "become", :id => @profile.user.id %> <br />
+  <%= @profile.user.login %> -> <%= @friend_of_both.login %> -> <%= @current_user.login %>
+<% elsif @connection == "none" %>
+  <%= link_to "Freund werden", :controller => "friends", :action => "become", :id => @profile.user.id %> <br />
+  Keine Verbindung
+<% end %>
+
+<h3>Freunde</h3>
+<% @profile.user.friends.each do  |f| %>
+  <%= show_user f %> 
+<% end %>  
+<br />
+<br />
 <%= show_comments @profile %>
