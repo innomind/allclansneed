@@ -17,8 +17,6 @@ class User < ActiveRecord::Base
   has_many :groupmemberships
   has_many :groups, :through => :groupmemberships
   
-  #before_save :encrypt_password
-  
   has_many :squad_users
   has_many :user_rights, :dependent => :destroy
   has_many :squads, :through => :squad_users
@@ -100,7 +98,8 @@ class User < ActiveRecord::Base
   end
   
   def self.all_dev_users
-    find :all, :conditions => {:login => User::ACN_DEV_USERS.collect {|u| u.login}}
+    #find :all, :conditions => {:login => User::ACN_DEV_USERS.collect {|u| u.login}}
+    find :all, :conditions => {:login => User.acn_dev_users.collect {|u| u.login}}
   end
 
   def rights

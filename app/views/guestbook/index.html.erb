@@ -1,13 +1,15 @@
-<h1>Guestbook</h1>
+<h1>Gästebuch</h1>
 
-<p id="add_link"><%= link_to_function("Add a Entry",
+<p id="add_link"><%= link_to_function("Eintrag hinzufügen",
 	"Element.remove('add_link');Element.show('add_guestbook')")%>
 </p>
 
 <div id="add_guestbook" style="display:none;">
 	<% form_remote_tag :url => {:action => 'new'}, :html => {:id => 'guestbook_form'} do%>
 		Name: <%= text_field :guestbooks, "name" %><br>
-		entry: <%= text_area :guestbooks, "entry", :rows => 2, :cols => 25 %>
+                Email: <%= text_field :guestbooks, "email" %><br>
+                Url: <%= text_field :guestbooks, "url" %><br>
+		Eintrag: <%= text_area :guestbooks, "entry", :rows => 2, :cols => 25 %>
 		<%= submit_tag 'Add' %>
 	<% end %>
 </div>
