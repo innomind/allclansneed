@@ -18,7 +18,7 @@ class Clan < ActiveRecord::Base
     else if opt[:through] == :site
         site_members
       else
-      nil
+        nil
       end
     end
   end

@@ -3,7 +3,7 @@ class CreateClassifieds < ActiveRecord::Migration
     create_table :classifieds do |t|
       t.string :name
       t.text :description
-
+      t.belongs_to :user
       t.timestamps
     end
   end

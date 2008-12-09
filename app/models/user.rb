@@ -13,6 +13,7 @@ class User < ActiveRecord::Base
   has_many :clanwars
   has_many :polls
   has_many :poll_results
+  has_many :classifieds
   
   has_one :profile
   

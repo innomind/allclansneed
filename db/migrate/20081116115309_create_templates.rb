@@ -3,8 +3,6 @@ class CreateTemplates < ActiveRecord::Migration
     create_table :templates do |t|
       t.string :name
       t.text :description
-      
-      
       t.timestamps
     end
   end

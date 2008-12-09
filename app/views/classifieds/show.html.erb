@@ -1,0 +1,6 @@
+Titel: <%= @classified.name %><br />
+Von: <%= @classified.user.login %><br />
+Beschreibung: <%= @classified.description %><br />
+
+<h2>Kommentare</h2>
+<%= show_comments @classified %>

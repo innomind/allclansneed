@@ -1,0 +1,8 @@
+<h1>Create a new Classified</h1>
+
+<% error_handling_form_for :classified, @classified, :url => {:action => "create", :id => params[:id]}, :html => { :multipart => false } do |form| %>
+  <%= form.text_field :name, :label => "Titel" %>
+  <%= form.text_area :description, :label => "Beschreibung" %>
+  
+  <%= form.submit "abschicken" %>
+<% end %>
