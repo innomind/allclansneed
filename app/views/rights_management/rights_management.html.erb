@@ -1,12 +1,4 @@
 <h2>rights management</h2>
-<%if flash[:notice]%><p style="color: green"><%= flash[:notice] %></p>
-<%else%>
-  <p>&nbsp;</p>
-<%end%>
-<%if flash[:error]%><p style="color: red"><%= flash[:error] %></p>
-<%else%>
-  <p>&nbsp;</p>
-<%end%>
 
 <%form_tag :controller => 'rights_management' do %>
   <div style="float:left">

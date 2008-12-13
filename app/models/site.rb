@@ -36,9 +36,14 @@ class Site < ActiveRecord::Base
   #areas = self.template.template_areas.select {|ta| ta.internal_name == ta_name.to_s}
   #areas = TemplateArea.find :all, :conditions => {:template_id => self.template_id, :internal_name => ta_name}
   
-  def get_boxes ta_name
-    areas = TemplateArea.all :conditions => {:internal_name => ta_name.to_s}
-    TemplateBox.all :conditions => ["site_id = ? AND template_area_id IN (?)", self.id, areas]
+  def self.get_boxes_for intern_name, template_id
+    area = TemplateArea.find :first, :conditions => {:internal_name => intern_name, :template_id => template_id},
+                            :joins => [:template_boxes]
+    #TemplateBox.find_for_site :all, 
+     #             :conditions => { :template_area_id => area}, 
+      #            :include => [:template_box_type],
+       #           :order => "position ASC"
+    area.template_boxes
   end
   
   def get_box_hash

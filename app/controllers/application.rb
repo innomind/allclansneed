@@ -2,12 +2,9 @@
 # Likewise, all the methods added will be available for all controllers.
 
 class ApplicationController < ActionController::Base
-  ####TEST
 
   helper :all # include all helpers, all the time
-  #layout 'standard'
   layout 'dnp'
-  #model :account
   # See ActionController::RequestForgeryProtection for details
   # Uncomment the :secret if you're not using the cookie session store
   #protect_from_forgery  :secret => 'b4966102579ebc6ad039fe761a621b88'
@@ -47,11 +44,11 @@ class ApplicationController < ActionController::Base
     #some useful variables
     @logged_in = !session['user'].nil?
     session['error_objects'] = []
+    @user = current_user
     
     # rights
     needed = self.class::ACTION_ACCESS_TYPES
     action = params[:action].to_sym
-    #controller = params[:controller].to_sym
     
     right = needed[action].nil? ? self.class::CONTROLLER_ACCESS : needed[action]
     return if right == PUBLIC
@@ -59,26 +56,18 @@ class ApplicationController < ActionController::Base
     
     denied_msg = RAILS_ENV == "production" ? "access denied!" :  "access denied: you don't have right -> #{verbose_right right}"
     render :text => denied_msg
-    
-=begin
-    unless levels == {}
-      request = :"#{params[:action]}"
-      req_level = levels[request].nil? ? levels[:all] : levels[request]
-      unless req_level.nil?
-        if user_has_right_ge? req_level
-          return
-        else
-          render :text => 'access denied'
-        end
-      end
-    end
-=end
   end
   
   def init_areas
-    @area_list = TemplateArea.find(:all, :select => "internal_name", :conditions => {:template_id => current_site.template_id})
+    @template_areas = TemplateArea.find :all, 
+                          :conditions => {:template_id => current_site.template_id}, 
+                          :include => [ :template_boxes => 
+                                            [ :template_box_type, 
+                                             {:navigations => :navigation_template} ]
+                                       ],
+                          :order => "template_boxes.position, navigations.position"
   end
-
+  
   #deprecated, don't use
   def current_site_id
     $site_id
@@ -127,7 +116,6 @@ class ApplicationController < ActionController::Base
     end
   end
   
-  
   def user_has? right
     return false if user_is_guest?
     user_right = current_user.local_right
@@ -159,5 +147,9 @@ class ApplicationController < ActionController::Base
     User.constants.select{ |c| c =~ /MEMBER|RIGHT|SITE|PUBLIC|PRIVATE/ }.each do |r|
       return r if (eval "User::#{r}") == right
     end
+  end
+  
+  def is_portal?
+    current_site.is_portal?    
   end
 end

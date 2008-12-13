@@ -1,10 +1,7 @@
 class GuestbookController < ApplicationController
   
   def index
-    #@guestbook = Guestbook.find(:all, :order => "created_at DESC")
-    @guestbook = Guestbook.show_model(params[:page], $site_id)
-    #@guestbook = Guestbook.find_for_site(:all)
-    #@guestbook = test(:all)
+    @guestbook = Guestbook.paginate_for_site
   end
   
   def new
@@ -17,17 +14,17 @@ class GuestbookController < ApplicationController
   end
   
   def delete
-    @guestbook = Guestbook.find(params[:id])
+    @guestbook = Guestbook.find_for_site(params[:id])
     @guestbook.destroy
     return if request.xhr?
     render :nothing, :status => 200
   end
   
   def add_comment
-    @guestbook = Guestbook.find(params[:id])
+    @guestbook = Guestbook.find_for_site(params[:id])
     @guestbook.update_attribute(:comment, params[:guestbooks][:comment])
     @guestbook.update_attribute(:comment_author_id, current_user_id)
-    redirect_to :action => "list"
+    redirect_to :action => "index"
     #return if request.xhr?
   end
 end

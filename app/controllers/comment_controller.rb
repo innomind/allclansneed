@@ -1,13 +1,6 @@
 class CommentController < ApplicationController
   #uses_tiny_mce
-  def index
-    
-  end
-  
-  def new
-    
-  end
-  
+
   def create
     @comment = Comment.new(params[:comment])
     @comment.commentable_id = params[:id]
@@ -20,15 +13,4 @@ class CommentController < ApplicationController
     end
   end
   
-  def edit
-    
-  end
-  
-  def update
-    
-  end
-  
-  def delete
-    
-  end
 end

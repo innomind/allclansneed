@@ -1,6 +1,5 @@
 class RightsManagementController < ApplicationController
   CONTROLLER_ACCESS = SITE_MEMBER
-  layout 'standard'
   
   before_filter :init_params
   

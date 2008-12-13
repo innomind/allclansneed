@@ -1,6 +1,12 @@
 class ProfileController < ApplicationController
+  before_filter :get_profile, :only => [:show]
+  
+  #TODO: Userliste
+  def index
+    
+  end
+  
   def show
-    @profile = Profile.find_by_user_id(params[:id])
     @current_user = current_user
     
     if @profile.user != current_user
@@ -29,6 +35,17 @@ class ProfileController < ApplicationController
        redirect_to :action => "index", :id => @profile.user_id
     else
       render :action => "edit"
+    end
+  end
+  
+  protected
+  
+  def get_profile
+    if is_portal?
+      @profile = Profile.find_by_user_id(params[:id])
+    else
+      #TODO nur user für diese Seite anzeigen
+      @profile = Profile.find_by_user_id(params[:id])
     end
   end
 end

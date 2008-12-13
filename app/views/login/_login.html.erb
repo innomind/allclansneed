@@ -1,11 +1,8 @@
-
-<% if flash[:notice] %><div style="background:yellow;"><%= flash[:notice] %></div><% end %>
-
 <%unless @logged_in%>
   <br/>
 
 
-  <% form_tag 'login' do -%>
+  <% form_tag :action => 'login' do -%>
     <div>
       <%= label_tag 'nick' %>
       <%= text_field_tag 'nick' %>
@@ -18,8 +15,6 @@
     <br/>
     <%= submit_tag 'log in' %>
   <%end%>
-
-
 
   <br/>
   <%= link_to 'account erstellen', :action => 'create' %>

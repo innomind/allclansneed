@@ -56,6 +56,7 @@ class ClanManagementController < ApplicationController
     
     #TASK: move
     if (task == 'move ->' || task == '<- move')
+      debugger
       unless @member.nil?
         if (task == 'move ->')? 
             Squad.move_user(@member, @squad1, @squad2) : 
@@ -144,10 +145,13 @@ class ClanManagementController < ApplicationController
   
   private
   
-  
-  #TODO: get clan by id
   def init_clan
-    @clan  = Clan.find_for_site :first
+    if is_portal?
+      #TODO: Rechteüberprüfung
+      @clan = Clan.find_by_id params[:id]
+    else
+      @clan  = Clan.find_for_site :first
+    end
     if @clan.nil?
       render :text => 'no clan given'+'  '+params.inspect
       return

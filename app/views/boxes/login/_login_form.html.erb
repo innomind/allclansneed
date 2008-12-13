@@ -1,0 +1,14 @@
+  <% form_tag :controller => "login", :action => 'login' do %>
+    <div>
+      <%= label_tag 'nick' %>
+      <%= text_field_tag 'nick' %>
+    </div>
+    <div>
+      <%= label_tag 'password' %>
+      <%= password_field_tag 'password' %>
+    </div>
+    <%= submit_tag 'log in' %>
+  <%end%>
+
+  <br/>
+  <%= link_to 'account erstellen', :action => 'create' %>

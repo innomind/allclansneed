@@ -14,15 +14,14 @@ module ApplicationHelper
     form_for(record_or_name_or_array, *args, &proc)
   end
   
-  def template_boxes_for intern_name
-    #area = TemplateArea.find(:all, :conditions => { :intern_name => intern_name})
+  def get_boxes_for internal_name
+    @template_areas.find{|a| a.internal_name == internal_name}.template_boxes
   end
   
-  #popup
-  #def popup(partial, popup_space)
-  def test123
-    #@template.alert "hallo :-)"
-  end    
+  def create_box box
+    render :partial => "boxes/#{box.template_box_type.internal_name}/show_loader", 
+           :locals => {:box => box}
+  end
   
   def username(user)
     link_to user.login, :controller => "profile", :action => "index", :id => user.id
@@ -95,4 +94,11 @@ module ApplicationHelper
       stylesheet_link_tag('calendar')
     end
   end
+  
+  #Hilfe texte
+  def helper(name=nil, opts={}, &proc)
+    tooltip name, opts, &proc
+  end
+  
+
 end

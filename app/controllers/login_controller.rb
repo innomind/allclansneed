@@ -1,5 +1,4 @@
 class LoginController < ApplicationController
-  layout 'standard'
   
   ACTION_ACCESS_TYPES = {
     :test1 => SITE_MEMBER,
@@ -18,11 +17,19 @@ class LoginController < ApplicationController
         put_rights_into_session usr
         session['']
         @logged_in = true
+        flash.now[:notice] = 'login success'
       else
         flash.now[:notice] = 'login failed'+' for "'+params[:nick]+'"'
       end
-      
+    else
+      flash.now[:error] = 'no such nick'
     end
+    render :action => 'index'
+  end
+  
+  def logout
+    reset_session
+    @logged_in = false
     render :action => 'index'
   end
   

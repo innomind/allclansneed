@@ -33,70 +33,39 @@
 	  <div id="header">
 		  <div id="innerheader">
 			  <h1><span>Site Created by Knightmare @ ClanTemplates.com</span></h1>
-			  <%= template_boxes_for "topnav" %>
-			  <ul>
-				  <li><a href="index.html">Home</a></li>
-				  <li><a href="/forums/">Forums</a></li>
-				  <li><a href="coverage.html">Coverage</a></li>
-				  <li><a href="files.html">Files</a></li>
-				  <li><a href="media.html">Media</a></li>
-				  <li><a href="sponsors.html">Sponsors</a></li>
-				  <li><a href="features.html">features</a></li>
-				  <li><a href="scene.html">scene</a></li>
-				</ul>
-      </div>
-		</div>
+			  <% get_boxes_for("topnav").each do |b| %>
+                              <%= create_box b %>
+                          <% end %>
+
+                </div>
+	</div>
 		<div id="content">
 		  <div class="side_column">
-			  <h1>Current<small>Headlines</small></h1>
-			  <ul>
-				  <li>Consectetuer adipiscing elit.</li>
-				  <li>Aliquam consectetuer elit eu lorem.</li>
-				  <li>Sed pulvinar accumsan lorem.</li>
-				  <li>Quisque porta ligula quis dui.</li>
-				  <li>Donec sagittis euismod massa.</li>
-				  <li>Fusce <a href="#">condimentum</a> est non dolor.</li>
-			  </ul>
-			  <h1>Search<small>Site</small></h1>
-			  <form action="#" method="post">
-				  <p>
-				    Enter Search String:
-				    <input type="text" class="text" name="search" value="Search" /><br />
-				    <input type="submit" class="button" value="suchen" />
-				  </p>
-			  </form>
-			  <h1>Official<small>Sponsors</small></h1>
-        <%= image_tag "dnp/sponsor_image_2.gif" %>
-			  <%= image_tag "dnp/sponsor_image_1.gif" %>
+                        <% get_boxes_for("rechte_seite").each do |b| %>
+                          <h1><small><%= b.name %></small></h1>
+                          <%= create_box b %>
+                        <% end %>
 		  </div>
 		  <!-- END LEFT COLUMN -->
 		  <div id="middle" >
 			  <div id="breadcrum">Home > Demos >> DOD</div>
 			    <h1>Welcome to OurSite</h1>
 			    <!-- ENTER MAIN CONTENT HERE -->
-			    <p style="color: green"><%= flash[:notice] %></p>
+                            
+<%if flash[:notice]%><p style="color: green"><%= flash[:notice] %></p>
+<%end%>
+<%if flash[:error]%><p style="color: red"><%= flash[:error] %></p>
+<%end%>
 			    <div class="content">
 			      <%= yield %>
 			    </div>
 			    <!-- END MAIN CONTENT -->
 		    </div>
 		    <div class="side_column" id="right">
-			    <h1>Member<small>Access</small></h1>
-			    <form action="#" method="post">
-				    <p>
-				      <input type="text" class="text" name="uname" value="Username" /><br />
-				      <input type="password" class="text" name="upass" value="Password" /><br />
-				      <label for="remember"><input type="checkbox"  class="check" id="remember" name="remember" value="1" /> Remember Me</label>
-				      <input type="submit" class="button" value="abschicken" />
-				    </p>
-			    </form>
-			    <h1>Current<small>Roster</small></h1>
-			    <div id="roster"></div>
-			    <h1>Heading<small>1</small></h1>
-			    <ul>
-				    <li>Unordered List </li>
-				    <li>List item </li>
-		      </ul>
+		        <% get_boxes_for("linke_seite").each do |b| %>
+                          <h1><small><%= b.name %></small></h1>
+                          <%= create_box b %>
+                        <% end %>
 		    </div>
 	    </div>
       <div id="footer">

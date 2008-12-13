@@ -24,7 +24,7 @@ class FriendsController < ApplicationController
     if @current_user != @want_friend_with
       current_user.request_friendship_with @want_friend_with
     end
-    
+    render :text => "test"
     #user per mail benachrichtigen
     #muss noch implementiert werden
   end

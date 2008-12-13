@@ -1,0 +1,5 @@
+<% unless @logged_in %>
+    <%=  render :partial => "boxes/login/login_form" %>
+<% else %>
+    <%= render :partial => "boxes/login/intern_box" %>
+<% end %>

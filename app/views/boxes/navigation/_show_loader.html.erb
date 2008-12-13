@@ -1,0 +1,6 @@
+<ul id=<%= dom_id(box) %>>
+  <%= render :partial => "boxes/navigation/show", 
+             :collection => box.navigations
+  %>
+</ul>
+<%= sortable_element(dom_id(box)) %>
