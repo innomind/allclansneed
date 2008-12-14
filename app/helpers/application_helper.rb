@@ -15,7 +15,9 @@ module ApplicationHelper
   end
   
   def get_boxes_for internal_name
-    @template_areas.find{|a| a.internal_name == internal_name}.template_boxes
+    area = @template_areas.find{|a| a.internal_name == internal_name}
+    return(Array('')) if area.nil?
+    area.template_boxes
   end
   
   def create_box box
@@ -100,5 +102,5 @@ module ApplicationHelper
     tooltip name, opts, &proc
   end
   
-
+  
 end

@@ -1,0 +1,4 @@
+<% form_remote_tag :url => {:controller  => 'template_areas', :action => 'create', :id => params[:id]} do%>
+    <%= select "boxes", "id", @boxes %>
+    <%= submit_tag 'Add' %>
+<% end %>

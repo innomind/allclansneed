@@ -58,14 +58,13 @@ class ApplicationController < ActionController::Base
     render :text => denied_msg
   end
   
-  def init_areas
-    @template_areas = TemplateArea.find :all, 
-                          :conditions => {:template_id => current_site.template_id}, 
-                          :include => [ :template_boxes => 
-                                            [ :template_box_type, 
-                                             {:navigations => :navigation_template} ]
-                                       ],
-                          :order => "template_boxes.position, navigations.position"
+  #initialize areas 
+  def init_areas force = false
+    if not request.xhr? or force
+    #unless request.xhr? and force
+      #list of all template areas
+      @template_areas = TemplateArea.get_areas_for_site current_site
+    end                  
   end
   
   #deprecated, don't use

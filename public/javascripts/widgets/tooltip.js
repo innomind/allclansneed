@@ -9,6 +9,7 @@ function toggleTooltip(event, element) {
   element.toggle();
 }
 */
+  
  
 // tooltip widget with mouseover
 function positionTooltip(event, element){
@@ -41,4 +42,13 @@ function toggleTooltip(event, element) {
   element.style.top = __y + 5;  
   element.style.left = __x - 40;
   element.toggle();
+  if (element.style.display == "none") {
+      element.firstChild.innerHTML = "<img src='/images/loading.gif' alt='Loading'/>"
+  }      
+}
+
+function showAjaxTooltip(id, url) {
+    if ($('tooltip_' + id).style.display == "none") {
+        new Ajax.Updater('tooltip_content_' + id, url, {asynchronous:true, evalScripts:true});
+    }
 }

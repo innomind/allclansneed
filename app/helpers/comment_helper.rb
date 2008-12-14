@@ -5,6 +5,6 @@ module CommentHelper
   end
   
   def get_comments model
-    model.comments.paginate(:page => params[:page], :order => 'created_at DESC', :per_page => @per_page)
+    model.comments.paginate_for_site
   end
 end
