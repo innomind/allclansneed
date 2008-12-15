@@ -1,3 +1,15 @@
-<li id=<%= dom_id(template_box) %>>
-  <%= template_box.name %>
+<li id=<%= dom_id(template_box, :edit) %>>
+    <%= template_box.name %> <i><%= template_box.template_box_type.name %></i>
+    <% tooltip image_tag("textfield_rename.png"), :show_mode => "ajax", :update_url => {:action => "edit", :template_box_id => template_box.id}, :id => dom_id(template_box, :rename) do  %>
+    <% end %>
+
+    <% tooltip image_tag("application_go.png"), :show_mode => "ajax", :update_url => {:action => "move", :template_box_id => template_box.id, :template_area_id => template_box.template_area_id}, :id => dom_id(template_box, :move) do  %>
+    <% end %>
+
+    <% if template_box.template_box_type.editable? %>
+      <% tooltip image_tag("application_edit.png"), :show_mode => "ajax", :update_url => {:action => "edit", :template_box_id => template_box.id}, :id => dom_id(template_box, :edit) do  %>
+      <% end %>
+    <% end %>
+
+    <%= link_to image_tag("application_delete.png"), { :action => "delete", :template_box_id => template_box.id}, :confirm => "Soll die Box '#{template_box.name}' wirklich gelöscht werden?" %>
 </li>

@@ -1,5 +1,6 @@
 class TemplateBoxesController < ApplicationController
-  #before_filter :init_template_areas  
+  before_filter :init_template_areas
+  before_filter :init_box, :only => [:edit, :update, :do_move, :delete]
   
   def index
     
@@ -16,40 +17,82 @@ class TemplateBoxesController < ApplicationController
   end
   
   def create
+    @area = TemplateArea.find_by_id params[:template_area_id].to_i
+    unless @area.is_addable?
+      flash[:error] = @area.name + "darf nur eine Box haben"
+      redirect_to :action => "index" and return
+    end
+    
     @box = TemplateBox.new(params[:template_box])
     @box.site = current_site
     @box.template_area_id = params[:template_area_id]
     if @box.save
       redirect_to :action => "index"
+    else
+      #TODO DRY it
+      flash[:error] = @box.errors.full_messages.join("<br>")
+      redirect_to :action => "index"
     end
   end
   
   def edit
-    render :layout => false, :text => "hallo"
+    render :layout => false
   end
 
   def update
-    
+    @box.name = params[:template_box][:name]
+    if @box.save
+      redirect_to :action => "index"
+    else
+      #TODO DRY it
+      flash[:error] = @box.errors.full_messages.join("<br>")
+      redirect_to :action => "index"
+    end
   end
 
+  #TODO Security lack man kann boxen von anderen seiten sortieren
   def update_positions
-    params["template_area_" + params[:id]].each_with_index do |id, position|
+    params["edit_template_area_#{params[:id]}"].each_with_index do |id, position|
       TemplateBox.update(id, :position => position)
     end
-    debugger
-    init_areas true
-    
+    init_template_areas
     render :layout => false,
-           :partial => "template_area", 
-           :object => @template_areas.find{|a| a.id == params[:id].to_i}
+           :partial => "template_area",           
+           :object => @template_areas.find{|a| a.id == params[:id].to_i} #TODO Dry it
+  end
+  
+  def move
+    @areas = @template_areas.
+                select{|a| a.is_addable? and 
+                              not(a.id == params[:template_area_id].to_i) }.
+                collect{|a| [a.name, a.id]}
+    render :layout => false
+  end
+  
+  def do_move
+    @box.update_attribute(:template_area_id, params[:template_box][:template_area_id].to_i)
+    @box.update_attribute(:position, nil)
+    redirect_to :action => "index"
+  end
+  
+  def delete
+    @box.destroy
+    redirect_to :action => "index"
   end
   
   private
   
-  def init_template_areas
-      init_areas true if request.xhr?
+  def init_box
+    @box = TemplateBox.find_for_site_by_id params[:template_box_id].to_i
   end
   
+  def init_template_areas
+    init_areas true
+    @all_areas = TemplateArea.find_all_by_template_id current_site.template_id
+    @template_areas = @template_areas.concat(@all_areas).uniq
+  end
+
+  #not used anymore - del?
   def get_area
     template_area = TemplateArea.find :first, 
                       :conditions => ["template_id = ? AND template_areas.id = ? AND tempalte_boxes.site_id = ?",
@@ -62,6 +105,7 @@ class TemplateBoxesController < ApplicationController
   end
   
   def get_box_type_list
+    init_template_areas
     b = Array('')
     @template_areas.each {|a| a.template_boxes.each {|box| b.push box.template_box_type_id}}
     b.uniq

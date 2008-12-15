@@ -1,9 +1,15 @@
 <div id="list_<%= dom_id(template_area) %>">  
   <b><%= template_area.name %></b> 
-<%# tooltip image_tag("application_add.png"), :show_mode => "ajax", :update_url => {:action => "new", :template_area_id => template_area.id}, :id => dom_id(template_area) do  %>
-<%# end %>
-  <ul id=<%= dom_id(template_area) %>>
+
+<% if template_area.is_addable? %>
+    <% tooltip image_tag("application_add.png"), :show_mode => "ajax", :update_url => {:action => "new", :template_area_id => template_area.id}, :id => dom_id(template_area) do  %>
+    <% end %>
+<% else %>
+  <i><small>darf nur eine Box beinhalten</small></i>
+<% end %>
+
+  <ul id=<%= dom_id(template_area, :edit) %>>
     <%= render :partial => "template_box", :collection => template_area.template_boxes %>
   </ul>
-  <%= sortable_element(dom_id(template_area), :update => "list_#{dom_id(template_area)}", :url => {:action => :update_positions, :id => template_area.id}) %>
+  <%= sortable_element(dom_id(template_area, :edit), :update => "list_#{dom_id(template_area)}", :url => {:action => :update_positions, :id => template_area.id}) %>
 </div>

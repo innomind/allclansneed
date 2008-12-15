@@ -1,2 +1,4 @@
-<h1>TemplateBoxes#edit</h1>
-<p>Find me in app/views/template_boxes/edit.html.erb</p>
+<% error_handling_form_for @box, :url => {:action => "update", :template_box_id => params[:template_box_id]} do |f| %>
+      <%= f.text_field :name %>
+      <%= f.submit 'ändern' %>
+<% end %>

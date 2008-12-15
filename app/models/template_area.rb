@@ -18,4 +18,9 @@ class TemplateArea < ActiveRecord::Base
                    ],
       :order => "template_areas.position, template_boxes.position, navigations.position"
   end
+  
+  #returns true if a box can be added to that area
+  def is_addable?
+    self.multiple_boxes_allowed? ? true : self.template_boxes.empty?
+  end
 end

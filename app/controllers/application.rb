@@ -23,7 +23,7 @@ class ApplicationController < ActionController::Base
   SITE_MEMBER = User::SITE_MEMBER
   COMPONENT_RIGHT_OWNER = User::COMPONENT_RIGHT_OWNER
   
-  before_filter :init_site, :init_rights, :pagination_defaults, :init_areas #:init_site_id#, :check_query
+  before_filter :init_site, :init_rights, :init_areas #:init_site_id#, :check_query
   
   protected
     
@@ -131,12 +131,6 @@ class ApplicationController < ActionController::Base
       session['error_objects'].push obj
     end
     saved
-  end
-  
-  def pagination_defaults
-    @page = (params[:page] || 1).to_i
-    @page = 1 if @page < 1
-    @per_page = (10 if params[:per_page].nil?).to_i
   end
 
   # since these consts should only be visible for development purposes

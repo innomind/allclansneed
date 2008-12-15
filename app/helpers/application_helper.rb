@@ -98,9 +98,8 @@ module ApplicationHelper
   end
   
   #Hilfe texte
-  def helper(name=nil, opts={}, &proc)
+  def help_text(name=nil, opts={}, &proc)
     tooltip name, opts, &proc
   end
-  
   
 end

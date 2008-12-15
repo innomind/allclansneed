@@ -5,4 +5,6 @@ class TemplateBox < ActiveRecord::Base
   belongs_to :template_box_type
   
   has_many :navigations
+  
+  validates_presence_of :name
 end
