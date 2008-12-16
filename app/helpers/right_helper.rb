@@ -6,7 +6,7 @@ module RightHelper
   def access_link name, target, html_options = nil
     action = target[:action]
     controller_name = target[:controller]
-    controller_name = urlize_controller @controller.class
+    controller_name = urlize_controller @controller.class if controller_name.nil?
     if accessible? target
       link_to name, {:controller => controller_name, :action => action}, html_options
     end
