@@ -8,7 +8,7 @@ Clan: <%= @clan.name  %>
       <%=f.text_field :name %><br/>
     
       <%=f.submit 'Squad erstellen'%> 
-      <% helper do %>
+      <% help_text do %>
         erstellt einen squad
       <% end %>
     <%end%>
@@ -38,7 +38,7 @@ Clan: <%= @clan.name  %>
         </div>
         <div style="float:left">
           <%= submit_tag 'Löschen'%> <%#'[x]', {:name => 'del'} %>
-      <% helper do %>
+      <% help_text do %>
         löscht einen member
       <% end %>
         </div>

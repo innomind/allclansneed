@@ -4,15 +4,9 @@
 class ApplicationController < ActionController::Base
 
   helper :all # include all helpers, all the time
-  layout 'dnp'
-  # See ActionController::RequestForgeryProtection for details
-  # Uncomment the :secret if you're not using the cookie session store
-  #protect_from_forgery  :secret => 'b4966102579ebc6ad039fe761a621b88'
-  
-  # See ActionController::Base for details 
-  # Uncomment this to filter the contents of submitted sensitive data parameters
-  # from your application log (in this case, all fields with names like "password"). 
-  # filter_parameter_logging :password
+  #layout 'dnp'
+  layout 'standard'
+
   
   #Access constants
   CONTROLLER_ACCESS = 0
@@ -23,57 +17,39 @@ class ApplicationController < ActionController::Base
   SITE_MEMBER = User::SITE_MEMBER
   COMPONENT_RIGHT_OWNER = User::COMPONENT_RIGHT_OWNER
   
-  before_filter :init_site, :init_rights, :init_areas #:init_site_id#, :check_query
+  before_filter :init, :pagination_defaults, :init_areas # :check_query
+  
+
+  #make session available in static (class) context
+  class_inheritable_accessor :static_session, :current_site
+  
   
   protected
+
+
+  def self.user_has_right_for? action
+    needed = self::ACTION_ACCESS_TYPES
+    action = action.to_sym
+    right = needed[action].nil? ? self::CONTROLLER_ACCESS : needed[action]
     
-  #the global variable site_id should be the ONLY exception in usage of global vars
-  #we should try to remove even this, as soon we have found a proper alternative
-  def init_site
-    if params[:site_id] == ""
-      render :text => 'strange request: site_id set, but empty'
-      return
-    end
-    $site_id = params[:site_id].nil? ? 1 : params[:site_id]
-    ####FIXME  ahhhhh blöööödddd!!!  ---- wird in acts_as_delegatable als std wert gebraucht
-    $page = params[:page].nil? ? 1 : params[:page]
-    @site = Site.find_by_id $site_id
+    return true if right == PUBLIC
+    return true if user_has? right
+    false
   end
   
-  def init_rights
-    #some useful variables
-    @logged_in = !session['user'].nil?
-    session['error_objects'] = []
-    @user = current_user
-    
-    # rights
-    needed = self.class::ACTION_ACCESS_TYPES
-    action = params[:action].to_sym
-    
-    right = needed[action].nil? ? self.class::CONTROLLER_ACCESS : needed[action]
-    return if right == PUBLIC
-    return if user_has? right
-    
-    denied_msg = RAILS_ENV == "production" ? "access denied!" :  "access denied: you don't have right -> #{verbose_right right}"
-    render :text => denied_msg
+  def init_areas
+    @template_areas = TemplateArea.find :all, 
+      :conditions => {:template_id => current_site.template_id}, 
+      :include => [ :template_boxes => 
+        [ :template_box_type, 
+        {:navigations => :navigation_template} ]
+    ],
+      :order => "template_boxes.position, navigations.position"
   end
-  
-  #initialize areas 
-  def init_areas force = false
-    if not request.xhr? or force
-    #unless request.xhr? and force
-      #list of all template areas
-      @template_areas = TemplateArea.get_areas_for_site current_site
-    end                  
-  end
-  
+
   #deprecated, don't use
   def current_site_id
     $site_id
-  end
-  
-  def current_site
-    @site
   end
   
   def logged_in?
@@ -81,7 +57,10 @@ class ApplicationController < ActionController::Base
   end
   
   def user_is_guest?
-    session['user'].nil?
+    self.class.user_is_guest?
+  end
+  def self.user_is_guest?
+    static_session['user'].nil?
   end
   
   def current_user_id
@@ -89,41 +68,15 @@ class ApplicationController < ActionController::Base
   end
   
   def current_user
-    session['user']
+    self.class.current_user
+  end
+  def self.current_user
+    static_session['user']
   end
   
   def user_belongs_to_site?
-    if session['user_sites'].nil?
-      false
-    else
-      session['user_sites'].include?(current_site_id)
-    end
-  end
-  
-  # user has right greater than/equal to level?
-  #!! deprecated !! use user_has_right?
-  def user_has_right_ge? level
-    unless user_is_guest?
-      right = UserRight.find :first, :conditions => {:site_id => current_site_id, :user_id => current_user_id}
-      if right.nil?
-        (level == LEVEL_ACN_MEMBER)
-      else
-        (right.level >= level)
-      end
-    else
-      false
-    end
-  end
-  
-  def user_has? right
-    return false if user_is_guest?
-    user_right = current_user.local_right
-    return false if user_right.nil?
-    unless right == COMPONENT_RIGHT_OWNER
-      true if (user_right.right_type & right) == right
-    else
-      true if session[:rights][current_site.id].include? self.class.to_s
-    end
+    return false if session['user_sites'].nil?
+    session['user_sites'].include?(current_site_id)
   end
   
   def save_verbose obj
@@ -132,17 +85,76 @@ class ApplicationController < ActionController::Base
     end
     saved
   end
-
-  # since these consts should only be visible for development purposes
-  # and i don't like fix lists, i search for them with simple regexps
-  # not failsafe of course
-  def verbose_right right
-    User.constants.select{ |c| c =~ /MEMBER|RIGHT|SITE|PUBLIC|PRIVATE/ }.each do |r|
-      return r if (eval "User::#{r}") == right
-    end
-  end
   
+  def pagination_defaults
+    @page = (params[:page] || 1).to_i
+    @page = 1 if @page < 1
+    @per_page = (10 if params[:per_page].nil?).to_i
+  end
+
+
   def is_portal?
     current_site.is_portal?    
   end
+  
+
+
+  ################# private #################
+  private
+
+  def init
+    init_site
+    
+    #some preparations
+    self.class.current_site = Site.find_by_id $site_id
+    self.class.static_session = session
+    @logged_in = !session['user'].nil?
+    session['error_objects'] = []
+    
+    init_access
+  end
+
+  #the global variable site_id should be the ONLY exception in usage of global vars
+  #we should try to remove even this, as soon we have found a proper alternative
+  #FIXME: please fix (and remove) or further explain the big fixme below
+  def init_site
+    if params[:site_id] == ""
+      render :text => 'strange request: site_id set, but empty'
+      return
+    end
+    $site_id = params[:site_id].nil? ? 1 : params[:site_id]
+    ####FIXME  ahhhhh blöööödddd!!!  ---- wird in acts_as_delegatable als std wert gebraucht
+    $page = params[:page].nil? ? 1 : params[:page]
+  end
+  
+  def init_access
+    return if self.class.user_has_right_for? params[:action]
+    
+    denied_msg = RAILS_ENV == "production" ? "access denied!" :  "access denied: you don't have right -> #{verbose_deny_message}"
+    render :text => denied_msg
+  end  
+
+  def self.user_has? right
+    return false if user_is_guest?
+    user_right = current_user.local_right
+    return false if user_right.nil?
+    unless right == COMPONENT_RIGHT_OWNER
+      true if (user_right.right_type & right) == right
+    else
+      true if static_session[:rights][current_site.id].include? self.to_s
+    end
+  end
+  
+  # since these consts should only be visible for development purposes
+  # and i don't like fix lists, i search for them with simple regexps
+  # not failsafe of course
+  def verbose_deny_message
+    right = self.class::ACTION_ACCESS_TYPES[params[:action].to_sym]
+    right = self.class::CONTROLLER_ACCESS if right.nil?
+    User.constants.select{ |c| c =~ /MEMBER|RIGHT|SITE|PUBLIC|PRIVATE/ }.select {|r| (eval "User::#{r}") == right}
+  end
+  
+  #this doesn't work, must use facets plugin, then a trick seems to be possible
+  #rescue NameError
+  #    eval("self.class"+$!.message[/method \`(.*)'/, 1])
 end
