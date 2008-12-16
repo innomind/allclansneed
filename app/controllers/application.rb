@@ -37,14 +37,10 @@ class ApplicationController < ActionController::Base
     false
   end
   
-  def init_areas
-    @template_areas = TemplateArea.find :all, 
-      :conditions => {:template_id => current_site.template_id}, 
-      :include => [ :template_boxes => 
-        [ :template_box_type, 
-        {:navigations => :navigation_template} ]
-    ],
-      :order => "template_boxes.position, navigations.position"
+  def init_areas force = false
+    if not request.xhr? or force
+      @template_areas = TemplateArea.get_areas_for_site current_site
+    end
   end
 
   #deprecated, don't use

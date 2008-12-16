@@ -46,7 +46,7 @@ module ApplicationHelper
       size = 100 * t.count / mid
       size = 75 if size < 75
       output << link_to(t.name, { :action  => "findByTag",
-                                  :id  => t.name},
+                dort wird automatisch immer die                   :id  => t.name},
                                   :style => "font-size: #{size}%") << " "
     end
     return output
