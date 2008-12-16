@@ -6,7 +6,5 @@
 <pre>
 <%#=YAML.dump session[:rights]%>
 <%=access_link 'ClanManagement', {:controller => 'clan_management', :action => 'index'}%>
-<%= LoginController.test %>
 <%#=YAML.dump session%>
-<%=LoginController.static_session.class.to_s%>
 </pre>

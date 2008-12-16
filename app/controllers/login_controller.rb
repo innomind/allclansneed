@@ -34,8 +34,7 @@ class LoginController < ApplicationController
     end
   
     def index
-      #render :text => static_session.inspect
-      current_user.inspect
+
     end
 
     def create
