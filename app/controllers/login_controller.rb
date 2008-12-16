@@ -1,9 +1,10 @@
 class LoginController < ApplicationController
 
     ACTION_ACCESS_TYPES = {
-      :test1 => SITE_MEMBER,
-      :test2 => COMPONENT_RIGHT_OWNER,
-      'test3' => 8
+      :test1 => ACN_MEMBER,
+      :test2 => SITE_MEMBER,
+      :test3 => COMPONENT_RIGHT_OWNER
+
     }
   
     def login
