@@ -5,6 +5,7 @@ module CommentHelper
   end
   
   def get_comments model
+    debugger
     model.comments.paginate_for_site
   end
 end

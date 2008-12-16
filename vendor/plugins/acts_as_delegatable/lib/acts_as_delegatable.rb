@@ -35,7 +35,6 @@ module ActiveRecord::Acts::ActsAsDelegatable
       private
       
       def initilize_paginate args
-        debugger
         if args.count == 0
           args = Array.new
           args[0] = Hash.new
@@ -47,7 +46,6 @@ module ActiveRecord::Acts::ActsAsDelegatable
       end
       
       def append_condition args, condition = nil
-        #TODO
         condition ||= Hash.new(:site_id => $site_id)
         created = false
         new_args = args
