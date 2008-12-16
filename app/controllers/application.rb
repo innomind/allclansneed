@@ -17,7 +17,7 @@ class ApplicationController < ActionController::Base
   SITE_MEMBER = User::SITE_MEMBER
   COMPONENT_RIGHT_OWNER = User::COMPONENT_RIGHT_OWNER
   
-  before_filter :init, :pagination_defaults, :init_areas #:init_site_id#, :check_query
+  before_filter :init, :pagination_defaults, :init_areas # :check_query
   
 
   #make session available in static (class) context
@@ -27,10 +27,8 @@ class ApplicationController < ActionController::Base
   protected
 
 
-  #comment
   def self.user_has_right_for? action
     needed = self::ACTION_ACCESS_TYPES
-    puts "--- "+self::ACTION_ACCESS_TYPES.inspect+" ---"
     action = action.to_sym
     right = needed[action].nil? ? self::CONTROLLER_ACCESS : needed[action]
     
@@ -65,11 +63,6 @@ class ApplicationController < ActionController::Base
     static_session['user'].nil?
   end
   
-  def self.test
-    #YAML.dump session
-    #session.class.to_s
-  end
-  
   def current_user_id
     session['user'].id
   end
@@ -82,23 +75,8 @@ class ApplicationController < ActionController::Base
   end
   
   def user_belongs_to_site?
-    if session['user_sites'].nil?
-      false
-    else
-      session['user_sites'].include?(current_site_id)
-    end
-  end
-  
-
-  def self.user_has? right
-    return false if user_is_guest?
-    user_right = current_user.local_right
-    return false if user_right.nil?
-    unless right == COMPONENT_RIGHT_OWNER
-      true if (user_right.right_type & right) == right
-    else
-      true if static_session[:rights][current_site.id].include? self.to_s
-    end
+    return false if session['user_sites'].nil?
+    session['user_sites'].include?(current_site_id)
   end
   
   def save_verbose obj
@@ -119,6 +97,8 @@ class ApplicationController < ActionController::Base
     current_site.is_portal?    
   end
   
+
+
   ################# private #################
   private
 
@@ -126,17 +106,17 @@ class ApplicationController < ActionController::Base
     init_site
     
     #some preparations
-    self.class.static_session = session
     self.class.current_site = Site.find_by_id $site_id
+    self.class.static_session = session
     @logged_in = !session['user'].nil?
     session['error_objects'] = []
-    #@user = self.class.current_user
     
     init_access
   end
 
   #the global variable site_id should be the ONLY exception in usage of global vars
   #we should try to remove even this, as soon we have found a proper alternative
+  #FIXME: please fix (and remove) or further explain the big fixme below
   def init_site
     if params[:site_id] == ""
       render :text => 'strange request: site_id set, but empty'
@@ -154,7 +134,17 @@ class ApplicationController < ActionController::Base
     render :text => denied_msg
   end  
 
-
+  def self.user_has? right
+    return false if user_is_guest?
+    user_right = current_user.local_right
+    return false if user_right.nil?
+    unless right == COMPONENT_RIGHT_OWNER
+      true if (user_right.right_type & right) == right
+    else
+      true if static_session[:rights][current_site.id].include? self.to_s
+    end
+  end
+  
   # since these consts should only be visible for development purposes
   # and i don't like fix lists, i search for them with simple regexps
   # not failsafe of course
@@ -165,6 +155,6 @@ class ApplicationController < ActionController::Base
   end
   
   #this doesn't work, must use facets plugin, then a trick seems to be possible
-#rescue NameError
-#    eval("self.class"+$!.message[/method \`(.*)'/, 1])
+  #rescue NameError
+  #    eval("self.class"+$!.message[/method \`(.*)'/, 1])
 end
