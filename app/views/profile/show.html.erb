@@ -2,7 +2,6 @@ BILD
 
 <% if @profile.user == @current_user %>
   <h3>Dies bist du selber</h3>
-  <%= link_to "Profile bearbeiten", :action => "edit" %><br>
 <% end %>
 <br />
 Vorname: <%= @profile.firstname %> <br />

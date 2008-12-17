@@ -161,7 +161,7 @@ module WillPaginate
       
       def method_missing_with_paginate(method, *args, &block) #:nodoc:
         # did somebody tried to paginate? if not, let them be
-        unless method.to_s.index('paginate') == 0
+        unless method.to_s.index('paginate_') == 0
           return method_missing_without_paginate(method, *args, &block) 
         end
         

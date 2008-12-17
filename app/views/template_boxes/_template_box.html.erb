@@ -7,7 +7,7 @@
     <% end %>
 
     <% if template_box.template_box_type.editable? %>
-      <% tooltip image_tag("application_edit.png"), :show_mode => "ajax", :update_url => {:action => "edit", :template_box_id => template_box.id}, :id => dom_id(template_box, :edit) do  %>
+      <% tooltip image_tag("application_edit.png"), :show_mode => "ajax", :update_url => {:controller => template_box.template_box_type.internal_name, :action => "edit_box", :template_box_id => template_box.id}, :id => dom_id(template_box, :edit) do  %>
       <% end %>
     <% end %>
 

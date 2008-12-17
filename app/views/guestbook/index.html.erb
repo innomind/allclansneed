@@ -5,13 +5,12 @@
 </p>
 
 <div id="add_guestbook" style="display:none;">
-	<% form_remote_tag :url => {:action => 'new'}, :html => {:id => 'guestbook_form'} do%>
-		Name: <%= text_field :guestbooks, "name" %>
-<br>
-                Email: <%= text_field :guestbooks, "email" %><br>
-                Url: <%= text_field :guestbooks, "url" %><br>
-		Eintrag: <%= text_area :guestbooks, "entry", :rows => 2, :cols => 25 %>
-		<%= submit_tag 'Add' %>
+	<% error_handling_remote_form_for @guestbook, :url => {:action => 'new'}, :html => {:id => 'guestbook_form'} do |f| %>
+		<%= f.text_field "name" %>
+                <%= f.text_field "email" %>
+                <%= f.text_field "url" %>
+		<%= f.text_area "entry", :rows => 2, :cols => 25 %>
+		<%= f.submit 'hinzufügen' %>
 	<% end %>
 </div>
 

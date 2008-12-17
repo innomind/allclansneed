@@ -1,5 +1,12 @@
 class EventController < ApplicationController
   
+  CONTROLLER_ACCESS = PUBLIC
+
+  ACTION_ACCESS_TYPES={
+    :new => COMPONENT_RIGHT_OWNER,
+    :create => COMPONENT_RIGHT_OWNER
+  }
+  
   def new
     @event = Event.new
   end

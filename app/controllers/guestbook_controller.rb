@@ -1,7 +1,14 @@
 class GuestbookController < ApplicationController
   
+  CONTROLLER_ACCESS = PUBLIC
+
+  ACTION_ACCESS_TYPES={
+    :delete => COMPONENT_RIGHT_OWNER,
+    :add_comment => COMPONENT_RIGHT_OWNER
+  }
+  
   def index
-    @guestbook = Guestbook.paginate_for_site
+    @guestbook = Guestbook.page_for_site
   end
   
   def new

@@ -1,11 +1,19 @@
 class ClanwarController < ApplicationController
   
+  CONTROLLER_ACCESS = COMPONENT_RIGHT_OWNER
+
+  ACTION_ACCESS_TYPES={
+    :index => PUBLIC,
+    :show => PUBLIC
+  }
+
+  
   def index
     @clanwars  = Clanwar.paginate_by_site_id(current_site_id, :page => params[:page], :order => 'played_at DESC', :per_page => @per_page)
   end
   
   def show
-    @clanwar = Clanwar.find_by_id(params[:id])
+    @clanwar = Clanwar.find_for_site_by_id(params[:id])
   end
   
   def new
@@ -28,12 +36,12 @@ class ClanwarController < ApplicationController
   end
   
   def edit
-    @clanwar = Clanwar.find_by_id(params[:id])
+    @clanwar = Clanwar.find_for_site_by_id(params[:id])
     @squads = Clan.find_for_site(:first).squads
   end
   
   def update
-    @clanwar = Clanwar.find_by_id(params[:id])
+    @clanwar = Clanwar.find_for_site_by_id(params[:id])
     if @clanwar.update_attributes(params[:clanwar])
       redirect_to :action => 'index'
     else

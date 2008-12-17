@@ -16,6 +16,7 @@ module RightHelper
     #controller_name = target[:controller]
     controller_name = urlize_controller @controller.class if controller_name.nil?
     check = {:action => action, :controller => controller_name}
+    target[:path] ||= check
     if accessible? check
       #link_to name, {:controller => controller_name, :action => action}, html_options
       link_to name, target[:path], html_options
@@ -42,6 +43,7 @@ module RightHelper
     else
       controller_class = @controller.class
     end
+    debugger
     controller_class.user_has_right_for? action
   end
   

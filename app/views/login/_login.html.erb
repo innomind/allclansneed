@@ -1,19 +1,10 @@
 <%unless @logged_in%>
   <br/>
 
-
-  <% form_tag :action => 'login' do -%>
-    <div>
-      <%= label_tag 'nick' %>
-      <%= text_field_tag 'nick' %>
-    </div>
-    <br/>
-    <div>
-      <%= label_tag 'password' %>
-      <%= password_field_tag 'password' %>
-    </div>
-    <br/>
-    <%= submit_tag 'log in' %>
+  <% error_handling_form_for :login, :url => { :action => 'login' } do |f|%>
+    <%= f.text_field 'nick' %>
+    <%= f.password_field 'password' %>
+    <%= f.submit 'log in' %>
   <%end%>
 
   <br/>

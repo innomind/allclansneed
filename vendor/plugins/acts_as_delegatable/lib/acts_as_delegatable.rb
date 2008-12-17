@@ -16,7 +16,7 @@ module ActiveRecord::Acts::ActsAsDelegatable
       def self.method_missing method, *args
         if find = method.to_s.match(/^find_for_site_(\w*)$/)
           self.send "find_#{find[1]}".to_sym, *append_condition(args)
-        elsif find = method.to_s.match(/^paginate_for_site_(\w*)$/)
+        elsif find = method.to_s.match(/^page_for_site_(\w*)$/)
           self.send "paginate_#{find[1]}".to_sym, initilize_paginate(args)
         else
           super
@@ -28,21 +28,23 @@ module ActiveRecord::Acts::ActsAsDelegatable
         find(*new_args)
       end
       
-      def self.paginate_for_site *args
+      def self.page_for_site *args
         paginate(*initilize_paginate(args))
       end
       
       private
       
+      #TODO
       def initilize_paginate args
+        debugger
         if args.count == 0
-          args = Array.new
-          args[0] = Hash.new
+          new_args = Array.new
+          new_args[0] = Hash.new
         end
-        args[0][:page] ||= $page
-        args[0][:per_page] ||= 10
-        args[0][:order] ||= 'created_at DESC'
-        append_condition(args)
+        new_args[0][:page] ||= $page
+        new_args[0][:per_page] ||= 10
+        new_args[0][:order] ||= 'created_at DESC'
+        append_condition(new_args)
       end
       
       def append_condition args, condition = nil

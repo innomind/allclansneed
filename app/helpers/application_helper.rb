@@ -5,13 +5,21 @@ module ApplicationHelper
   include TagsHelper
   
   def error_handling_form_for(record_or_name_or_array, *args, &proc)
+    form_for(record_or_name_or_array, *append_builder(args), &proc)
+  end
+  
+  def error_handling_remote_form_for(record_or_name_or_array, *args, &proc)
+    remote_form_for(record_or_name_or_array, *append_builder(args), &proc)
+  end
+  
+  def append_builder (args)
     options = args.detect { |argument| argument.is_a?(Hash) }
     if options.nil?
       options = {:builder => ErrorHandlingFormBuilder}
       args << options
     end 
     options[:builder] = ErrorHandlingFormBuilder unless options.nil?
-    form_for(record_or_name_or_array, *args, &proc)
+    args
   end
   
   def get_boxes_for internal_name

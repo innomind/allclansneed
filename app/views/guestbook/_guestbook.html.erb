@@ -6,17 +6,27 @@
             <%= link_to image_tag("world_link.png", :border => 0), {:url => guestbook.url}, {:target => "_new"} unless guestbook.url.blank? %>
         </h2>
 	<%= guestbook.entry %><br>
+          
+        <%  if accessible?({:action => 'add_comment'}) and not guestbook.comment %>
 	<%= link_to_function image_tag("comment_add.png", :border => 0),
 				"Element.toggle('add_comment_#{guestbook.id}')" %>
-        <%= link_to_remote image_tag("delete.png", :border => 0), :url => {:action => "delete", :id => guestbook.id} %>
-	<% if guestbook.comment %>
+        <% end %>
+
+        <%  if accessible?({:action => 'delete'}) %>
+            <%= link_to_remote image_tag("delete.png", :border => 0), :url => {:action => "delete", :id => guestbook.id} %>
+        <% end %>
+
+        <% if guestbook.comment %>
 		<%= render :partial => 'comment', :object => guestbook %>
 	<% else %>
+        <%  if accessible?({:action => 'add_comment'}) %>
+
 	<div id="add_comment_<%= guestbook.id %>" style="display:none;">
-		<% form_tag :action => 'add_comment', :id => guestbook.id do%>
-			<%= text_area :guestbooks, "comment", :rows => 2, :cols => 25 %>
-			<%= submit_tag 'Add' %>
+		<% error_handling_form_for :guestbooks, :action => 'add_comment', :id => guestbook.id do |f| %>
+			<%= f.text_area "comment", :rows => 2, :cols => 25 %>
+			<%= f.submit 'hinzufügen' %>
 		<% end %>
 	</div>
+        <% end %>
 	<% end %>
 </div>
