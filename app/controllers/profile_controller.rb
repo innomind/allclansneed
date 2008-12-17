@@ -38,6 +38,11 @@ class ProfileController < ApplicationController
     end
   end
   
+  #persönliche Startseite
+  def start
+    
+  end
+  
   protected
   
   def get_profile

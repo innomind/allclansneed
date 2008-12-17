@@ -17,7 +17,8 @@ class LoginController < ApplicationController
           put_rights_into_session usr
           session['']
           @logged_in = true
-          flash.now[:notice] = 'login success'
+          flash[:notice] = 'login success'
+          redirect_to :controller => "profile", :action => "start" and return
         else
           flash.now[:notice] = 'login failed'+' for "'+params[:nick]+'"'
         end

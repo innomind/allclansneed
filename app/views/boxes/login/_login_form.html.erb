@@ -1,14 +1,8 @@
-  <% form_tag :controller => "login", :action => 'login' do %>
-    <div>
-      <%= label_tag 'nick' %>
-      <%= text_field_tag 'nick' %>
-    </div>
-    <div>
-      <%= label_tag 'password' %>
-      <%= password_field_tag 'password' %>
-    </div>
-    <%= submit_tag 'log in' %>
+  <% error_handling_form_for :login, :url => {:controller => "login", :action => "login"} do |f| %>
+    <%= f.text_field 'nick', :size => 10 %>
+    <%= f.password_field 'password', :size => 10 %>
+    <%= f.submit 'log in' %>
   <%end%>
 
   <br/>
-  <%= link_to 'account erstellen', :action => 'create' %>
+  <%= link_to 'account erstellen', :controller => 'login',  :action => 'create' %>

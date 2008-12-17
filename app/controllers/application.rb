@@ -4,8 +4,8 @@
 class ApplicationController < ActionController::Base
 
   helper :all # include all helpers, all the time
-  #layout 'dnp'
-  layout 'standard'
+  layout 'dnp'
+  #layout 'standard'
 
   
   #Access constants
@@ -17,7 +17,7 @@ class ApplicationController < ActionController::Base
   SITE_MEMBER = User::SITE_MEMBER
   COMPONENT_RIGHT_OWNER = User::COMPONENT_RIGHT_OWNER
   
-  before_filter :init, :pagination_defaults, :init_areas # :check_query
+  before_filter :init, :init_areas # :check_query
   
 
   #make session available in static (class) context
@@ -81,12 +81,6 @@ class ApplicationController < ActionController::Base
     end
     saved
   end
-  
-  def pagination_defaults
-    @page = (params[:page] || 1).to_i
-    @page = 1 if @page < 1
-    @per_page = (10 if params[:per_page].nil?).to_i
-  end
 
 
   def is_portal?
@@ -106,6 +100,7 @@ class ApplicationController < ActionController::Base
     self.class.static_session = session
     @logged_in = !session['user'].nil?
     session['error_objects'] = []
+    @user = current_user
     
     init_access
   end

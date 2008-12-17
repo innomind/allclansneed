@@ -55,7 +55,7 @@ ActionController::Routing::Routes.draw do |map|
   map.root :controller => 'login'
   
   map.users 'register', :controller => 'login', :action => 'create'
-  map.login 'login', :controller => 'login', :action => 'login'
+  #map.login 'login', :controller => 'login', :action => 'login'
   map.squads ':site_id/create_squad', :controller => 'clan_management', :action => 'create_squad'
   map.rights ':site_id/rights_management', :controller => 'rights_management', :action => 'rights_management'
   

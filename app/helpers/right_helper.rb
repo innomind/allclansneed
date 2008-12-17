@@ -4,11 +4,21 @@ module RightHelper
   #action is mandatory
   
   def access_link name, target, html_options = nil
-    action = target[:action]
-    controller_name = target[:controller]
+    if target.has_key?(:target)
+      action = target[:target][:action] ||= "index"
+      controller_name = target[:target][:controller]
+    else
+      action = target[:action] ||= "index"
+      controller_name = target[:controller]
+    end
+    
+    #action = target[:action]
+    #controller_name = target[:controller]
     controller_name = urlize_controller @controller.class if controller_name.nil?
-    if accessible? target
-      link_to name, {:controller => controller_name, :action => action}, html_options
+    check = {:action => action, :controller => controller_name}
+    if accessible? check
+      #link_to name, {:controller => controller_name, :action => action}, html_options
+      link_to name, target[:path], html_options
     end
   end
   
@@ -16,7 +26,6 @@ module RightHelper
   def if_accessible target, &block
     block.call if accessible? target
   end
-  
   
   #ok, there is an evil eval, but how to remove it?
   def accessible? target
