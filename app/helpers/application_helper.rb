@@ -110,4 +110,12 @@ module ApplicationHelper
     tooltip name, opts, &proc
   end
   
+  def ajax_tooltip(name=nil, opts={})
+    opts[:show_mode] = "ajax"
+    tooltip name, opts
+  end
+  
+  def ajax_loading_tag
+    image_tag("loading.gif")
+  end
 end

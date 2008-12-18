@@ -49,7 +49,8 @@ module Widgets
     
     def tooltip_content(opts={}, &proc)
      return render(:partial => opts[:partial]) if opts[:partial]
-     return capture(&proc)
+     return capture(&proc) unless proc.nil?
+     return image_tag("loading.gif") if opts[:show_mode] == "ajax"
     end
        
     def tooltip_link(id, name)
@@ -76,18 +77,9 @@ module Widgets
     end
     
     def render_tooltip(name, content, opts)
-      html = tag('div', {:id => "tooltip_#{opts[:id]}", :class=>'tooltip', :style => 'display:none'}, true)
-      html << tag('div', {:id => "tooltip_content_#{opts[:id]}", :class=>'tooltip_content'},true)
-      
-      if opts[:show_mode] == "ajax"
-        html << image_tag("loading.gif")
-      else
-        html << content
-        html << '<small>' + close_tooltip_link(opts[:id], opts[:close_message]) + '</small>'    
-      end
-      
-      html << '</div></div>' 
-      html
+      render :partial => "boxes/layouts/standard", :locals => { :opts => opts,
+                                                                :content => content,
+                                                                :name => name }
     end
   end
 end

@@ -4,5 +4,5 @@ class Forum < ActiveRecord::Base
   has_many :forum_threads
   belongs_to :site
   
-  validates_presence_of :name
+  validates_presence_of :title
 end

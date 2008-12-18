@@ -43,7 +43,6 @@ module RightHelper
     else
       controller_class = @controller.class
     end
-    debugger
     controller_class.user_has_right_for? action
   end
   

@@ -2,8 +2,7 @@
   <b><%= template_area.name %></b> 
 
 <% if template_area.is_addable? %>
-    <% tooltip image_tag("application_add.png"), :show_mode => "ajax", :update_url => {:action => "new", :template_area_id => template_area.id}, :id => dom_id(template_area) do  %>
-    <% end %>
+    <% ajax_tooltip image_tag("application_add.png"), :show_mode => "ajax", :update_url => {:action => "new", :template_area_id => template_area.id}, :id => dom_id(template_area)  %>
 <% else %>
   <i><small>darf nur eine Box beinhalten</small></i>
 <% end %>

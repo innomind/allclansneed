@@ -2,9 +2,8 @@ class ForumController < ApplicationController
   
   def index
     if params[:id].nil?
-      #@categories = ForumCategory.find_all_by_parent_id(nil)
       @forums = Forum.find_for_site(:all, :conditions => {:parent_id => nil} )
-      if @forums.count == 0
+      if @forums.empty?
         newforum = Forum.new(:title => "root")
         newforum.site = current_site
         newforum.save
@@ -16,7 +15,6 @@ class ForumController < ApplicationController
       render :template => "forum/forum"
     end
   end
-  
   
   def new
     return if request.xhr? 

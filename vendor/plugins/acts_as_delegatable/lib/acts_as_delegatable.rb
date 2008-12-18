@@ -34,17 +34,20 @@ module ActiveRecord::Acts::ActsAsDelegatable
       
       private
       
-      #TODO
       def initilize_paginate args
-        debugger
-        if args.count == 0
-          new_args = Array.new
-          new_args[0] = Hash.new
+        options = args.detect { |argument| argument.is_a?(Hash) }
+        if options.nil?
+          options = {:page => $page,
+                     :per_page => 15,
+                     :order => 'created_at DESC' 
+          }
+          args << options
+        else
+          options[:page] ||= $page 
+          options[:per_page] ||= 15
+          options[:order] ||= 'created_at DESC'
         end
-        new_args[0][:page] ||= $page
-        new_args[0][:per_page] ||= 10
-        new_args[0][:order] ||= 'created_at DESC'
-        append_condition(new_args)
+        append_condition(args)
       end
       
       def append_condition args, condition = nil
