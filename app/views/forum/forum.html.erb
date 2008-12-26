@@ -2,11 +2,11 @@
 
 <h1><%= @forum.title %></h1>
 <h2><%= @forum.subtitle %></h2>
-subcategories: 
+Unterforen: 
 <% @subforums.each do |s| %>
     <%= link_to s.title, :id => s.id %>
 <% end %>
 <br>
-<%= link_to "New Thread", :controller => "forum_thread", :action => "new", :id => @forum.id  %>
+<%= link_to "Neuen Thread erstellen", :controller => "forum_thread", :action => "new", :id => @forum.id  %>
 <h2>Threads:</h2>
 <%= render :partial => "thread", :collection => @threads %>

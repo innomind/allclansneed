@@ -2,8 +2,8 @@ class ForumThreadController < ApplicationController
   
   #show thread
   def index
-    @thread = ForumThread.find(params[:id]);
-    @messages = ForumMessage.search(params[:id], params[:page])
+    @thread = ForumThread.find_for_site(params[:id]);
+    @messages = ForumMessage.page_for_site :conditions => ['forum_thread_id = ?', params[:id]]
   end
   
   #show new thread form
@@ -17,10 +17,12 @@ class ForumThreadController < ApplicationController
     @forum = Forum.find_for_site(:first, :conditions => {:id => params[:id]})
     @forum_thread = ForumThread.new(params[:forum_thread])
     @forum_thread.forum = @forum
+    @forum_thread.site = current_site
     @forum_thread.user = current_user
     @forum_thread.forum_messages[0].user = current_user
+    @forum_thread.forum_messages[0].site = current_site
     if @forum_thread.save
-      redirect_to forum_thread_path(current_site_id, @forum_thread.id)
+      redirect_to forum_thread_path(current_site.id, @forum_thread.id)
     else
       render :action => "new"
     end

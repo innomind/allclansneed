@@ -4,12 +4,6 @@ class ForumMessage < ActiveRecord::Base
   belongs_to :user
   belongs_to :site
   
-  validates_presence_of :message, :message => "must be given"
-
-  def self.search(search, page)
-    paginate :per_page => 5, :page => page,
-             :conditions => ['forum_thread_id = ?', "#{search}"],
-             :order => 'created_at ASC'
-  end
+  validates_presence_of :message, :message => "es muss eine Nachricht angegeben werden"
 
 end

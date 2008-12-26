@@ -22,7 +22,7 @@ module Widgets
         result << tooltip_link(opts[:id],name)
       end
       
-      if opts[:show_mode] == "mouse_over"
+      if opts[:show_mode] == "mouseover"
         result << javascript_tag(tooltip_link_function_mouse_over(opts[:id]))
       else
         result << javascript_tag(tooltip_link_function_klick(opts[:id]))
@@ -58,7 +58,6 @@ module Widgets
     end
     
     def tooltip_link_ajax(id, name, update_url)
-      #link_to_remote(name, :url => opts[:update_url], :html => {:id => "tooltip_link_#{opts[:id]}"}, :update => "tooltip_content_#{opts[:id]}")
       link_to_function name, "showAjaxTooltip('#{id}', '#{url_for(update_url)}')", :id => "tooltip_link_#{id}"
     end
     

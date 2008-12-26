@@ -4,22 +4,16 @@ module RightHelper
   #action is mandatory
   
   def access_link name, target, html_options = nil
-    if target.has_key?(:target)
-      action = target[:target][:action] ||= "index"
-      controller_name = target[:target][:controller]
-    else
-      action = target[:action] ||= "index"
-      controller_name = target[:controller]
-    end
+    check = Hash.new
+    check[:action] = target.delete(:check_action) || 
+             target[:action] || 
+             "index"
+    check[:controller] = target.delete(:check_controller) || 
+             target[:controller] || 
+             urlize_controller(@controller.class)
     
-    #action = target[:action]
-    #controller_name = target[:controller]
-    controller_name = urlize_controller @controller.class if controller_name.nil?
-    check = {:action => action, :controller => controller_name}
-    target[:path] ||= check
     if accessible? check
-      #link_to name, {:controller => controller_name, :action => action}, html_options
-      link_to name, target[:path], html_options
+      link_to name, target, html_options
     end
   end
   

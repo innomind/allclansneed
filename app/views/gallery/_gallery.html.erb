@@ -1,1 +1,5 @@
-<%= link_to gallery.name, :action => "show", :id => gallery.id  %>
+<%= image_tag gallery.category_pic.url(:thumb) %><br>
+<%= link_to gallery.name, :action => "show", :id => gallery.id %>
+<% tooltip image_tag("world_link.png"), :show_mode => "mouseover" do  %>
+      <%= gallery.description %>
+<% end %>

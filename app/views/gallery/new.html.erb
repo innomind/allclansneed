@@ -1,5 +1,5 @@
-<% form_for :gallery, :url => {:action => "create"} do |form| %>
-      Name: <%= form.text_field :name %><br>
-      Beschreibung: <%= form.text_area :description %>
+<% error_handling_form_for @gallery, :url => {:action => "create"} do |form| %>
+      <%= form.text_field :name %>
+      <%= form.text_area :description, :rows => 5, :cols => 30%>
       <%= form.submit "erstellen" %>
 <% end %>

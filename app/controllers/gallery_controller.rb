@@ -1,10 +1,18 @@
 class GalleryController < ApplicationController
+  
+  CONTROLLER_ACCESS = COMPONENT_RIGHT_OWNER
+
+  ACTION_ACCESS_TYPES={
+    :index => PUBLIC,
+    :show => PUBLIC
+  }
+  
   def index
     @galleries = Gallery.find_for_site(:all)
   end
   
   def show
-    @gallery = Gallery.find_for_site(:all, :conditions => {:id => params[:id]}).first
+    @gallery = Gallery.find_for_site(:first, :conditions => {:id => params[:id]})
   end
   
   def new

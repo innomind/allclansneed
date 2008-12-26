@@ -24,7 +24,7 @@ class ErrorHandlingFormBuilder < ActionView::Helpers::FormBuilder
       }
       
       if has_errors_on?(field)
-        flash[:notice].push error_message(field, options)
+        #flash[:notice].push error_message(field, options)
         locals.merge!(:error => error_message(field, options))
         @template.render :partial => partial + '_with_errors',
                          :locals  => locals

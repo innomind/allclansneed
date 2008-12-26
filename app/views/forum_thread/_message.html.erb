@@ -1,9 +1,8 @@
 <div>
-   
     <%# unless message.user? %>
-        author: <%= username(message.user)  %> 
+        erstellt von: <%= username(message.user)  %> 
     <%# end %>
-  at <%= german_date_with_time(message.created_at) %> <br>
-  message: <%= message.message %><br>
+  am <%= german_date_with_time(message.created_at) %> <br>
+  Nachricht: <%= message.message %><br>
 </div>
 <br>

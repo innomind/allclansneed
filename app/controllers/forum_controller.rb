@@ -21,7 +21,7 @@ class ForumController < ApplicationController
   end
   
   def create
-    @forum = Forum.find_by_id(params[:id])
+    @forum = Forum.find_for_site_by_id(params[:id])
     @new_forum = @forum.children.new(params[:forum])
     @new_forum.site = current_site
     if @new_forum.save
@@ -30,11 +30,11 @@ class ForumController < ApplicationController
   end
   
   def edit
-    @category = Forum.find_by_id(params[:id])
+    @category = Forum.find_for_site_by_id(params[:id])
   end
   
   def update
-    @category = Forum.find_by_id(params[:id])
+    @category = Forum.find_for_site_by_id(params[:id])
     if @category.update_attributes(params[:forum_category])
     end
   end
