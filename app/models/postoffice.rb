@@ -10,5 +10,4 @@ class Postoffice < ActionMailer::Base
     # Email body substitutions go here
     body :user=> user
   end
-
 end
