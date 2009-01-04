@@ -69,11 +69,11 @@ Rails::Initializer.run do |config|
 
 end
 
-
-ActionMailer::Base.delivery_method = :smtp
 ActionMailer::Base.smtp_settings = {
   :address  => "mail.innomind.info",
+  :port => "25",
+  :domain  => "dev.innomind.info",
   :user_name  => "rails@innomind.info",
   :password => "rallclansneed",
   :authentication  => :login
-  }
+}
