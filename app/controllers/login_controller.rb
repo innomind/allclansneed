@@ -35,7 +35,6 @@ class LoginController < ApplicationController
     end
   
     def index
-
     end
 
     def create
