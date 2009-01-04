@@ -66,5 +66,14 @@ Rails::Initializer.run do |config|
   # Activate observers that should always be running
   # config.active_record.observers = :cacher, :garbage_collector
   
-  #require will_paginate
+
 end
+
+
+ActionMailer::Base.delivery_method = :smtp
+ActionMailer::Base.smtp_settings = {
+  :address  => "mail.innomind.info",
+  :user_name  => "rails@innomind.info",
+  :password => "rallclansneed",
+  :authentication  => :login
+  }
