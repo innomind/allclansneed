@@ -1,5 +1,5 @@
 alle news zu den tags
 <br />
 <% @news.each do |n| %>
-  <%= n.title %><br />
+  <%= link_to n.title, :action => "show", :id => n.id %><br />
 <% end %>

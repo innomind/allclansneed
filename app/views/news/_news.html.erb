@@ -1,9 +1,11 @@
 <div id="news_<%= news.id %>">
 	Überschrift: <%= link_to news.title, :action => 'show', :id => news.id %> <br />
 	
+	Tags:
 	<% news.tag_list.each do |t| %>
-	  <%= t %><br />
+	  <%= t %>
 	<% end %>
+	<br />
   created: <%= german_date_with_time(news.created_at) %> <br />
 	updated: <%= german_date_with_time(news.updated_at) %><br />
 	Teaser: <%= news.subtext %> <br />

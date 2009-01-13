@@ -65,7 +65,7 @@ class NewsController < ApplicationController
   def auto_complete_for_news_tags
     #autocomplete funktioniert nicht wenn mehrere, durch komma getrennte, tags in der eingabemaske sind
     #@tags = Tag.find(:all, :conditions => ['name LIKE :nt AND site_id = :site_id', {:nt => params[:news][:tags]+'%', :site_id  => $site_id}])
-    @tags = Tag.find(:all, :conditions => ['name LIKE ?', "#{params[:news][:tags]}%"])
+    @tags = Tag.find(:all, :conditions => ['name LIKE ?', "#{params[:news][:tags]}%"])    
     render :inline => "<%= auto_complete_result(@tags, 'name') %>", :layout => false
   end
 end
