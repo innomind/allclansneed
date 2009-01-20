@@ -4,9 +4,7 @@
 class ApplicationController < ActionController::Base
 
   helper :all # include all helpers, all the time
-  layout 'dnp'
   #layout 'standard'
-
   
   #Access constants
   CONTROLLER_ACCESS = 0
@@ -23,9 +21,7 @@ class ApplicationController < ActionController::Base
   #make session available in static (class) context
   class_inheritable_accessor :static_session, :current_site
   
-  
   protected
-
 
   def self.user_has_right_for? action
     needed = self::ACTION_ACCESS_TYPES
@@ -101,6 +97,7 @@ class ApplicationController < ActionController::Base
     @logged_in = !session['user'].nil?
     session['error_objects'] = []
     @user = current_user
+    self.class.layout('dnp')
     
     init_access
   end
