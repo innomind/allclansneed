@@ -34,6 +34,7 @@ class ApplicationController < ActionController::Base
   end
   
   def init_areas force = false
+    debugger
     if not request.xhr? or force
       @template_areas = TemplateArea.get_areas_for_site current_site
     end

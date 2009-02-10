@@ -7,6 +7,7 @@ class LoginController < ApplicationController
     }
   
     def login
+      debugger
       nick = params[:login][:nick]
       pw = params[:login][:password]
       unless (nick.nil? || pw.nil?)

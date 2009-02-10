@@ -23,3 +23,5 @@ public/stylesheets/cache/*
 models.pdf
 *.rb~
 acn_development
+acn_production
+acn_test
