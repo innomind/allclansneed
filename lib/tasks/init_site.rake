@@ -48,11 +48,6 @@ namespace :init do
     #Navi2
     tb = TemplateBox.create(:name => "ClanNavi", :position => 1)
     
-    navBoxType = TemplateBoxType.create(:name => "Navigation", 
-                                                  :internal_name => "navigation", 
-                                                  :editable => true, 
-                                                  :multiple_allowed => true)
-    
     tb.template_box_type = navBoxType
                                                   
     tb.navigations << Nav["Clanwar"]

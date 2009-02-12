@@ -1,4 +1,6 @@
 class TemplateBoxesController < ApplicationController
+  #CONTROLLER_ACCESS = SITE_MEMBER
+  
   before_filter :init_template_areas
   before_filter :init_box, :only => [:edit, :update, :do_move, :delete]
   
