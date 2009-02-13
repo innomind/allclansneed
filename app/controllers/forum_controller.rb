@@ -1,6 +1,7 @@
 class ForumController < ApplicationController
   
   def index
+    #git test
     if params[:id].nil?
       @forums = Forum.find_for_site(:all, :conditions => {:parent_id => nil} )
       if @forums.empty?
