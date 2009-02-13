@@ -1,2 +1,3 @@
 <ul id="forum_root"><%= render :partial => 'forum', :collection => @forums %></ul>
-<%= @forums.inspect %>
+
+<%= access_link image_tag("folder_add.png") + " Forum hinzufügen", :action => "new" %>

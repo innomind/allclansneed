@@ -1,4 +1,4 @@
 <div>
-  <%= link_to(thread.title, :action => "thread", :id => thread.id) %>
+  <%= link_to(thread.title, :controller => "forum_thread", :action => "index", :id => thread.id) %>
   (<%= thread.forum_messages.count %>)
 </div>

@@ -22,7 +22,7 @@ class ForumThreadController < ApplicationController
     @forum_thread.forum_messages[0].user = current_user
     @forum_thread.forum_messages[0].site = current_site
     if @forum_thread.save
-      redirect_to forum_thread_path(current_site.id, @forum_thread.id)
+      redirect_to :action => "index", :id => @forum_thread.id
     else
       render :action => "new"
     end
