@@ -118,4 +118,15 @@ module ApplicationHelper
   def ajax_loading_tag
     image_tag("loading.gif")
   end
+  
+  def show_breadcrumb(seperator='>')
+    output = ""
+    if @breadcrumbs
+	  	@breadcrumbs[0..-2].each do |txt, path|  
+	  	  output << link_to(h(txt), path)
+	  	  output << " " + seperator + " "  
+	  	end
+	  	output << @breadcrumbs.last.first 
+	  end
+  end
 end

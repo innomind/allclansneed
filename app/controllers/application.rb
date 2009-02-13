@@ -4,7 +4,7 @@
 class ApplicationController < ActionController::Base
 
   helper :all # include all helpers, all the time
-  layout :set_layout
+  layout :set_layout 
   
   #Access constants
   CONTROLLER_ACCESS = 0
@@ -34,7 +34,7 @@ class ApplicationController < ActionController::Base
   end
   
   def init_areas force = false
-    debugger
+
     if not request.xhr? or force
       @template_areas = TemplateArea.get_areas_for_site current_site
     end
@@ -84,13 +84,28 @@ class ApplicationController < ActionController::Base
     current_site.is_portal?    
   end
   
-
+  ################# protected #################
+  protected
+  
+  def add_breadcrumb name, url = ''  
+    @breadcrumbs ||= []  
+    url = eval(url) if url =~ /_path|_url|@/  
+    @breadcrumbs << [name, url]  
+  end  
+  
+  def self.add_breadcrumb name, url, options = {}  
+    before_filter options do |controller|  
+      controller.send(:add_breadcrumb, name, url)  
+    end  
+  end
+  
 
   ################# private #################
   private
 
   def init
     init_site
+    add_breadcrumb 'Home', '/'
     
     #some preparations
     self.class.current_site = Site.find_by_id $site_id
