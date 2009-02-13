@@ -1,9 +1,0 @@
-if  @new_forum.new_record?
-  page.alert @new_forum.errors.full_messages.join("\n")
-else
-  page.insert_html :after, "forum_#{params[:id]}", :partial => 'create_forum_for_ajax'
-  page.visual_effect :pulsate, "forum_#{@new_forum.id}"
-  page.form.reset "create_forum_#{params[:id]}"
-  page.hide "forum_popup_space_#{params[:id]}"
-  page.show "forum_links_#{params[:id]}"
-end

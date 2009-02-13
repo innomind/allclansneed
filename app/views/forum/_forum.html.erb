@@ -1,12 +1,9 @@
 <li id="forum_<%=  forum.id %>">
     
-        <%= link_to forum.title, forum_category_path($site_id, forum.id) %>
+        <%= link_to forum.title, {:action => "index", :id => forum.id} %>
         (<%= forum.forum_threads.count %>)
 
   <span id="forum_links_<%= forum.id %>">
-    <%= link_to_remote(image_tag("folder_add.png", :border => "0", :id => "folder_add_img_#{forum.id}"), :url => {:action => "new", :id => forum.id},
-                     :loading => "Element.show('loading_#{forum.id}');",
-                     :loaded => "Element.hide('loading_#{forum.id}')")%>
     <%= link_to_remote(image_tag("folder_edit.png", :border => "0", :id => "folder_update_img_#{forum.id}"), :url => {:action => "edit", :id => forum.id},
                      :loading => "Element.show('loading');",
                      :loaded => "Element.hide('loading')")%>
@@ -27,7 +24,5 @@
   </span>
 <br>
 
-  <% unless forum.children.empty? %>
-    <ul><%= render :partial => 'forum', :collection => forum.children %></ul>
-  <% end %>  
+
 </li>

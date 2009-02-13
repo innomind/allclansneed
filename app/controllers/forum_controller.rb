@@ -1,16 +1,18 @@
 class ForumController < ApplicationController
   
+  CONTROLLER_ACCESS = COMPONENT_RIGHT_OWNER
+
+  ACTION_ACCESS_TYPES={
+    :index => PUBLIC,
+    :show => PUBLIC
+  }
+  
   def index
     #git test
     if params[:id].nil?
-      @forums = Forum.find_for_site(:all, :conditions => {:parent_id => nil} )
-      if @forums.empty?
-        newforum = Forum.new(:title => "root")
-        newforum.site = current_site
-        newforum.save
-      end
+      @forums = Forum.find_for_site(:all)
     else
-      @subforums = Forum.find_for_site(:all, :conditions => {:parent_id => params[:id]} )
+      #@subforums = Forum.find_for_site(:all, :conditions => {:parent_id => params[:id]} )
       @forum = Forum.find_for_site(:first, :conditions => { :id => params[:id]})
       @threads = ForumThread.find_for_site(:all, :conditions => {:forum_id => params[:id]})
       render :template => "forum/forum"
@@ -18,15 +20,16 @@ class ForumController < ApplicationController
   end
   
   def new
-    return if request.xhr? 
+    @forum = Forum.new
   end
   
   def create
-    @forum = Forum.find_for_site_by_id(params[:id])
-    @new_forum = @forum.children.new(params[:forum])
-    @new_forum.site = current_site
-    if @new_forum.save
-      return if request.xhr?
+    @forum = Forum.new(params[:forum])
+    @forum.site = current_site
+    if @forum.save
+      redirect_to :action => "index"
+    else
+      render :action => "new"
     end
   end
   
