@@ -4,7 +4,7 @@
 class ApplicationController < ActionController::Base
 
   helper :all # include all helpers, all the time
-  #layout 'standard'
+  layout :set_layout
   
   #Access constants
   CONTROLLER_ACCESS = 0
@@ -98,9 +98,12 @@ class ApplicationController < ActionController::Base
     @logged_in = !session['user'].nil?
     session['error_objects'] = []
     @user = current_user
-    self.class.layout('dnp')
     
     init_access
+  end
+
+  def set_layout
+    'dnp'
   end
 
   #the global variable site_id should be the ONLY exception in usage of global vars
