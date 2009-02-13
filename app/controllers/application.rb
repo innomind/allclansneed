@@ -34,7 +34,6 @@ class ApplicationController < ActionController::Base
   end
   
   def init_areas force = false
-    debugger
     if not request.xhr? or force
       @template_areas = TemplateArea.get_areas_for_site current_site
     end
@@ -93,7 +92,11 @@ class ApplicationController < ActionController::Base
     init_site
     
     #some preparations
-    self.class.current_site = Site.find_by_id $site_id
+    #self.class.current_site = Site.find_by_id $site_id
+    subdomain = current_subdomain
+    subdomain ||= "portal"
+    self.class.current_site = Site.find_by_title(subdomain)
+    $site_id = current_site.id
     self.class.static_session = session
     @logged_in = !session['user'].nil?
     session['error_objects'] = []
@@ -114,7 +117,7 @@ class ApplicationController < ActionController::Base
       render :text => 'strange request: site_id set, but empty'
       return
     end
-    $site_id = params[:site_id].nil? ? 1 : params[:site_id]
+    #$site_id = params[:site_id].nil? ? 1 : params[:site_id]
     ####FIXME  ahhhhh blöööödddd!!!  ---- wird in acts_as_delegatable als std wert gebraucht
     $page = params[:page].nil? ? 1 : params[:page]
   end
