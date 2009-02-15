@@ -2,6 +2,11 @@
 <h2><%= @forum.subtitle %></h2>
 
 <br>
+
 <%= access_link "Neuen Thread erstellen", new_forum_forum_thread_path(@forum)  %>
 <h2>Threads:</h2>
+<%= will_paginate @threads %>
+
 <%= render :partial => "thread", :collection => @threads %>
+
+<%= will_paginate @threads %>

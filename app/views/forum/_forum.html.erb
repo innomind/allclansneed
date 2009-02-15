@@ -4,13 +4,9 @@
         (<%= forum.forum_threads_count %>)
 
   <span id="forum_links_<%= forum.id %>">
-    <%= link_to_remote(image_tag("folder_edit.png", :border => "0", :id => "folder_update_img_#{forum.id}"), :url => {:action => "edit", :id => forum.id},
-                     :loading => "Element.show('loading');",
-                     :loaded => "Element.hide('loading')")%>
-    <%= link_to_remote(image_tag("folder_delete.png", :border => "0", :id => "folder_del_img_#{forum.id}"), :url => {:action => "delete", :id => forum.id},
-                     :loading => "Element.show('loading');",
-                     :loaded => "Element.hide('loading')")%>
-  <%# popup("create_category_form", "category_popup_test_#{category.id}") %>
+    <%= access_link image_tag("folder_edit.png"), edit_forum_path(forum) %>
+    <%= access_link image_tag("folder_delete.png"), forum_path(forum), :method => "delete", :confirm => "Wirklich löschen?" %>
+
     <span id="loading_<%= forum.id %>" style="display:none;"><%= image_tag("loading.gif", :border => 0) %></span>
     
   </span>

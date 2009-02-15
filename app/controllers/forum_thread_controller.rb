@@ -24,8 +24,7 @@ class ForumThreadController < ApplicationController
   #save new thread
   def create
     @forum = Forum.find_for_site(params[:forum_id])
-    @forum_thread = ForumThread.new(params[:forum_thread])
-    @forum_thread.forum = @forum
+    @forum_thread = @forum.forum_threads.new(params[:forum_thread])
     @forum_thread.site = current_site
     @forum_thread.user = current_user
     @forum_thread.forum_messages[0].user = current_user

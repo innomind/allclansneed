@@ -14,8 +14,8 @@ class ForumController < ApplicationController
   end
   
   def show
-    @forum = Forum.find_for_site(:first, :conditions => { :id => params[:id]})
-    @threads = ForumThread.find_for_site(:all, :conditions => {:forum_id => params[:id]})
+    @forum = Forum.find_for_site :first, :conditions => { :id => params[:id]}
+    @threads = ForumThread.page_for_site :all, :conditions => {:forum_id => params[:id]}
     add_breadcrumb @forum.title, ''
   end
   
@@ -27,6 +27,7 @@ class ForumController < ApplicationController
     @forum = Forum.new(params[:forum])
     @forum.site = current_site
     if @forum.save
+      flash[:notice] = "Forum erfolgreich erstellt"
       redirect_to :action => "index"
     else
       render :action => "new"
@@ -34,16 +35,21 @@ class ForumController < ApplicationController
   end
   
   def edit
-    @category = Forum.find_for_site_by_id(params[:id])
+    @forum = Forum.find_for_site_by_id(params[:id])
   end
   
   def update
-    @category = Forum.find_for_site_by_id(params[:id])
-    if @category.update_attributes(params[:forum_category])
+    @forum = Forum.find_for_site_by_id(params[:id])
+    if @forum.update_attributes(params[:forum])
+      flash[:notice] = "Forum erfolgreich geändert"
+      redirect_to forums_path
+    else
+      render :action => "edit"
     end
   end
   
-  def delete
-    return if request.xhr?
+  def destroy
+    Forum.find_for_site_by_id(params[:id]).destroy if flash[:notice] = "Forum gelöscht"
+    redirect_to forums_path
   end
 end
