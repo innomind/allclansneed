@@ -7,16 +7,16 @@ class ForumController < ApplicationController
     :show => PUBLIC
   }
   
+  add_breadcrumb 'Forum', 'forums_path'
+  
   def index
-    #git test
-    if params[:id].nil?
-      @forums = Forum.find_for_site(:all)
-    else
-      #@subforums = Forum.find_for_site(:all, :conditions => {:parent_id => params[:id]} )
-      @forum = Forum.find_for_site(:first, :conditions => { :id => params[:id]})
-      @threads = ForumThread.find_for_site(:all, :conditions => {:forum_id => params[:id]})
-      render :template => "forum/forum"
-    end
+    @forums = Forum.find_for_site(:all)
+  end
+  
+  def show
+    @forum = Forum.find_for_site(:first, :conditions => { :id => params[:id]})
+    @threads = ForumThread.find_for_site(:all, :conditions => {:forum_id => params[:id]})
+    add_breadcrumb @forum.title, ''
   end
   
   def new

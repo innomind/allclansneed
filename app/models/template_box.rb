@@ -4,7 +4,7 @@ class TemplateBox < ActiveRecord::Base
   belongs_to :site
   belongs_to :template_box_type
   
-  has_many :navigations
+  has_many :navigations, :dependent => :destroy
   
   validates_presence_of :name
 end

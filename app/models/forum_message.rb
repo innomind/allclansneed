@@ -1,6 +1,6 @@
 class ForumMessage < ActiveRecord::Base
   acts_as_delegatable
-  belongs_to :forum_thread
+  belongs_to :forum_thread, :counter_cache => true
   belongs_to :user
   belongs_to :site
   

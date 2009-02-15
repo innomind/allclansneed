@@ -5,13 +5,17 @@ module RightHelper
   
   def access_link name, target, html_options = nil
     check = Hash.new
-    check[:action] = target.delete(:check_action) || 
+    if target.is_a? String
+      check = ActionController::Routing::Routes.recognize_path(target, {:method => :get})
+    else
+      check[:action] = target.delete(:check_action) || 
              target[:action] || 
              "index"
-    check[:controller] = target.delete(:check_controller) || 
+      check[:controller] = target.delete(:check_controller) || 
              target[:controller] || 
              urlize_controller(@controller.class)
-    
+      target = target.delete(:path) if target.has_key? :path
+    end
     if accessible? check
       link_to name, target, html_options
     end

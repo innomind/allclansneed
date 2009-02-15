@@ -2,6 +2,6 @@
 <h2><%= @forum.subtitle %></h2>
 
 <br>
-<%= access_link "Neuen Thread erstellen", :controller => "forum_thread", :action => "new", :id => @forum.id  %>
+<%= access_link "Neuen Thread erstellen", new_forum_forum_thread_path(@forum)  %>
 <h2>Threads:</h2>
 <%= render :partial => "thread", :collection => @threads %>

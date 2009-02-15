@@ -1,7 +1,7 @@
 <li id="forum_<%=  forum.id %>">
     
-        <%= link_to forum.title, {:action => "index", :id => forum.id} %>
-        (<%= forum.forum_threads.count %>)
+        <%= link_to forum.title, forum_path(forum) %>
+        (<%= forum.forum_threads_count %>)
 
   <span id="forum_links_<%= forum.id %>">
     <%= link_to_remote(image_tag("folder_edit.png", :border => "0", :id => "folder_update_img_#{forum.id}"), :url => {:action => "edit", :id => forum.id},

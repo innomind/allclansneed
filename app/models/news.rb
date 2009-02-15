@@ -6,7 +6,7 @@ class News < ActiveRecord::Base
   belongs_to :news_category
   belongs_to :site
   
-  has_many :comments, :as => :commentable
+  has_many :comments, :as => :commentable, :dependent => :destroy
   
   validates_presence_of :title
   validates_presence_of :subtext

@@ -1,5 +1,5 @@
 <h1><%= @thread.title %> </h1>
-<%= access_link "Antworten", :controller => "forum_message", :action => "new", :id => params[:id] %><br>
+<%= access_link "Antworten", new_forum_thread_forum_message_path(@thread) %><br>
 <%= will_paginate @messages %><br>
 <%= render :partial => "message", :collection => @messages %>
 

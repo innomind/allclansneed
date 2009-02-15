@@ -3,7 +3,7 @@ class ForumThread < ActiveRecord::Base
   belongs_to :user
   belongs_to :forum, :counter_cache => true
   belongs_to :site
-  has_many :forum_messages
+  has_many :forum_messages, :dependent => :destroy
   
   validates_presence_of :title
   
