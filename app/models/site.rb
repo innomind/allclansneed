@@ -1,21 +1,21 @@
 class Site < ActiveRecord::Base
-  has_many :guestbooks
-  has_many :news_categories
-  has_many :gallery_categories
-  has_many :gallery_pics
-  has_many :forums
-  has_many :forum_threads
-  has_many :forum_messages
-  has_many :clanwars
-  has_many :events
-  has_many :polls
+  has_many :guestbooks, :dependent => :destroy
+  has_many :news_categories, :dependent => :destroy
+  has_many :gallery_categories, :dependent => :destroy
+  has_many :gallery_pics, :dependent => :destroy
+  has_many :forums, :dependent => :destroy
+  has_many :forum_threads, :dependent => :destroy
+  has_many :forum_messages, :dependent => :destroy
+  has_many :clanwars, :dependent => :destroy
+  has_many :events, :dependent => :destroy
+  has_many :polls, :dependent => :destroy
   
   belongs_to :template
   
-  has_many :template_boxes
-  has_many :template_areas, :through => :template_boxes
+  has_many :template_boxes, :dependent => :destroy
+  has_many :template_areas, :through => :template_boxes, :dependent => :destroy
   
-  has_many :user_rights
+  has_many :user_rights, :dependent => :destroy
   has_many :users, :through => :user_rights
   has_one :clan
   

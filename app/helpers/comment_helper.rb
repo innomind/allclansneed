@@ -5,6 +5,6 @@ module CommentHelper
   end
   
   def get_comments model  
-    model.comments.page_for_site :all, :conditions => {:user_id => 1}
+    model.comments.page_for_site :all
   end
 end

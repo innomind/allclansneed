@@ -1,7 +1,11 @@
 <li id=<%= dom_id(template_box, :edit) %>>
     <%= template_box.name %> <i><%= template_box.template_box_type.name %></i>
-    <%= ajax_tooltip image_tag("textfield_rename.png"), :show_mode => "ajax", :update_url => {:action => "edit", :template_box_id => template_box.id}, :id => dom_id(template_box, :rename)  %>
 
+    <%= ajax_tooltip image_tag("textfield_rename.png"), :update_url => {:action => "edit", :template_box_id => template_box.id}, :id => dom_id(template_box, :rename)  %>
+
+<% if template_box.template_area.is_addable? %>
+    <%= ajax_tooltip image_tag("application_add.png"), :update_url => {:action => "new", :template_area_id => template_box.template_area.id}, :id => dom_id(template_box, :new_box)  %>
+<% end %>
     <%= ajax_tooltip image_tag("application_go.png"), :update_url => {:action => "move", :template_box_id => template_box.id, :template_area_id => template_box.template_area_id}, :id => dom_id(template_box, :move) %>
 
     <% if template_box.template_box_type.editable? %>

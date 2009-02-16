@@ -5,8 +5,8 @@ class Poll < ActiveRecord::Base
   belongs_to :site
   belongs_to :user
   
-  has_many :poll_options
-  has_many :pollresults
+  has_many :poll_options, :dependent => :destroy
+  has_many :pollresults, :dependent => :destroy
   
   after_update :save_options
   

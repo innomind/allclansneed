@@ -2,11 +2,11 @@ class Clanwar < ActiveRecord::Base
   
   acts_as_delegatable
   
-  has_many :comments, :as => :commentable
+  has_many :comments, :as => :commentable, :dependent => :destroy
   belongs_to :squad
   belongs_to :site
   belongs_to :user
-  has_many :clanwar_maps
+  has_many :clanwar_maps, :dependent => :destroy
   
   after_update :save_maps
   

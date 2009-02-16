@@ -1,12 +1,14 @@
 class NewsController < ApplicationController
   #ACTION_LEVELS = {:new => LEVEL_SITE_ADMIN}
+  add_breadcrumb 'News', 'news_path'
+  before_filter :init_news, :only => [:show, :delete, :edit, :update]
+  
   def index
     @news = News.find_for_site(:all)
     @tags = News.tag_counts(:order => 'count desc', :conditions  => {:site_id  => current_site_id})
   end
   
   def show
-    @news = News.find_for_site(params[:id])
   end
   
   def new
@@ -33,19 +35,16 @@ class NewsController < ApplicationController
   end
   
   def delete
-    @news = News.find_for_site(params[:id])
     @news.destroy
     #redirect_to :action => 'index'
   end
   
   def edit
-    @news = News.find_for_site(params[:id])
     @tags = News.tag_counts(:order => 'count desc', :conditions  => {:site_id  => current_site_id})
   end
   
   def update
     #@_post = params[:news]
-    @news = News.find_for_site(params[:id])
     #@news.title = @_post['title']
     #@news.subtext = @_post['title']
     #@news.news = @_post['title']
@@ -67,5 +66,12 @@ class NewsController < ApplicationController
     #@tags = Tag.find(:all, :conditions => ['name LIKE :nt AND site_id = :site_id', {:nt => params[:news][:tags]+'%', :site_id  => $site_id}])
     @tags = Tag.find(:all, :conditions => ['name LIKE ?', "#{params[:news][:tags]}%"])    
     render :inline => "<%= auto_complete_result(@tags, 'name') %>", :layout => false
+  end
+  
+  private
+  
+  def init_news
+    @news = News.find_for_site(params[:id])
+    add_breadcrumb @news.title, ''
   end
 end
