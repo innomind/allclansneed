@@ -1,4 +1,7 @@
 class ForumMessageController < ApplicationController
+  
+  CONTROLLER_ACCESS = ACN_MEMBER
+  
   def new
     @forum_thread = ForumThread.find_for_site(params[:forum_thread_id])
     add_breadcrumb 'Forum', "forums_path"

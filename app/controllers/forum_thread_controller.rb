@@ -1,6 +1,12 @@
 class ForumThreadController < ApplicationController
+
+  CONTROLLER_ACCESS = ACN_MEMBER
+
+  ACTION_ACCESS_TYPES={
+    :show => PUBLIC
+  }
+
   add_breadcrumb 'Forum', 'forums_path'
-  before_filter :init_thread, :only => [:new]
   
   #show thread
   def show
@@ -37,9 +43,5 @@ class ForumThreadController < ApplicationController
   end
   
   private
-  
-  def init_thread
-    
-  end
 
 end

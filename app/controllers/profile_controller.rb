@@ -50,7 +50,7 @@ class ProfileController < ApplicationController
       @profile = Profile.find_by_user_id(params[:id])
     else
       #TODO nur user für diese Seite anzeigen
-      @profile = Profile.find_by_user_id(params[:id])
+      @profile = Profile.find_for_site_by_user_id(params[:id])
     end
   end
 end

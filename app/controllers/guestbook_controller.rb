@@ -8,7 +8,8 @@ class GuestbookController < ApplicationController
   }
   
   def index
-    @guestbook = Guestbook.page_for_site
+    @guestbook = Guestbook.new
+    @guestbooks = Guestbook.page_for_site
   end
   
   def new

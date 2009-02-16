@@ -7,15 +7,15 @@
 <div id="add_guestbook" style="display:none;">
 	<% error_handling_remote_form_for @guestbook, :url => {:action => 'new'}, :html => {:id => 'guestbook_form'} do |f| %>
 		<%= f.text_field "name" %>
-                <%= f.text_field "email" %>
-                <%= f.text_field "url" %>
+        <%= f.text_field "email" %>
+        <%= f.text_field "url" %>
 		<%= f.text_area "entry", :rows => 2, :cols => 25 %>
 		<%= f.submit 'hinzufügen' %>
 	<% end %>
 </div>
 
 <div id="guestbook_list">
-<%= render :partial => 'guestbook', :collection => @guestbook %>
+<%= render :partial => 'guestbook', :collection => @guestbooks %>
 </div>
 
-<%= will_paginate @guestbook %>
+<%= will_paginate @guestbooks %>

@@ -17,7 +17,6 @@ class ApplicationController < ActionController::Base
   
   before_filter :init, :init_areas # :check_query
   
-
   #make session available in static (class) context
   class_inheritable_accessor :static_session, :current_site
   
@@ -78,7 +77,6 @@ class ApplicationController < ActionController::Base
     saved
   end
 
-
   def is_portal?
     current_site.is_portal?    
   end
@@ -105,13 +103,9 @@ class ApplicationController < ActionController::Base
   def init
     init_site
     add_breadcrumb 'Home', '/'
+
+    $page = params[:page].nil? ? 1 : params[:page]
     
-    #some preparations
-    #self.class.current_site = Site.find_by_id $site_id
-    subdomain = current_subdomain
-    subdomain ||= "portal"
-    self.class.current_site = Site.find_by_title(subdomain)
-    $site_id = current_site.id
     self.class.static_session = session
     @logged_in = !session['user'].nil?
     session['error_objects'] = []
@@ -121,20 +115,12 @@ class ApplicationController < ActionController::Base
   end
 
   def set_layout
-    'dnp'
+    current_site.template.internal_name#'dnp'
   end
 
-  #the global variable site_id should be the ONLY exception in usage of global vars
-  #we should try to remove even this, as soon we have found a proper alternative
-  #FIXME: please fix (and remove) or further explain the big fixme below
   def init_site
-    if params[:site_id] == ""
-      render :text => 'strange request: site_id set, but empty'
-      return
-    end
-    #$site_id = params[:site_id].nil? ? 1 : params[:site_id]
-    ####FIXME  ahhhhh blöööödddd!!!  ---- wird in acts_as_delegatable als std wert gebraucht
-    $page = params[:page].nil? ? 1 : params[:page]
+    self.class.current_site = Site.find_by_subdomain(current_subdomain || "portal" )
+    $site_id = current_site.id
   end
   
   def init_access

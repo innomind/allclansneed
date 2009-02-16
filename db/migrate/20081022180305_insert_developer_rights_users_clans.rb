@@ -10,10 +10,10 @@ class InsertDeveloperRightsUsersClans < ActiveRecord::Migration
   
   def self.generate_sites
     @sites = []
-    @main_site = Site.new(:title => Site::PORTAL_NAME)
+    @main_site = Site.new(:title => Site::PORTAL_NAME, :subdomain => "portal")
     #@main_site.id=1
     2.upto(@users.length+1) { |i|
-      @sites.push Site.new(:title => "page #{i}", :id => i) 
+      @sites.push Site.new(:title => "page #{i}", :id => i, :subdomain => "clan#{i}") 
     }
   end
   
