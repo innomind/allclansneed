@@ -90,13 +90,13 @@ class ApplicationController < ActionController::Base
     @breadcrumbs << [name, url]  
   end  
   
-  def self.add_breadcrumb name, url, options = {}  
+  def self.add_breadcrumb name, url = '', options = {}  
     before_filter options do |controller|  
       controller.send(:add_breadcrumb, name, url)  
     end  
   end
   
-
+  
   ################# private #################
   private
 
@@ -131,6 +131,7 @@ class ApplicationController < ActionController::Base
   end  
 
   def self.user_has? right
+    return true
     return false if user_is_guest?
     user_right = current_user.local_right
     return false if user_right.nil?

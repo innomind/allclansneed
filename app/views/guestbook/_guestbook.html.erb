@@ -12,9 +12,9 @@
 				"Element.toggle('add_comment_#{guestbook.id}')" %>
         <% end %>
 
-        <%  if accessible?({:action => 'delete'}) %>
-            <%= link_to_remote image_tag("delete.png", :border => 0), :url => {:action => "delete", :id => guestbook.id} %>
-        <% end %>
+        
+	<%= access_remote_link image_tag("delete.png", :border => 0), :url => guestbook_path(guestbook), :method => "delete",
+ 												:confirm => "Möchten sie diesen Gästebucheintrag wirklich löschen?"%>
 
         <% if guestbook.comment %>
 		<%= render :partial => 'comment', :object => guestbook %>
@@ -22,7 +22,7 @@
         <%  if accessible?({:action => 'add_comment'}) %>
 
 	<div id="add_comment_<%= guestbook.id %>" style="display:none;">
-		<% error_handling_form_for :guestbooks, :action => 'add_comment', :id => guestbook.id do |f| %>
+		<% error_handling_form_for guestbook, :url => add_comment_guestbook_path(guestbook), :html => {:method => :post} do |f| %>
 			<%= f.text_area "comment", :rows => 2, :cols => 25 %>
 			<%= f.submit 'hinzufügen' %>
 		<% end %>

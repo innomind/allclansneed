@@ -4,4 +4,6 @@ else
   page.insert_html :top, 'guestbook_list', :partial => 'guestbook'
   page.visual_effect :pulsate, "guestbook_#{@guestbook.id}"
   page.form.reset 'guestbook_form'
+  page.hide :add_guestbook
+  page.show :add_link
 end
