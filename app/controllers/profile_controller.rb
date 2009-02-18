@@ -49,8 +49,16 @@ class ProfileController < ApplicationController
     if is_portal?
       @profile = Profile.find_by_user_id(params[:id])
     else
-      #TODO nur user für diese Seite anzeigen
-      @profile = Profile.find_for_site_by_user_id(params[:id])
+      #TODO nur user für diese Seite anzeigen      
+      #geht nicht:
+      user = User.find :first, 
+                       :conditions => ["users.id=? AND user_rights.site_id = ?",params[:id],current_site.id],
+                       :joins => [:sites, :profile]
+      if user.nil?
+        redirect_to profile_path(params[:id], :subdomain => false) 
+      else
+        @profile = user.profile
+      end
     end
   end
 end

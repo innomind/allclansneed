@@ -10,7 +10,8 @@ class TemplateArea < ActiveRecord::Base
                   template_boxes.name, template_boxes.id,
                   template_box_types.name, template_box_types.internal_name,
                   navigations.name,
-                  navigations_template.controller, navigations_action",
+                  navigations_template.controller, navigations_action,
+                  navigations_template.link_path",
       :conditions => ["template_id = ? AND template_boxes.site_id = ?",site.template_id,site.id],
       :include => [ :template_boxes => 
                         [ :template_box_type, 

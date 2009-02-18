@@ -67,7 +67,7 @@ class ApplicationController < ActionController::Base
   
   def user_belongs_to_site?
     return false if session['user_sites'].nil?
-    session['user_sites'].include?(current_site_id)
+    session['user_sites'].include?(current_site.id)
   end
   
   def save_verbose obj
@@ -115,7 +115,7 @@ class ApplicationController < ActionController::Base
   end
 
   def set_layout
-    current_site.template.internal_name#'dnp'
+    current_site.template.internal_name
   end
 
   def init_site

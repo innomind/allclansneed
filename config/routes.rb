@@ -18,6 +18,8 @@ ActionController::Routing::Routes.draw do |map|
                             :except => [:new, :update, :edit],
                             :member => {:add_comment => :post}
   
+  map.resources :profiles, :controller => "profile"
+  
   map.users 'register', :controller => 'login', :action => 'create'
   #map.login 'login', :controller => 'login', :action => 'login'
   map.squads ':site_id/create_squad', :controller => 'clan_management', :action => 'create_squad'

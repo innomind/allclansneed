@@ -1,11 +1,11 @@
 Hallo <%= @user.nick %><br>
-<%= link_to image_tag("door_in.png") + "meine Startseite", :controller => "profile", :action => "start" %><br>
-<%= link_to image_tag("user_go.png") + "mein Profil", :controller => "profile", :action => "show", :id => @user.id %>
-<%= link_to image_tag("pencil.png"), :action => "edit" %><br>
-<%= link_to image_tag("email.png") + "Nachrichten", :controller => "messages" %><br><br>
+<%= link_to image_tag("door_in.png") + " meine Startseite", :controller => "profile", :action => "start" %><br>
+<%= link_to image_tag("user_go.png") + " mein Profil", profile_path(@user) %>
+<%= link_to image_tag("pencil.png"), edit_profile_path(@user) %><br>
+<%= link_to image_tag("email.png") + " Nachrichten", :controller => "messages" %><br><br>
   
-<%= access_link image_tag("group_edit.png") + "Clan verwalten", :controller => "clan_management" %><br>
-<%= access_link image_tag("user_edit.png") + "User verwalten", :controller => "rights_management" %><br>
-<%= link_to image_tag("monitor_edit.png") + "Seite bearbeiten", :controller => "template_boxes" %><br>
+<%= access_link image_tag("group_edit.png") + " Clan verwalten", :controller => "clan_management" %><br>
+<%= access_link image_tag("user_edit.png") + " User verwalten", :controller => "rights_management" %><br>
+<%= link_to image_tag("monitor_edit.png") + " Seite bearbeiten", :controller => "template_boxes" %><br>
 
-<%= link_to image_tag("door_out.png") + "logout", :controller => "login", :action => "logout" %>
+<%= link_to image_tag("door_out.png") + " logout", :controller => "login", :action => "logout" %>

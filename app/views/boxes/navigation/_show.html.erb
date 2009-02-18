@@ -1,3 +1,9 @@
-<li><%= link_to show.name, :controller => show.navigation_template.controller, 
-                           :action => show.navigation_template.action %>
+<li>
+<% if show.navigation_template.controller.empty? %>
+	<%= link_to show.name, eval(show.navigation_template.link_path) %>
+<% else %>
+	<%= link_to show.name, :controller => show.navigation_template.controller, 
+                       :action => show.navigation_template.action %>
+
+<% end%>
 </li>
