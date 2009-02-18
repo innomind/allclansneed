@@ -21,6 +21,7 @@ class ForumController < ApplicationController
   
   def new
     @forum = Forum.new
+    add_breadcrumb 'Frum erstellen', ''
   end
   
   def create
@@ -36,6 +37,7 @@ class ForumController < ApplicationController
   
   def edit
     @forum = Forum.find_for_site_by_id(params[:id])
+    add_breadcrumb 'Forum Editieren', ''
   end
   
   def update

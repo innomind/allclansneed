@@ -7,7 +7,4 @@ class Guestbook < ActiveRecord::Base
   belongs_to :site
   belongs_to :user, :foreign_key => "comment_author_id"
   
-  def self.show_model(page, site_id)
-    paginate_for_site
-  end
 end

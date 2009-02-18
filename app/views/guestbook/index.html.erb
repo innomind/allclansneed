@@ -1,11 +1,11 @@
 <h1>Gästebuch</h1>
 
 <p id="add_link"><%= link_to_function("Eintrag hinzufügen",
-	"Element.remove('add_link');Element.show('add_guestbook')")%>
+	"Element.hide('add_link');Element.show('add_guestbook')")%>
 </p>
 
 <div id="add_guestbook" style="display:none;">
-	<% error_handling_remote_form_for @guestbook, :url => {:action => 'new'}, :html => {:id => 'guestbook_form'} do |f| %>
+	<% error_handling_remote_form_for @guestbook, :html => {:id => 'guestbook_form'} do |f| %>
 		<%= f.text_field "name" %>
         <%= f.text_field "email" %>
         <%= f.text_field "url" %>
