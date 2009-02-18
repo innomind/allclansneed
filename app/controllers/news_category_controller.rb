@@ -1,5 +1,6 @@
 class NewsCategoryController < ApplicationController
-    ACTION_LEVELS = {:all => LEVEL_SITE_ADMIN}
+  #  ACTION_ACCESS_TYPES = {:all => User::COMPONENT_RIGHT_OWNER}
+  CONTROLLER_ACCESS = User::COMPONENT_RIGHT_OWNER
   def index
     redirect_to :action => "list"
   end
