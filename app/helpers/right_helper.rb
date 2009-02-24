@@ -21,6 +21,10 @@ module RightHelper
     end
   end
   
+  def access_link_if condition, name, target, html_options = nil
+    access_link(name, target, html_options) if condition
+  end
+  
   def access_remote_link name, target, html_options = nil
     link_to_remote name, target, html_options
   end

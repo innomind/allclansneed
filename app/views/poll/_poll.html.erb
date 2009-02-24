@@ -1,6 +1,11 @@
 <div id="poll<%= poll.id %>">
 	Titel: <%= poll.title %> <br />
+	Status: <%= poll.status %> 
+	<%= access_link_if poll.open?, "schließen", close_poll_path(poll) %>
+	<%= access_link_if poll.close?, "öffnen", open_poll_path(poll) %>
+	<br />
 	Beschreibung: <%= poll.description %> <br />
-  <%= link_to("details", :action => "show", :id => poll.id) %>
+  <%= access_link "details", poll_path(poll)  %>
+
 	<br /><br />
 </div>

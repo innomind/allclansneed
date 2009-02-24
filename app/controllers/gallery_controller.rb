@@ -1,5 +1,7 @@
 class GalleryController < ApplicationController
   
+  add_breadcrumb 'Galerie', 'galleries_path'
+  
   CONTROLLER_ACCESS = COMPONENT_RIGHT_OWNER
 
   ACTION_ACCESS_TYPES={
@@ -12,10 +14,12 @@ class GalleryController < ApplicationController
   end
   
   def show
-    @gallery = Gallery.find_for_site(:first, :conditions => {:id => params[:id]})
+    @gallery = Gallery.find_for_site_by_id params[:id]
+    add_breadcrumb @gallery.name
   end
   
   def new
+    add_breadcrumb 'neue Galerie erstellen'
     @gallery = Gallery.new
   end
   
@@ -24,7 +28,8 @@ class GalleryController < ApplicationController
     @gallery.site = current_site
     @gallery.user = current_user
     if @gallery.save
-      redirect_to :action => "index"
+      flash[:notice] = "Gallerie erstellt"
+      redirect_to new_gallery_pic_path(@gallery)
     else
       render :action => "new"
     end

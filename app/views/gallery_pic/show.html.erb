@@ -1,8 +1,8 @@
 <%= @gallery_pic.name %><br>
 
-<%= image_tag @gallery_pic.pic.url(:medium) %><br>
+<%= link_to image_tag(@gallery_pic.pic.url(:medium)), @gallery_pic.pic.url(:original) %><br>
 Beschreibung: <%= @gallery_pic.description %><br>
 Hochgeladen von:<%= username(@gallery_pic.user) %><br>
 Hochgeladen am: <%= german_date_with_time(@gallery_pic.created_at) %>
 <br>
-<%= render :partial => "comment/index", :locals => { :model => @gallery_pic} %>
+<%= show_comments @gallery_pic %>

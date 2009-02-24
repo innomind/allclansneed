@@ -1,6 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
 
-  map.root :controller => 'login'
+  map.root :controller => 'news'
   
   map.resources :news, :singular => "onenews"
   
@@ -10,11 +10,13 @@ ActionController::Routing::Routes.draw do |map|
     end
   end
   
-  map.resources :galleries, :controller => "gallery" do |gallery|
-    gallery.resource :gallery_pic
+  map.resources :galleries, :controller => "gallery", :shallow => true do |gallery|
+    gallery.resources :pics, :controller => "gallery_pic"
   end
   
-  map.resources :guestbooks, :controller => "guestbook", #:collection => {:add_comment => :post},
+  map.resources :polls, :controller => "poll", :member => {:vote => :post, :open => :get, :close => :get}
+  
+  map.resources :guestbooks, :controller => "guestbook",
                             :except => [:new, :update, :edit],
                             :member => {:add_comment => :post}
   
@@ -24,7 +26,6 @@ ActionController::Routing::Routes.draw do |map|
   #map.login 'login', :controller => 'login', :action => 'login'
   map.squads ':site_id/create_squad', :controller => 'clan_management', :action => 'create_squad'
   map.rights ':site_id/rights_management', :controller => 'rights_management', :action => 'rights_management'
-  
   
   map.connect ':controller/:action'
   map.connect ':controller/:action/:id'

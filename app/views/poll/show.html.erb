@@ -1,9 +1,5 @@
-<h1>show details for a special poll</h1>
-<% error_handling_form_for :poll, @poll, :url => {:action => "vote", :id => params[:id]} do |form| %>
-  Poll: <%= @poll.title %><br />
-  Beschreibung: <%= @poll.description %><br />
-  <ul id="poll">
-    <%= render :partial => "polloption", :collection => @polloptions %>
-  </ul>
-  <%= form.submit "abschicken" %>
+<% init_progress_bar %>
+<% for option in @poll.poll_options %>
+	<%= option.name %> votes: <%= option.vote_count.to_s %><br />
+	<%= progress_bar %>
 <% end %>

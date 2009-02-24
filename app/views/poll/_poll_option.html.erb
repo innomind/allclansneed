@@ -1,0 +1,7 @@
+<div id="polloption_<%= poll_option.id %>">
+<% fields_for :poll_result, :builder => ErrorHandlingFormBuilder do |poll_result_form| %>
+  <%#= pollresult_form.radio_button("poll_result", "polloption", polloption.id) %>
+  <%= poll_result_form.radio_button("poll_option_id", poll_option.id) %>
+  <%= poll_option.name %>
+<% end %>
+</div>

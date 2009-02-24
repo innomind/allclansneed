@@ -1,4 +1,4 @@
-<% error_handling_form_for :gallery_pic, @gallery_pic, :url => {:action => "create", :id => params[:id]}, :html => { :multipart => true } do |form| %>
+<% error_handling_form_for :gallery_pic, @gallery_pic, :url => gallery_pics_path(@gallery), :html => { :multipart => true, :method => :post } do |form| %>
   <%= form.file_field :pic %>
   <%= form.text_field :name %>
   <%= form.text_area :description, :rows => "5", :cols => "15" %>

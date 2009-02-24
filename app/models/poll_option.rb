@@ -1,7 +1,7 @@
 class PollOption < ActiveRecord::Base
   
   belongs_to :poll
-  has_many :pollresults
+  has_many :poll_results
   
   attr_accessor :should_destroy
   

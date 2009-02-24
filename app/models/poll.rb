@@ -6,9 +6,17 @@ class Poll < ActiveRecord::Base
   belongs_to :user
   
   has_many :poll_options, :dependent => :destroy
-  has_many :pollresults, :dependent => :destroy
+  has_many :poll_results, :dependent => :destroy
   
   after_update :save_options
+  
+  def close?
+    !open
+  end
+  
+  def status
+    open? ? "offen" : "geschlossen"
+  end
   
   def polloption_attributes=(polloption_attributes)
     polloption_attributes.each do |attributes|

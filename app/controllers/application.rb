@@ -16,6 +16,7 @@ class ApplicationController < ActionController::Base
   COMPONENT_RIGHT_OWNER = User::COMPONENT_RIGHT_OWNER
   
   before_filter :init, :init_areas # :check_query
+  around_filter :catch_exceptions
   
   #make session available in static (class) context
   class_inheritable_accessor :static_session, :current_site
@@ -96,7 +97,6 @@ class ApplicationController < ActionController::Base
     end  
   end
   
-  
   ################# private #################
   private
 
@@ -154,4 +154,14 @@ class ApplicationController < ActionController::Base
   #this doesn't work, must use facets plugin, then a trick seems to be possible
   #rescue NameError
   #    eval("self.class"+$!.message[/method \`(.*)'/, 1])
+  
+  def catch_exceptions
+    begin
+      yield
+    rescue ActiveRecord::RecordNotFound
+      render :template => "errors/RecordNotFound"
+    #rescue NoMethodError
+     # render :text => "no method exception"
+    end
+  end
 end

@@ -4,6 +4,6 @@ class AddCounterCacheToForumThreads < ActiveRecord::Migration
   end
 
   def self.down
-    remove_colum :forum_threads, :forum_message_count
+    remove_column :forum_threads, :forum_messages_count
   end
 end

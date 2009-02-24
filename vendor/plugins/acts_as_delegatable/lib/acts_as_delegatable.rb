@@ -15,7 +15,8 @@ module ActiveRecord::Acts::ActsAsDelegatable
 
       def self.method_missing method, *args
         if find = method.to_s.match(/^find_for_site_(\w*)$/)
-          self.send "find_#{find[1]}".to_sym, *append_condition(args)
+          do_find "find_#{find[1]}", args
+          #self.send "find_#{find[1]}".to_sym, *append_condition(args)
         elsif find = method.to_s.match(/^page_for_site_(\w*)$/)
           self.send "paginate_#{find[1]}".to_sym, initilize_paginate(args)
         else
@@ -24,8 +25,7 @@ module ActiveRecord::Acts::ActsAsDelegatable
       end
       
       def self.find_for_site *args
-        new_args = append_condition(args)
-        find(*new_args)
+        do_find("find", args)
       end
       
       def self.page_for_site *args
@@ -33,6 +33,18 @@ module ActiveRecord::Acts::ActsAsDelegatable
       end
       
       private
+      
+      def do_find method, args
+        old_args = args.dup
+        #begin
+          self.send method.to_sym, *append_condition(args)
+       #rescue ActiveRecord::RecordNotFound
+       #  raise "ACNException"
+       #  if find(*old_args)
+       #    raise "IntrusionException"
+       #  end
+       #end
+      end
       
       def initilize_paginate args
         options = args.detect { |argument| argument.is_a?(Hash) }
