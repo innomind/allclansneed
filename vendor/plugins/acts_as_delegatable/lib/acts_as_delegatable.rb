@@ -8,28 +8,86 @@ module ActiveRecord::Acts::ActsAsDelegatable
   def self.included(base)
     base.extend(ClassMethods)
   end
-
+  
   module ClassMethods
+    def acts_as_site options = {}
+      
+      @options = options
+
+      def self.find *args
+        with_scope(:find => { :conditions => "site_id = #{$site_id}" }) do
+          r = super(*args)
+          if r.nil?
+            with_exclusive_scope(:find => {  }) do
+              unless super(*args).nil?
+                raise ActiveRecord::RecordNotFound
+              end
+            end
+          end
+          r
+        end
+      end
+      
+      def self.new *args
+        model = super(*args)
+        model.site_id = $site_id
+        model.user_id = $user_id if model.has_attribute?("user_id")
+        model
+      end
+      
+      def self.paginate *args
+        super(*initilize_paginate(args))
+      end
+      
+      def self.pages *args
+        paginate(*initilize_paginate(args))
+      end
+      
+      #could be refactored - but also could not
+      def initilize_paginate args
+        options = args.detect { |argument| argument.is_a?(Hash) }
+        if options.nil?
+          options = {:page => $page,
+                     :per_page => 2,
+                     :order => 'created_at DESC' 
+          }
+          args << options
+        else
+          options[:page] ||= $page 
+          options[:per_page] ||= 2
+          options[:order] ||= 'created_at DESC'
+        end
+        append_condition(args)
+      end
+
+    end
+    
     def acts_as_delegatable
       include ActiveRecord::Acts::ActsAsDelegatable::InstanceMethods
 
       def self.method_missing method, *args
-        if find = method.to_s.match(/^find_for_site_(\w*)$/)
-          do_find "find_#{find[1]}", args
-          #self.send "find_#{find[1]}".to_sym, *append_condition(args)
-        elsif find = method.to_s.match(/^page_for_site_(\w*)$/)
-          self.send "paginate_#{find[1]}".to_sym, initilize_paginate(args)
-        else
-          super
+        with_scope(:find => { :conditions => "site_id = #{$site_id}" }, :create => { :site_id => $site_id }) do
+          if find = method.to_s.match(/^find_for_site_(\w*)$/)
+            self.send "find_#{find[1]}", *args
+            #self.send "find_#{find[1]}".to_sym, *append_condition(args)
+          elsif find = method.to_s.match(/^page_for_site_(\w*)$/)
+            self.send "paginate_#{find[1]}".to_sym, *initilize_paginate(args)
+          else
+            super
+          end
         end
       end
       
       def self.find_for_site *args
-        do_find("find", args)
+        with_scope(:find => { :conditions => "site_id = #{$site_id}" }, :create => { :site_id => $site_id }) do
+          find(*args)
+        end
       end
       
       def self.page_for_site *args
-        paginate(*initilize_paginate(args))
+        with_scope(:find => { :conditions => "site_id = #{$site_id}" }, :create => { :site_id => $site_id }) do
+          paginate(*initilize_paginate(args))
+        end
       end
       
       private
@@ -60,6 +118,23 @@ module ActiveRecord::Acts::ActsAsDelegatable
           options[:order] ||= 'created_at DESC'
         end
         append_condition(args)
+      end
+      
+      
+      def initilize_paginate_new args
+        options = args.detect { |argument| argument.is_a?(Hash) }
+        if options.nil?
+          {:page => $page,
+                         :per_page => 15,
+                         :order => 'created_at DESC' 
+                       }
+        else
+          options.merge({:page => $page,
+                         :per_page => 15,
+                         :order => 'created_at DESC' 
+                       })
+          
+        end
       end
       
       def append_condition args, condition = nil

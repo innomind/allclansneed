@@ -5,6 +5,6 @@ module CommentHelper
   end
   
   def get_comments model  
-    model.comments.page_for_site :all
+    model.comments.pages :all
   end
 end

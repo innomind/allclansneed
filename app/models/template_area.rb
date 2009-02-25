@@ -1,5 +1,5 @@
 class TemplateArea < ActiveRecord::Base
-  acts_as_delegatable
+  #acts_as_delegatable
   belongs_to :template
   has_many :template_boxes, :dependent => :destroy
   has_many :sites, :through => :template_boxes
