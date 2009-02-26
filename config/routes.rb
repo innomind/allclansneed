@@ -21,14 +21,14 @@ ActionController::Routing::Routes.draw do |map|
                             :member => {:add_comment => :post}
   
   map.resources :profiles, :controller => "profile"
+
+  map.resources :articles, :controller => "article"
   
   map.resources :templates, :member => { :choose => :get }
   
   map.resources :messages
   
   map.resources :categories
-
-  map.resources :articles, :controller => "article"
 
   map.users 'register', :controller => 'login', :action => 'create'
   #map.login 'login', :controller => 'login', :action => 'login'
