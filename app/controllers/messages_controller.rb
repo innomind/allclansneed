@@ -1,4 +1,5 @@
 class MessagesController < ApplicationController
+  auto_complete_for :user, :login
   def index
     @messages = Message.find(:all, :conditions => { :receiver_id => current_user_id })
   end

@@ -1,42 +1,39 @@
 class NewsController < ApplicationController
   #ACTION_LEVELS = {:new => LEVEL_SITE_ADMIN}
   add_breadcrumb 'News', 'news_path'
-  before_filter :init_news, :only => [:show, :delete, :edit, :update]
+  before_filter :init_news, :only => [:show, :destroy, :edit, :update]
   
   def index
-    @news = News.find_for_site(:all)
-    @tags = News.tag_counts(:order => 'count desc', :conditions  => {:site_id  => current_site_id})
+    @news = News.paginate(:all)
+    @tags = News.tag_counts(:order => 'count desc', :conditions  => {:site_id  => current_site.id})
   end
   
   def show
   end
   
   def new
+    add_breadcrumb 'News erstellen'
     @news = News.new
-    @tags = News.tag_counts :order => 'count desc'
+    @tags = News.tag_counts :order => 'count desc', :conditions  => {:site_id  => current_site.id}
   end
   
   def create
-    @_post = params[:news]
-    
-    @news = News.new( :title => @_post['title'],
-                      :subtext => @_post['subtext'],
-                      :news => @_post['news'])
-                      
-    @news.user = current_user
-    @news.site = current_site
-    @news.tag_list = @_post['tags']
+    tags = params[:news].delete(:tags)
+    @news = News.new params[:news]          
+    @news.tag_list = tags
     
     if @news.save
-      redirect_to :action => 'index'
+      flash[:notice] = "News erstellt"
+      redirect_to news_path
     else
       render :action => 'new'
     end
   end
   
-  def delete
+  def destroy
     @news.destroy
-    #redirect_to :action => 'index'
+    flash[:notice] = "News gelöscht"
+    redirect_to news_path
   end
   
   def edit
@@ -44,14 +41,12 @@ class NewsController < ApplicationController
   end
   
   def update
-    #@_post = params[:news]
-    #@news.title = @_post['title']
-    #@news.subtext = @_post['title']
-    #@news.news = @_post['title']
-    #@news.tag_list = @_post['tags']
+    tags = params[:news].delete(:tags)
     @news.update_attributes(params[:news])
+    @news.tag_list = tags
     if @news.save
-      redirect_to :action => 'index'
+      flash[:notice] = "News erfolgreich bearbeitet"
+      redirect_to news_path
     else
       render :action => 'edit'
     end
@@ -71,7 +66,7 @@ class NewsController < ApplicationController
   private
   
   def init_news
-    @news = News.find_for_site(params[:id])
-    add_breadcrumb @news.title, ''
+    @news = News.find(params[:id])
+    add_breadcrumb @news.title
   end
 end

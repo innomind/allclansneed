@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+  <title>WEBSEITEN TITEL!</title>
+<%= stylesheet_link_tag "redspace/redspace" %>
+</head>
+
+<body>
+<div class="wrapper">
+   <div class="header">
+      <div id="header" class="top">Willkommen zum CLAN - #abc on IRC</div>
+      <div id="header" class="text">CLAN NAME</div>
+      <div id="header" class="content">Main Content</div>
+   </div>
+   <div class="content_left">
+   <!-- NAVI START -->
+
+ <% get_boxes_for("linke_seite").each do |b| %>
+   <ul class="navi_left">
+   <li id="navi_left" class="top"><%= b.name %></li>
+	<%= create_box b %>
+   <li id="navi_left" class="bottom">&nbsp;</li>
+   </ul>
+ <% end %>
+
+   <!-- NAVI END -->
+   </div>
+   <div class="content_middle">Hier kommt dein Content rein!</div>
+   <div class="content_right">
+   <!-- NAVI START -->
+   <ul class="navi_right">
+   <li id="navi_right" class="top">Main Navigation</li>
+   <li id="navi_right" class="first"><a href="#">link</a></li>
+   <li id="navi_right" class="second"><a href="#">link</a></li>
+   <li id="navi_right" class="bottom">&nbsp;</li>
+   </ul>
+   <!-- NAVI END -->
+   <!-- NAVI START -->
+   <ul class="navi_right">
+   <li id="navi_right" class="top">Main Navigation</li>
+   <li id="navi_right" class="first"><a href="#">link</a></li>
+   <li id="navi_right" class="second"><a href="#">link</a></li>
+   <li id="navi_right" class="bottom">&nbsp;</li>
+   </ul>
+   <!-- NAVI END -->
+   </div>
+   <div class="bottom_left"></div>
+   <div class="bottom_right"></div>
+    <div class="bottom"><span>Copyright by jokerface.com</span></div>
+</div>
+</body>
+</html>

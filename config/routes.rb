@@ -6,7 +6,7 @@ ActionController::Routing::Routes.draw do |map|
   
   map.resources :forums, :controller => "forum", :shallow => true do |forum|
     forum.resources :forum_threads, :controller => "forum_thread", :shallow => true, :except => [:index], :as => "threads" do |thread|
-      thread.resources :forum_messages, :controller => "forum_message", :shallow => true, :as => "messages"
+      thread.resources :forum_messages, :controller => "forum_message", :shallow => true, :as => "posts"
     end
   end
   
@@ -21,6 +21,10 @@ ActionController::Routing::Routes.draw do |map|
                             :member => {:add_comment => :post}
   
   map.resources :profiles, :controller => "profile"
+  
+  map.resources :templates, :collection => { :choose => :get }
+  
+  map.resources :messages
   
   map.users 'register', :controller => 'login', :action => 'create'
   #map.login 'login', :controller => 'login', :action => 'login'

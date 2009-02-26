@@ -25,8 +25,6 @@ class GalleryController < ApplicationController
   
   def create
     @gallery = Gallery.new(params[:gallery])
-    #@gallery.site = current_site
-    #@gallery.user = current_user
     if @gallery.save
       flash[:notice] = "Gallerie erstellt"
       redirect_to new_gallery_pic_path(@gallery)

@@ -1,16 +1,9 @@
-<%= error_messages_for 'news' -%>
-
 <h1>edit News</h1>
-<% form_tag :action => 'update', :id => @news.id do %>
+<% error_handling_form_for @news, :url => onenews_path(@news) do |f| %>
 
-	<p><label for="news_title">Title</label>
-	<%= text_field 'news', 'title' %></p>
-
-	<p><label for="news_subtext">Subtext</label>
-	<%= text_field 'news', 'subtext' %></p>
-	
-	<p><label for="news_news">Text</label>
-	<%= text_field 'news', 'news' %></p>
+	<%= f.text_field :title %>
+	<%= f.text_field :subtext %>
+	<%= f.text_field :news %>
 	
 	<%= text_field_with_auto_complete :news,
 	                                  :tags,
@@ -22,8 +15,5 @@
 	vorhandene Tags:<br />
 	<%= cloud(@tags) %>
 	<br /><br />
-	<%= submit_tag "update" %>
+	<%= f.submit "bearbeiten" %>
 <% end %>
- 
-<br />
-<%= link_to "Back", :action => "index" %>

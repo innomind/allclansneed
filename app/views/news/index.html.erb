@@ -3,8 +3,10 @@
 <ul id="news_list">
 <%= render :partial => "news", :collection => @news %>
 </ul>
-<%= link_to "Neue News erstellen", :action => "new" %>
-<%= link_to "Kategorien verwalten", :controller => "News_Category", :action => "list" %>
+
+<%= will_paginate @news%>
+<br />
+<%= link_to "Neue News erstellen", new_onenews_path %>
 <br /><br />
 
 <%= cloud(@tags) %> 

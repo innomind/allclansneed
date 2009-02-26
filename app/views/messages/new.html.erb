@@ -1,6 +1,14 @@
 <h1>Send a new message</h1>
 
-<% error_handling_form_for :message, @message, :url => {:action => "create", :id => params[:id]}, :html => { :multipart => false } do |form| %>
+<% error_handling_form_for @message do |form| %>
+  
+  	<%= text_field_with_auto_complete :user, :login,
+	                                  { :value  => '',
+	                                    :size  => '20', 
+	                                    :tokens => ','},
+	                                  :indicator => 'status-indicator' %>
+	<span id="status-indicator" style="display: none"><%= image_tag("loading.gif", :border  => "0") %></span>
+	<br/>
   <%= form.collection_select("receiver_id", @possible_receiver, :id, :login)%>
   <%= form.text_field :subject, :label => "Betreff" %>
   <%= form.text_area :message, :label => "Nachricht" %>

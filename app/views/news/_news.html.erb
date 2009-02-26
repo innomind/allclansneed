@@ -10,8 +10,8 @@
 	updated: <%= german_date_with_time(news.updated_at) %><br />
 	Teaser: <%= news.subtext %> <br />
 
-	<%= link_to_remote image_tag('delete.png', :border => 0), :url => { :action  => 'delete', :id  => news.id} -%>
+	<%= access_link image_tag('delete.png', :border => 0), onenews_path(news), :method => :delete, :confirm => "Möchten sie diese News wirklich löschen?" -%>
 	
-	<%= link_to image_tag("page_edit.png", :border => 0), :action => 'edit', :id => news.id %>
+	<%= access_link image_tag("page_edit.png", :border => 0), edit_onenews_path(news) %>
 	<br /><br />
 </div>
