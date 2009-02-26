@@ -1,6 +1,7 @@
 class TemplateArea < ActiveRecord::Base
   #acts_as_delegatable
   belongs_to :template
+  belongs_to :template_box_type, :foreign_key => :prefered_box_type_id
   has_many :template_boxes, :dependent => :destroy
   has_many :sites, :through => :template_boxes
   

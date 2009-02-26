@@ -22,9 +22,11 @@ ActionController::Routing::Routes.draw do |map|
   
   map.resources :profiles, :controller => "profile"
   
-  map.resources :templates, :collection => { :choose => :get }
+  map.resources :templates, :member => { :choose => :get }
   
   map.resources :messages
+  
+  map.resources :categories
   
   map.users 'register', :controller => 'login', :action => 'create'
   #map.login 'login', :controller => 'login', :action => 'login'

@@ -28,23 +28,28 @@
 
    <!-- NAVI END -->
    </div>
-   <div class="content_middle">Hier kommt dein Content rein!</div>
+   <div class="content_middle">
+		<%= show_breadcrumb %><br><br>
+
+		<%if flash[:notice]%><p style="color: green"><%= flash[:notice] %></p>
+		<%end%>
+		<%if flash[:error]%><p style="color: red"><%= flash[:error] %></p>
+		<%end%>
+		
+		<%= yield %>
+		
+   </div>
    <div class="content_right">
    <!-- NAVI START -->
+
+ <% get_boxes_for("rechte_seite").each do |b| %>
    <ul class="navi_right">
-   <li id="navi_right" class="top">Main Navigation</li>
-   <li id="navi_right" class="first"><a href="#">link</a></li>
-   <li id="navi_right" class="second"><a href="#">link</a></li>
-   <li id="navi_right" class="bottom">&nbsp;</li>
+   <li id="navi_left" class="top"><%= b.name %></li>
+	<%= create_box b %>
+   <li id="navi_left" class="bottom">&nbsp;</li>
    </ul>
-   <!-- NAVI END -->
-   <!-- NAVI START -->
-   <ul class="navi_right">
-   <li id="navi_right" class="top">Main Navigation</li>
-   <li id="navi_right" class="first"><a href="#">link</a></li>
-   <li id="navi_right" class="second"><a href="#">link</a></li>
-   <li id="navi_right" class="bottom">&nbsp;</li>
-   </ul>
+ <% end %>
+
    <!-- NAVI END -->
    </div>
    <div class="bottom_left"></div>

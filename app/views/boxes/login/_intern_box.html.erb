@@ -7,6 +7,6 @@ Hallo <%= @user.nick %><br>
 <%= access_link image_tag("group_edit.png") + " Clan verwalten", :controller => "clan_management" %><br>
 <%= access_link image_tag("user_edit.png") + " User verwalten", :controller => "rights_management" %><br>
 <%= link_to image_tag("monitor_edit.png") + " Seite bearbeiten", :controller => "template_boxes" %><br>
-<%= access_link "Template verwalten", choose_templates_path%><br />
+<%= access_link "Template verwalten", templates_path%><br />
 
 <%= link_to image_tag("door_out.png") + " logout", :controller => "login", :action => "logout" %>

@@ -4,12 +4,21 @@ class TemplatesController < ApplicationController
   CONTROLLER_ACCESS = COMPONENT_RIGHT_OWNER
   
   def index
-    
+    @site = current_site
+    @templates = Template.all
   end
   
   def choose
-    @site = current_site
-    @templates = Template.all
+    new_template = Template.find_by_id params[:id]
+    old_template = current_site.template
+    
+    new_template.move_boxes(current_site.template_boxes)
+    
+    current_site.template = new_template
+    if current_site.save
+      flash[:notice] = "Template geändert"
+    end
+    redirect_to templates_path
   end
   
   def edit
