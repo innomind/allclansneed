@@ -1,37 +1,19 @@
-<%= error_messages_for 'news' -%>
-
 <h1>Post new News</h1>
-<% form_tag :action => 'create' do %>
-
-	<p><label for="news_title">Title</label>
-	<%= text_field 'news', 'title' %></p>
-
-	<p><label for="news_subtext">Subtext</label>
-	<%= text_field 'news', 'subtext' %></p>
+<% error_handling_form_for @news do |f| %>
+	<%= f.text_field 'title' %>
+	<%= f.text_field 'subtext' %>
+	<%= f.text_field 'news' %>
 	
-	<p><label for="news_news">Text</label>
-	<%= text_field 'news', 'news' %></p>
-	
-	<%= text_field_with_auto_complete :news,
-	                                  :tags,
-	                                  { :value  => 'tags',
+	tags: <%= text_field_with_auto_complete :news, :tags,
+	                                  { :value  => '',
 	                                    :size  => '20', 
 	                                    :tokens => ','},
 	                                  :indicator => 'status-indicator' %>
+	<span id="status-indicator" style="display: none"><%= image_tag("loading.gif", :border  => "0") %></span>
 	                                  
-	<%= text_field_with_auto_complete 'news',
-	                                  'tags',
-	                                  { :size => 50 },
-	                                  { :tokens => ','}%>
-  
-  
-                    <span id="status-indicator" style="display: none"><%= image_tag("loading.gif", :border  => "0") %></span>
 	<br /><br />
 	vorhandene Tags:<br />
 	<%= cloud(@tags) %>
 	<br /><br />
-	<%= submit_tag "Create" %>
+	<%= f.submit "News erstellen" %>
 <% end %>
- 
-<br />
-<%= link_to "Back", :action => "index" %>

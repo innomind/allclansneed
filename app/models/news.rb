@@ -1,6 +1,6 @@
 class News < ActiveRecord::Base
   acts_as_taggable
-  acts_as_delegatable
+  acts_as_site
 
   belongs_to :user
   belongs_to :news_category
