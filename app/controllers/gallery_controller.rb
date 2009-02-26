@@ -10,11 +10,11 @@ class GalleryController < ApplicationController
   }
   
   def index
-    @galleries = Gallery.find_for_site(:all)
+    @galleries = Gallery.paginate(:all, :include => :gallery_pics)
   end
   
   def show
-    @gallery = Gallery.find_for_site_by_id params[:id]
+    @gallery = Gallery.find_by_id params[:id], :include => :gallery_pics
     add_breadcrumb @gallery.name
   end
   
@@ -25,8 +25,8 @@ class GalleryController < ApplicationController
   
   def create
     @gallery = Gallery.new(params[:gallery])
-    @gallery.site = current_site
-    @gallery.user = current_user
+    #@gallery.site = current_site
+    #@gallery.user = current_user
     if @gallery.save
       flash[:notice] = "Gallerie erstellt"
       redirect_to new_gallery_pic_path(@gallery)
@@ -43,7 +43,7 @@ class GalleryController < ApplicationController
     
   end
   
-  def delete
+  def destroy
     
   end
 end

@@ -2,5 +2,5 @@
   <%= render :partial => "gallery", :collection => @galleries %><br>
 <% end %>
 <br>
-  
+<%= will_paginate @galleries %><br  />
 <%= access_link "Gallerie hinzufügen", new_gallery_path %>

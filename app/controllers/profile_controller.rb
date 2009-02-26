@@ -11,16 +11,19 @@ class ProfileController < ApplicationController
     
     if @profile.user != current_user
       #if there is a direct connection between the current_user and the profile which is currently viewed
-      if (@profile.user.is_friends_with? @current_user)
-        @connection = "direct"
-      elsif ((@profile.user.friends & @current_user.friends).length > 0)
-        @connection = "indirect"
-        #wenn beide mehrere freunde gemeinsam haben wird einer zufällig ausgewählt
-        @friends_of_both = (@profile.user.friends & @current_user.friends)
-        @friend_of_both = @friends_of_both[rand(@friends_of_both.length)]
-      else
-        @connection = "none"
-      end
+    
+    #todo
+      
+     #if (@profile.user.is_friends_with? @current_user)
+     #  @connection = "direct"
+     #elsif ((@profile.user.friends & @current_user.friends).length > 0)
+     #  @connection = "indirect"
+     #  #wenn beide mehrere freunde gemeinsam haben wird einer zufällig ausgewählt
+     #  @friends_of_both = (@profile.user.friends & @current_user.friends)
+     #  @friend_of_both = @friends_of_both[rand(@friends_of_both.length)]
+     #else
+     #  @connection = "none"
+     #end
     end
   end
   
