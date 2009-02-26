@@ -1,0 +1,18 @@
+<% if @articles.blank? %>
+  <p>No articles added yet.</p>
+<% else %>
+  <p>All articles on you site:</p>
+
+<ul id="articles">
+
+<% @articles.each do |a| %>
+  <li>
+    <%= link_to a.title, {:action => 'show', :id => a.id} -%>
+    <%= access_link image_tag("folder_edit.png"), { :action => "edit", :id => a.id } %>
+    <%= access_link image_tag("folder_delete.png"), {  :action => "destroy", :id => a.id } %>
+  </li>
+<% end %>
+
+</ul>
+<% end %>
+<p><%= link_to "Add an article", {:action => 'new' }%></p>

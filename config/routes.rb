@@ -21,7 +21,9 @@ ActionController::Routing::Routes.draw do |map|
                             :member => {:add_comment => :post}
   
   map.resources :profiles, :controller => "profile"
-  
+
+  map.resources :articles, :controller => "article"
+
   map.users 'register', :controller => 'login', :action => 'create'
   #map.login 'login', :controller => 'login', :action => 'login'
   map.squads ':site_id/create_squad', :controller => 'clan_management', :action => 'create_squad'
