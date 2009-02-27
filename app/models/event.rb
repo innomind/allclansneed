@@ -1,5 +1,5 @@
 class Event < ActiveRecord::Base
-  acts_as_delegatable
+  acts_as_site
   belongs_to :site
 
   #before saving the event, expire_at must be build together

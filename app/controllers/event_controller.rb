@@ -7,23 +7,10 @@ class EventController < ApplicationController
     :create => COMPONENT_RIGHT_OWNER
   }
   
-  def new
-    @event = Event.new
-  end
-  
-  def create
-    @event = Event.new(params[:event])
-    @event.site = current_site
-        
-    if @event.save
-      redirect_to :action => 'index'
-    else
-      render :action => "new"
-    end
-  end
+  add_breadcrumb 'Kalender', "events_path"
   
   def index
-    @events = Event.find_for_site(:all)
+    @events = Event.find(:all)
     @year = (params[:year].nil?) ? Time.now.year : params[:year].to_i
     
     if (params[:month].nil?)
@@ -39,15 +26,34 @@ class EventController < ApplicationController
         @year += 1
       end
     end
+  end  
+  
+  def show
+    @event = Event.find(:first, :conditions => {:id => params[:id]})
+    add_breadcrumb @event.name
+  end  
+  
+  def new
+    @event = Event.new
+    add_breadcrumb "neuen Eintrag erstellen"
+  end
+  
+  def create
+    @event = Event.new(params[:event])
+    @event.site = current_site
+        
+    if @event.save
+      redirect_to :action => 'index'
+    else
+      render :action => "new"
+    end
   end
   
   def showDay
     @day = params[:date].to_date
-    @events = Event.find_for_site(:all, :conditions => ["created_at > ? and created_at < ?",@day, @day + 1.day], :order => "expire_at ASC")
+    @events = Event.find(:all, :conditions => ["created_at > ? and created_at < ?",@day, @day + 1.day], :order => "expire_at ASC")
+    add_breadcrumb "Tag: " + Time.parse(@day)
   end
-  
-  def showEvent
-    @event = Event.find_for_site(:first, :conditions => {:id => params[:id]})
-  end
+
 end
 

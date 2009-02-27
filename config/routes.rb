@@ -37,6 +37,10 @@ ActionController::Routing::Routes.draw do |map|
                           :member => [:accept, :reject, :become]
 
   map.resources :groups, :member => [:join, :administrate, :activate, :kick]
+  
+  map.resources :clanwars, :controller => "clanwar"
+  
+  map.resources :events, :controller => "event", :collection => {:showDay => :get}
 
   map.users 'register', :controller => 'login', :action => 'create'
   #map.login 'login', :controller => 'login', :action => 'login'
