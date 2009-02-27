@@ -3,9 +3,9 @@
     <%= polloption_form.text_field :name, :index => nil, :label => "Name" %>
    
     <% if newoption.new_record? %>
-      <%= link_to_function "remove", "$(this).up('.polloption').remove()" %>
+      <%= link_to_function "löschen", "$(this).up('.polloption').remove()" %>
     <% else %>
-      <%= link_to_function "remove", "mark_poll_for_destroy(this)" %>
+      <%= link_to_function "löschen", "mark_poll_for_destroy(this)" %>
       <%= polloption_form.hidden_field :id, :style => "blank", :index => nil %>
       <%= polloption_form.hidden_field :should_destroy, :style => "blank", :index => nil, :class => 'should_destroy' %>
     <% end %>

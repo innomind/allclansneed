@@ -1,10 +1,4 @@
 class LoginController < ApplicationController
-
-    ACTION_ACCESS_TYPES = {
-      :test1 => ACN_MEMBER,
-      :test2 => SITE_MEMBER,
-      :test3 => COMPONENT_RIGHT_OWNER
-    }
   
     def login
       nick = params[:login][:nick]
@@ -48,18 +42,6 @@ class LoginController < ApplicationController
         end
       end
       @pages = Site.all
-    end
-  
-    def test1
-      render :text => "Test1"
-    end
-  
-    def test2
-      render :text => "Test2"
-    end
-  
-    def test3
-      render :text => "Test3"
     end
   
     private

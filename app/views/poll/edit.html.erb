@@ -1,6 +1,6 @@
 <h1>edit Poll #<%= @poll.id %></h1>
 
-<% error_handling_form_for :poll, @poll, :url => {:action => "update", :id => params[:id]}, :html => { :multipart => false } do |form| %>
+<% error_handling_form_for @poll do |form| %>
   <%= form.text_field :title, :label => "Titel:" %>
   <%= form.text_field :description, :label => "Beschreibung:" %>
 

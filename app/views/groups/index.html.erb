@@ -1,4 +1,5 @@
-<%= link_to ("neue gruppe anlegen", :action => "new") %>
-
 <h1>Gruppenübersicht</h1>
 <%= render :partial => 'group', :collection => @groups%>
+
+<br />
+<%= access_link ("neue gruppe anlegen", :action => "new") %>

@@ -11,8 +11,10 @@ class GroupsController < ApplicationController
     :update => COMPONENT_RIGHT_OWNER
   }
   
+  before_filter :check_founder, :only => [:kick, :administrate, :activate]
+  
   def index
-    @groups = Group.paginate(:all)
+    @groups = Group.paginate(:all, :page => params[:page])
   end
   
   def show
@@ -84,14 +86,12 @@ class GroupsController < ApplicationController
   
   def administrate
     add_breadcrumb "Verwaltung"
-    @group = Group.find_by_id(params[:id])
     
     @pending_memberships = Groupmembership.find(:all, :conditions => {:group_id => @group.id, :status => "pending"})
     @active_memberships = Groupmembership.find(:all, :conditions => ["group_id = ? AND status = ? AND user_id NOT IN (?)", @group.id, "active", current_user.id])
   end
   
   def activate
-    @group = Group.find_by_id params[:id]
     @groupmembership = @group.groupmemberships.find_by_id(params[:membership_id])
     @groupmembership.status = "active"
     
@@ -104,11 +104,21 @@ class GroupsController < ApplicationController
   end
   
   def kick
-    @group = Group.find_by_id params[:id]
     @groupmembership = @group.groupmemberships.find_by_id(params[:membership_id])
     if @groupmembership.destroy
       flash[:notice] = "Du hast " + @groupmembership.user.login + " aus der Gruppe geworfen."
       redirect_to :action => "administrate", :id => @groupmembership.group.id
     end
   end
+  
+  private
+  
+  def check_founder
+    @group = Group.find_by_id(params[:id])
+    unless @group.founder == current_user
+      flash[:error] = "Du bist nicht der Gründer von dieser Gruppe! Nur gründer können sie verwalten"
+      redirect_to groups_path
+    end
+  end
+  
 end

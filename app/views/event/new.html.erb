@@ -3,7 +3,7 @@
   
   <%= form.text_field :name %>
   Datum: <%= form.text_field :date, :style => "blank" %> <%= calendar_for('event_date') %><br />
-  Uhrzeit: <%#= time_picker(Time.now, {:minute_step => 30, :time_separator => ":", :prefix => "event", :field_name  => "time" }) %><br />
+  Uhrzeit: <%= time_picker(Time.now, {:minute_step => 30, :time_separator => ":", :prefix => "event", :field_name  => "time" }) %><br />
   Beschreibung: <%= form.text_field :description, :style => "blank" %><br />
   
   <br />
