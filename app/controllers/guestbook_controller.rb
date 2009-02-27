@@ -33,7 +33,8 @@ class GuestbookController < ApplicationController
     @guestbook = Guestbook.find(params[:id])
     @guestbook.update_attribute(:comment, params[:guestbook][:comment])
     @guestbook.update_attribute(:comment_author_id, current_user_id)
-    redirect_to :action => "index"
+    flash[:notice] = "Kommentar gespeichert"
+    redirect_to guestbook_path
     #return if request.xhr?
   end
 end

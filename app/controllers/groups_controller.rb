@@ -3,15 +3,8 @@ class GroupsController < ApplicationController
   add_breadcrumb 'Gruppen', "groups_path"
   
   CONTROLLER_ACCESS = PUBLIC
-
-  ACTION_ACCESS_TYPES={
-    :new => COMPONENT_RIGHT_OWNER,
-    :create => COMPONENT_RIGHT_OWNER,
-    :edit => COMPONENT_RIGHT_OWNER,
-    :update => COMPONENT_RIGHT_OWNER
-  }
   
-  before_filter :check_founder, :only => [:kick, :administrate, :activate]
+  before_filter :check_founder, :only => [:edit, :update, :kick, :administrate, :activate]
   
   def index
     @groups = Group.paginate(:all, :page => params[:page])
@@ -37,10 +30,10 @@ class GroupsController < ApplicationController
       @membership.status = "active"
       @membership.save
       flash[:notice] = "Gruppe erfolgreich angelegt"
-      redirect_to :action => 'index'
+      redirect_to group_path(@group)
     else
       flash[:notice] = "Gruppe konnte nicht angelegt werden"
-      redirect_to :action => 'new'
+      render :action => 'new'
     end
   end
   
@@ -62,13 +55,22 @@ class GroupsController < ApplicationController
     end
     if @membership.save
       flash[:notice] = "Du bist der Gruppe " + @group.name + " beigetreten."
-      redirect_to :action => "show", :id => params[:id]
+      redirect_to group_path(@group)
+    end
+  end
+  
+  def leave
+    @group = Group.find_by_id(params[:id])
+    @membership = @group.groupmemberships.find_by_user_id current_user.id
+    unless @membership.nil?
+      @membership.destroy
+      flash[:notice] = "Du bist aus der Gruppe ausgetreten"
+      redirect_to groups_path
     end
   end
   
   def edit
     @group = Group.find_by_id(params[:id])
-    add_breadcrumb "Verwaltung", "administrate_group_path(#{@group.id})"
     add_breadcrumb "bearbeiten"
   end
   
@@ -77,10 +79,10 @@ class GroupsController < ApplicationController
     
     if @group.update_attributes(params[:group])
       flash[:notice] = "Deine Gruppe " + @group.name + " wurde erfolgreich aktualisiert."
-      redirect_to :action => 'show', :id => @group.id
+      redirect_to group_path(@group)
     else
       flash[:notice] = "Fehler beim aktualisieren der Gruppe " + @group.name
-      redirect_to :action => 'edit', :id => @group.id
+      render :action => 'edit'
     end
   end
   
@@ -100,14 +102,14 @@ class GroupsController < ApplicationController
     else
       flash[:notice] = "Es ist ein Fehler beim freischalten von " + @groupmembership.user.login + " aufgetreten."
     end
-    redirect_to :action => "administrate", :id => @groupmembership.group.id
+    redirect_to administrate_group_path(@group)
   end
   
   def kick
     @groupmembership = @group.groupmemberships.find_by_id(params[:membership_id])
     if @groupmembership.destroy
       flash[:notice] = "Du hast " + @groupmembership.user.login + " aus der Gruppe geworfen."
-      redirect_to :action => "administrate", :id => @groupmembership.group.id
+      redirect_to administrate_group_path(@group)
     end
   end
   
@@ -115,6 +117,7 @@ class GroupsController < ApplicationController
   
   def check_founder
     @group = Group.find_by_id(params[:id])
+    add_breadcrumb @group.name, "group_path(#{@group.id})"
     unless @group.founder == current_user
       flash[:error] = "Du bist nicht der Gründer von dieser Gruppe! Nur gründer können sie verwalten"
       redirect_to groups_path

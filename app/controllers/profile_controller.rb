@@ -35,7 +35,7 @@ class ProfileController < ApplicationController
     @profile = current_user.profile
     @profile.update_attributes(params[:profile])
     if @profile.save
-       redirect_to :action => "index", :id => @profile.user_id
+       redirect_to profile_path(@profile.user_id)
     else
       render :action => "edit"
     end

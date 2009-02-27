@@ -34,7 +34,7 @@ module ApplicationHelper
   end
   
   def username(user)
-    link_to user.login, :controller => "profile", :action => "index", :id => user.id
+    link_to user.login, profile_path(user)
   end
   
   #returns a formated date-string  

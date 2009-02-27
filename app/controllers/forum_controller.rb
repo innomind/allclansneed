@@ -28,7 +28,7 @@ class ForumController < ApplicationController
     @forum = Forum.new(params[:forum])
     if @forum.save
       flash[:notice] = "Forum erfolgreich erstellt"
-      redirect_to :action => "index"
+      redirect_to forums_path
     else
       render :action => "new"
     end

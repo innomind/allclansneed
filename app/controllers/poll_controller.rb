@@ -49,7 +49,7 @@ class PollController < ApplicationController
     @poll = Poll.find_by_id params[:id]
     if @poll.update_attributes(params[:poll])
       flash[:notice] = "Poll gespeichert"
-      redirect_to :action => 'index'
+      redirect_to poll_path(@poll)
     else
       render :action => "edit"
     end
@@ -63,23 +63,25 @@ class PollController < ApplicationController
 
     if result.save
       flash[:notice] = "Dein Vote wurde gespeichert"
-      redirect_to :action => "show", :id => params[:id]
+      redirect_to poll_path(@poll)
     else
       render :action => "show", :id => params[:id]
     end
   end
   
   def open
-    @poll = Poll.find_for_site_by_id params[:id]
+    @poll = Poll.find_by_id params[:id]
     @poll.open = true
     @poll.save
+    flash[:notice] = "Poll geöffnet"
     redirect_to polls_path
   end
   
   def close
-    @poll = Poll.find_for_site_by_id params[:id]
+    @poll = Poll.find_by_id params[:id]
     @poll.open = false
     @poll.save
+    flash[:notice] = "Poll geschlossen"
     redirect_to polls_path
   end
   

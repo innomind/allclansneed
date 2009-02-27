@@ -85,7 +85,7 @@ class TemplateBoxesController < ApplicationController
   private
   
   def init_box
-    @box = TemplateBox.find_for_site_by_id params[:template_box_id].to_i
+    @box = TemplateBox.find_by_id params[:template_box_id].to_i
   end
   
   def init_template_areas

@@ -1,8 +1,5 @@
 <h1>Gruppe <%= @group.name %></h1>
 
-<h3>Gruppe bearbeiten:</h3>
-  <%= link_to image_tag("page_edit.png"), edit_group_path(@group) %>
-
 <h3>Ausstehende Mitglieder</h3>
 <% @pending_memberships.each do |member| %>
 	<%= show_user member.user %>

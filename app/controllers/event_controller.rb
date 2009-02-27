@@ -43,7 +43,7 @@ class EventController < ApplicationController
     
     if @event.save
       flash[:notice] = "Kalendereintrag erstellt"
-      redirect_to :action => 'index'
+      redirect_to events_path
     else
       render :action => "new"
     end
