@@ -40,9 +40,9 @@ class EventController < ApplicationController
   
   def create
     @event = Event.new(params[:event])
-    @event.site = current_site
-        
+    
     if @event.save
+      flash[:notice] = "Kalendereintrag erstellt"
       redirect_to :action => 'index'
     else
       render :action => "new"
@@ -51,8 +51,8 @@ class EventController < ApplicationController
   
   def showDay
     @day = params[:date].to_date
-    @events = Event.find(:all, :conditions => ["created_at > ? and created_at < ?",@day, @day + 1.day], :order => "expire_at ASC")
-    add_breadcrumb "Tag: " + Time.parse(@day)
+    @events = Event.find(:all, :conditions => ["expire_at > ? and expire_at < ?",@day, @day + 1.day], :order => "expire_at ASC")
+    add_breadcrumb "Tag: " + (@day.to_s)
   end
 
 end
