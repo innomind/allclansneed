@@ -6,7 +6,8 @@
 
 <%= will_paginate @news%>
 <br />
-<%= link_to "Neue News erstellen", new_onenews_path %>
+<%= access_link "Neue News erstellen", new_onenews_path %>
+<%= access_link "Kategorien bearbeiten", category_path("News")%>
 <br /><br />
 
 <%= cloud(@tags) %> 

@@ -1,0 +1,11 @@
+<ul id="categories">
+<% @categories.each do |cat| %>
+	<li id="<%=dom_id(cat)%>">
+		<%= cat.name %>
+		<%= access_link image_tag("folder_edit.png"), edit_category_path(cat)%>
+	</li>
+<% end %>
+</ul>
+<%= access_link image_tag("folder_add.png") + " Kategorie erstellen", newcat_category_path(@cat_name) %>
+
+<%= sortable_element("categories", :url => update_positions_categories_path(:id => @cat_name)) %>

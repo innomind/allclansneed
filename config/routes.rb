@@ -28,7 +28,8 @@ ActionController::Routing::Routes.draw do |map|
   
   map.resources :messages
   
-  map.resources :categories
+  map.resources :categories, :member => {:newcat => :get, :createcat => :post}, :except => :new,
+                             :collection => {:update_positions => :post}
   
   map.resources :classifieds, :as => "kleinanzeigen"
   

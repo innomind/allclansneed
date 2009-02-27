@@ -3,7 +3,7 @@
 	<%= f.text_field 'title' %>
 	<%= f.text_field 'subtext' %>
 	<%= f.text_field 'news' %>
-	
+	<%= f.select :category_id, Category.for_select("News")%>
 	tags: <%= text_field_with_auto_complete :news, :tags,
 	                                  { :value  => '',
 	                                    :size  => '20', 
