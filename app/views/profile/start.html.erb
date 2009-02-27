@@ -1,1 +1,22 @@
 persönliche Startseite
+
+<% unless @pending_friends_for_me.empty? %>
+<p>Freundschaftseinladungen für dich</p>
+<ul>
+	<% @pending_friends_for_me.each do |friend| %>
+		<li>
+			<%= show_user(friend) %> <%= link_to "annehmen", accept_friend_path(friend) %> 
+			<%= link_to "ablehnen", friend_path(friend), :method => :delete, :confirm => "Einladung wirklich ablehnen?" %>
+		</li>
+	<% end %>
+</ul>
+<% end %>
+
+<% unless @pending_friends_by_me.empty? %>
+<p>Noch nicht bestätigte Freundschaftseinladungen von dir</p>
+<ul>
+	<% @pending_friends_by_me.each do |friend| %>
+		<li><%= show_user(friend) %> <%= link_to "zurückziehen", friend_path(friend), :method => :delete %></li>
+	<% end %>
+</ul>
+<% end %>

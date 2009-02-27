@@ -1,6 +1,18 @@
 class GroupsController < ApplicationController
+  
+  add_breadcrumb 'Gruppen', "groups_path"
+  
+  CONTROLLER_ACCESS = PUBLIC
+
+  ACTION_ACCESS_TYPES={
+    :new => COMPONENT_RIGHT_OWNER,
+    :create => COMPONENT_RIGHT_OWNER,
+    :edit => COMPONENT_RIGHT_OWNER,
+    :update => COMPONENT_RIGHT_OWNER
+  }
+  
   def index
-    @groups = Group.find(:all)
+    @groups = Group.paginate(:all)
   end
   
   def show
@@ -8,6 +20,7 @@ class GroupsController < ApplicationController
     @active_memberships = Groupmembership.find(:all, :conditions => {:group_id => @group.id, :status => "active"})
     
     @user = current_user
+    add_breadcrumb @group.name
   end
   
   def create
@@ -16,7 +29,6 @@ class GroupsController < ApplicationController
     
     @membership = Groupmembership.new
     @membership.user = current_user
-    
     
     if @group.save
       @membership.group = @group
@@ -32,6 +44,7 @@ class GroupsController < ApplicationController
   
   def new
     @group = Group.new
+    add_breadcrumb 'Gruppe erstellen'
   end
   
   def join
@@ -53,6 +66,8 @@ class GroupsController < ApplicationController
   
   def edit
     @group = Group.find_by_id(params[:id])
+    add_breadcrumb "Verwaltung", "administrate_group_path(#{@group.id})"
+    add_breadcrumb "bearbeiten"
   end
   
   def update
@@ -68,14 +83,16 @@ class GroupsController < ApplicationController
   end
   
   def administrate
+    add_breadcrumb "Verwaltung"
     @group = Group.find_by_id(params[:id])
     
     @pending_memberships = Groupmembership.find(:all, :conditions => {:group_id => @group.id, :status => "pending"})
-    @active_memberships = Groupmembership.find(:all, :conditions => {:group_id => @group.id, :status => "active"})
+    @active_memberships = Groupmembership.find(:all, :conditions => ["group_id = ? AND status = ? AND user_id NOT IN (?)", @group.id, "active", current_user.id])
   end
   
   def activate
-    @groupmembership = Groupmembership.find_by_id(params[:id])
+    @group = Group.find_by_id params[:id]
+    @groupmembership = @group.groupmemberships.find_by_id(params[:membership_id])
     @groupmembership.status = "active"
     
     if @groupmembership.save
@@ -87,7 +104,8 @@ class GroupsController < ApplicationController
   end
   
   def kick
-    @groupmembership = Groupmembership.find_by_id(params[:id])
+    @group = Group.find_by_id params[:id]
+    @groupmembership = @group.groupmemberships.find_by_id(params[:membership_id])
     if @groupmembership.destroy
       flash[:notice] = "Du hast " + @groupmembership.user.login + " aus der Gruppe geworfen."
       redirect_to :action => "administrate", :id => @groupmembership.group.id

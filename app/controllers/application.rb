@@ -110,6 +110,7 @@ class ApplicationController < ActionController::Base
     @logged_in = !session['user'].nil?
     session['error_objects'] = []
     @user = current_user
+    @user_belongs_to_site = user_belongs_to_site? ? true : false
     $user_id = @user.id unless @user.nil?
     
     init_access

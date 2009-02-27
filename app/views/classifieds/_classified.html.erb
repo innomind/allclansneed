@@ -1,0 +1,7 @@
+<li>
+<%= link_to classified.name, classified_path(classified) %>
+
+<%= access_link "bearbein", edit_classified_path(classified) %>
+<%= access_link "löschen", classified_path(classified), :method => :delete, :confirm => "Sind sie sicher, dass sie diese Anzeige löschen wollen?" %>
+
+</li>

@@ -1,10 +1,16 @@
 <h1>Gruppe <%= @group.name %></h1>
 
 <h3>Gruppe bearbeiten:</h3>
-  <%= link_to image_tag("page_edit.png", :border => 0), :action => 'edit', :id => @group.id %>
+  <%= link_to image_tag("page_edit.png"), edit_group_path(@group) %>
 
 <h3>pending members</h3>
-  <%= render :partial => 'user_pending', :collection => @pending_memberships %>
+<% @pending_memberships.each do |member| %>
+	<%= show_user member.user %>
+	<%= link_to image_tag("accept.png"), activate_group_path(@group, :membership_id => member) %>
+<% end %>
 
 <h3>active members</h3>
-  <%= render :partial => 'user_active', :collection => @active_memberships %>
+<% @active_memberships.each do |member| %>
+	<%= show_user member.user %>
+	<%= link_to image_tag("delete.png"), kick_group_path(@group, :membership_id => member), :confirm => "Möchten sie wirklich den User löschen?" %>
+<% end %>

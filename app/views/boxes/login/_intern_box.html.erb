@@ -1,4 +1,9 @@
-Hallo <%= @user.nick %><br>
+Hallo <%= @user.nick %> 
+<% unless @user_belongs_to_site %>
+	(gast auf dieser Seite)
+<% end %>
+
+<br>
 <%= link_to image_tag("door_in.png") + " meine Startseite", :controller => "profile", :action => "start" %><br>
 <%= link_to image_tag("user_go.png") + " mein Profil", profile_path(@user) %>
 <%= link_to image_tag("pencil.png"), edit_profile_path(@user) %><br>

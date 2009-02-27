@@ -1,0 +1,7 @@
+<h2>Kleinanzeigen</h2>
+<ul>
+<%= render :partial => 'classified', :collection => @classifieds %>
+</ul>
+<%= access_link "neue Kleinanzeige aufgeben", new_classified_path %>
+
+<%= will_paginate @classifieds %>

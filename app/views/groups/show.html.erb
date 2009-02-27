@@ -1,5 +1,9 @@
 <h1>Gruppe <%= @group.name %></h1>
 
+<% if @group.founder == @user %>
+	<%= link_to "Gruppe Verwalten", administrate_group_path(@group)%>
+<% end %>
+
 <h3>Beschreibung</h3>
   <%= @group.description %><br />
 
@@ -12,7 +16,7 @@
   <% elsif (@user.status_for_group @group) == "pending" %>
     Deine Mitgliedschaft wird überprüft
   <% else %>
-    <%= link_to ("Mitglied werden", :action => "join", :id => @group.id) %> 
+    <%= link_to "Mitglied werden", join_group_path(@group) %> 
   <% end %>
 
 <h3>Mitglieder</h3>

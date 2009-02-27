@@ -1,8 +1,8 @@
 class Group < ActiveRecord::Base
-  acts_as_delegatable
   
   has_many :groupmemberships
   has_many :users, :through => :groupmemberships
+  belongs_to :founder, :class_name => "User", :foreign_key => :founder_id
   
   validates_presence_of :name
   validates_presence_of :founder_id

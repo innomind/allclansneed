@@ -9,6 +9,7 @@ class Site < ActiveRecord::Base
   has_many :clanwars, :dependent => :destroy
   has_many :events, :dependent => :destroy
   has_many :polls, :dependent => :destroy
+  has_many :classifieds, :dependent => :destroy
   
   belongs_to :template
   

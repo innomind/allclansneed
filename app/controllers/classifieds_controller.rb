@@ -1,32 +1,39 @@
 class ClassifiedsController < ApplicationController
+
+  add_breadcrumb 'Kleinanzeigen', "classifieds_path"
+
+  CONTROLLER_ACCESS = COMPONENT_RIGHT_OWNER
+
+  ACTION_ACCESS_TYPES={
+    :index => PUBLIC,
+    :show => PUBLIC
+  }
+
   def index
-    list
-    render :action => 'list'
-  end
-  
-  def list
-    @classifieds = Classified.all
+    @classifieds = Classified.paginate :all
   end
   
   def show
     @classified = Classified.find(params[:id])
+    add_breadcrumb @classified.name
   end
   
   def new
+    add_breadcrumb "Kleinanzeige erstellen"
     @classified = Classified.new
   end
   
   def edit
     @classified = Classified.find(params[:id])
+    add_breadcrumb @classified.name + "bearbeiten"
   end
   
   def create
     @classified = Classified.new(params[:classified])
-    @classified.user = current_user
     
     if @classified.save
-      flash[:notice] = 'Classified was successfully created.'
-      redirect_to :action => 'index'
+      flash[:notice] = 'Anzeige erfolgreich erstellt'
+      redirect_to classifieds_path
     else
       render :action => "new"
     end
@@ -36,7 +43,7 @@ class ClassifiedsController < ApplicationController
     @classified = Classified.find(params[:id])
     
     if @classified.update_attributes(params[:classified])
-      flash[:notice] = 'Classified was successfully updated.'
+      flash[:notice] = 'Anzeige erfolgreich geändert.'
       redirect_to :action => 'index'
     else
       render :action => "edit"
@@ -45,8 +52,9 @@ class ClassifiedsController < ApplicationController
   
   def destroy
     @classified = Classified.find(params[:id])
-    @classified.destroy
-    
+    if @classified.destroy
+      flash[:notice] = 'Anzeige erfolgreich gelöscht'
+    end
     redirect_to :action => 'index'
   end
 end

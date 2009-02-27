@@ -29,6 +29,13 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :messages
   
   map.resources :categories
+  
+  map.resources :classifieds, :as => "kleinanzeigen"
+  
+  map.resources :friends, :only => [:index, :destroy],
+                          :member => [:accept, :reject, :become]
+
+  map.resources :groups, :member => [:join, :administrate, :activate, :kick]
 
   map.users 'register', :controller => 'login', :action => 'create'
   #map.login 'login', :controller => 'login', :action => 'login'

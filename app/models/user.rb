@@ -19,6 +19,7 @@ class User < ActiveRecord::Base
   
   has_many :groupmemberships
   has_many :groups, :through => :groupmemberships
+  has_many :groupfounderships, :class_name => "Group", :foreign_key => :founder_id
   
   has_many :squad_users
   has_many :user_rights, :dependent => :destroy

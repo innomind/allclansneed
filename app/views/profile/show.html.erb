@@ -1,8 +1,18 @@
-BILD
-
+<h3>Verbindung</h3>
 <% if @profile.user == @current_user %>
-  <h3>Dies bist du selber</h3>
+  <p>Dies bist du selber</p>
 <% end %>
+<% if @connection == "direct" %>
+  <%= show_user @profile.user %> -> <%= show_user @current_user %>
+<% elsif @connection == "indirect" %>
+  <%= become_friends_link @profile.user %> <br />
+  <%= show_user @profile.user %> -> <%= show_user @friend_of_both %> -> <%= show_user @current_user %>
+<% elsif @connection == "none" %>
+  <%= become_friends_link @profile.user %> <br />
+  Keine Verbindung
+<% end %>
+
+<br />
 <br />
 Vorname: <%= @profile.firstname %> <br />
 Nachname: <%= @profile.lastname %> <br />
@@ -19,16 +29,7 @@ Nachname: <%= @profile.lastname %> <br />
 <% end %>  
 <br>
 
-<h3>Verbindung</h3>
-<% if @connection == "direct" %>
-  <%= @profile.user.login %> -> <%= @current_user.login %>
-<% elsif @connection == "indirect" %>
-  <%= link_to "Freund werden", :controller => "friends", :action => "become", :id => @profile.user.id %> <br />
-  <%= @profile.user.login %> -> <%= @friend_of_both.login %> -> <%= @current_user.login %>
-<% elsif @connection == "none" %>
-  <%= link_to "Freund werden", :controller => "friends", :action => "become", :id => @profile.user.id %> <br />
-  Keine Verbindung
-<% end %>
+
 
 <h3>Freunde</h3>
 <% @profile.user.friends.each do  |f| %>
