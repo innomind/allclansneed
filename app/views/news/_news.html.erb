@@ -1,6 +1,6 @@
 <div id="news_<%= news.id %>">
 	Überschrift: <%= link_to news.title, :action => 'show', :id => news.id %> <br />
-	
+	Kategorie: <%= news.category.name unless news.category.nil?%><br />
 	Tags:
 	<% news.tag_list.each do |t| %>
 	  <%= t %>

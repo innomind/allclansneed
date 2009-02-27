@@ -1,0 +1,4 @@
+<% error_handling_form_for @category, :url => categories_path(:id => @cat_name) do |f| %>
+	<%= f.text_field :name %>
+	<%= f.submit "erstellen" %>
+<% end %>
