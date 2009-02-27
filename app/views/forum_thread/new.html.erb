@@ -1,4 +1,4 @@
-<% error_handling_form_for @forum_thread, :url => forum_forum_threads_path(params[:forum_id]) do |f| %>
+<% error_handling_form_for @forum_thread do |f| %>
     <%= f.text_field 'title' %>
     
     <% fields_for "forum_thread[forum_message]" do |message_form| %>

@@ -12,7 +12,7 @@ class GroupsController < ApplicationController
   }
   
   def index
-    @groups = Group.paginate(:all)
+    @groups = Group.paginate(:all, :page => params[:page])
   end
   
   def show

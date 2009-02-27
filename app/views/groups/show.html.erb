@@ -21,3 +21,10 @@
 
 <h3>Mitglieder</h3>
   <%= render :partial => 'user', :collection => @active_memberships %>
+
+
+<%= access_link "Neuen Thread erstellen", new_group_thread_path(@group)  %>
+<h2>Threads:</h2>
+<%#= will_paginate @group.threads %>
+
+<%= render :partial => "forum/thread", :collection => @group.forum_threads %>

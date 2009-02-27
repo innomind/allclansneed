@@ -36,6 +36,7 @@ module ActiveRecord::Acts::ActsAsDelegatable
       end
       
       def self.paginate *args
+        debugger
         super(*initilize_paginate(args))
       end
       

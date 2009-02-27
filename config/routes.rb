@@ -36,7 +36,9 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :friends, :only => [:index, :destroy],
                           :member => [:accept, :reject, :become]
 
-  map.resources :groups, :member => [:join, :administrate, :activate, :kick]
+  map.resources :groups, :member => [:join, :administrate, :activate, :kick], :shallow => true do |group|
+    group.resources :threads, :controller => "forum_thread"
+  end
 
   map.users 'register', :controller => 'login', :action => 'create'
   #map.login 'login', :controller => 'login', :action => 'login'

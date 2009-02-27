@@ -6,7 +6,7 @@ class ForumThreadController < ApplicationController
     :show => PUBLIC
   }
 
-  add_breadcrumb 'Forum', 'forums_path'
+  before_filter :init_thread
   
   #show thread
   def show
@@ -19,18 +19,33 @@ class ForumThreadController < ApplicationController
   
   #show new thread form
   def new
-    @forum = Forum.find(params[:forum_id])
-    add_breadcrumb @forum.title, "forum_path(#{@forum.id})"
+    unless params[:forum_id].nil?
+      @anchor = Forum.find(params[:forum_id])
+      add_breadcrumb 'Forum', 'forums_path'
+      add_breadcrumb @anchor.title, "forum_path(#{@anchor.id})"
+      @forum_thread = @anchor.forum_threads.new
+    end
+    unless params[:group_id].nil?
+      @anchor = Group.find(params[:group_id])
+      add_breadcrumb 'Gruppen', 'groups_path'
+      add_breadcrumb @anchor.name, "group_path(#{@anchor.id})"
+      @forum_thread = @anchor.threads.new
+    end
     add_breadcrumb "neuer Thread"
     
-    @forum_thread = ForumThread.new
     @forum_thread.forum_messages.build
   end
   
   #save new thread
   def create
-    @forum = Forum.find(params[:forum_id])
-    @forum_thread = @forum.forum_threads.new(params[:forum_thread])
+    unless params[:forum_id].nil?
+      @forum = Forum.find(params[:forum_id])
+      @forum_thread = @forum.forum_threads.new(params[:forum_thread])
+    end
+    unless params[:group_id].nil?
+      @group = Group.find(params[:group_id])
+      @forum_thread = @group.threads.new(params[:forum_thread])
+    end
     @forum_thread.forum_messages[0].user = current_user
     @forum_thread.forum_messages[0].site = current_site
     if @forum_thread.save
@@ -41,5 +56,14 @@ class ForumThreadController < ApplicationController
   end
   
   private
-
+  def init_thread
+    unless params[:forum_id].nil?
+      add_breadcrumb 'Forum', "forums_path"
+    end
+    
+    unless params[:group_id].nil?
+      add_breadcrumb 'Gruppen', 'groups_path'
+    end
+  end
+  
 end

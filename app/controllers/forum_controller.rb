@@ -15,7 +15,7 @@ class ForumController < ApplicationController
   
   def show
     @forum = Forum.find :first, :conditions => { :id => params[:id]}
-    @threads = ForumThread.paginate :all, :conditions => {:forum_id => params[:id]}
+    @threads = @forum.forum_threads.pages :all
     add_breadcrumb @forum.title, ''
   end
   
