@@ -1,4 +1,6 @@
 class Article < ActiveRecord::Base
+  acts_as_site
+  
   validates_presence_of :title
   validates_presence_of :content
   belongs_to :user

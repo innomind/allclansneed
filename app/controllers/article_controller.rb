@@ -25,11 +25,9 @@ class ArticleController < ApplicationController
 
   def create
     @article = Article.new(params[:article])
-    @article.user = current_user
-    @article.site = current_site
     if @article.save
       flash[:notice] = "Artikel erfolgreich erstellt"
-      redirect_to :action => "index"
+      redirect_to article_path(@article)
     else
       render :action => "new"
     end
@@ -51,7 +49,7 @@ class ArticleController < ApplicationController
   end
 
   def destroy
-    Article.find(params[:id]).destroy if flash[:notice] = "Artikel gelöscht"
+    flash[:notice] = "Artikel gelöscht" if Article.find(params[:id]).destroy 
     redirect_to articles_path
   end
 end
