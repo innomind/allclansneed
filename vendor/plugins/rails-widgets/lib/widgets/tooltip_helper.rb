@@ -48,9 +48,10 @@ module Widgets
     end
     
     def tooltip_content(opts={}, &proc)
-     return render(:partial => opts[:partial]) if opts[:partial]
-     return capture(&proc) unless proc.nil?
-     return image_tag("loading.gif") if opts[:show_mode] == "ajax"
+      return opts[:text] if opts[:text]
+      return render(:partial => opts[:partial]) if opts[:partial]
+      return capture(&proc) unless proc.nil?
+      return image_tag("loading.gif") if opts[:show_mode] == "ajax"
     end
        
     def tooltip_link(id, name)

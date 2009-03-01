@@ -23,7 +23,6 @@ class CategoriesController < ApplicationController
   end
   
   def update_positions
-    debugger
    params["categories"].each_with_index do |id, position|
      Category.update(id, :position => position)
    end

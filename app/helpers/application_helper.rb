@@ -115,6 +115,15 @@ module ApplicationHelper
     tooltip name, opts
   end
   
+  def ajax_tooltip_if(condition, name=nil, opts={}, &proc)
+    if condition
+      opts[:show_mode] = "ajax" 
+    else
+      opts[:show_mode] = "mouseover"
+    end
+    tooltip name, opts, &proc
+  end
+  
   def ajax_loading_tag
     image_tag("loading.gif")
   end
