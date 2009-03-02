@@ -13,10 +13,10 @@ class TemplateBoxesController < ApplicationController
 
   def new
     new_boxes = TemplateBoxType.find :all, 
-                                     :select => "name, id",
-                                     :conditions => ["multiple_allowed = ? OR id NOT IN (?)", 
-                                                      true, 
-                                                      get_box_type_list]
+      :select => "name, id",
+      :conditions => ["multiple_allowed = ? OR id NOT IN (?)",
+      true,
+      get_box_type_list]
     @boxes = new_boxes.collect{|b| [b.name, b.id]}
     render :layout => false
   end
@@ -31,13 +31,9 @@ class TemplateBoxesController < ApplicationController
     @box = TemplateBox.new(params[:template_box])
     @box.site = current_site
     @box.template_area_id = params[:template_area_id]
-    if @box.save
-      redirect_to :action => "index"
-    else
-      #TODO DRY it
-      flash[:error] = @box.errors.full_messages.join("<br>")
-      redirect_to :action => "index"
-    end
+    # dryes a little ;)
+    flash[:error] = @box.errors.full_messages.join("<br>") unless @box.save
+    redirect_to :action => "index"
   end
   
   def edit
@@ -46,13 +42,8 @@ class TemplateBoxesController < ApplicationController
 
   def update
     @box.name = params[:template_box][:name]
-    if @box.save
-      redirect_to :action => "index"
-    else
-      #TODO DRY it
-      flash[:error] = @box.errors.full_messages.join("<br>")
-      redirect_to :action => "index"
-    end
+    flash[:error] = @box.errors.full_messages.join("<br>") unless @box.save
+    redirect_to :action => "index"
   end
 
   #TODO Security lack man kann boxen von anderen seiten sortieren
@@ -62,15 +53,15 @@ class TemplateBoxesController < ApplicationController
     end
     init_template_areas
     render :layout => false,
-           :partial => "template_area",           
-           :object => @template_areas.find{|a| a.id == params[:id].to_i} #TODO Dry it
+      :partial => "template_area",
+      :object => @template_areas.find{|a| a.id == params[:id].to_i} #TODO Dry it
   end
   
   def move
     @areas = @template_areas.
-                select{|a| a.is_addable? and 
-                              not(a.id == params[:template_area_id].to_i) }.
-                collect{|a| [a.name, a.id]}
+      select{|a| a.is_addable? and
+        not(a.id == params[:template_area_id].to_i) }.
+      collect{|a| [a.name, a.id]}
     render :layout => false
   end
   
@@ -100,12 +91,12 @@ class TemplateBoxesController < ApplicationController
   #not used anymore - del?
   def get_area
     template_area = TemplateArea.find :first, 
-                      :conditions => ["template_id = ? AND template_areas.id = ? AND tempalte_boxes.site_id = ?",
-                                      current_site.template_id,
-                                      params[:id],
-                                      current_site.id ], 
-                      :include => [ :template_boxes => :template_box_type ],
-                      :order => "template_areas.position, template_boxes.position"
+      :conditions => ["template_id = ? AND template_areas.id = ? AND tempalte_boxes.site_id = ?",
+      current_site.template_id,
+      params[:id],
+      current_site.id ],
+      :include => [ :template_boxes => :template_box_type ],
+      :order => "template_areas.position, template_boxes.position"
     render :layout => false, :partial => "template_area", :object => template_area
   end
   
