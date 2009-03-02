@@ -4,4 +4,4 @@
 
 <h2><%= nl2br @message.message %><h2>
 
-<%= link_to "beantworten", :action => "answer", :id  => @message.id %>
+<%= link_to "beantworten", answer_message_path(@message) %>

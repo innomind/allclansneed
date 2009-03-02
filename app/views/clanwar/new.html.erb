@@ -1,8 +1,8 @@
-<h1>Insert new Clanwar</h1>
+<h1>Clanwar hinzufügen</h1>
 
-<% error_handling_form_for :clanwar, @clanwar, :url => {:action => "create"}, :html => { :multipart => false } do |form| %>
+<% error_handling_form_for @clanwar do |form| %>
   <%= form.text_field :opponent, :label => "Gegner" %>
-  Score: <%= form.text_field :score, :style => "blank", :size => "5" %>:<%= form.text_field :score_opponent, :style => "blank", :size => "5" %>
+  Ergebnis: <%= form.text_field :score, :style => "blank", :size => "5" %>:<%= form.text_field :score_opponent, :style => "blank", :size => "5" %>
   
   <%= form.collection_select("squad_id", @squads, :id, :name)%>
   

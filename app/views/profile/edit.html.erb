@@ -1,7 +1,7 @@
 Profil bearbeiten
 <%#= error_messages_for @profile -%>
 
-<% error_handling_form_for :profile, @profile, :action => 'update' do |f|%>
+<% error_handling_form_for @profile do |f|%>
 	<%= f.text_field 'firstname' %>
 	<%= f.text_field 'lastname' %>
         <%= f.submit "Änderungen übernehmen" %>

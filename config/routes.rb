@@ -20,13 +20,24 @@ ActionController::Routing::Routes.draw do |map|
                             :except => [:new, :update, :edit],
                             :member => {:add_comment => :post}
   
-  map.resources :profiles, :controller => "profile"
+  map.resources :profiles, :controller => "profile", :collection => {:start => :get}
 
   map.resources :articles, :controller => "article"
   
   map.resources :templates, :member => { :choose => :get }
   
-  map.resources :messages
+  map.resources :boxes, :controller => "template_boxes", 
+                                     :member => { :update_positions => :post,
+                                     :move => :get,
+                                     :do_move => :post }
+  
+  map.resources :navigations, :controller => "navigation",
+                                     :collection => {:edit_box => :get,
+                                                     :update_positions => :post},
+                                     :member => {:move => :get,
+                                                 :do_move => :post}
+  
+  map.resources :messages, :member => { :create => :post, :answer => :get }
   
   map.resources :categories, :member => {:newcat => :get, :createcat => :post}, :except => :new,
                              :collection => {:update_positions => :post}
@@ -36,12 +47,16 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :friends, :only => [:index, :destroy],
                           :member => [:accept, :reject, :become]
 
-  map.resources :groups, :member => [:join, :administrate, :activate, :kick]
+  map.resources :groups, :member => [:join, :leave, :administrate, :activate, :kick]
+  
+  map.resources :clanwars, :controller => "clanwar"
+  
+  map.resources :events, :controller => "event", :collection => {:showDay => :get}
 
-  map.users 'register', :controller => 'login', :action => 'create'
+  #map.users 'register', :controller => 'login', :action => 'create'
   #map.login 'login', :controller => 'login', :action => 'login'
-  map.squads ':site_id/create_squad', :controller => 'clan_management', :action => 'create_squad'
-  map.rights ':site_id/rights_management', :controller => 'rights_management', :action => 'rights_management'
+  #map.squads ':site_id/create_squad', :controller => 'clan_management', :action => 'create_squad'
+  #map.rights ':site_id/rights_management', :controller => 'rights_management', :action => 'rights_management'
   
   map.connect ':controller/:action'
   map.connect ':controller/:action/:id'

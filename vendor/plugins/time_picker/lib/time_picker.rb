@@ -36,7 +36,7 @@ module TimePicker
           end
         end
       end
-      select_html(options[:field_name] || 'hour_minute', hour_minute_options, options)
+      select(options[:field_name] || 'hour_minute', hour_minute_options, options)
     end
   end
   

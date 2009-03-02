@@ -3,7 +3,7 @@ class MessagesController < ApplicationController
   add_breadcrumb 'Nachrichten', "messages_path"
   
   def index
-    @messages = Message.find(:all, :conditions => { :receiver_id => current_user_id })
+    @messages = Message.find(:all, :conditions => { :receiver_id => current_user.id }, :order => "created_at DESC")
   end
   
   def new
@@ -21,6 +21,7 @@ class MessagesController < ApplicationController
   
   def answer
     @message = Message.find(params[:id])
+    add_breadcrumb @message.subject + " antworten"
   end
   
   def create
@@ -28,8 +29,11 @@ class MessagesController < ApplicationController
     @message.sender = current_user
     @message.read = FALSE
     @message.answered = FALSE
-    @message.save
-    
-    redirect_to :action => "index"
+    if @message.save
+      flash[:notice] = "Nachricht erfolgreich gesendet"
+      redirect_to messages_path
+    else
+      render :action => new
+    end
   end
 end

@@ -1,5 +1,5 @@
 <h1>Neuen Kalendereintrag erstellen</h1>
-<% error_handling_form_for :event, @event, :url => {:action => "create", :id => params[:id]}, :html => { :multipart => false } do |form| %>
+<% error_handling_form_for @event do |form| %>
   
   <%= form.text_field :name %>
   Datum: <%= form.text_field :date, :style => "blank" %> <%= calendar_for('event_date') %><br />

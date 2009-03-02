@@ -11,12 +11,11 @@ class GuestbookController < ApplicationController
   
   def index
     @guestbook = Guestbook.new
-    @guestbooks = Guestbook.page_for_site
+    @guestbooks = Guestbook.paginate
   end
   
   def create
     @guestbook = Guestbook.new(params[:guestbook])
-    @guestbook.site_id = $site_id
     if @guestbook.save
       return if request.xhr?
       render :partial => 'guestbook', :object => @guestbook
@@ -24,17 +23,18 @@ class GuestbookController < ApplicationController
   end
   
   def destroy
-    @guestbook = Guestbook.find_for_site(params[:id])
+    @guestbook = Guestbook.find(params[:id])
     @guestbook.destroy
     return if request.xhr?
     render :nothing, :status => 200
   end
   
   def add_comment
-    @guestbook = Guestbook.find_for_site(params[:id])
+    @guestbook = Guestbook.find(params[:id])
     @guestbook.update_attribute(:comment, params[:guestbook][:comment])
     @guestbook.update_attribute(:comment_author_id, current_user_id)
-    redirect_to :action => "index"
+    flash[:notice] = "Kommentar gespeichert"
+    redirect_to guestbook_path
     #return if request.xhr?
   end
 end

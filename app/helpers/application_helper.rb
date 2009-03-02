@@ -34,7 +34,7 @@ module ApplicationHelper
   end
   
   def username(user)
-    link_to user.login, :controller => "profile", :action => "index", :id => user.id
+    link_to user.login, profile_path(user)
   end
   
   #returns a formated date-string  
@@ -113,6 +113,15 @@ module ApplicationHelper
   def ajax_tooltip(name=nil, opts={})
     opts[:show_mode] = "ajax"
     tooltip name, opts
+  end
+  
+  def ajax_tooltip_if(condition, name=nil, opts={}, &proc)
+    if condition
+      opts[:show_mode] = "ajax" 
+    else
+      opts[:show_mode] = "mouseover"
+    end
+    tooltip name, opts, &proc
   end
   
   def ajax_loading_tag
