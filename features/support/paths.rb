@@ -6,6 +6,9 @@ def path_to(page_name)
   
   # Add more page name => path mappings here
   
+  when /news/i
+    news_path
+  
   else
     raise "Can't find mapping from \"#{page_name}\" to a path."
   end
