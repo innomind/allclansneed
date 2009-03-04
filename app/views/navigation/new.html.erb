@@ -1,0 +1,6 @@
+<% error_handling_form_for @navigation do |f| %>
+	<%= f.hidden_field :template_box_id, :style => "blank"%>
+	<%= f.text_field :name %>
+	<%= f.select :navigation_template_id, @navigation_templates%>
+	<%= f.submit "erstellen" %>
+<% end %>

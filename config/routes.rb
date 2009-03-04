@@ -26,6 +26,17 @@ ActionController::Routing::Routes.draw do |map|
   
   map.resources :templates, :member => { :choose => :get }
   
+  map.resources :boxes, :controller => "template_boxes", 
+                                     :member => { :update_positions => :post,
+                                     :move => :get,
+                                     :do_move => :post }
+  
+  map.resources :navigations, :controller => "navigation",
+                                     :collection => {:edit_box => :get,
+                                                     :update_positions => :post},
+                                     :member => {:move => :get,
+                                                 :do_move => :post}
+  
   map.resources :messages, :member => { :create => :post, :answer => :get }
   
   map.resources :messages

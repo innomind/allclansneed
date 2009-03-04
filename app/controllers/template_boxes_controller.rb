@@ -1,8 +1,11 @@
 class TemplateBoxesController < ApplicationController
-  #CONTROLLER_ACCESS = SITE_MEMBER
+
+  CONTROLLER_ACCESS = COMPONENT_RIGHT_OWNER
   
   before_filter :init_template_areas
   before_filter :init_box, :only => [:edit, :update, :do_move, :delete]
+  
+  add_breadcrumb 'Boxen bearbeiten', "boxes_path"
   
   def index
     
