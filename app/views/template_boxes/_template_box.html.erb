@@ -13,8 +13,13 @@
                 :update_url => {:controller => template_box.template_box_type.internal_name, 
                                 :action => "edit_box", 
                                 :template_box_id => template_box.id}, 
-                :id => dom_id(template_box, :edit) %>
+                :id => dom_id(template_box, :edit)  unless template_box.template_box_type.edit_in_new_window? %>
+
+	  <%= access_link image_tag("application_edit.png"), 
+	              :controller => template_box.template_box_type.internal_name, 
+	              :action => "edit_box", 
+	              :template_box_id => template_box.id if template_box.template_box_type.edit_in_new_window? %>
     <% end %>
 
-    <%= link_to image_tag("application_delete.png"), { :action => "delete", :template_box_id => template_box.id}, :confirm => "Soll die Box '#{template_box.name}' wirklich gelöscht werden?" %>
+    <%= access_link image_tag("application_delete.png"), { :action => "delete", :template_box_id => template_box.id}, :confirm => "Soll die Box '#{template_box.name}' wirklich gelöscht werden?" %>
 </li>

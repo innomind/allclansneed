@@ -19,6 +19,7 @@ class GroupsController < ApplicationController
   end
   
   def create
+    add_breadcrumb 'Gruppe erstellen'
     @group = Group.new(params[:group])
     @group.founder = current_user
     

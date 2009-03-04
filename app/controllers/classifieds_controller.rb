@@ -29,6 +29,7 @@ class ClassifiedsController < ApplicationController
   end
   
   def create
+    add_breadcrumb "Kleinanzeige erstellen"
     @classified = Classified.new(params[:classified])
     
     if @classified.save

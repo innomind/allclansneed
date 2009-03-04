@@ -1,0 +1,4 @@
+<% error_handling_form_for @navigation, :url => do_move_navigation_path(@navigation, :template_box_id => @navigation.template_box_id), :html => {:method => :post} do |f| %>
+    <%= f.select :template_box_id, @possible_boxes %>
+    <%= f.submit 'verschieben' %>
+<% end %>

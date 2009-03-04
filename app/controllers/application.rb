@@ -116,7 +116,6 @@ class ApplicationController < ActionController::Base
     init_access
   end
 
-
   def set_layout
     current_site.template.internal_name
   end

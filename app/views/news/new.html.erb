@@ -6,9 +6,9 @@
 	<%= f.select :category_id, Category.for_select("News")%>
 	tags: <%= text_field_with_auto_complete :news, :tags,
 	                                  { :value  => '',
-	                                    :size  => '20', 
-	                                    :tokens => ','},
-	                                  :indicator => 'status-indicator' %>
+	                                    :size  => '20'},
+	                                  {:indicator => 'status-indicator',
+		 								:tokens => ','}%>
 	<span id="status-indicator" style="display: none"><%= image_tag("loading.gif", :border  => "0") %></span>
 	                                  
 	<br /><br />

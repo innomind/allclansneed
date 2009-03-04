@@ -25,6 +25,7 @@ class MessagesController < ApplicationController
   end
   
   def create
+    add_breadcrumb 'Neue Nachricht erstellen'
     @message = Message.new(params[:message])
     @message.sender = current_user
     @message.read = FALSE

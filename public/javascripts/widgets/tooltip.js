@@ -48,7 +48,12 @@ function toggleTooltip(event, element) {
 }
 
 function showAjaxTooltip(id, url) {
+	  if (arguments[2]) {
+			update_method = arguments[2]
+ 		} else {
+ 			update_method = 'get'
+ 		}
     if ($('tooltip_' + id).style.display == "none") {
-        new Ajax.Updater('tooltip_content_' + id, url, {asynchronous:true, evalScripts:true});
+        new Ajax.Updater('tooltip_content_' + id, url, {method:update_method, asynchronous:true, evalScripts:true});
     }
 }
