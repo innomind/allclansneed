@@ -30,8 +30,8 @@ class PollController < ApplicationController
   end
   
   def create
-    @poll = Poll.new(params[:poll])
-     
+    add_breadcrumb 'Poll erstellen'
+    @poll = Poll.new(params[:poll])     
     if @poll.save
       flash[:notice] = "Poll erfolgreich erstellt"
       redirect_to polls_path

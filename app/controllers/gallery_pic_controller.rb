@@ -14,6 +14,7 @@ class GalleryPicController < ApplicationController
   end
   
   def create
+    add_breadcrumb 'Bild hochladen'
     @gallery_pic = GalleryPic.new(params[:gallery_pic])
     @gallery_pic.gallery = @gallery
 #    @gallery_pic.user = current_user

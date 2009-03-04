@@ -21,10 +21,11 @@ class ForumController < ApplicationController
   
   def new
     @forum = Forum.new
-    add_breadcrumb 'Forum erstellen', ''
+    add_breadcrumb 'Forum erstellen'
   end
   
   def create
+    add_breadcrumb 'Forum erstellen'
     @forum = Forum.new(params[:forum])
     if @forum.save
       flash[:notice] = "Forum erfolgreich erstellt"
