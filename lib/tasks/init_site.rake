@@ -49,7 +49,7 @@ namespace :init do
     tb.navigations << Nav["Forum"]
     tb.navigations << Nav["Event"]
     tb.navigations << Nav["Gallery"]
-    tb.navigations << Nav["Artikel"]
+    tb.navigations << Nav["Articles"]
     
     tb.site = site
     t_area[:topnav].template_boxes << tb
