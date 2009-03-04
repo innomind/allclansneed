@@ -52,7 +52,6 @@ class User < ActiveRecord::Base
   
   #don't change the position, it must be located AFTER def password=...
   #migrate 20081022180305 & 20081119122051 down&up, to insert new users
- #... i don't find the right citeria (very strange migration behaviour)
   
   def self.acn_dev_users
     return [
@@ -102,7 +101,6 @@ class User < ActiveRecord::Base
   end
   
   def self.all_dev_users
-    #find :all, :conditions => {:login => User::ACN_DEV_USERS.collect {|u| u.login}}
     find :all, :conditions => {:login => User.acn_dev_users.collect {|u| u.login}}
   end
 

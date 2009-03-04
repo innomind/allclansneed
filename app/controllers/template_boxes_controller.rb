@@ -28,7 +28,7 @@ class TemplateBoxesController < ApplicationController
     @box = TemplateBox.new(params[:template_box])
     @box.site = current_site
     @box.template_area_id = params[:template_area_id]
-    # dryes a little ;)
+    # dryed a little ;)
     flash[:error] = @box.errors.full_messages.join("<br>") unless @box.save
     redirect_to :action => "index"
   end

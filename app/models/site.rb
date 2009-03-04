@@ -33,6 +33,10 @@ class Site < ActiveRecord::Base
     PORTAL_NAME
   end
 
+  def self.current
+    Site.find_by_id $site_id
+  end
+  
   #possibly slower / uglier alternatives for areas
   #areas = self.template.template_areas.select {|ta| ta.internal_name == ta_name.to_s}
   #areas = TemplateArea.find :all, :conditions => {:template_id => self.template_id, :internal_name => ta_name}

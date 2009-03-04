@@ -12,7 +12,7 @@ class SquadsController < ApplicationController
 
 
   def new
-
+    @squad = Squad.new(params[:id])
   end
 
 
@@ -22,9 +22,17 @@ class SquadsController < ApplicationController
 
 
   def create
-    @squad = Squad.new(params[:squad])
-
-
+    @squad = Squad.new(params[:id])
+    @clan = Clan.current
+    @squad.clan = @clan
+    if save_verbose @squad
+      flash.now[:notice] = 'Squad successfully created.'
+      @squad2 = @squad
+    else
+      flash.now[:error] = "Squad couldn't be created"
+    end
+    @clan.reload
+    redirect_to :action => 'index'
   end
 
   def update

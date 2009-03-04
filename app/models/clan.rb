@@ -22,5 +22,9 @@ class Clan < ActiveRecord::Base
       end
     end
   end
+
+  def self.current
+    Site.current.clan
+  end
   
 end
