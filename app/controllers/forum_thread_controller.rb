@@ -30,6 +30,8 @@ class ForumThreadController < ApplicationController
   #save new thread
   def create
     @forum = Forum.find(params[:forum_id])
+    add_breadcrumb @forum.title, "forum_path(#{@forum.id})"
+    add_breadcrumb "neuer Thread"
     @forum_thread = @forum.forum_threads.new(params[:forum_thread])
     @forum_thread.forum_messages[0].user = current_user
     @forum_thread.forum_messages[0].site = current_site

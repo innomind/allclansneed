@@ -24,6 +24,7 @@ class GalleryController < ApplicationController
   end
   
   def create
+    add_breadcrumb 'neue Galerie erstellen'    
     @gallery = Gallery.new(params[:gallery])
     if @gallery.save
       flash[:notice] = "Gallerie erstellt"

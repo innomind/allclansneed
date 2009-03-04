@@ -1,6 +1,6 @@
 class GalleryPic < ActiveRecord::Base
-  #acts_as_delegatable
   acts_as_site
+  acts_as_rateable
   
   has_attached_file :pic,
     :styles => {

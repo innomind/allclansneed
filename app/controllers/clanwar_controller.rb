@@ -26,6 +26,7 @@ class ClanwarController < ApplicationController
   end
   
   def create
+    add_breadcrumb 'Clanwar hinzufügen'
     @clanwar = Clanwar.new(params[:clanwar])
     if @clanwar.save
       flash[:notice] = "Clanwar erfolgreich erstellt"

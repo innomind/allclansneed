@@ -68,7 +68,7 @@ class ApplicationController < ActionController::Base
   
   def user_belongs_to_site?
     return false if session['user_sites'].nil?
-    session['user_sites'].include?(current_site.id)
+    session['user_sites'].include?(current_site)
   end
   
   def save_verbose obj

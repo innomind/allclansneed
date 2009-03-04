@@ -39,6 +39,7 @@ class EventController < ApplicationController
   end
   
   def create
+    add_breadcrumb "neuen Eintrag erstellen"
     @event = Event.new(params[:event])
     
     if @event.save

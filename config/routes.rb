@@ -39,6 +39,8 @@ ActionController::Routing::Routes.draw do |map|
   
   map.resources :messages, :member => { :create => :post, :answer => :get }
   
+  map.resources :messages
+
   map.resources :categories, :member => {:newcat => :get, :createcat => :post}, :except => :new,
                              :collection => {:update_positions => :post}
   
@@ -61,4 +63,5 @@ ActionController::Routing::Routes.draw do |map|
   map.connect ':controller/:action'
   map.connect ':controller/:action/:id'
   map.connect ':controller/:action/:id.:format'
+ 
 end
