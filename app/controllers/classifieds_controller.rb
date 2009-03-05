@@ -29,6 +29,7 @@ class ClassifiedsController < ApplicationController
   end
   
   def create
+    add_breadcrumb "Kleinanzeige erstellen"
     @classified = Classified.new(params[:classified])
     
     if @classified.save
@@ -44,7 +45,7 @@ class ClassifiedsController < ApplicationController
     
     if @classified.update_attributes(params[:classified])
       flash[:notice] = 'Anzeige erfolgreich geändert.'
-      redirect_to :action => 'index'
+      redirect_to classifieds_path
     else
       render :action => "edit"
     end
@@ -55,6 +56,6 @@ class ClassifiedsController < ApplicationController
     if @classified.destroy
       flash[:notice] = 'Anzeige erfolgreich gelöscht'
     end
-    redirect_to :action => 'index'
+    redirect_to classifieds_path
   end
 end

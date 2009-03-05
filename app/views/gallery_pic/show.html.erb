@@ -4,5 +4,10 @@
 Beschreibung: <%= @gallery_pic.description %><br>
 Hochgeladen von:<%= username(@gallery_pic.user) %><br>
 Hochgeladen am: <%= german_date_with_time(@gallery_pic.created_at) %>
+
+<div id="star-ratings-block">
+    <%= render :partial => "rating/rating", :locals => { :asset => @gallery_pic } %>
+</div>
+
 <br>
 <%= show_comments @gallery_pic %>

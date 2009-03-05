@@ -1,5 +1,5 @@
 class Guestbook < ActiveRecord::Base
-  acts_as_delegatable
+  acts_as_site
   validates_presence_of :name
   validates_presence_of :entry
   #validates_presence_of :comment

@@ -30,7 +30,7 @@ namespace :init do
     site.template.template_areas = t_area.values
     site.save
     Nav = Hash.new
-    ["News", "Forum", "Event", "Gallery", "Clanwar", "Poll", "Guestbook"].each {|n|
+    ["News", "Forum", "Event", "Gallery", "Clanwar", "Poll", "Guestbook", "Articles"].each {|n|
       tpl = NavigationTemplate.create(:name => n, :controller => n, :action => "index")
       Nav[n.to_s] = Navigation.create(:name => n, :navigation_template => tpl)
     }
@@ -49,6 +49,7 @@ namespace :init do
     tb.navigations << Nav["Forum"]
     tb.navigations << Nav["Event"]
     tb.navigations << Nav["Gallery"]
+    tb.navigations << Nav["Articles"]
     
     tb.site = site
     t_area[:topnav].template_boxes << tb

@@ -18,6 +18,7 @@ class NewsController < ApplicationController
   end
   
   def create
+    add_breadcrumb 'News erstellen'
     tags = params[:news].delete(:tags)
     @news = News.new params[:news]          
     @news.tag_list = tags
@@ -26,6 +27,7 @@ class NewsController < ApplicationController
       flash[:notice] = "News erstellt"
       redirect_to news_path
     else
+      params[:news][:tags] = tags
       render :action => 'new'
     end
   end

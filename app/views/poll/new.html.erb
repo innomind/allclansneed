@@ -1,12 +1,12 @@
-<h1>Insert new Poll</h1>
+<h1>Neuen Poll erstellen</h1>
 
-<% error_handling_form_for :poll, @poll, :url => {:action => "create", :id => params[:id]}, :html => { :multipart => false } do |form| %>
+<% error_handling_form_for @poll do |form| %>
   <%= form.text_field :title, :label => "Titel:" %>
   <%= form.text_field :description, :label => "Beschreibung:" %>
 
   <div id="poll_options">
     <%= render :partial => 'newoption', :collection => @poll.poll_options %>
   </div>
-    <p><%= add_option_link "Add an option" %></p>
-  <%= form.submit "abschicken" %>
+    <p><%= add_option_link "Option hinzufügen" %></p>
+  <%= form.submit "erstellen" %>
 <% end %>

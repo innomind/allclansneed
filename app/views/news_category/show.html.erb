@@ -1,5 +1,0 @@
-Alle News aus dieser Kategorie:
-<br />
-<% @category.news.each do |n| %>
-  <%= link_to n.title, :controller  => 'news', :action => 'show', :id => n.id %><br />
-<% end %>

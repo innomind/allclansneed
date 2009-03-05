@@ -1,4 +1,8 @@
 <h1><p>Title: <%= @article.title %></p></h1>
+von <%= @article.user.nick %> vor <%= time_ago_in_words @article.created_at %>
 <p><%= @article.content %></p>
+ <div id="star-ratings-block">
+    <%= render :partial => "rating/rating", :locals => { :asset => @article } %>
+</div> 
 
 <%= show_comments @article  %>

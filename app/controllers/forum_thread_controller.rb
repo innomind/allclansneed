@@ -38,6 +38,7 @@ class ForumThreadController < ApplicationController
   
   #save new thread
   def create
+
     unless params[:forum_id].nil?
       @forum = Forum.find(params[:forum_id])
       @forum_thread = @forum.forum_threads.new(params[:forum_thread])
@@ -46,6 +47,7 @@ class ForumThreadController < ApplicationController
       @group = Group.find(params[:group_id])
       @forum_thread = @group.threads.new(params[:forum_thread])
     end
+
     @forum_thread.forum_messages[0].user = current_user
     @forum_thread.forum_messages[0].site = current_site
     if @forum_thread.save

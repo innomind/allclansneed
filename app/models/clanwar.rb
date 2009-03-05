@@ -1,7 +1,7 @@
 class Clanwar < ActiveRecord::Base
   
-  acts_as_delegatable
-  
+  acts_as_site
+
   has_many :comments, :as => :commentable, :dependent => :destroy
   belongs_to :squad
   belongs_to :site

@@ -7,43 +7,46 @@ class ClanwarController < ApplicationController
     :show => PUBLIC
   }
 
+  add_breadcrumb 'Clanwars', "clanwars_path"
   
   def index
-    @clanwars  = Clanwar.paginate_by_site_id(current_site_id, :page => params[:page], :order => 'played_at DESC', :per_page => @per_page)
+    @clanwars  = Clanwar.paginate :all
   end
   
   def show
-    @clanwar = Clanwar.find_for_site_by_id(params[:id])
+    @clanwar = Clanwar.find_by_id(params[:id])
+    add_breadcrumb "gegen "+@clanwar.opponent
   end
   
   def new
     @clanwar = Clanwar.new
-    @squads = Clan.find_for_site(:first).squads
+    @squads = Clan.find(:first).squads
     2.times { @clanwar.clanwar_maps.build }
-    
+    add_breadcrumb 'Clanwar hinzufügen'
   end
   
   def create
+    add_breadcrumb 'Clanwar hinzufügen'
     @clanwar = Clanwar.new(params[:clanwar])
-    @clanwar.site = current_site
-    @clanwar.user = current_user
-     
     if @clanwar.save
-      redirect_to :action => 'index'
+      flash[:notice] = "Clanwar erfolgreich erstellt"
+      redirect_to clanwars_path
     else
       render :action => "new"
     end
   end
   
   def edit
-    @clanwar = Clanwar.find_for_site_by_id(params[:id])
-    @squads = Clan.find_for_site(:first).squads
+    @clanwar = Clanwar.find_by_id(params[:id])
+    @squads = Clan.find(:first).squads
+    add_breadcrumb 'Clanwar bearbeiten'
   end
   
   def update
-    @clanwar = Clanwar.find_for_site_by_id(params[:id])
+    @clanwar = Clanwar.find_by_id(params[:id])
     if @clanwar.update_attributes(params[:clanwar])
-      redirect_to :action => 'index'
+      flash[:notice] = "Clanwar erfolgreich geändert"
+      redirect_to clanwars_path
     else
       render :action => "edit"
     end

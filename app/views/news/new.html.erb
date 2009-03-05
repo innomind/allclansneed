@@ -1,14 +1,14 @@
-<h1>Post new News</h1>
+<h1>News erstellen</h1>
 <% error_handling_form_for @news do |f| %>
 	<%= f.text_field 'title' %>
-	<%= f.text_field 'subtext' %>
-	<%= f.text_field 'news' %>
+	<%= f.text_area 'subtext' %>
+	<%= f.text_area 'news' %>
 	<%= f.select :category_id, Category.for_select("News")%>
 	tags: <%= text_field_with_auto_complete :news, :tags,
 	                                  { :value  => '',
-	                                    :size  => '20', 
-	                                    :tokens => ','},
-	                                  :indicator => 'status-indicator' %>
+	                                    :size  => '20'},
+	                                  {:indicator => 'status-indicator',
+		 								:tokens => ','}%>
 	<span id="status-indicator" style="display: none"><%= image_tag("loading.gif", :border  => "0") %></span>
 	                                  
 	<br /><br />

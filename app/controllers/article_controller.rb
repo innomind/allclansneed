@@ -7,7 +7,7 @@ class ArticleController < ApplicationController
     :show => PUBLIC
   }
 
-  add_breadcrumb 'Article', 'articles_path'
+  add_breadcrumb 'Artikel', 'articles_path'
 
   def index
     @articles = Article.find :all
@@ -25,11 +25,9 @@ class ArticleController < ApplicationController
 
   def create
     @article = Article.new(params[:article])
-    @article.site = current_site
-    @article.user = current_user
     if @article.save
       flash[:notice] = "Artikel erfolgreich erstellt"
-      redirect_to :action => "index"
+      redirect_to article_path(@article)
     else
       render :action => "new"
     end
@@ -51,9 +49,7 @@ class ArticleController < ApplicationController
   end
 
   def destroy
-    @article = Article.find params[:id]
-    @article.destroy
-    flash[:notice] = "Artikel gelöscht"
+    flash[:notice] = "Artikel gelöscht" if Article.find(params[:id]).destroy 
     redirect_to articles_path
   end
 end

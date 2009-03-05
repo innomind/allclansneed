@@ -1,15 +1,15 @@
-<h1>edit Clanwar <%= @clanwar.id</h1>
+<h1>Clanwar <%= @clanwar.opponent %> bearbeiten</h1>
 
-<% error_handling_form_for :clanwar, @clanwar, :url => {:action => "update", :id => params[:id]}, :html => { :multipart => false } do |form| %>
+<% error_handling_form_for @clanwar do |form| %>
   <%= form.text_field :opponent, :label => "Gegner" %>
   Score: <%= form.text_field :score, :style => "blank", :size => "5" %>:<%= form.text_field :score_opponent, :style => "blank", :size => "5" %>
   
   <%= form.collection_select("squad_id", @squads, :id, :name)%>
   
-  gespielt am: <%= form.text_field :played_at, :style => "blank" % <%= calendar_for('clanwar_played_at') %>
+  gespielt am: <%= form.text_field :played_at, :style => "blank" %><%= calendar_for('clanwar_played_at') %>
   <div id="clanwar_maps">
     <%= render :partial => 'newmap', :collection => @clanwar.clanwar_maps %>
   </div>
-    <p><%= add_map_link "Add a map" %></p>
+    <p><%= add_map_link "Map hinzufügen" %></p>
   <%= form.submit "abschicken" %>
 <% end %>

@@ -61,6 +61,27 @@ module ActiveRecord::Acts::ActsAsDelegatable
         append_condition(args)
       end
 
+      def append_condition args, condition = nil
+        condition ||= Hash.new(:site_id => $site_id)
+        created = false
+        new_args = args
+        new_args.each do |a|
+          if a.is_a?(Hash)
+            a[:conditions] ||= Hash.new
+            a[:conditions][:site_id] = $site_id if a[:conditions].is_a?(Hash)
+            if a[:conditions].is_a?(Array)
+              a[:conditions][0] = a[:conditions][0] + " AND site_id = ?"
+              a[:conditions].push $site_id
+            end
+            created = true
+          end
+        end
+        unless created
+          new_args.push :conditions => {:site_id => $site_id }
+        end
+        new_args
+      end
+
     end
     
     def acts_as_delegatable

@@ -1,2 +1,25 @@
-<%= @navigations.inspect %>
-edit box
+<%= ajax_tooltip_if NavigationTemplate.templates_free?, image_tag("application_add.png") + " Navigationspunkt erstellen", 
+            :update_url => new_navigation_path(:template_box_id => params[:template_box_id]), 
+            :id => "new_navigation",
+ 			:text => "es gibt momentan keine freien Navigationspunkte" %>
+
+
+<ul id="navigations">
+<% @navigations.each do |nav| %>
+	<li id="<%= dom_id(nav) %>">
+		<%= "#{nav.name} (#{nav.navigation_template.name})"%>
+		<%= ajax_tooltip image_tag("textfield_rename.png"), 
+	                :update_url => edit_navigation_path(nav), 
+	                :id => dom_id(nav, :edit) %>
+		 <%= ajax_tooltip image_tag("application_go.png"), 
+					:update_url => move_navigation_path(nav), 
+					:id => dom_id(nav, :move) %>
+		<%= access_link image_tag("application_delete.png"), 
+					navigation_path(nav), 
+					:method => :delete, 
+					:confirm => "Soll der Navigationpunkt '#{nav.name}' wirklich gelöscht werden?" %>
+	</li>
+<% end %>
+</ul>
+
+<%= sortable_element("navigations", :url => update_positions_navigations_path(:template_box_id => params[:template_box_id])) %>

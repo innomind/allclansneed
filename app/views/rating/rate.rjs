@@ -1,0 +1,3 @@
+page.replace_html "star-ratings-block", :partial => 'rating/rating', :locals => { :asset => @asset }
+page.replace_html :rated_message, "<div id='rated_message'>deine Stimme wurde gezählt</div>"
+page.visual_effect :highlight, :rated_message
