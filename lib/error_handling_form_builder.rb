@@ -18,11 +18,12 @@ class ErrorHandlingFormBuilder < ActionView::Helpers::FormBuilder
   def build_shell(field, options)
     partial = options[:style].nil? ? 'forms/field' : 'forms/' + options[:style]
     @template.capture do
+      translate = I18n.t(@object.class.name.tableize + "." + field.to_s, :default => {:name => nil, :desc => nil})
       locals = {
         :element => yield,
-        :label   => label(field, options[:label])
+        :label   => label(field, (options[:label] || translate[:name])),
+        :desc    => translate[:desc]
       }
-      
       if has_errors_on?(field)
         #flash[:notice].push error_message(field, options)
         locals.merge!(:error => error_message(field, options))
