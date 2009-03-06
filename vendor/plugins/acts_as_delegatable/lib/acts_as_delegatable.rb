@@ -36,7 +36,6 @@ module ActiveRecord::Acts::ActsAsDelegatable
       end
       
       def self.paginate *args
-        debugger
         super(*initilize_paginate(args))
       end
       
@@ -49,7 +48,7 @@ module ActiveRecord::Acts::ActsAsDelegatable
         options = args.detect { |argument| argument.is_a?(Hash) }
         if options.nil?
           options = {:page => $page,
-                     :per_page => 2,
+                     :per_page => 15,
                      :order => 'created_at DESC' 
           }
           args << options

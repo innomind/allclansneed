@@ -5,7 +5,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :news, :singular => "onenews"
   
   map.resources :forums, :controller => "forum", :shallow => true do |forum|
-    forum.resources :forum_threads, :controller => "forum_thread", :shallow => true, :except => [:index], :as => "threads" do |thread|
+    forum.resources :forum_threads, :controller => "forum_thread", :shallow => true, :as => "threads" do |thread|
       thread.resources :forum_messages, :controller => "forum_message", :shallow => true, :as => "posts"
     end
   end
@@ -50,7 +50,9 @@ ActionController::Routing::Routes.draw do |map|
                           :member => [:accept, :reject, :become]
 
   map.resources :groups, :member => [:join, :administrate, :activate, :kick], :shallow => true do |group|
-    group.resources :threads, :controller => "forum_thread"
+    group.resources :forum_threads, :controller => "forum_thread", :as => "threads" do |thread|
+      thread.resources :forum_messages, :controller => "forum_message", :shallow => true, :as => "posts"
+    end
   end
 
   map.resources :clanwars, :controller => "clanwar"

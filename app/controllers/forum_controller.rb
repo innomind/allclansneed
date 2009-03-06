@@ -12,13 +12,7 @@ class ForumController < ApplicationController
   def index
     @forums = Forum.find(:all)
   end
-  
-  def show
-    @forum = Forum.find :first, :conditions => { :id => params[:id]}
-    @threads = @forum.forum_threads.pages :all
-    add_breadcrumb @forum.title, ''
-  end
-  
+    
   def new
     @forum = Forum.new
     add_breadcrumb 'Forum erstellen'

@@ -19,4 +19,8 @@ class ForumThread < ActiveRecord::Base
   def self.latest_threads
     find :all, :limit => 5
   end
+  
+  def anchor
+    eval("self.#{self.threadable_type.downcase}")
+  end
 end
