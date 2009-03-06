@@ -19,7 +19,8 @@ class ErrorHandlingFormBuilder < ActionView::Helpers::FormBuilder
     partial = options[:style].nil? ? 'forms/field' : 'forms/' + options[:style]
     @template.capture do
       #debugger
-      translate = I18n.t(@object.class.name.tableize + "." + field.to_s, :default => {:name => nil, :desc => nil})
+      translate = I18n.t(field.to_s, :default => {:name => nil, :desc => nil},
+                                     :scope => [:dbfields, @object.class.name.tableize])
       locals = {
         :element => yield,
         :label   => label(field, (options[:label] || translate[:name])),
