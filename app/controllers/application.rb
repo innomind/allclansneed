@@ -114,7 +114,6 @@ class ApplicationController < ActionController::Base
     $user_id = @user.id unless @user.nil?
     
     I18n.locale = :de
-    
     init_access
   end
 

@@ -1,7 +1,7 @@
 <h1>Clanwar hinzufügen</h1>
 
 <% error_handling_form_for @clanwar do |form| %>
-  <%= form.text_field :opponent, :label => "Gegner" %>
+  <%= form.text_field :opponent %>
   Ergebnis: <%= form.text_field :score, :style => "blank", :size => "5" %>:<%= form.text_field :score_opponent, :style => "blank", :size => "5" %>
   
   <%= form.collection_select("squad_id", @squads, :id, :name)%>
