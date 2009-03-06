@@ -9,7 +9,7 @@
   <% else %>
     <font color="yellow">Ergebnis: <%= @clanwar.score %> : <%= @clanwar.score_opponent %> </font><br />
   <% end %>
-  gespielt am: <%= german_date_with_time(@clanwar.played_at) %> <br /><br />
+  gespielt am: <%= l @clanwar.played_at %> <br /><br />
   <h2>Maps</h2>
   <%= render :partial => "map", :collection => @clanwar.clanwar_maps %>
 	<br /><br />
