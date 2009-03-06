@@ -8,7 +8,7 @@
   <% else %>
     <font color="yellow">Ergebnis: <%= clanwar.score %> : <%= clanwar.score_opponent %> </font><br />
   <% end %>
-  gespielt am: <%= german_date_with_time(clanwar.played_at) %> <br />
+  gespielt am: <%= l clanwar.played_at %> <br />
   <%= link_to "details anzeigen", clanwar_path(clanwar) %><br />
  <%= access_link "bearbeiten", edit_clanwar_path(clanwar) %>
 	<br /><br />
