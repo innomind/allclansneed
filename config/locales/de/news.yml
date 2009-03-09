@@ -1,5 +1,7 @@
 de:
   activerecord:
+    models:
+      news: "News"
     attributes:
       news:
         title: "Titellll"

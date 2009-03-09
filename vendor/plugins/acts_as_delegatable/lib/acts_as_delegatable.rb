@@ -12,6 +12,10 @@ module ActiveRecord::Acts::ActsAsDelegatable
   module ClassMethods
     def acts_as_site options = {}
       
+      #def self.human_name(options = {})
+      #  I18n.translate(self.name.underscore, :scope => [:activerecord, :models], :count => 1, :default => self.name.humanize)
+      #end
+              
       @options = options
 
       def self.find *args
@@ -54,7 +58,7 @@ module ActiveRecord::Acts::ActsAsDelegatable
           args << options
         else
           options[:page] ||= $page 
-          options[:per_page] ||= 15
+          options[:per_page] ||= 2
           options[:order] ||= 'created_at DESC'
         end
         append_condition(args)
@@ -81,6 +85,8 @@ module ActiveRecord::Acts::ActsAsDelegatable
         new_args
       end
 
+    end
+    
     end
   end
     

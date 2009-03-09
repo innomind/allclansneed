@@ -1,7 +1,7 @@
 <li id="forum_<%=  forum.id %>">
     
-        <%= link_to forum.title, forum_path(forum) %>
-        (<%= forum.forum_threads_count %>)
+        <%= link_to forum.title, [forum, "forum_threads"] %>
+        (<%= forum.threads_count %>)
 
   <span id="forum_links_<%= forum.id %>">
     <%= access_link image_tag("folder_edit.png"), edit_forum_path(forum) %>
