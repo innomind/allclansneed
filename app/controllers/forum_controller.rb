@@ -12,6 +12,13 @@ class ForumController < ApplicationController
   def index
     @forums = Forum.find(:all)
   end
+  
+  def show
+    @anchor = Forum.find params[:id]
+    @threads = @anchor.forum_threads.pages :all
+    add_breadcrumb @anchor.title, @anchor
+    render :template => 'forum_thread/index'
+  end
     
   def new
     @forum = Forum.new

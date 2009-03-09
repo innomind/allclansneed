@@ -3,10 +3,12 @@
 
 <br>
 
-<%= access_link "Neuen Thread erstellen", new_forum_forum_thread_path(@anchor)  %>
+<%= access_link "Neuen Thread erstellen", new_thread_link(@anchor)  %>
 <h2>Threads:</h2>
-<%= will_paginate @threads %>
 
-<%= render :partial => "thread", :collection => @threads %>
+<%= will_paginate @threads %>
+<%= page_entries_info @threads %>
+
+<%= render :partial => "forum_thread/thread", :collection => @threads %>
 
 <%= will_paginate @threads %>

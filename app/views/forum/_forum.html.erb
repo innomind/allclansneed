@@ -1,6 +1,6 @@
 <li id="forum_<%=  forum.id %>">
     
-        <%= link_to forum.title, forum_path(forum) %>
+        <%= link_to forum.title, [forum, "forum_threads"] %>
         (<%= forum.threads_count %>)
 
   <span id="forum_links_<%= forum.id %>">
