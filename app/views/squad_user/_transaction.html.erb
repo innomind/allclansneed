@@ -1,0 +1,8 @@
+<select name="target_squad" size="1">
+  <%(target_squads_from @squad).each do |sq|%>
+    <option value="<%=sq.id.to_s%>"  >
+      <%= sq.name %>
+    </option>
+  <%end%>
+</select>
+

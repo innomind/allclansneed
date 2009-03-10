@@ -1,0 +1,7 @@
+<h1>new Squad in <%=@clan.name%></h1>
+
+<%  error_handling_form_for Squad.new do |f| %>
+    <%= f.text_field :name  %>
+    <%= f.submit 'anlegen' %>
+<%end%>
+

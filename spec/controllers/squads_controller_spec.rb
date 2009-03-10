@@ -13,5 +13,6 @@ describe SquadsController do
     controller.stub!(:current_site).and_return(Site.find_by_id(Site::PORTAL_ID))
     get :index
     response.should be_success
+    #puts response.class.to_s
   end
 end

@@ -55,6 +55,9 @@ ActionController::Routing::Routes.draw do |map|
   
   map.resources :events, :controller => "event", :collection => {:showDay => :get}
 
+  map.resources :users, :controller => 'squad_user'
+  map.resources :squads, :controller => 'squad'
+
   #map.users 'register', :controller => 'login', :action => 'create'
   #map.login 'login', :controller => 'login', :action => 'login'
   #map.squads ':site_id/create_squad', :controller => 'clan_management', :action => 'create_squad'

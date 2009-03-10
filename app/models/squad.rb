@@ -16,22 +16,21 @@ class Squad < ActiveRecord::Base
   
   
   #TODO: make this a real _transaction_, if something goes wrong, revert it (like migration up/down)
+  #dryed a little
+  
   def self.move_user user, src_squad, dst_squad
-    return false unless user.squads.include? src_squad
-    return false if user.squads.include? dst_squad
-    user.squads.push dst_squad
-    user.squads.delete src_squad
+    user.squads.delete src_squad unless (copy_user user, src_squad, dst_squad)
     user.save
   end
   
   #ok we could just add the user to dst and ignore src, but this wouldn't be clean
   #perhaps it's more a philosophical question
+  #anyway, it's safer doing it this more strict way
   def self.copy_user user, src_squad, dst_squad
     return false unless user.squads.include? src_squad
     return false if user.squads.include? dst_squad
     user.squads.push dst_squad
     user.save
   end
-  
 
 end

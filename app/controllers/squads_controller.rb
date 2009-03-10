@@ -22,7 +22,7 @@ class SquadsController < ApplicationController
 
 
   def create
-    @squad = Squad.new(params[:id])
+    @squad = Squad.new(params[:squad])
     @clan = Clan.current
     @squad.clan = @clan
     if save_verbose @squad

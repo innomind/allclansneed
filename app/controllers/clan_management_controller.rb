@@ -51,12 +51,12 @@ class ClanManagementController < ApplicationController
     @squad1 = Squad.find params[:squad1] unless params[:squad1].nil?
     @squad2 = Squad.find params[:squad2] unless params[:squad2].nil?
     @member = User.find params[:member] unless params[:member].nil?
-    #render :text => @squad1.name+" ->  "+@squad2.name+": "+@member.nick
+
     task = params[:commit]
     
     #TASK: move
     if (task == 'move ->' || task == '<- move')
-      debugger
+      #debugger
       unless @member.nil?
         if (task == 'move ->')? 
             Squad.move_user(@member, @squad1, @squad2) : 

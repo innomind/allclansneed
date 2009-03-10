@@ -130,13 +130,14 @@ class ApplicationController < ActionController::Base
     
     denied_msg = RAILS_ENV == "production" ? "access denied!" :  "access denied: you don't have right -> #{verbose_deny_message}"
     render :text => denied_msg
-  end  
+  end
 
   def self.user_has? right
     return true
     return false if user_is_guest?
     user_right = current_user.local_right
     return false if user_right.nil?
+    false # false, if true isn't explicitly set from now on
     unless right == COMPONENT_RIGHT_OWNER
       true if (user_right.right_type & right) == right
     else
@@ -160,8 +161,8 @@ class ApplicationController < ActionController::Base
   def catch_exceptions
     begin
       yield
-    rescue ActiveRecord::RecordNotFound
-      render :template => "errors/RecordNotFound"
+    #rescue ActiveRecord::RecordNotFound
+      #render :template => "errors/RecordNotFound"
     #rescue NoMethodError
      # render :text => "no method exception"
     end

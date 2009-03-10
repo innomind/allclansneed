@@ -1,0 +1,19 @@
+<h1>Users of squad <%=@squad.name%> </h1>
+
+
+
+<% @squad.members.each do |m|%>
+
+  <h2> <%="#{m.nick}"%><%=  pad = "";5.times {pad << "&nbsp"};pad %>;
+
+    [<%= link_to "edit", user_path(m, :squad_id => @squad.id)%>]
+    [<%= link_to "neu", :action => 'new' ,  :squad_id => @squad.id%>]
+    [<%= link_to "löschen", user_path(m, :squad_id => @squad.id), :method => :delete %>]
+    #kopieren/verschieben
+    
+    <%#=  link_to "kopieren", :action => 'copy', :squad_id => @squad_id, :user_id => m.id%>
+    <%= render :partial => 'copy_form' %>
+    <%= render :partial => 'move_form' %>
+    <%#=  link_to "verschieben", :action => 'move', :squad_id => @squad_id, :user_id => m.id%>
+  </h2>
+<%end%>
