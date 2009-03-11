@@ -58,7 +58,7 @@ module ActiveRecord::Acts::ActsAsDelegatable
           args << options
         else
           options[:page] ||= $page 
-          options[:per_page] ||= 2
+          options[:per_page] ||= 15
           options[:order] ||= 'created_at DESC'
         end
         append_condition(args)
