@@ -86,6 +86,8 @@ module ActiveRecord::Acts::ActsAsDelegatable
       end
 
     end
+    
+    end
   end
     
   module InstanceMethods
