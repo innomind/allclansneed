@@ -84,6 +84,15 @@ namespace :init do
                                                   :editable => true)
     tb.site = site
     t_area[:linke_seite].template_boxes << tb
+
+    #Poll
+    tb = TemplateBox.create(:name => "poll", :position => 2)
+    tb.template_box_type = TemplateBoxType.create(:name => "Poll",
+                                                  :internal_name => "poll",
+                                                  :editable => true)
+    tb.site = site
+    t_area[:linke_seite].template_boxes << tb
+
     tb.save
   end
   
