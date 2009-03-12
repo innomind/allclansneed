@@ -2,7 +2,7 @@
   <h2><%= poll.title %></h2>
   <%= poll.description %><br />
   <ul id="poll">
-    <%= render :partial => "poll_option", :collection => poll.poll_options %>
+    <%= render :partial => "poll/poll_option", :collection => poll.poll_options %>
   </ul>
   <%= form.submit "voten" %>
 <%  end %>

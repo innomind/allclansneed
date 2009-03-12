@@ -36,7 +36,9 @@ module TimePicker
           end
         end
       end
-      select(options[:field_name] || 'hour_minute', hour_minute_options, options)
+      content_tag :select, :name => "#{options[:field_model]}[#{options[:field_name]}]" do
+        hour_minute_options
+      end
     end
   end
   
