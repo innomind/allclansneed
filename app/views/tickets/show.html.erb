@@ -3,7 +3,7 @@ Betreff: <%= @ticket.subject %><br />
 <%= render :partial => "message", :collection => @messages %>
 
 Antwort:
-<% error_handling_form_for @answer, :url => answer_path do |form| %>
+<% error_handling_form_for @answer, :url => ticket_ticket_message_path do |form| %>
       <%= form.hidden_field :ticket_id, :value => @ticket.id %>
       <%= form.text_area :message, :rows => 5, :cols => 30%>
       <%= form.submit "erstellen" %>
@@ -11,5 +11,3 @@ Antwort:
 
 
 <%= link_to 'Back', tickets_path %>
-
-
