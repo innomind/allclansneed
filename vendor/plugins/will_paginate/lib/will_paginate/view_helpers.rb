@@ -162,7 +162,7 @@ module WillPaginate
     #   #-> Displaying items 6 - 10 of 26 in total
     def page_entries_info(collection, options = {})
       entry_name = options[:entry_name] ||
-        (collection.empty?? 'entry' : collection.first.class.human_name) #todo: plural
+        (collection.empty?? 'entry' : collection.first.class.human_name)
       
       if collection.total_pages < 2
         case collection.size
