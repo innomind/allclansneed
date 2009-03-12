@@ -1,0 +1,10 @@
+de:
+  paginate:
+    label:
+      previous: "&laquo; zurück"
+      next: "vor &raquo;"
+    not_found: "Keine {{entry}} gefunden"
+    found:
+      one: "Zeige <b>1</b> {{entry}}"
+      other: "Zeige <b>alle {{count}}</b> {{entry}}"
+      between: "Zeige {{entry}} <b>{{von}}&nbsp;-&nbsp;{{bis}}</b> von <b> {{insgesamt}}</b> insgesamt"

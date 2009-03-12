@@ -1,4 +1,4 @@
 de:
-  active_record:
+  activerecord:
     models:
-      forum_threads: "Forum Threads"
+      forum_thread: "Thread"
