@@ -14,8 +14,8 @@
     <td><%= ticket.subject %></td>
     <td><%= ticket.author.login %></td>
     <td><% unless ticket.admin.nil? %><%= ticket.admin.login %><% end %></td>
-    <td><%= german_date_with_time(ticket.created_at) %></td>
-    <td><%= german_date_with_time(ticket.updated_at) %></td>
+    <td><%= l ticket.created_at %></td>
+    <td><%= l ticket.updated_at %></td>
     <td><%= link_to 'Show', ticket %></td>
     <td><%= link_to 'Edit', edit_ticket_path(ticket) %></td>
     <td><%= link_to 'Destroy', ticket, :confirm => 'Are you sure?', :method => :delete %></td>
