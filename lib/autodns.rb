@@ -30,7 +30,7 @@ auth = Element.new("auth")
   
   domain = Element.new("domain")
   domain.add_element("name")
-  domain.elements["name"].text = "innomind.de"
+  domain.elements["name"].text = "innomind.info"
 
   task.elements << domain
   document.elements["request"].elements << task

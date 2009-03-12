@@ -84,9 +84,6 @@ module ActiveRecord::Acts::ActsAsDelegatable
         end
         new_args
       end
-
-    end
-    
     end
   end
     
