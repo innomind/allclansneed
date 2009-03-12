@@ -1,0 +1,15 @@
+de:
+  dbfields:
+    news:
+      title:
+        name: "Titel"
+        desc: "Titel der News"
+      subtext:
+        name: "Kurztext"
+        desc: "kurze Einleitung"
+      news:
+        name: "Newseintrag"
+        desc: "der eigentliche Newstext"
+      category_id:
+        name: "Kategorie"
+        desc: "Kategorie, die der News zugeordnet wird"

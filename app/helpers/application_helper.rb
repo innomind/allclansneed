@@ -37,15 +37,6 @@ module ApplicationHelper
     link_to user.login, profile_path(user)
   end
   
-  #returns a formated date-string  
-  def german_date_with_time(datum)     
-    datum.strftime("%d.%m.%Y %H:%M")
-  end
-  
-  def german_date(datum)     
-    datum.strftime("%d.%m.%Y")
-  end
-  
   def cloud(tags)
     return if tags.blank?
     output = ""

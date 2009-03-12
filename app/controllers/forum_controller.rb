@@ -14,11 +14,12 @@ class ForumController < ApplicationController
   end
   
   def show
-    @forum = Forum.find :first, :conditions => { :id => params[:id]}
-    @threads = ForumThread.paginate :all, :conditions => {:forum_id => params[:id]}
-    add_breadcrumb @forum.title, ''
+    @anchor = Forum.find params[:id]
+    @threads = @anchor.forum_threads.pages :all
+    add_breadcrumb @anchor.title, @anchor
+    render :template => 'forum_thread/index'
   end
-  
+    
   def new
     @forum = Forum.new
     add_breadcrumb 'Forum erstellen'

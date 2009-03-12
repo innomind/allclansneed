@@ -1,5 +1,5 @@
 class Squad < ActiveRecord::Base
-  acts_as_delegatable
+  #acts_as_delegatable
   belongs_to :clan
   has_many :squad_users
   has_many :clanwars
@@ -13,7 +13,6 @@ class Squad < ActiveRecord::Base
   def members
     users
   end
-  
   
   #TODO: make this a real _transaction_, if something goes wrong, revert it (like migration up/down)
   def self.move_user user, src_squad, dst_squad
