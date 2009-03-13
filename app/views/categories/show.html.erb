@@ -3,9 +3,10 @@
 	<li id="<%=dom_id(cat)%>">
 		<%= cat.name %>
 		<%= access_link image_tag("folder_edit.png"), edit_category_path(cat)%>
+		<%= access_link image_tag("folder_delete.png"), category_path(cat), :method => :delete, :confirm => "Kategorie wirklcih löschen?"%>
 	</li>
 <% end %>
 </ul>
-<%= access_link image_tag("folder_add.png") + " Kategorie erstellen", newcat_category_path(@cat_name) %>
+<%= access_link image_tag("folder_add.png") + " Kategorie erstellen", :controller => :category, :action => :newcat, :path => newcat_category_path(@cat_name, @section_link) %>
 
 <%= sortable_element("categories", :url => update_positions_categories_path(:id => @cat_name)) %>
