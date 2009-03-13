@@ -2,7 +2,7 @@
 
 <% error_handling_form_for @ticket do |form| %>
       <%= form.text_field :subject %>
-      <%= form.select :category_id, Category.for_select("Ticket")%>
+      <%= form.select :category_id, Category.global_for_select("Ticket")%>
       <% fields_for "ticket[ticket_message]" do |message_form| %>
         <%= message_form.text_area 'message', :rows => 10, :cols => 40 %>
       <% end %>

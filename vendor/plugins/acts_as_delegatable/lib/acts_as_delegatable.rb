@@ -15,42 +15,47 @@ module ActiveRecord::Acts::ActsAsDelegatable
       #def self.human_name(options = {})
       #  I18n.translate(self.name.underscore, :scope => [:activerecord, :models], :count => 1, :default => self.name.humanize)
       #end
-              
+             
       @options = options
-      
-      def self.rand
-        all(:select => :id).collect{|n|n.id}.rand
+      @@without_scope = false
+#      
+      def self.without_site
+        @@without_scope = true
       end
-      
-      def self.count
-        with_scope(:find => { :conditions => "site_id = #{$site_id}" }) do
-          super
-        end
+#      
+      def self.with_site
+        @@without_scope = false
+        true
       end
-      
-      def self.count_total
-        with_exclusive_scope(:find => { :conditions => ""}) do
-          count
-        end
-      end
-      
-      def self.find_total *args
-        with_exclusive_scope(:find => { :conditions => ""}) do 
-          find(*args)
-        end
-      end
-      
+#      
+#      def self.scope
+#        @@without_scope
+#      end
+#      
+#      def self.count
+#        with_scope(:find => { :conditions => "site_id = #{$site_id}" }) do
+#          super
+#        end
+#      end
+#      
       def self.find *args
-        with_scope(:find => { :conditions => "site_id = #{$site_id}" }) do
-          r = super(*args)
-          if r.nil?
-            with_exclusive_scope(:find => {  }) do
-              unless super(*args).nil?
-                raise ActiveRecord::RecordNotFound
+        #debugger
+        options = args.find{|a| a.is_a? Hash}
+        options ||= Hash.new
+        unless options.delete(:global)
+          with_scope(:find => { :conditions => "site_id = #{$site_id}" }) do
+            r = super(*args)
+            if r.nil?
+              with_exclusive_scope(:find => {  }) do
+                unless super(*args).nil?
+                  raise ActiveRecord::RecordNotFound
+                end
               end
             end
+            r
           end
-          r
+        else
+          super(*args)
         end
       end
       
@@ -83,7 +88,8 @@ module ActiveRecord::Acts::ActsAsDelegatable
           options[:per_page] ||= 15
           options[:order] ||= 'created_at DESC'
         end
-        append_condition(args)
+        #append_condition(args)
+        args
       end
 
       def append_condition args, condition = nil
@@ -113,7 +119,6 @@ module ActiveRecord::Acts::ActsAsDelegatable
     def get_page
       "pageid: "+self[:site_id].to_s
     end
-
   end
 
 end

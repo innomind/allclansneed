@@ -1,9 +1,12 @@
 class Ticket < ActiveRecord::Base
+  
   belongs_to :admin, :class_name  => "User", :foreign_key  => "admin_id"
   belongs_to :author, :class_name => "User", :foreign_key => "author_id"
   
   belongs_to :status, :class_name => "Category", :foreign_key => "status_id"
   belongs_to :category
+  
+  belongs_to :site
   
   has_many :ticket_messages, :dependent => :destroy
   
@@ -15,6 +18,8 @@ class Ticket < ActiveRecord::Base
   end
   
   def before_create
-    self.status = Category.find_total :first, :conditions => {:controller => "Ticket", :section => "status", :name => "offen"}
+    #Category.without_site
+    self.status = Category.find :first, :global => true, :conditions => {:controller => "Ticket", :section => "status", :name => "offen"}
+    #Category.with_site
   end
 end

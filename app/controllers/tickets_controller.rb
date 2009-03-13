@@ -2,12 +2,13 @@ class TicketsController < ApplicationController
   
   add_breadcrumb 'Tickets', 'tickets_path'
   
-  CONTROLLER_ACCESS = COMPONENT_RIGHT_OWNER
+  CONTROLLER_ACCESS = SITE_MEMBER
   
   ACTION_ACCESS_TYPES={
-    :index => PUBLIC,
-    :show => PUBLIC
+    :destroy => COMPONENT_RIGHT_OWNER
   }
+  
+  before_filter :init_ticket, :only => [:show]
   
   def index
     @tickets = Ticket.all
@@ -15,6 +16,8 @@ class TicketsController < ApplicationController
 
   def show
     @ticket = Ticket.find(params[:id])
+    @category = Category.find(:first, :global => true, :conditions => {:id => @ticket.category_id})
+    @status = Category.find(:first, :global => true, :conditions => {:id => @ticket.status_id})
     @messages = @ticket.ticket_messages
     @answer = TicketMessage.new
     
@@ -59,5 +62,11 @@ class TicketsController < ApplicationController
     @ticket = Ticket.find(params[:id])
     flash[:notice] = "Ticket gelöscht" if @ticket.destroy
     redirect_to(tickets_url)
+  end
+  
+  private
+  
+  def init_scope
+     if is_portal?
   end
 end

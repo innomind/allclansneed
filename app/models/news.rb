@@ -13,4 +13,9 @@ class News < ActiveRecord::Base
   validates_presence_of :subtext
   validates_presence_of :news
 
+  def self.testbla
+    with_exclusive_scope :find => {:conditions => {:limit => 3}} do
+      find :all
+    end
+  end
 end
