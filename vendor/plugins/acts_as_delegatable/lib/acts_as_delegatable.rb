@@ -18,6 +18,10 @@ module ActiveRecord::Acts::ActsAsDelegatable
               
       @options = options
       
+      def self.rand
+        all(:select => :id).collect{|n|n.id}.rand
+      end
+      
       def self.count
         with_scope(:find => { :conditions => "site_id = #{$site_id}" }) do
           super
