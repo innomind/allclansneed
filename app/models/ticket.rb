@@ -5,6 +5,7 @@ class Ticket < ActiveRecord::Base
   has_many :ticket_messages, :dependent => :destroy
   
   validates_presence_of :author_id
+  validates_presence_of :subject
   
   def ticket_message=(ticket_message)
     ticket_messages.build(ticket_message)
