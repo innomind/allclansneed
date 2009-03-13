@@ -1,8 +1,12 @@
-<% error_handling_form_for poll, :url => vote_poll_path(poll), :html => {:method => :post} do |form| %>
-  <h2><%= poll.title %></h2>
-  <%= poll.description %><br />
-  <ul id="poll">
-    <%= render :partial => "poll/poll_option", :collection => poll.poll_options %>
-  </ul>
-  <%= form.submit "voten" %>
-<%  end %>
+<% unless poll.nil? %>
+  <% error_handling_form_for poll, :url => vote_poll_path(poll), :html => {:method => :post} do |form| %>
+    <h2><%= poll.title %></h2>
+    <%= poll.description %><br />
+    <ul id="poll">
+      <%= render :partial => "poll/poll_option", :collection => poll.poll_options %>
+    </ul>
+    <%= form.submit "voten" %>
+  <%  end %>
+<% else %>
+Derzeit keine Polls.
+<% end %>

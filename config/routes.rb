@@ -1,6 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
   map.resources :tickets
-
+  map.resources :ticket_messages, :controller => "TicketMessage"
 
   map.root :controller => 'news'
   
