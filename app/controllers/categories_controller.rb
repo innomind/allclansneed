@@ -1,9 +1,11 @@
 class CategoriesController < ApplicationController
-  before_filter :fetch_object, :except => [:edit, :update]
-  before_filter :init_category, :except => [:edit, :update]
+  before_filter :fetch_object, :except => [:edit, :update, :destroy]
+  before_filter :init_category, :except => [:edit, :update, :destroy]
+  before_filter :section_link
   
   def show
-    @categories = Category.find :all, :conditions => {:controller => @cat_name}, :order => :position
+    params[:section] ||= ""
+    @categories = Category.find :all, :conditions => {:controller => @cat_name, :section => params[:section]}, :order => :position
   end
   
   def newcat
@@ -14,9 +16,11 @@ class CategoriesController < ApplicationController
   def create
     @category = Category.new(params[:category])
     @category.controller = @cat_object.class_name
+    @section_link = {:section => params[:category][:section]} unless params[:category][:section].empty?
     if @category.save
       flash[:notice] = "Neue Kategorie erstellt"
-      redirect_to category_path(@cat_name)
+      
+      redirect_to category_path(@cat_name, @section_link)
     else
       render :action => :new
     end
@@ -46,7 +50,19 @@ class CategoriesController < ApplicationController
     end
   end
   
+  def destroy
+    @category = Category.find params[:id]
+    controller = @category.controller
+    flash[:notice] = "Kategorie gelöscht" if @category.destroy
+    redirect_to category_path(controller)
+  end
+  
   private
+  
+  def section_link
+    @section_link = Hash.new
+    @section_link = {:section => params[:section]} unless params[:section].nil?
+  end
   
   def fetch_object
     begin
