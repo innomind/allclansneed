@@ -1,0 +1,1 @@
+<%= render :partial => "boxes/clanwar/clanwar", :collection => Clanwar.find(:all, :limit => 5, :order => "created_at DESC"), :as => :clanwar %>

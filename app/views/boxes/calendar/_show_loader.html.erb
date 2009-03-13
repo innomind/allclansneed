@@ -1,0 +1,1 @@
+<%= render :partial => "boxes/calendar/calendar", :object => @year = Time.now.year, :object => @month = Time.now.month, :object => @events = Event.find(:all) %>
