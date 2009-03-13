@@ -11,9 +11,11 @@ Signal.trap("TERM") do
 end
 
 while($running) do
+  task = DaemonTask.next_task
   
-  # Replace this with your code
-  ActiveRecord::Base.logger.info "This daemon is still running at #{Time.now}.\n"
-  
-  sleep 10
+  if task
+    task.process_task
+  else
+    sleep 15
+  end
 end
