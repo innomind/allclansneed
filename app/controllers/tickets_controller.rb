@@ -36,7 +36,6 @@ class TicketsController < ApplicationController
     @ticket = Ticket.new(params[:ticket])
     @ticket.ticket_messages[0].user = current_user
     @ticket.author = current_user
-    
     if @ticket.save
       flash[:notice] = 'Ticket was successfully created.'
       redirect_to(@ticket)
@@ -58,7 +57,7 @@ class TicketsController < ApplicationController
 
   def destroy
     @ticket = Ticket.find(params[:id])
-    @ticket.destroy
+    flash[:notice] = "Ticket gelöscht" if @ticket.destroy
     redirect_to(tickets_url)
   end
 end

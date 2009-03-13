@@ -17,7 +17,13 @@ module ActiveRecord::Acts::ActsAsDelegatable
       #end
               
       @options = options
-
+      
+      def self.find_total *args
+        with_exclusive_scope(:find => { :conditions => ""}) do 
+          find(*args)
+        end
+      end
+      
       def self.find *args
         with_scope(:find => { :conditions => "site_id = #{$site_id}" }) do
           r = super(*args)

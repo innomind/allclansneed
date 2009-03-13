@@ -1,13 +1,17 @@
 Betreff: <%= @ticket.subject %><br />
+Kategorie: <%= @ticket.category.name %><br />
+Status: <%= @ticket.status.name %>
+
+<% error_handling_form_for @ticket do |form| %>
+	<%= form.select :status_id, Category.for_select("Ticket", "status")%>
+	<%= form.submit "ändern" %>
+<% end %>
 
 <%= render :partial => "message", :collection => @messages %>
 
 Antwort:
-<% error_handling_form_for @answer, :url => ticket_messages_path do |form| %>
+<% error_handling_form_for @answer do |form| %>
       <%= form.hidden_field :ticket_id, :value => @ticket.id %>
       <%= form.text_area :message, :rows => 5, :cols => 30%>
       <%= form.submit "erstellen" %>
 <% end %>
-
-
-<%= link_to 'Back', tickets_path %>

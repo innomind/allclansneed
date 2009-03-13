@@ -1,4 +1,4 @@
-<h1>Listing tickets</h1>
+<h1>Tickets</h1>
 
 <table>
   <tr>
@@ -25,4 +25,6 @@
 
 <br />
 
-<%= link_to 'New ticket', new_ticket_path %>
+<%= link_to 'Neues Ticket', new_ticket_path %>
+<%= link_to "Kategorien bearbeiten", category_path("Ticket")%>
+<%= link_to "Status verwalten", category_path("Ticket", :section => "status")%>
