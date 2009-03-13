@@ -18,6 +18,18 @@ module ActiveRecord::Acts::ActsAsDelegatable
               
       @options = options
       
+      def self.count
+        with_scope(:find => { :conditions => "site_id = #{$site_id}" }) do
+          super
+        end
+      end
+      
+      def self.count_total
+        with_exclusive_scope(:find => { :conditions => ""}) do
+          count
+        end
+      end
+      
       def self.find_total *args
         with_exclusive_scope(:find => { :conditions => ""}) do 
           find(*args)
