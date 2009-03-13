@@ -1,0 +1,11 @@
+<div id="clanwar_<%= clanwar.id %>">
+  <%= link_to("#{clanwar.squad.name} vs. #{clanwar.opponent}", clanwar_path(clanwar)) %><br />
+  <% if clanwar.score > clanwar.score_opponent %>
+	  <font color="green">Ergebnis: <%= clanwar.score %> : <%= clanwar.score_opponent %> </font><br />
+  <% elsif clanwar.score < clanwar.score_opponent%>
+    <font color="red">Ergebnis: <%= clanwar.score %> : <%= clanwar.score_opponent %> </font><br />
+  <% else %>
+    <font color="yellow">Ergebnis: <%= clanwar.score %> : <%= clanwar.score_opponent %> </font><br />
+  <% end %>
+</div>
+<P></P>

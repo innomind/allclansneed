@@ -1,1 +1,1 @@
-<%= render :partial => "boxes/poll/poll", :locals =>  { :poll => Poll.last } %>
+<%= render :partial => "boxes/poll/poll", :locals =>  { :poll => Poll.box_poll(@user) } %>
