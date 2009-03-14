@@ -1,5 +1,4 @@
 class DaemonTask < ActiveRecord::Base
-  
   validates_presence_of :task
   validates_presence_of :domain
   validates_presence_of :scheduled_at
@@ -11,7 +10,8 @@ class DaemonTask < ActiveRecord::Base
   def process_task
     update_attribute(:scheduled_at, nil)
     task = Autodns.new task, domain
-    @answer = task.request  
+    @answer = task.request
+    
     update_attribute(:response, @answer.elements["response/result/msg/code"].text)
     update_attribute(:processed_at, Time.now)
   end
