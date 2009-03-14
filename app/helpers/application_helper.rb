@@ -129,4 +129,10 @@ module ApplicationHelper
 	  	output << @breadcrumbs.last.first 
 	  end
   end
+  
+  def intern_pic(model)
+    if model.intern
+      tooltip image_tag("key.png"), :show_mode => "mouseover", :text => "Intern"
+    end
+  end
 end

@@ -1,5 +1,5 @@
 <div id="poll<%= poll.id %>">
-	Titel: <%= poll.title %> <br />
+	Titel: <%= poll.title %> <%= intern_pic poll %> <br />
 	Status: <%= poll.status %> 
 	<%= access_link_if poll.open?, "schließen", close_poll_path(poll) %>
 	<%= access_link_if poll.close?, "öffnen", open_poll_path(poll) %>

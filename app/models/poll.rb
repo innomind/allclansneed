@@ -9,6 +9,17 @@ class Poll < ActiveRecord::Base
   has_many :poll_results, :dependent => :destroy
   
   after_update :save_options
+  has_many :comments, :as => :commentable, :dependent => :destroy  
+  
+  def before_update
+    p = Poll.find(id, :include => :comments)
+    if p.intern != intern
+      p.comments.each do |c| 
+        c.intern = intern
+        c.save
+      end
+    end
+  end
   
   def close?
     !open

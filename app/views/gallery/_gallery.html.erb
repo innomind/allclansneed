@@ -2,6 +2,7 @@
 	<%= image_tag gallery.category_pic.url(:thumb) %>
 <% end %>
 <%= link_to gallery.name, gallery_path(gallery) %>
+<%= intern_pic gallery %>
 <% tooltip image_tag("world_link.png"), :show_mode => "mouseover" do  %>
       <%= gallery.description %>
 <% end %>

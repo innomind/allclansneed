@@ -13,4 +13,18 @@ class Gallery < ActiveRecord::Base
       return_pic.pic
     end
   end
+  
+  def before_update
+    g = Gallery.find(id, :include => {:gallery_pics => :comments})
+    if g.intern != intern
+      g.gallery_pics.each do |p| 
+        p.intern = intern
+        p.save
+        p.comments.each do |c|
+          c.intern = intern
+          c.save
+        end
+      end
+    end
+  end
 end

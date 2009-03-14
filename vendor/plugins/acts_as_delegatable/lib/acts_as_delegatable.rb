@@ -29,7 +29,7 @@ module ActiveRecord::Acts::ActsAsDelegatable
         options ||= Hash.new
         unless options.delete(:global)
           conditions =  { :site_id => $site_id }
-          
+          #debugger
           #if self.methods.include? ("intern")
             conditions.merge!({:intern => false}) unless $user_belongs_to_site
           #end

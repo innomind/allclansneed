@@ -2,7 +2,7 @@
     
         <%= link_to forum.title, [forum, "forum_threads"] %>
         (<%= forum.threads_count %>)
-
+<%= intern_pic forum %>
   <span id="forum_links_<%= forum.id %>">
     <%= access_link image_tag("folder_edit.png"), edit_forum_path(forum) %>
     <%= access_link image_tag("folder_delete.png"), forum_path(forum), :method => "delete", :confirm => "Wirklich löschen?" %>

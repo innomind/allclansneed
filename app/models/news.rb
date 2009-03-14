@@ -12,10 +12,14 @@ class News < ActiveRecord::Base
   validates_presence_of :title
   validates_presence_of :subtext
   validates_presence_of :news
-
-  def self.testbla
-    with_exclusive_scope :find => {:conditions => {:limit => 3}} do
-      find :all
+  
+  def before_update
+    n = News.find(id, :include => :comments)
+    if n.intern != intern
+      n.comments.each do |c| 
+        c.intern = intern
+        c.save
+      end
     end
   end
 end

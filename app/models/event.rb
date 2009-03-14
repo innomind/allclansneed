@@ -7,6 +7,16 @@ class Event < ActiveRecord::Base
     self[:expire_at] = Time.parse(date + " " + time)  
   end
   
+  def before_update
+    e = Event.find(id, :include => :comments)
+    if e.intern != intern
+      e.comments.each do |c| 
+        c.intern = intern
+        c.save
+      end
+    end
+  end
+  
   #getter for virtual attribute date
   def date
     if self[:expire_at].nil?

@@ -2,6 +2,7 @@
 <% @categories.each do |cat| %>
 	<li id="<%=dom_id(cat)%>">
 		<%= cat.name %>
+		<%= intern_pic cat %>
 		<%= access_link image_tag("folder_edit.png"), edit_category_path(cat)%>
 		<%= access_link image_tag("folder_delete.png"), category_path(cat), :method => :delete, :confirm => "Kategorie wirklcih löschen?"%>
 	</li>
