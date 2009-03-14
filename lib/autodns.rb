@@ -6,8 +6,6 @@ include REXML
 
 class Autodns
   @@document = nil
-  @@task = nil
-  @@domain = nil
   def initialize (task, domain)
     #Creating XML-Skeleton
     @document = Document.new
@@ -49,8 +47,7 @@ class Autodns
       task_tag.add_element("tld")
       task_tag.elements["tld"].text = domain[1]
       
-      @document.elements["request"].elements << task_tag
-    
+      @document.elements["request"].elements << task_tag  
   end
   
   def request
