@@ -16,6 +16,7 @@ class Autodns
     build_auth_tag document
     build_task_tag document
     request document
+
   end
   
   def build_auth_tag document
@@ -54,5 +55,6 @@ class Autodns
       resp, data = http.post('/', document.to_s)
       return resp.body
     }
+    return @answer
   end
 end

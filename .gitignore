@@ -25,3 +25,5 @@ models.pdf
 acn_development
 acn_production
 acn_test
+log/domain.rb.pid
+log/domain.rb_monitor.pid
