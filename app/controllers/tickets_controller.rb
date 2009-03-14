@@ -2,19 +2,23 @@ class TicketsController < ApplicationController
   
   add_breadcrumb 'Tickets', 'tickets_path'
   
-  CONTROLLER_ACCESS = COMPONENT_RIGHT_OWNER
+  CONTROLLER_ACCESS = SITE_MEMBER
   
   ACTION_ACCESS_TYPES={
-    :index => PUBLIC,
-    :show => PUBLIC
+    :destroy => COMPONENT_RIGHT_OWNER
   }
   
+  before_filter :init_condition
+  before_filter :init_ticket, :only => [:show, :edit, :update, :destroy]
+  
   def index
-    @tickets = Ticket.all
+    #debugger
+    @tickets = Ticket.paginate :page => params[:page], :per_page => 15, :conditions => @conditions
   end
 
   def show
-    @ticket = Ticket.find(params[:id])
+    @category = Category.find(:first, :global => true, :conditions => {:id => @ticket.category_id})
+    @status = Category.find(:first, :global => true, :conditions => {:id => @ticket.status_id})
     @messages = @ticket.ticket_messages
     @answer = TicketMessage.new
     
@@ -29,7 +33,6 @@ class TicketsController < ApplicationController
   
   def edit
     add_breadcrumb 'Ticket bearbeiten'
-    @ticket = Ticket.find(params[:id])
   end
   
   def create
@@ -45,8 +48,6 @@ class TicketsController < ApplicationController
   end
 
   def update
-    @ticket = Ticket.find(params[:id])
-
     if @ticket.update_attributes(params[:ticket])
       flash[:notice] = 'Ticket was successfully updated.'
       redirect_to(@ticket)
@@ -56,8 +57,18 @@ class TicketsController < ApplicationController
   end
 
   def destroy
-    @ticket = Ticket.find(params[:id])
     flash[:notice] = "Ticket gelöscht" if @ticket.destroy
     redirect_to(tickets_url)
   end
+  
+  private
+  
+  def init_condition
+    @conditions = {:author_id => current_user} unless current_user.is_supporter?
+  end
+  
+  def init_ticket
+    @ticket = Ticket.find(params[:id], :conditions => @conditions)
+  end
+  
 end

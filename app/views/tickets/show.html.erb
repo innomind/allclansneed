@@ -1,10 +1,12 @@
 Betreff: <%= @ticket.subject %><br />
-Kategorie: <%= @ticket.category.name %><br />
-Status: <%= @ticket.status.name %>
-
-<% error_handling_form_for @ticket do |form| %>
-	<%= form.select :status_id, Category.for_select("Ticket", "status")%>
-	<%= form.submit "ändern" %>
+Kategorie: <%= @category.name %><br />
+Status: <%= @status.name %>
+<% supporter_area do %>
+	<% error_handling_form_for @ticket do |form| %>
+		<%= form.select :status_id, Category.global_for_select("Ticket", "status")%>
+		<%= form.select :admin_id, [["keiner", nil]] + User.get_supporter_for_select %>
+		<%= form.submit "ändern" %>
+	<% end %>
 <% end %>
 
 <%= render :partial => "message", :collection => @messages %>
