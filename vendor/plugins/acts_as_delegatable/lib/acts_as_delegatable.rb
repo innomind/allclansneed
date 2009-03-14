@@ -10,6 +10,11 @@ module ActiveRecord::Acts::ActsAsDelegatable
   end
   
   module ClassMethods
+    
+    def human_attribute_desc(attr)
+      I18n.t("activerecord.attributes.#{self.name.underscore}.#{attr}_desc", :default => "")
+    end
+    
     def acts_as_site options = {}
       
       #def self.human_name(options = {})
@@ -17,33 +22,19 @@ module ActiveRecord::Acts::ActsAsDelegatable
       #end
              
       @options = options
-      @@without_scope = false
-#      
-      def self.without_site
-        @@without_scope = true
-      end
-#      
-      def self.with_site
-        @@without_scope = false
-        true
-      end
-#      
-#      def self.scope
-#        @@without_scope
-#      end
-#      
-#      def self.count
-#        with_scope(:find => { :conditions => "site_id = #{$site_id}" }) do
-#          super
-#        end
-#      end
-#      
+
       def self.find *args
         #debugger
         options = args.find{|a| a.is_a? Hash}
         options ||= Hash.new
         unless options.delete(:global)
-          with_scope(:find => { :conditions => "site_id = #{$site_id}" }) do
+          conditions =  { :site_id => $site_id }
+          
+          #if self.methods.include? ("intern")
+            conditions.merge!({:intern => false}) unless $user_belongs_to_site
+          #end
+          
+          with_scope(:find => { :conditions => conditions }) do
             r = super(*args)
             if r.nil?
               with_exclusive_scope(:find => {  }) do

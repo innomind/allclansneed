@@ -5,6 +5,7 @@
 <div id="add_comment" style="display:none;">
 	<% form_remote_tag :url => {:controller  => 'comment', :action => 'create', :model => modelname, :id => model.id}, :html => {:id => "create_comment"} do%>
 		<%= text_area :comment, "entry", :rows => 2, :cols => 25 %>
+		<%= hidden_field :comment, "intern", :value => (model.attribute_names.include?("intern")? model.intern : false)%>
 		<%= submit_tag 'Add' %>
 	<% end %>
 </div>

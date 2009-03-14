@@ -111,6 +111,8 @@ class ApplicationController < ActionController::Base
     session['error_objects'] = []
     @user = current_user
     @user_belongs_to_site = user_belongs_to_site? ? true : false
+    
+    $user_belongs_to_site = @user_belongs_to_site
     $user_id = @user.id unless @user.nil?
     
     I18n.locale = :de

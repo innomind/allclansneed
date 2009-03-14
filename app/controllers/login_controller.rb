@@ -1,8 +1,8 @@
 class LoginController < ApplicationController
   
     def login
-      nick = params[:login][:nick]
-      pw = params[:login][:password]
+      nick = params[:user][:nick]
+      pw = params[:user][:password]
       unless (nick.nil? || pw.nil?)
         usr = User.first :conditions => {:login => nick}
         if !usr.nil? && usr.check_pw(pw)

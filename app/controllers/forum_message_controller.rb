@@ -10,6 +10,7 @@ class ForumMessageController < ApplicationController
   
   def create
     @forum_message = @forum_thread.forum_messages.new(params[:forum_message])
+    @forum_message.intern = @forum_thread.anchor.intern if @forum_thread.anchor.methods.include?("intern")
     if @forum_message.save
       redirect_to forum_thread_path(@forum_thread)
     else

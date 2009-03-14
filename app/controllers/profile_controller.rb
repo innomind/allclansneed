@@ -1,12 +1,15 @@
 class ProfileController < ApplicationController
   before_filter :get_profile, :only => [:show]
   
+  add_breadcrumb "Profile", "profiles_path"
+  
   #TODO: Userliste
   def index
     
   end
   
   def show
+    add_breadcrumb current_user.nick
     @current_user = current_user
     
     if @profile.user != current_user

@@ -13,6 +13,7 @@ class TicketsController < ApplicationController
   
   def index
     #debugger
+    User.human_attribute_desc "login"
     @tickets = Ticket.paginate :page => params[:page], :per_page => 15, :conditions => @conditions
   end
 

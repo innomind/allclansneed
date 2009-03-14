@@ -27,6 +27,7 @@
 
 <%= access_link "Neuen Thread erstellen", new_group_forum_thread_path(@group)  %>
 <h2>Threads:</h2>
+<%= link_to "alle Threads", group_forum_threads_path(@group)%>
 <%= will_paginate @threads %>
 <%= page_entries_info @threads %>
 <%= render :partial => "forum_thread/thread", :collection => @threads %>

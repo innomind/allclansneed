@@ -1,5 +1,6 @@
 <% error_handling_form_for :forum, @forum, :url => forums_path do |form| %>
 	<%= form.text_field :title %>
 	<%= form.text_field :subtitle %>
+	<%= form.check_box :intern %>
 	<%= form.submit "Forum erstellen"%>
 <% end %>

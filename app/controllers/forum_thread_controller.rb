@@ -33,6 +33,8 @@ class ForumThreadController < ApplicationController
     @forum_thread = @anchor.forum_threads.new(params[:forum_thread])
     @forum_thread.forum_messages[0].user = current_user
     @forum_thread.forum_messages[0].site = current_site
+    @forum_thread.forum_messages[0].intern = @anchor.intern if @anchor.methods.include?("intern")
+    @forum_thread.intern = @anchor.intern if @anchor.methods.include?("intern")
     if @forum_thread.save
       redirect_to forum_thread_path(@forum_thread.id)
     else

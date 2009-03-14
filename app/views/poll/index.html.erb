@@ -1,4 +1,7 @@
+<%= page_entries_info @polls %>
+<%= will_paginate @polls %>
+
 <ul id="poll_list">
 <%= render :partial => "poll", :collection => @polls %>
 </ul>
-<%= access_link "new poll", new_poll_path %>
+<%= access_link "Poll erstellen", new_poll_path %>
