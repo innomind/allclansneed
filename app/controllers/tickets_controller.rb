@@ -66,7 +66,10 @@ class TicketsController < ApplicationController
   
   private
   
+  def init_ticket
+  end
+  
   def init_scope
-     if is_portal?
+     #if is_portal?
   end
 end
