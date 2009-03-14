@@ -6,12 +6,17 @@ include REXML
 
 class Autodns
   @@document = nil
+  @@task = nil
+  @@domain = nil
   def initialize (task, domain)
     #Creating XML-Skeleton
     @document = Document.new
-      @document.add_element("request")
+    @document.add_element("request")
+    @task = task
+    @domain = domain
+      
     build_auth_tag
-    build_task_tag task, domain 
+    build_task_tag
   end
   
   def build_auth_tag
@@ -29,9 +34,9 @@ class Autodns
       @document.elements["request"].elements << auth
   end
   
-  def build_task_tag (task, domain)
+  def build_task_tag
     
-    domain = domain.split(".")
+    domain = @domain.split(".")
 
       #building domain check
       task_tag = Element.new("task")
@@ -53,7 +58,8 @@ class Autodns
     @http.use_ssl = true
     @http.start() {|http|
       resp, data = http.post('/', @document.to_s)
-      return resp.body
+      @answer = Document.new resp.body
     }
+    return @answer
   end
 end

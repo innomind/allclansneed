@@ -10,11 +10,12 @@ class DaemonTask < ActiveRecord::Base
   
   def process_task
     update_attribute(:scheduled_at, nil)
-    
     task = Autodns.new task, domain
-    task.request
     
-    sleep 10 # placeholder for sending email
+    @answer = task.request
+    logger.info { @answer.elements["response/result/msg/code"].text }
+    
+    update_attribute(:response, @answer.elements["response/result/msg/code"].text)
     update_attribute(:processed_at, Time.now)
   end
 end
