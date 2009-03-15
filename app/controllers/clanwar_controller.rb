@@ -32,6 +32,7 @@ class ClanwarController < ApplicationController
       flash[:notice] = "Clanwar erfolgreich erstellt"
       redirect_to clanwars_path
     else
+      @squads = Clan.find(:first).squads
       render :action => "new"
     end
   end

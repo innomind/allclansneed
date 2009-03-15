@@ -7,6 +7,7 @@
 <ul id="navigations">
 <% @navigations.each do |nav| %>
 	<li id="<%= dom_id(nav) %>">
+		<span class="sortable_handle"><%= image_tag("sort.png") %></span>
 		<%= "#{nav.name} (#{nav.navigation_template.name})"%>
 		<%= ajax_tooltip image_tag("textfield_rename.png"), 
 	                :update_url => edit_navigation_path(nav), 
@@ -22,4 +23,5 @@
 <% end %>
 </ul>
 
-<%= sortable_element("navigations", :url => update_positions_navigations_path(:template_box_id => params[:template_box_id])) %>
+<%= sortable_element("navigations", :url => update_positions_navigations_path(:template_box_id => params[:template_box_id]),
+:handle => "sortable_handle") %>

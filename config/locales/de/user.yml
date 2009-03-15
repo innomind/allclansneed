@@ -1,0 +1,8 @@
+de:
+  activerecord:
+    models:
+      user: test
+    attributes:
+      user:
+        login: blub
+        login_desc: test

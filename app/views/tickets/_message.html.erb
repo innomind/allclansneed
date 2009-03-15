@@ -1,0 +1,8 @@
+<div>
+    <%# unless message.user? %>
+        erstellt von: <%= username(message.user)  %> 
+    <%# end %>
+  am <%= l(message.created_at) %> <br>
+  Nachricht: <%= message.message %><br>
+</div>
+<br>

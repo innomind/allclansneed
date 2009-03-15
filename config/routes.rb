@@ -1,11 +1,16 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :administration
+  
+  map.resources :tickets
+  
+  map.resources :ticket_messages, :controller => "TicketMessage"
 
   map.root :controller => 'news'
   
   map.resources :news, :singular => "onenews"
   
   map.resources :forums, :controller => "forum", :shallow => true do |forum|
-    forum.resources :forum_threads, :controller => "forum_thread", :shallow => true, :except => [:index], :as => "threads" do |thread|
+    forum.resources :forum_threads, :controller => "forum_thread", :shallow => true, :as => "threads" do |thread|
       thread.resources :forum_messages, :controller => "forum_message", :shallow => true, :as => "posts"
     end
   end
@@ -49,8 +54,12 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :friends, :only => [:index, :destroy],
                           :member => [:accept, :reject, :become]
 
-  map.resources :groups, :member => [:join, :leave, :administrate, :activate, :kick]
-  
+  map.resources :groups, :member => [:join, :administrate, :activate, :kick], :shallow => true do |group|
+    group.resources :forum_threads, :controller => "forum_thread", :as => "threads" do |thread|
+      thread.resources :forum_messages, :controller => "forum_message", :shallow => true, :as => "posts"
+    end
+  end
+
   map.resources :clanwars, :controller => "clanwar"
   
   map.resources :events, :controller => "event", :collection => {:showDay => :get}

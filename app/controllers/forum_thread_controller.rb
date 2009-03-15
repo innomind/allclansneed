@@ -3,38 +3,38 @@ class ForumThreadController < ApplicationController
   CONTROLLER_ACCESS = ACN_MEMBER
 
   ACTION_ACCESS_TYPES={
-    :show => PUBLIC
+    :show => PUBLIC,
+    :index => PUBLIC
   }
 
-  add_breadcrumb 'Forum', 'forums_path'
+  before_filter :init_thread, :except => [:show] 
+  before_filter :init_show, :only => [:show]
+  before_filter :init_breadcrumb
+  
+  def index
+    @threads = @anchor.forum_threads.pages :all
+  end
   
   #show thread
   def show
-    @thread = ForumThread.find(params[:id]);
     @messages = ForumMessage.paginate :conditions => {:forum_thread_id => @thread}
-    
-    add_breadcrumb @thread.forum.title, "forum_path(#{@thread.forum.id})"
-    add_breadcrumb @thread.title, "forum_thread_path(#{@thread.id})"
+    add_breadcrumb @thread.title
   end
   
   #show new thread form
   def new
-    @forum = Forum.find(params[:forum_id])
-    add_breadcrumb @forum.title, "forum_path(#{@forum.id})"
     add_breadcrumb "neuer Thread"
-    
-    @forum_thread = ForumThread.new
+    @forum_thread = @anchor.forum_threads.new
     @forum_thread.forum_messages.build
   end
   
   #save new thread
   def create
-    @forum = Forum.find(params[:forum_id])
-    add_breadcrumb @forum.title, "forum_path(#{@forum.id})"
-    add_breadcrumb "neuer Thread"
-    @forum_thread = @forum.forum_threads.new(params[:forum_thread])
+    @forum_thread = @anchor.forum_threads.new(params[:forum_thread])
     @forum_thread.forum_messages[0].user = current_user
     @forum_thread.forum_messages[0].site = current_site
+    @forum_thread.forum_messages[0].intern = @anchor.intern if @anchor.methods.include?("intern")
+    @forum_thread.intern = @anchor.intern if @anchor.methods.include?("intern")
     if @forum_thread.save
       redirect_to forum_thread_path(@forum_thread.id)
     else
@@ -43,5 +43,20 @@ class ForumThreadController < ApplicationController
   end
   
   private
-
+  def init_thread
+    @anchor = Forum.find(params[:forum_id]) unless params[:forum_id].nil?    
+    @anchor = Group.find(params[:group_id]) unless params[:group_id].nil?
+  end
+  
+  def init_show
+    @thread = ForumThread.find(params[:id])
+    @anchor = @thread.anchor
+  end
+  
+  def init_breadcrumb
+    add_breadcrumb @anchor.class.human_name, "#{@anchor.class.name.tableize}_path"
+    add_breadcrumb @anchor.title, @anchor
+    add_breadcrumb "Threads", [@anchor, "forum_threads"] unless @anchor.class == Forum
+  end
+  
 end

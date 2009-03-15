@@ -3,6 +3,9 @@
 <%= link_to image_tag(@gallery_pic.pic.url(:medium)), @gallery_pic.pic.url(:original) %><br>
 Beschreibung: <%= @gallery_pic.description %><br>
 Hochgeladen von:<%= username(@gallery_pic.user) %><br>
-Hochgeladen am: <%= german_date_with_time(@gallery_pic.created_at) %>
+Hochgeladen am: <%= l @gallery_pic.created_at %>
+
+<%= rating_for @gallery_pic %>
+
 <br>
 <%= show_comments @gallery_pic %>

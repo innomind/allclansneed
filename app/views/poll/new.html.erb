@@ -8,5 +8,6 @@
     <%= render :partial => 'newoption', :collection => @poll.poll_options %>
   </div>
     <p><%= add_option_link "Option hinzufügen" %></p>
+  <%= form.check_box :intern %>
   <%= form.submit "erstellen" %>
 <% end %>

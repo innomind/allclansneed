@@ -2,7 +2,7 @@
     <%# unless message.user? %>
         erstellt von: <%= username(message.user)  %> 
     <%# end %>
-  am <%= german_date_with_time(message.created_at) %> <br>
+  am <%= l message.created_at %> <br>
   Nachricht: <%= message.message %><br>
 </div>
 <br>

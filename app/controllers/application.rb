@@ -68,7 +68,7 @@ class ApplicationController < ActionController::Base
   
   def user_belongs_to_site?
     return false if session['user_sites'].nil?
-    session['user_sites'].include?(current_site.id)
+    session['user_sites'].include?(current_site)
   end
   
   def save_verbose obj
@@ -111,8 +111,11 @@ class ApplicationController < ActionController::Base
     session['error_objects'] = []
     @user = current_user
     @user_belongs_to_site = user_belongs_to_site? ? true : false
+    
+    $user_belongs_to_site = @user_belongs_to_site
     $user_id = @user.id unless @user.nil?
     
+    I18n.locale = :de
     init_access
   end
 
@@ -121,7 +124,14 @@ class ApplicationController < ActionController::Base
   end
 
   def init_site
-    self.class.current_site = Site.find_by_subdomain(current_subdomain || "portal" )
+    server = request.server_name.split(".")
+    server.delete_at(0) if server[0] == "www"
+    if server.count == 2
+      site = Site.find_by_subdomain(server[0])
+    else
+      site = Site.find_by_domain(server.join("."))
+    end
+    self.class.current_site = site || Site.find_by_subdomain("portal")
     $site_id = current_site.id
   end
   

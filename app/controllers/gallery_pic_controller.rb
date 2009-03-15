@@ -15,10 +15,8 @@ class GalleryPicController < ApplicationController
   
   def create
     add_breadcrumb 'Bild hochladen'
-    @gallery_pic = GalleryPic.new(params[:gallery_pic])
-    @gallery_pic.gallery = @gallery
-#    @gallery_pic.user = current_user
-#    @gallery_pic.site = current_site
+    @gallery_pic = @gallery.gallery_pics.new(params[:gallery_pic])
+    @gallery_pic.intern = @gallery.intern
     if @gallery_pic.save
       flash[:notice] = "Bild hochgeladen"
       redirect_to pic_path(@gallery_pic) 

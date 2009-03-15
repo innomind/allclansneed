@@ -1,4 +1,4 @@
-  <% error_handling_form_for :login, :url => {:controller => "login", :action => "login"} do |f| %>
+  <% error_handling_form_for User.new, :url => {:controller => "login", :action => "login"} do |f| %>
     <%= f.text_field 'nick', :size => 10 %>
     <%= f.password_field 'password', :size => 10 %>
     <%= f.submit 'log in' %>

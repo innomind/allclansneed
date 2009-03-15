@@ -1,4 +1,6 @@
 <h1>Gruppenübersicht</h1>
+<%= page_entries_info @groups %>
+<%= will_paginate @groups %>
 <%= render :partial => 'group', :collection => @groups%>
 
 <br />

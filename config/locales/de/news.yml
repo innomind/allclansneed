@@ -1,0 +1,9 @@
+de:
+  activerecord:
+    models:
+      news: "News"
+    attributes:
+      news:
+        title: "Titellll"
+  news:
+    welcome: "News übersicht"

@@ -1,0 +1,37 @@
+<h1>Tickets</h1>
+
+<%= will_paginate @tickets %>
+<%= page_entries_info @tickets %>
+
+<table>
+  <tr>
+    <th>Betreff</th>
+    <th>Von</th>
+    <th>Verantwortlich</th>
+    <th>erstellt am</th>
+    <th>letztes Update</th>
+  </tr>
+  
+<% for ticket in @tickets %>
+  <tr>
+    <td><%= ticket.subject %></td>
+    <td><%= ticket.author.login %></td>
+    <td><% unless ticket.admin.nil? %><%= ticket.admin.login %><% end %></td>
+    <td><%= l ticket.created_at %></td>
+    <td><%= l ticket.updated_at %></td>
+    <td><%= link_to 'Show', ticket %></td>
+<% supporter_area do %>
+    <td><%= link_to 'Edit', edit_ticket_path(ticket) %></td>
+    <td><%= link_to 'Destroy', ticket, :confirm => 'Are you sure?', :method => :delete %></td>
+<% end %>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'Neues Ticket', new_ticket_path %>
+<% supporter_area do %>
+	<%= link_to "Kategorien bearbeiten", category_path("Ticket")%>
+	<%= link_to "Status verwalten", category_path("Ticket", :section => "status")%>
+<% end %>

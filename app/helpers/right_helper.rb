@@ -5,7 +5,7 @@ module RightHelper
   
   def access_link name, target, html_options = nil
     check = Hash.new
-    if target.is_a? String
+    if target.is_a?(String)
       check = ActionController::Routing::Routes.recognize_path(target, {:method => :get})
     else
       check[:action] = target.delete(:check_action) || 

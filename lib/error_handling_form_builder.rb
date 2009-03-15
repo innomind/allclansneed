@@ -4,8 +4,8 @@ class ErrorHandlingFormBuilder < ActionView::Helpers::FormBuilder
   helpers = field_helpers +
     %w(date_select datetime_select time_select collection_select) +
     %w(collection_select select country_select time_zone_select) -
-    %w(label fields_for)
-
+    %w(label fields_for) 
+    
   helpers.each do |name|
     define_method name do |field, *args|
       options = args.detect {|argument| argument.is_a?(Hash)} || {}
@@ -14,15 +14,22 @@ class ErrorHandlingFormBuilder < ActionView::Helpers::FormBuilder
       end
     end
   end
-
+  
   def build_shell(field, options)
     partial = options[:style].nil? ? 'forms/field' : 'forms/' + options[:style]
     @template.capture do
+      #debugger
+      #translate = I18n.t(field.to_s, :default => {:name => nil, :desc => nil},
+      #                               :scope => [:dbfields, @object.class.name.tableize])
+      translate = @object.class.human_attribute_name field.to_s if @object.class.methods.include? ("human_attribute_name")
+      translate ||= Hash.new
+      desc =  @object.class.human_attribute_desc(field.to_s) if @object.class.methods.include? ("human_attribute_desc")
+      desc ||= ""
       locals = {
         :element => yield,
-        :label   => label(field, options[:label])
+        :label   => label(field, (options[:label] || translate[:name])),
+        :desc    => desc
       }
-      
       if has_errors_on?(field)
         #flash[:notice].push error_message(field, options)
         locals.merge!(:error => error_message(field, options))

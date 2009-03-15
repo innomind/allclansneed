@@ -10,7 +10,7 @@ class PollController < ApplicationController
   }  
     
   def index
-    @polls = Poll.find(:all, :order => "created_at DESC")
+    @polls = Poll.paginate(:all, :order => "created_at DESC")
   end
   
   def show

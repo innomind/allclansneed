@@ -84,6 +84,47 @@ namespace :init do
                                                   :editable => true)
     tb.site = site
     t_area[:linke_seite].template_boxes << tb
+
+    #Poll
+    tb = TemplateBox.create(:name => "Aktuelle Polls", :position => 2)
+    tb.template_box_type = TemplateBoxType.create(:name => "Poll",
+                                                  :internal_name => "poll",
+                                                  :editable => true)
+    tb.site = site
+    t_area[:linke_seite].template_boxes << tb
+
+    #Random_Gallery_Pic
+    tb = TemplateBox.create(:name => "Zufälliges Galeriebild", :position => 3)
+    tb.template_box_type = TemplateBoxType.create(:name => "Zufäliges Galeriebild",
+                                                  :internal_name => "gallery_pic",
+                                                  :editable => true)
+    tb.site = site
+    t_area[:linke_seite].template_boxes << tb
+
+    #Clanwars
+    tb = TemplateBox.create(:name => "Letzte Clanwars", :position => 4)
+    tb.template_box_type = TemplateBoxType.create(:name => "Letzte Clanwars",
+                                                  :internal_name => "clanwar",
+                                                  :editable => true)
+    tb.site = site
+    t_area[:linke_seite].template_boxes << tb
+
+    #Calendar
+    tb = TemplateBox.create(:name => "Kalender", :position => 5)
+    tb.template_box_type = TemplateBoxType.create(:name => "Kalender",
+                                                  :internal_name => "calendar",
+                                                  :editable => true)
+    tb.site = site
+    t_area[:linke_seite].template_boxes << tb
+
+    #Calendar
+    tb = TemplateBox.create(:name => "Shoutbox", :position => 5)
+    tb.template_box_type = TemplateBoxType.create(:name => "Shoutbox",
+                                                  :internal_name => "shoutbox",
+                                                  :editable => true)
+    tb.site = site
+    t_area[:linke_seite].template_boxes << tb
+    
     tb.save
   end
   

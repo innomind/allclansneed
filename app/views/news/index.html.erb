@@ -1,11 +1,11 @@
-<h1>News</h1>
+<h1><%= t "news.welcome" %></h1>
 
 <ul id="news_list">
 <%= render :partial => "news", :collection => @news %>
 </ul>
-
+<%= page_entries_info @news %>
 <%= will_paginate @news%>
-<br />
+<br /><br />
 <%= access_link "Neue News erstellen", new_onenews_path %>
 <%= access_link "Kategorien bearbeiten", category_path("News")%>
 <br /><br />

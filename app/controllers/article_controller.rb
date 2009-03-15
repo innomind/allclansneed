@@ -7,7 +7,7 @@ class ArticleController < ApplicationController
     :show => PUBLIC
   }
 
-  add_breadcrumb 'Article', 'articles_path'
+  add_breadcrumb 'Artikel', 'articles_path'
 
   def index
     @articles = Article.find :all

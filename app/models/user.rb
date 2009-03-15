@@ -136,5 +136,12 @@ class User < ActiveRecord::Base
   def status_for_group group
     (membership group).status
   end
+  
+  def is_supporter?
+    support_status?
+  end
 
+  def self.get_supporter_for_select
+    find(:all, :conditions => {:support_status => 1}).collect{|u| [u.login, u.id]}
+  end
 end

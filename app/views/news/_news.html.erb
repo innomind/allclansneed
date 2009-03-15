@@ -1,14 +1,13 @@
 <div id="news_<%= news.id %>">
-	Überschrift: <%= link_to news.title, onenews_path(news) %> <br />
+	<%= t "dbfields.news.title.name" %>: <%= link_to news.title, onenews_path(news) %> <%= intern_pic news %><br />
 	Kategorie: <%= news.category.name unless news.category.nil?%><br />
 	Tags:
 	<% news.tag_list.each do |t| %>
 	  <%= t %>
 	<% end %>
 	<br />
-  created: <%= german_date_with_time(news.created_at) %> <br />
-	updated: <%= german_date_with_time(news.updated_at) %><br />
-	Teaser: <%= news.subtext %> <br />
+  erstellt: <%= l news.created_at, :format => :long %> <br />
+	Kurztext: <%= news.subtext %> <br />
 
 	<%= access_link image_tag('delete.png', :border => 0), onenews_path(news), :method => :delete, :confirm => "Möchten sie diese News wirklich löschen?" -%>
 	

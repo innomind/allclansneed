@@ -15,6 +15,7 @@ class GalleryController < ApplicationController
   
   def show
     @gallery = Gallery.find_by_id params[:id], :include => :gallery_pics
+    @gallery_pics = @gallery.gallery_pics.pages
     add_breadcrumb @gallery.name
   end
   

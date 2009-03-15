@@ -13,8 +13,8 @@ class GroupsController < ApplicationController
   def show
     @group = Group.find_by_id(params[:id])
     @active_memberships = Groupmembership.find(:all, :conditions => {:group_id => @group.id, :status => "active"})
-    
     @user = current_user
+    @threads = @group.forum_threads.pages :all, :per_page => 5
     add_breadcrumb @group.name
   end
   
