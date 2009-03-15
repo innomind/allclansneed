@@ -1,2 +1,5 @@
-
-<%= render :partial => 'copy_form' %>
+<% unless @squad_select.empty? %>
+	<%= render :partial => 'copy_form' %>
+<% else %>
+	Kein Squad frei
+<% end %>

@@ -23,13 +23,16 @@ class SquadUserController < ApplicationController
 
   def edit
     @components = Component.all
+    @user_components = @user.components
     render :layout => false
   end
   
   def update
     @user.user_rights.destroy_all
-    params[:component_list].delete_if{|k,c| c == "0"}.each do |k,c|
-      @user.components.push Component.find c
+    
+    params[:component_list].delete_if{|k,v| v == "0"}.each do |c,v|
+      UserRight.create(:user_id => @user, :site_id => current_site.id, :component_id => c)
+      #@user.components.push Component.find c
       #@user.user_rights << UserRight.create(:site_id => current_site.id, :user_id => @user.id, :right_type => c)
     end
     flash[:notice] = "User gespeichert"
@@ -74,6 +77,7 @@ class SquadUserController < ApplicationController
 
  
   def move
+    @squad_select = (@clan.squads-@user.squads).collect{|s| [s.name,s.id]}
     render :layout => false
   end
 
@@ -84,6 +88,7 @@ class SquadUserController < ApplicationController
   end
 
   def copy
+    @squad_select = (@clan.squads-@user.squads).collect{|s| [s.name,s.id]}
     render :layout => false
   end
 

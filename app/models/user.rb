@@ -22,10 +22,11 @@ class User < ActiveRecord::Base
   has_many :groupfounderships, :class_name => "Group", :foreign_key => :founder_id
   
   has_many :squad_users
-  has_many :user_rights, :dependent => :destroy
   has_many :squads, :through => :squad_users
+    
+  has_many :user_rights, :dependent => :destroy
   has_many :sites, :through => :user_rights
-  has_many :right_components, :through => :user_rights
+  has_many :components, :through => :user_rights
   
   validates_presence_of :login
   validates_presence_of :password
@@ -109,6 +110,9 @@ class User < ActiveRecord::Base
     find :all, :conditions => {:login => User.acn_dev_users.collect {|u| u.login}}
   end
 
+
+  ### Rechte
+  
   def rights
     self.user_rights
   end
@@ -125,12 +129,27 @@ class User < ActiveRecord::Base
     (right_for_site site_id).components
   end
   
-  def components
-    local_rights.each do |right|
-      right.component
-    end
-    #local
+  def has_component? c
+    !!(user_rights.find :first, :conditions => {:site_id => $site_id, :component_id => c})
   end
+  
+  def components
+    Component.find :all, :joins => :user_rights, :conditions => ["user_rights.site_id = ?",$site_id]
+  end
+  
+  #def components
+  #  #self.components
+  #end
+  
+  #def components
+  #  local_rights.each do |right|
+  #    right.component
+  #  end
+  #  #local
+  #end
+  
+  
+  ### Gruppen
   
   def membership group
     mship = Groupmembership.find(:first, :conditions => {:group_id  => group.id, :user_id => self[:id]})
@@ -144,6 +163,9 @@ class User < ActiveRecord::Base
   def status_for_group group
     (membership group).status
   end
+  
+  
+  ### Tickets
   
   def is_supporter?
     support_status?

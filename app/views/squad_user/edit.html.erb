@@ -1,7 +1,7 @@
 <% error_handling_form_for @user do |form| %>
 	<% fields_for "component_list" do |cform| %>
 		<% @components.each do |c| %>
-			<%= cform.check_box c.id, :checked => (true) %>
+			<%= cform.check_box c.id, :checked => (@user_components.include? c) %>
 			<%= c.name %>
 			<br />
 		<% end %>
