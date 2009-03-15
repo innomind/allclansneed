@@ -1,5 +1,7 @@
 <li id=<%= dom_id(template_box, :edit) %>>
-    <%= template_box.name %> <i><%= template_box.template_box_type.name %></i>
+    
+<span class="sortable_handle"><%= image_tag("sort.png") %></span>
+<%= template_box.name %> <i><%= template_box.template_box_type.name %></i>
 
     <%= ajax_tooltip image_tag("textfield_rename.png"), :update_url => {:action => "edit", :template_box_id => template_box.id}, :id => dom_id(template_box, :rename)  %>
 
