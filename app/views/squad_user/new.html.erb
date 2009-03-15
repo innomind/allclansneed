@@ -1,4 +1,6 @@
-<h1>new member of squad "<%=@squad.name%>"</h1>
+<h1> neues squad-Mitglied in "<%=@squad.name%>"</h1>
 <%error_handling_form_for User.new do |form|%>
+  <%= hidden_field_tag :squad_id, @squad.id %>
   <%=  form.text_field :nick%>
+    <%= form.submit 'anlegen'  %>
 <%end%>

@@ -1,19 +1,21 @@
-<h1>Users of squad <%=@squad.name%> </h1>
+<h1>User im squad "<%=@squad.name%>" </h1>
 
+<%#if flash[:error]%><%#=flash[:error]%><%#end%>
+<%#if flash[:notice]%><%#=flash[:notice]%><%#end%>
 
-
+  [<%= ajax_tooltip "neuer user", :update_url => {:action => "new", :squad_id => @squad.id}, :id => 2 %>]
 <% @squad.members.each do |m|%>
 
   <h2> <%="#{m.nick}"%><%=  pad = "";5.times {pad << "&nbsp"};pad %>;
 
-    [<%= link_to "edit", user_path(m, :squad_id => @squad.id)%>]
-    [<%= link_to "neu", :action => 'new' ,  :squad_id => @squad.id%>]
-    [<%= link_to "löschen", user_path(m, :squad_id => @squad.id), :method => :delete %>]
-    #kopieren/verschieben
+    [<%= ajax_tooltip "editieren", :update_url => {:action => "edit", :squad_id => @squad.id, :id => m.id} %>]
+    [<%= link_to "löschen", :action => "delete", :squad_id => @squad.id, :id => m.id %>]
+    <%#= ajax_tooltip "löschen", :update_url => {:action => "delete", :squad_id => @squad.id, :id => m.id}%>
+
+    <%=  pad = "";5.times {pad << "&nbsp"};pad %>
     
-    <%#=  link_to "kopieren", :action => 'copy', :squad_id => @squad_id, :user_id => m.id%>
-    <%= render :partial => 'copy_form' %>
-    <%= render :partial => 'move_form' %>
-    <%#=  link_to "verschieben", :action => 'move', :squad_id => @squad_id, :user_id => m.id%>
+    [<%= ajax_tooltip "kopieren", :update_url => {:action => "copy", :squad_id => @squad.id, :user_id => m.id} %>]
+    [<%= ajax_tooltip "verschieben", :update_url => {:action => "move", :squad_id => @squad.id, :user_id => m.id} %>]
+
   </h2>
 <%end%>

@@ -15,11 +15,12 @@ class Squad < ActiveRecord::Base
   end
   
   
-  #TODO: make this a real _transaction_, if something goes wrong, revert it (like migration up/down)
+  #TODO: make these transfers  real _transactions_, if something goes wrong, revert it (like migration up/down)
   #dryed a little
   
   def self.move_user user, src_squad, dst_squad
-    user.squads.delete src_squad unless (copy_user user, src_squad, dst_squad)
+    return false unless (copy_user user, src_squad, dst_squad)
+    user.squads.delete src_squad
     user.save
   end
   

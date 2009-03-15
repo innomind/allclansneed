@@ -1,6 +1,6 @@
 class ClanController < ApplicationController
   def index
-    
+    @clan = Clan.current
   end
 
   def new
@@ -8,6 +8,7 @@ class ClanController < ApplicationController
   end
 
   def edit
+
   end
 
 end
