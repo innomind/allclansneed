@@ -64,8 +64,9 @@ ActionController::Routing::Routes.draw do |map|
   
   map.resources :events, :controller => "event", :collection => {:showDay => :get}
 
-  map.resources :users, :controller => 'squad_user'
-  map.resources :squads, :controller => 'squad'
+  map.resources :squads, :controller => 'squad', :member => {:confirm_users => :get, :confirm_users_save => :put}, :shallow => true do |squad|
+    squad.resources :users, :controller => 'squad_user', :member => {:copy => :get, :do_copy => :post, :move => :get, :do_move => :post, :destroy_form => :get}
+  end
 
   #map.users 'register', :controller => 'login', :action => 'create'
   #map.login 'login', :controller => 'login', :action => 'login'

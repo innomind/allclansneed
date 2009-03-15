@@ -1,12 +1,9 @@
 class SquadUserController < ApplicationController
 
-  before_filter :init_squad
+  #before_filter :init_squad
   #after_filter :update_squad
-
-  def show
-    edit
-    render :action => 'edit'
-  end
+  before_filter :init_clan
+  before_filter :init_squad_user, :only => [:destroy_form, :destroy, :move, :do_move, :copy, :do_copy]
   
   def index
     render :layout => false
@@ -22,61 +19,78 @@ class SquadUserController < ApplicationController
       @squad.users << user
     end
     redirect_to :action => 'index'
-    
   end
 
   def edit
-    @user = User.find(params[:id])
+    @components = Component.all
+    render :layout => false
+  end
+  
+  def update
+    @user.user_rights.destroy_all
+    params[:component_list].delete_if{|k,c| c == "0"}.each do |k,c|
+      @user.components.push Component.find c
+      #@user.user_rights << UserRight.create(:site_id => current_site.id, :user_id => @user.id, :right_type => c)
+    end
+    flash[:notice] = "User gespeichert"
+    redirect_to squads_path
+  end
+
+  def destroy_form
+    if @squad_user.user.squads_in_clan(@clan).count > 1
+      squad = [["Squad", "squad"]]
+    else
+      squad = []
+      @msg = "Da der User nur in einem Squad ist, kann er nur komplett aus dem Clan gelöscht werden"
+    end
+    @select = [["Clan", "clan"]] + squad
     render :layout => false
   end
 
-  def delete
-    #@user = User.find(params[:id])
-    #render :layout => false
-    #let's be quick and lazy'
-    #no extra template inbetween here
-    destroy
-  end
-
   def destroy
-    @user = User.find(params[:id])
-    unless @user.squads.length <= 1
-      #bad double query
-      if @squad.users.delete(@user)
-        if @squad.save
-          flash.now[:notice] = "User aus squad gelöscht"
-        else
-          flash.now[:error] = "User konnte nicht gelöscht werden"
-        end
-      end
+    if params[:target][:type] == "clan"
+      destroy_squads = @squad_user.user.squads_in_clan @clan
     else
-      flash.now[:error] = "User kann nicht aus letztem squad entfernt werden"
+      destroy_squads = [@squad_user.squad]
     end
-    render :action => 'index'
+    @squad_user.user.squads -= destroy_squads
+    flash[:notice] = "erfolgreich gelöscht"
+    redirect_to squads_path
+    
+    #
+    #unless @squad_user.user.squads_in_clan(@clan).length <= 1
+    #  if @squad.users.delete(@user)
+    #    if @squad.save
+    #      flash.now[:notice] = "User aus squad gelöscht"
+    #    else
+    #      flash.now[:error] = "User konnte nicht gelöscht werden"
+    #    end
+    #  end
+    #else
+    #  flash.now[:error] = "User kann nicht aus letztem squad entfernt werden"
+    #end
+    #render :action => 'index'
   end
 
+ 
   def move
-    @user = User.find(params[:user_id])
     render :layout => false
   end
 
   def do_move
-    @user = User.find(params[:user_id])
-    @target_squad = Squad.find(params[:target_squad])
+    @target_squad = @clan.squads.find(params[:target_squad])
     do_transfer :move
-    render :action => 'index'
+    redirect_to squads_path
   end
 
   def copy
-    @user = User.find(params[:user_id])
     render :layout => false
   end
 
   def do_copy
-    @user = User.find(params[:user_id])
-    @target_squad = Squad.find(params[:target_squad])
+    @target_squad = @clan.squads.find(params[:target_squad])
     do_transfer :copy
-    render :action => 'index'
+    redirect_to squads_path
   end
 
   private
@@ -101,8 +115,17 @@ class SquadUserController < ApplicationController
     end
     @squad.reload
   end
+  
+  def init_clan
+    @clan = current_site.clan
+  end
 
-
+  def init_squad_user
+    @squad_user = SquadUser.find_by_id params[:id], :conditions => ["squad_id IN (?)", @clan.squads]
+    @user = @squad_user.user
+    @squad = @squad_user.squad
+  end
+  
   #def update_squad
   # @squad.reload
   #end

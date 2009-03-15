@@ -1,0 +1,23 @@
+<li id="<%= dom_id(squad)%>"> 
+	<b><%=squad.name%></b>
+	<%= ajax_tooltip "neuer user", :update_url => new_squad_user_path(squad), :html => {:method => :get}, :id => dom_id(squad, :user_new) %>
+	<%= ajax_tooltip "bearbeiten", :update_url => edit_squad_path(squad), :html => {:method => :get}, :id => dom_id(squad, :edit) %>
+	<%= access_link("löschen", squad_path(squad), :method => :delete, :confirm => "Diesen Squad wirklich löschen?") unless @squads.count == 1 %>
+	
+	<ul id="<%= dom_id(squad, :users) %>">
+	<% squad.squad_users.each do |m|%>
+	
+	  <li id="<%= dom_id(m) %>"> <%="#{m.user.nick}"%><%=  pad = "";5.times {pad << "&nbsp"};pad %>;
+	
+	    <%= ajax_tooltip "editieren", :update_url => edit_user_path(m) %>
+		<%= ajax_tooltip "löschen", :update_url => destroy_form_user_path(m) %>
+	    
+	    <%=  pad = "";5.times {pad << "&nbsp"};pad %>
+	    
+	    <%= ajax_tooltip "kopieren", :update_url => copy_user_path(m) %>
+	    <%= ajax_tooltip "verschieben", :update_url => move_user_path(m) %>
+
+	  </li>
+	<%end%>
+	</ul>
+</li>

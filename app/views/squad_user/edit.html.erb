@@ -1,9 +1,11 @@
-<h1>Squad: <%=@squad.name%>  </h1>
-<h2>Member: <%=@user.nick%></h2>
-
 <% error_handling_form_for @user do |form| %>
-  <%= form.text_field :login %>
-  <%= form.submit 'speichern'  %>
+	<% fields_for "component_list" do |cform| %>
+		<% @components.each do |c| %>
+			<%= cform.check_box c.id, :checked => (true) %>
+			<%= c.name %>
+			<br />
+		<% end %>
+	<% end %>
+	
+ 	<%= form.submit 'speichern'  %>
 <%end%>
-
-

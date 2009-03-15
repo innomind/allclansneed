@@ -100,6 +100,11 @@ class User < ActiveRecord::Base
     (sites.collect {|s| s.clan}).compact
   end
   
+  #alle squads, in denen der user in DIESEM clan ist
+  def squads_in_clan c
+    c.squads.select{|s| s.users.include? self}
+  end
+  
   def self.all_dev_users
     find :all, :conditions => {:login => User.acn_dev_users.collect {|u| u.login}}
   end
@@ -109,10 +114,10 @@ class User < ActiveRecord::Base
   end
   
   def right_for_site site_id
-    UserRight.first :conditions => {:user_id => self.id, :site_id => site_id}
+    UserRight.find :all, :conditions => {:user_id => self.id, :site_id => site_id}
   end
   
-  def local_right
+  def local_rights
     right_for_site $site_id
   end
   
@@ -121,7 +126,10 @@ class User < ActiveRecord::Base
   end
   
   def components
-    local_right.components
+    local_rights.each do |right|
+      right.component
+    end
+    #local
   end
   
   def membership group

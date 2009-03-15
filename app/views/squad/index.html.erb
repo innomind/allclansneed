@@ -1,8 +1,7 @@
 <%#= javascript_include_tag :defaults %>
 <h1> alle squads von <%=@clan.name%></h1>
-<%@clan.squads.each do |sq|%>
-  <div id=<%=  dom_id(sq) %>></div>
-  <%  javascript_tag({}) do %>
-    <%=remote_function  :url => {:controller => 'squad_user', :action => 'index', :squad_id => sq.id}, :update => dom_id(sq), :method => :get %>
-  <%end%>
-<%end%>
+<%= ajax_tooltip "Squad erstellen", :update_url => new_squad_path, :html => {:method => :get}, :id => dom_id(@clan, :new_squad)  %>
+
+<ul id="squads_list">
+	<%= render :partial => "squad", :collection => @squads %>
+</ul>

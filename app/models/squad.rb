@@ -10,6 +10,13 @@ class Squad < ActiveRecord::Base
     :too_short => 'Name ist zu kurz, bitte mindestens %d Buchstaben verwenden',
     :too_long => 'Der Squadname darf nicht mehr als %d Buchstaben haben'
   
+  def save_destroy_users?
+    users.each do |u|
+      u.squads -= [self] if u.squads_in_clan(self.clan).count > 1
+    end
+    users.count == 0
+  end
+  
   def members
     users
   end
