@@ -22,16 +22,17 @@ class SquadUserController < ApplicationController
   end
 
   def edit
-    @components = Component.all
+    @components = Component.all :conditions => {:parent_id => nil}
     @user_components = @user.components
     render :layout => false
   end
   
   def update
     @user.user_rights.destroy_all
-    
-    params[:component_list].delete_if{|k,v| v == "0"}.each do |c,v|
-      UserRight.create(:user_id => @user, :site_id => current_site.id, :component_id => c)
+    components = Component.all
+    params[:component_list].delete_if{|k,v| v == "0"}.each do |co,v|
+      UserRight.create(:user_id => @user, :site_id => current_site.id, :component_id => co)
+      components.select{|comp| comp.id == co.to_i}.first.children.each{|comp| UserRight.create(:user_id => @user, :site_id => current_site.id, :component_id => comp.id)}
       #@user.components.push Component.find c
       #@user.user_rights << UserRight.create(:site_id => current_site.id, :user_id => @user.id, :right_type => c)
     end

@@ -47,11 +47,12 @@ class LoginController < ApplicationController
     private
   
     def put_rights_into_session usr
-      #hash = {}
-      #usr.rights.each do |right|
-      #  hash[right.site.id] = right.components.collect {|c| c.controller}
-      #end
-      #session[:rights] = hash
+      hash = {}
+      usr.rights.each do |right|
+        hash[right.site.id] ||= Array.new
+        hash[right.site.id] += [right.component.controller]
+      end
+      session[:rights] = hash
     end
   
 end

@@ -1,6 +1,6 @@
 <h1>Clanwar</h1>
 <div id="clanwar_<%= @clanwar.id %>">
-	Squad: <%= @clanwar.squad.name %> <br />
+	Squad: <%= @clanwar.squad.name unless @clanwar.squad.nil? %> <br />
 	Gegner: <%= @clanwar.opponent %> <br />
 	<% if @clanwar.score > @clanwar.score_opponent %>
 	  <font color="green">Ergebnis: <%= @clanwar.score %> : <%= @clanwar.score_opponent %> </font><br />

@@ -30,10 +30,9 @@ module ActiveRecord::Acts::ActsAsDelegatable
         unless options.delete(:global)
           conditions =  { :site_id => $site_id }
           #debugger
-          #if self.methods.include? ("intern")
-          
-          #  conditions.merge!({:intern => false}) unless $user_belongs_to_site
-          #end
+          if self.column_names.include? ("intern")
+            conditions.merge!({:intern => false}) unless $user_belongs_to_site
+          end
           
           with_scope(:find => { :conditions => conditions }) do
             r = super(*args)

@@ -134,7 +134,8 @@ class User < ActiveRecord::Base
   end
   
   def components
-    @component_list ||= Component.find :all, :joins => :user_rights, :conditions => ["user_rights.site_id = ?",$site_id]
+    #@component_list ||= 
+    Component.find :all, :joins => :user_rights, :conditions => ["user_rights.site_id = ?",$site_id]
   end
   
   def has_right_for? controller

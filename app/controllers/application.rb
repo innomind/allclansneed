@@ -25,7 +25,8 @@ class ApplicationController < ActionController::Base
   
   #remove '#'s to activate rights check
   def self.user_has_right_for? action
-    return true
+    #return true
+    
     needed = self::ACTION_ACCESS_TYPES
     action = action.to_sym
     right = needed[action].nil? ? self::CONTROLLER_ACCESS : needed[action]
@@ -35,7 +36,9 @@ class ApplicationController < ActionController::Base
     return true if right == SITE_MEMBER #&& user_belongs_to_site?
     
     ## COMPONENT_RIGHT_OWNER
-    return true if current_user.has_right_for? self.to_s
+    return false if static_session[:rights].nil?
+    return true if static_session[:rights][current_site.id].include?((self.class.name == "Class")? self.to_s : self.class.name)
+    #return true if current_user.has_right_for? self.to_s
     false
   end
   
@@ -119,7 +122,8 @@ class ApplicationController < ActionController::Base
     
     I18n.locale = :de
     init_access
-    
+    debugger unless params[:debug].nil?
+    return
   end
 
   def set_layout

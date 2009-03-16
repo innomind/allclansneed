@@ -40,7 +40,7 @@ module RightHelper
   
   #ok, there is an evil eval, but how to remove it?
   def accessible? target
-    return true
+    #return true
     action = target[:action]
     controller_name = target[:controller]
 
