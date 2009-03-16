@@ -25,6 +25,7 @@ class ApplicationController < ActionController::Base
   
   #remove '#'s to activate rights check
   def self.user_has_right_for? action
+    return true
     needed = self::ACTION_ACCESS_TYPES
     action = action.to_sym
     right = needed[action].nil? ? self::CONTROLLER_ACCESS : needed[action]
