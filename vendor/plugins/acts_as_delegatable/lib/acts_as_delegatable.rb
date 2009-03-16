@@ -31,7 +31,8 @@ module ActiveRecord::Acts::ActsAsDelegatable
           conditions =  { :site_id => $site_id }
           #debugger
           #if self.methods.include? ("intern")
-            conditions.merge!({:intern => false}) unless $user_belongs_to_site
+          
+          #  conditions.merge!({:intern => false}) unless $user_belongs_to_site
           #end
           
           with_scope(:find => { :conditions => conditions }) do
