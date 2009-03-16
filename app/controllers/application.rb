@@ -34,7 +34,7 @@ class ApplicationController < ActionController::Base
     return true if right == SITE_MEMBER #&& user_belongs_to_site?
     
     ## COMPONENT_RIGHT_OWNER
-    return true #if current_user.has_right_for? self.to_s
+    return true if current_user.has_right_for? self.to_s
     false
   end
   
