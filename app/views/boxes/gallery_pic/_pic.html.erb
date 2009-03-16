@@ -1,2 +1,4 @@
-<%= link_to image_tag(gallery_pic.pic.url(:small)), pic_path(gallery_pic) %> <br>
-<%= gallery_pic.name %>
+<% unless gallery_pic.nil? %>
+	<%= link_to image_tag(gallery_pic.pic.url(:small)), pic_path(gallery_pic) %> <br>
+	<%= gallery_pic.name %>
+<% end %>
