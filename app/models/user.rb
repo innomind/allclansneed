@@ -138,7 +138,6 @@ class User < ActiveRecord::Base
   end
   
   def has_right_for? controller
-    debugger
     !components.select{|c| c.controller == controller}.empty?
   end
   

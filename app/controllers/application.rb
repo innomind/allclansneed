@@ -22,7 +22,8 @@ class ApplicationController < ActionController::Base
   class_inheritable_accessor :static_session, :current_site
   
   protected
-
+  
+  #remove '#'s to activate rights check
   def self.user_has_right_for? action
     needed = self::ACTION_ACCESS_TYPES
     action = action.to_sym
@@ -33,7 +34,7 @@ class ApplicationController < ActionController::Base
     return true if right == SITE_MEMBER #&& user_belongs_to_site?
     
     ## COMPONENT_RIGHT_OWNER
-    return true if current_user.has_right_for? self.to_s
+    return true #if current_user.has_right_for? self.to_s
     false
   end
   
