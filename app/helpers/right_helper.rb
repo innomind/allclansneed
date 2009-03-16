@@ -40,9 +40,10 @@ module RightHelper
   
   #ok, there is an evil eval, but how to remove it?
   def accessible? target
-    return true
+    #return true
     action = target[:action]
     controller_name = target[:controller]
+
     unless controller_name.nil?
       #oh, poor controller, he has now to suffer a bit (violent code ;) )
       controller_class_name = controller_name.to_s.classify# hooo, "deviolated"... split('_').collect{|part| part.capitalize}.join

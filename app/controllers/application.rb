@@ -29,7 +29,11 @@ class ApplicationController < ActionController::Base
     right = needed[action].nil? ? self::CONTROLLER_ACCESS : needed[action]
     
     return true if right == PUBLIC
-    return true if user_has? right
+    return true if right == ACN_MEMBER #&& logged_in?
+    return true if right == SITE_MEMBER #&& user_belongs_to_site?
+    
+    ## COMPONENT_RIGHT_OWNER
+    return true if current_user.has_right_for? self.to_s
     false
   end
   
@@ -39,11 +43,6 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  #deprecated, don't use
-  def current_site_id
-    $site_id
-  end
-  
   def logged_in?
     @logged_in
   end
@@ -51,6 +50,7 @@ class ApplicationController < ActionController::Base
   def user_is_guest?
     self.class.user_is_guest?
   end
+  
   def self.user_is_guest?
     static_session['user'].nil?
   end
@@ -117,6 +117,7 @@ class ApplicationController < ActionController::Base
     
     I18n.locale = :de
     init_access
+    
   end
 
   def set_layout
@@ -150,7 +151,7 @@ class ApplicationController < ActionController::Base
     false # false, if true isn't explicitly set from now on
     unless right == COMPONENT_RIGHT_OWNER
       true if (user_right.right_type & right) == right
-    else
+    else # component required
       true if static_session[:rights][current_site.id].include? self.to_s
     end
   end
