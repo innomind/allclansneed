@@ -1,12 +1,5 @@
 class ClanwarController < ApplicationController
   
-  CONTROLLER_ACCESS = COMPONENT_RIGHT_OWNER
-
-  ACTION_ACCESS_TYPES={
-    :index => PUBLIC,
-    :show => PUBLIC
-  }
-
   add_breadcrumb 'Clanwars', "clanwars_path"
   
   def index

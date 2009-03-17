@@ -1,12 +1,5 @@
 class EventController < ApplicationController
   
-  CONTROLLER_ACCESS = PUBLIC
-
-  ACTION_ACCESS_TYPES={
-    :new => COMPONENT_RIGHT_OWNER,
-    :create => COMPONENT_RIGHT_OWNER
-  }
-  
   add_breadcrumb 'Kalender', "events_path"
   
   def index

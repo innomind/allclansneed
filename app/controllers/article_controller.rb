@@ -1,12 +1,5 @@
 class ArticleController < ApplicationController
 
- CONTROLLER_ACCESS = COMPONENT_RIGHT_OWNER
- 
-  ACTION_ACCESS_TYPES= {
-    :index => PUBLIC,
-    :show => PUBLIC
-  }
-
   add_breadcrumb 'Artikel', 'articles_path'
 
   def index

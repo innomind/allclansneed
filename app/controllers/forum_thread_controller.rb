@@ -1,12 +1,5 @@
 class ForumThreadController < ApplicationController
 
-  CONTROLLER_ACCESS = ACN_MEMBER
-
-  ACTION_ACCESS_TYPES={
-    :show => PUBLIC,
-    :index => PUBLIC
-  }
-
   before_filter :init_thread, :except => [:show] 
   before_filter :init_show, :only => [:show]
   before_filter :init_breadcrumb

@@ -2,13 +2,6 @@ class ClassifiedsController < ApplicationController
 
   add_breadcrumb 'Kleinanzeigen', "classifieds_path"
 
-  CONTROLLER_ACCESS = COMPONENT_RIGHT_OWNER
-
-  ACTION_ACCESS_TYPES={
-    :index => PUBLIC,
-    :show => PUBLIC
-  }
-
   def index
     @classifieds = Classified.paginate :all
   end

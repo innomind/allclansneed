@@ -29,7 +29,7 @@ module ActiveRecord::Acts::ActsAsDelegatable
         options ||= Hash.new
         unless options.delete(:global)
           conditions =  { :site_id => $site_id }
-          #debugger
+
           if self.column_names.include? ("intern")
             conditions.merge!({:intern => false}) unless $user_belongs_to_site
           end
@@ -79,29 +79,7 @@ module ActiveRecord::Acts::ActsAsDelegatable
           options[:per_page] ||= 15
           options[:order] ||= 'created_at DESC'
         end
-        #append_condition(args)
         args
-      end
-
-      def append_condition args, condition = nil
-        condition ||= Hash.new(:site_id => $site_id)
-        created = false
-        new_args = args
-        new_args.each do |a|
-          if a.is_a?(Hash)
-            a[:conditions] ||= Hash.new
-            a[:conditions][:site_id] = $site_id if a[:conditions].is_a?(Hash)
-            if a[:conditions].is_a?(Array)
-              a[:conditions][0] = a[:conditions][0] + " AND site_id = ?"
-              a[:conditions].push $site_id
-            end
-            created = true
-          end
-        end
-        unless created
-          new_args.push :conditions => {:site_id => $site_id }
-        end
-        new_args
       end
     end
   end

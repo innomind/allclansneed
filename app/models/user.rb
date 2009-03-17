@@ -113,46 +113,63 @@ class User < ActiveRecord::Base
 
   ### Rechte
   
-  def rights
-    self.user_rights
-  end
-  
-  def right_for_site site_id
-    UserRight.find :all, :conditions => {:user_id => self.id, :site_id => site_id}
-  end
-  
-  def local_rights
-    right_for_site $site_id
-  end
-  
-  def components_for_site site_id
-    (right_for_site site_id).components
-  end
-  
+  #deprecated
   def has_component? c
     !!(user_rights.find :first, :conditions => {:site_id => $site_id, :component_id => c})
   end
   
+  # TODO cache
   def components
-    #@component_list ||= 
-    Component.find :all, :joins => :user_rights, :conditions => ["user_rights.site_id = ?",$site_id]
+    @component_list ||= Component.find :all, :joins => :user_rights, :conditions => ["user_rights.site_id = ? AND user_id = ?",$site_id, self.id]
   end
   
   def has_right_for? controller
     !components.select{|c| c.controller == controller}.empty?
   end
   
-  #def components
-  #  #self.components
-  #end
+  def can_access? check
+    check[:action] ||= "index"
+    right = Rights.lookup_class(check[:controller], check[:action])
+    
+    case right
+    when "public"
+      true
+    when "member"
+      logged_in?
+    when "site"
+      belongs_to_site?
+    when "right"
+      has_right_for? check[:controller]
+    else 
+      true
+    end
+  end
   
-  #def components
-  #  local_rights.each do |right|
-  #    right.component
-  #  end
-  #  #local
-  #end
+  ## Session
   
+  def logged_in?
+    @logged_in
+  end
+  
+  def logged_in= status
+    @logged_in = status
+  end
+  
+  def belongs_to_current_site?
+    belongs_to_site? @current_site
+  end
+  
+  def belongs_to_site? site
+    sites.include? site
+  end
+  
+  def is_guest?
+    !belongs_to_site?
+  end
+  
+  def current_site= site
+    @current_site = site
+  end
   
   ### Gruppen
   

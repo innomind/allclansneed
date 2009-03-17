@@ -2,13 +2,6 @@ class GalleryController < ApplicationController
   
   add_breadcrumb 'Galerie', 'galleries_path'
   
-  CONTROLLER_ACCESS = COMPONENT_RIGHT_OWNER
-
-  ACTION_ACCESS_TYPES={
-    :index => PUBLIC,
-    :show => PUBLIC
-  }
-  
   def index
     @galleries = Gallery.paginate(:all, :include => :gallery_pics)
   end

@@ -2,8 +2,6 @@ class GroupsController < ApplicationController
   
   add_breadcrumb 'Gruppen', "groups_path"
   
-  CONTROLLER_ACCESS = PUBLIC
-  
   before_filter :check_founder, :only => [:edit, :update, :kick, :administrate, :activate]
   
   def index

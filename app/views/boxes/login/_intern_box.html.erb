@@ -1,5 +1,5 @@
 Hallo <%= @user.nick %> 
-<% unless @user_belongs_to_site %>
+<% unless @user.belongs_to_current_site? %>
 	(gast auf dieser Seite)
 <% end %>
 

@@ -1,7 +1,9 @@
 class CategoriesController < ApplicationController
   before_filter :fetch_object, :except => [:edit, :update, :destroy]
-  before_filter :init_category, :except => [:edit, :update, :destroy]
+  before_filter :init_category_by_id, :only => [:edit, :update, :destroy]
+  before_filter :init_breadcrumb, :except => [:edit, :update, :destroy]
   before_filter :section_link
+  before_filter :init_category_access
   
   def show
     params[:section] ||= ""
@@ -34,14 +36,12 @@ class CategoriesController < ApplicationController
   end
   
   def edit
-    @category = Category.find_by_id params[:id]
     add_breadcrumb @category.controller, @category.controller.tableize + "_path"
     add_breadcrumb "Kategorien verwalten", category_path(@category.controller)
     add_breadcrumb @category.name + " bearbeiten"    
   end
   
   def update
-    @category = Category.find_by_id params[:id]
     if @category.update_attributes(params[:category])
       flash[:notice] = "Kategorie geändert"
       redirect_to category_path(@category.controller)
@@ -51,7 +51,6 @@ class CategoriesController < ApplicationController
   end
   
   def destroy
-    @category = Category.find params[:id]
     controller = @category.controller
     flash[:notice] = "Kategorie gelöscht" if @category.destroy
     redirect_to category_path(controller)
@@ -68,12 +67,21 @@ class CategoriesController < ApplicationController
     begin
       @cat_object = eval(params[:id])
       @cat_name = @cat_object.class_name
+      
     rescue NameError
       render :layout => true, :text => "ups" and return
     end
   end
   
-  def init_category
+  def init_category_by_id
+    @category = Category.find params[:id]
+  end
+    
+  def init_category_access
+    raise Exceptions::Access unless current_user.has_right_for? ((@category.nil? ? @cat_name : @category.controller).underscore)
+  end
+    
+  def init_breadcrumb
     add_breadcrumb @cat_name, @cat_name.tableize + "_path"
     add_breadcrumb "Kategorien verwalten", category_path(@cat_name)
   end

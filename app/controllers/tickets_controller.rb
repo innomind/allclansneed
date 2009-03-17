@@ -2,12 +2,6 @@ class TicketsController < ApplicationController
   
   add_breadcrumb 'Tickets', 'tickets_path'
   
-  CONTROLLER_ACCESS = SITE_MEMBER
-  
-  ACTION_ACCESS_TYPES={
-    :destroy => COMPONENT_RIGHT_OWNER
-  }
-  
   before_filter :init_condition
   before_filter :init_ticket, :only => [:show, :edit, :update, :destroy]
   

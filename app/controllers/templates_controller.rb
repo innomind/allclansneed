@@ -1,8 +1,6 @@
 class TemplatesController < ApplicationController
   add_breadcrumb 'Templates', "templates_path"
   
-  CONTROLLER_ACCESS = COMPONENT_RIGHT_OWNER
-  
   def index
     @site = current_site
     @templates = Template.all

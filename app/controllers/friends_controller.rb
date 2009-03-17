@@ -1,10 +1,5 @@
 class FriendsController < ApplicationController
-  CONTROLLER_ACCESS = COMPONENT_RIGHT_OWNER
 
-  ACTION_ACCESS_TYPES={
-    :index => PUBLIC,
-  }
-  
   def accept
     @current_user = current_user
     @become_friend_with  = User.find_by_id(params[:id])

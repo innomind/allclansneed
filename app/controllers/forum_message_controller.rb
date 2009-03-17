@@ -1,7 +1,5 @@
 class ForumMessageController < ApplicationController
   
-  CONTROLLER_ACCESS = ACN_MEMBER
-  
   before_filter :init_thread
     
   def new

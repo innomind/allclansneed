@@ -1,12 +1,5 @@
 class ForumController < ApplicationController
   
-  CONTROLLER_ACCESS = COMPONENT_RIGHT_OWNER
-
-  ACTION_ACCESS_TYPES={
-    :index => PUBLIC,
-    :show => PUBLIC
-  }
-  
   add_breadcrumb 'Forum', 'forums_path'
   
   def index

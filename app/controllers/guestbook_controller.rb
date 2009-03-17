@@ -1,12 +1,5 @@
 class GuestbookController < ApplicationController
   
-  CONTROLLER_ACCESS = PUBLIC
-
-  ACTION_ACCESS_TYPES={
-    :destroy => COMPONENT_RIGHT_OWNER,
-    :add_comment => COMPONENT_RIGHT_OWNER
-  }
-  
   add_breadcrumb 'Gästebuch'
   
   def index

@@ -1,0 +1,71 @@
+# restful: true #=> [index, show] -> public; [new, create, edit, update, destroy] -> right
+
+# public
+# member
+# site
+# right
+
+article:
+  restful: true
+clanwar:
+  restful: true
+classifieds:
+  restful: true
+comments:
+    default: member
+event:
+  restful: true
+  showDay: public
+forum:
+  restful: true
+forum_message:
+  default: member
+forum_thread:
+  restful:true
+friends:
+  default: member
+  index: public
+gallery:
+  restful: true
+gallery_pic:
+  restful: true
+groups: 
+  default: member
+  index: public
+  show: public
+guestbook:
+  default: public
+  destroy: right
+  add_comment: site
+login:
+  default: public
+messages:
+  default: member
+navigation:
+  default: right
+news:
+  restful: true
+  default: right
+poll:
+  restful: true
+  vote: public
+profile:
+  restful: true
+  start: member
+rating:
+  default: member
+shoutbox:
+  restful: true
+squad:
+  default: public #right
+squad_user:
+  default: public #right
+template_boxes:
+  default: right
+templates:
+  default: right
+ticket_message:
+  default: member
+tickets:
+  default: site
+  destroy: right

@@ -1,10 +1,10 @@
 class NewsController < ApplicationController
-  #ACTION_LEVELS = {:new => LEVEL_SITE_ADMIN}
+
   add_breadcrumb 'News', 'news_path'
   before_filter :init_news, :only => [:show, :destroy, :edit, :update]
   
   def index
-    @news = News.paginate(:all)
+    @news = News.paginate(:all, :include => [:category, :tags])
     @tags = News.tag_counts(:order => 'count desc', :conditions  => {:site_id  => current_site.id})
   end
   
@@ -39,7 +39,7 @@ class NewsController < ApplicationController
   end
   
   def edit
-    @tags = News.tag_counts(:order => 'count desc', :conditions  => {:site_id  => current_site_id})
+    @tags = News.tag_counts(:order => 'count desc', :conditions  => {:site_id  => current_site.id})
   end
   
   def update
