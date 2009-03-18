@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   helper :all # include all helpers, all the time
   layout :set_layout 
   
-  before_filter :init, :init_areas # :check_query
+  before_filter :init  # :check_query
   around_filter :catch_exceptions
   
   protected
@@ -54,6 +54,10 @@ class ApplicationController < ActionController::Base
   ################# private #################
   private
 
+  def set_layout
+    current_site.template.internal_name
+  end
+
   def init
     init_site
     init_user 
@@ -62,25 +66,27 @@ class ApplicationController < ActionController::Base
 
     $page = params[:page].nil? ? 1 : params[:page]
     I18n.locale = :de
+    
+    init_areas
+    
     init_access
     debugger unless params[:debug].nil?
     return
   end
 
   def init_user
+    @current_session = Session.new
+    @current_session.set_controller self.class.to_s.underscore.gsub(/_controller$/, '')
     unless session['user'].nil?
       @user = User.find session['user'] #, :joins => [:sites, :components]
       @user.logged_in = true
       @user.current_site = @site
       session['error_objects'] = [] 
+      @current_session.set_user @user
       
       $user_belongs_to_site = @user.belongs_to_current_site? || false
       $user_id = @user.id unless @user.nil?
     end
-  end
-
-  def set_layout
-    current_site.template.internal_name
   end
 
   def init_site
@@ -93,18 +99,15 @@ class ApplicationController < ActionController::Base
     end
     #self.class.current_site = site || Site.find_by_subdomain("portal")
     @site = site || Site.find_by_subdomain("portal")
-    
     $site_id = current_site.id
   end
   
   def init_access
-    return false if @user.nil?
     controller = self.class.to_s.underscore.gsub(/_controller$/, '')
     check = {:controller => controller, :action => params[:action]}
-    return if @user.can_access? check
-    
-    denied_msg = "du darfst das nicht"
-    render :text => denied_msg
+    return if @current_session.can_access? check #Rights.lookup_class(check[:controller], check[:action]) == "public"
+    #return if @user.can_access? check
+    render :template => "errors/Access"
   end
 
   def catch_exceptions

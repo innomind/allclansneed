@@ -1,9 +1,10 @@
 # restful: true #=> [index, show] -> public; [new, create, edit, update, destroy] -> right
 
-# public
-# member
-# site
-# right
+# Verfügbare rechte:
+# public - jeder hat zugriff
+# member - Allclansneed Mitglieder
+# site   - Mitglied auf der Seite
+# right  - Man muss das Recht auf der Seite besitzen
 
 article:
   restful: true

@@ -7,26 +7,25 @@
         </h2>
 	<%= guestbook.entry %><br>
           
-        <%  if accessible?({:action => 'add_comment'}) and not guestbook.comment %>
+        <%  if accessable?({:action => 'add_comment'}) and not guestbook.comment %>
 	<%= link_to_function image_tag("comment_add.png", :border => 0),
 				"Element.toggle('add_comment_#{guestbook.id}')" %>
         <% end %>
 
         
-	<%= access_remote_link image_tag("delete.png", :border => 0), :url => guestbook_path(guestbook), :method => "delete",
+	<%= access_remote_link image_tag("delete.png", :border => 0), guestbook_path(guestbook), :method => "delete",
  												:confirm => "Möchten sie diesen Gästebucheintrag wirklich löschen?"%>
 
         <% if guestbook.comment %>
 		<%= render :partial => 'comment', :object => guestbook %>
 	<% else %>
-        <%  if accessible?({:action => 'add_comment'}) %>
-
-	<div id="add_comment_<%= guestbook.id %>" style="display:none;">
-		<% error_handling_form_for guestbook, :url => add_comment_guestbook_path(guestbook), :html => {:method => :post} do |f| %>
-			<%= f.text_area "comment", :rows => 2, :cols => 25 %>
-			<%= f.submit 'hinzufügen' %>
-		<% end %>
-	</div>
+        <%  if accessable?({:action => 'add_comment'}) %>
+			<div id="add_comment_<%= guestbook.id %>" style="display:none;">
+				<% error_handling_form_for guestbook, :url => add_comment_guestbook_path(guestbook), :html => {:method => :post} do |f| %>
+					<%= f.text_area "comment", :rows => 2, :cols => 25 %>
+					<%= f.submit 'hinzufügen' %>
+				<% end %>
+			</div>
         <% end %>
 	<% end %>
 </div>

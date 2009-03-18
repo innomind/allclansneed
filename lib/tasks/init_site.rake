@@ -26,7 +26,7 @@ namespace :init do
     t_area[:rechte_seite] = TemplateArea.create(:name => "rechte Seite", 
                                               :internal_name => "rechte_seite", 
                                               :position => 3)
-                                            
+                                              
     site.template.template_areas = t_area.values
     site.save
     Nav = Hash.new
@@ -117,7 +117,7 @@ namespace :init do
     tb.site = site
     t_area[:linke_seite].template_boxes << tb
 
-    #Calendar
+    #Shoutbox
     tb = TemplateBox.create(:name => "Shoutbox", :position => 5)
     tb.template_box_type = TemplateBoxType.create(:name => "Shoutbox",
                                                   :internal_name => "shoutbox",

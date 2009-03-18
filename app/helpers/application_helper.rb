@@ -62,7 +62,6 @@ module ApplicationHelper
     end
     str
   end
-  
 
   def show_verbose_messages
     str = ''
@@ -73,11 +72,6 @@ module ApplicationHelper
       obj.errors.each {|i,j| j.each {|e| str << e}} #(error_messages_for obj.class, :object => obj)
     end
     str
-  end
- 
-  #TODO: use the code2block wiki-entry!
-  def div_encapsulate string, id=nil
-    "<div #{id.nil? ? "" : 'id="'+id.to_s+'"'}>"+string.to_s+'</div>'
   end
   
   #building popup calendar

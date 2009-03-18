@@ -72,7 +72,7 @@ class User < ActiveRecord::Base
       :password => "supertest",
       :email => "superadmin@dev.innomind.info"
     )
-  ] #if table_exists?
+    ] #if table_exists?
   end
   
   def nick= nickname
@@ -137,7 +137,7 @@ class User < ActiveRecord::Base
     when "member"
       logged_in?
     when "site"
-      belongs_to_site?
+      belongs_to_current_site?
     when "right"
       has_right_for? check[:controller]
     else 
