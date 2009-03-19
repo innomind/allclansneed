@@ -1,5 +1,5 @@
 Hallo <%= @user.nick %> 
-<% unless @user.belongs_to_current_site? %>
+<% unless @current_session.belongs_to_current_site? %>
 	(gast auf dieser Seite)
 <% end %>
 
@@ -7,10 +7,14 @@ Hallo <%= @user.nick %>
 <%= link_to image_tag("door_in.png") + " meine Startseite", start_profiles_path %><br>
 <%= link_to image_tag("user_go.png") + " mein Profil", profile_path(@user) %>
 <%= link_to image_tag("pencil.png"), edit_profile_path(@user) %><br>
-<%= link_to image_tag("email.png") + " Nachrichten", messages_path %><br><br>
-  
-<%= access_link image_tag("user_edit.png") + " User verwalten", :controller => "squads" %><br>
-<%= link_to image_tag("monitor_edit.png") + " Seite bearbeiten", :controller => "template_boxes" %><br>
-<%= link_to "Template verwalten", templates_path%><br />
+<%= link_to image_tag("email.png") + " Nachrichten", messages_path %><br>
+<%= link_to image_tag("group.png") + " meine Clans", clans_path(:subdomain => false) %><br><br>
 
+<div id="admin_links">
+	<%= link_to image_tag("user_edit.png") + " User verwalten", :controller => "squads" if @user.owns_current_clan?%><br>
+	<%= access_link image_tag("monitor_edit.png") + " Seite bearbeiten", :controller => "template_boxes" %><br>
+	<%= access_link image_tag("page_world.png") + " Template verwalten", templates_path%><br />
+</div>
+
+<br>
 <%= link_to image_tag("door_out.png") + " logout", :controller => "login", :action => "logout" %>

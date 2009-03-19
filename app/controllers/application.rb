@@ -12,9 +12,9 @@ class ApplicationController < ActionController::Base
   protected
   
   def init_areas force = false
-    if not request.xhr? or force
+    #if not request.xhr? or force
       @template_areas = TemplateArea.get_areas_for_site current_site
-    end
+    #end
   end
 
   def current_site
@@ -60,8 +60,8 @@ class ApplicationController < ActionController::Base
 
   def init
     init_site
-    init_user 
-    
+    init_user
+
     add_breadcrumb 'Home', '/'
 
     $page = params[:page].nil? ? 1 : params[:page]
@@ -84,7 +84,7 @@ class ApplicationController < ActionController::Base
       session['error_objects'] = [] 
       @current_session.set_user @user
       
-      $user_belongs_to_site = @user.belongs_to_current_site? || false
+      $user_belongs_to_site = @current_session.belongs_to_current_site? || false
       $user_id = @user.id unless @user.nil?
     end
   end
@@ -97,6 +97,7 @@ class ApplicationController < ActionController::Base
     else
       site = Site.find_by_domain(server.join("."))
     end
+    
     #self.class.current_site = site || Site.find_by_subdomain("portal")
     @site = site || Site.find_by_subdomain("portal")
     $site_id = current_site.id
@@ -116,7 +117,7 @@ class ApplicationController < ActionController::Base
     rescue ActiveRecord::RecordNotFound
       render :template => "errors/RecordNotFound"
     rescue Exceptions::Access
-      render :template => "errors/Access"
+      render :template => "errors/Access", :layout => !request.xhr?
     #rescue NoMethodError
     # render :text => "no method exception"
     end

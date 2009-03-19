@@ -8,8 +8,7 @@
 	<% squad.squad_users.each do |m|%>
 	
 	  <li id="<%= dom_id(m) %>"> <%="#{m.user.nick}"%><%=  pad = "";5.times {pad << "&nbsp"};pad %>;
-	
-	    <%= ajax_tooltip "editieren", :update_url => edit_user_path(m) %>
+	    <%= ajax_tooltip "editieren", :update_url => edit_user_path(m), :method => :get unless m.user.owns_clan?(@clan)%>
 		<%= ajax_tooltip "löschen", :update_url => destroy_form_user_path(m) %>
 	    
 	    <%=  pad = "";5.times {pad << "&nbsp"};pad %>

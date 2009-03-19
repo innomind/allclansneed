@@ -10,6 +10,8 @@ article:
   restful: true
 clanwar:
   restful: true
+clans:
+  default: member
 classifieds:
   restful: true
 comments:
@@ -23,6 +25,8 @@ forum_message:
   default: member
 forum_thread:
   restful:true
+  new: member
+  create: member
 friends:
   default: member
   index: public

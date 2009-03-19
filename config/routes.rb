@@ -68,6 +68,14 @@ ActionController::Routing::Routes.draw do |map|
     squad.resources :users, :controller => 'squad_user', :member => {:copy => :get, :do_copy => :post, :move => :get, :do_move => :post, :destroy_form => :get}
   end
 
+  map.resources :clans, :member => {:leave, :delete} do |clan|
+    clan.resources :squads, :controller => "squad", :member => {:confirm_users => :get, :confirm_users_save => :put} do |squad|
+      squad.resources :users, :controller => 'squad_user', :member => {:copy => :get, :do_copy => :post, :move => :get, :do_move => :post, :destroy_form => :get}
+    end
+  end
+
+  map.resources :clan_join_inquiry
+
   #map.users 'register', :controller => 'login', :action => 'create'
   #map.login 'login', :controller => 'login', :action => 'login'
   #map.squads ':site_id/create_squad', :controller => 'clan_management', :action => 'create_squad'

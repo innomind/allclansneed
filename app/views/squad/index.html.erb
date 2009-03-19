@@ -1,5 +1,26 @@
-<%#= javascript_include_tag :defaults %>
 <h1> alle squads von <%=@clan.name%></h1>
+
+<% unless @inquiries.empty? %>
+	Es gibt folgende Anfragen von Usern, den clan beizutreten:
+	<ul>
+	<% @inquiries.each do |inquiry| %>
+		<li>
+			<%= username(inquiry.user)%> 
+			<%= tooltip "Anfrage Text", :show_mode => "mouseover", :text => inquiry.inquiry_text %>
+			<% tooltip "annehmen" do %>
+				<% error_handling_form_for inquiry do |f| %>
+					<%= select("inquiry", "squad_id", @squads.collect{|s| [s.name, s.id]}) %>
+					<%= f.submit "User aufnehmen" %>
+				<% end %>
+			<% end %>
+			<%= access_link "ablehnen", squads_path %>
+		</li>
+	<% end %>
+	</ul>
+<% else %>
+
+<% end %>
+
 <%= ajax_tooltip "Squad erstellen", :update_url => new_squad_path, :html => {:method => :get}, :id => dom_id(@clan, :new_squad)  %>
 
 <ul id="squads_list">

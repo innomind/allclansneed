@@ -23,9 +23,10 @@ class LoginController < ApplicationController
    def logout
      reset_session
      @logged_in = false
-     render :action => 'index'
+     flash[:notice] = "erfolgreich ausgeloggt"
+     redirect_to root_path
    end
-   
+     
    def index
    end
    

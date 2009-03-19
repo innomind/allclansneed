@@ -1,0 +1,32 @@
+class ClanJoinInquiryController < ApplicationController
+  before_filter :init_inquiry, :only => [:update]
+  
+  def create
+    @search_clan = Clan.find_by_uniq params[:clan_join_inquiry][:clan_name]
+    redirect_to clans_path and flash[:notice] = "Clan #{params[:clan_join_inquiry][:clan_name]} wurde nicht gefunden" and return if @search_clan.nil?
+    redirect_to clans_path and flash[:notice] = "Es existiert bereits eine Anfrage von dir an den Clan '#{params[:clan_join_inquiry][:clan_name]}' bitte warte die Antwort ab" and return unless ClanJoinInquiry.find(:first, :conditions => {:clan_id => @search_clan, :user_id => current_user.id}).nil?
+    redirect_to clans_path and flash[:notice] = "Du bist bereits Mitglied im Clan '#{params[:clan_join_inquiry][:clan_name]}'" and return if current_user.clans.include?(@search_clan)
+    ClanJoinInquiry.create(:user_id => current_user.id, :clan_id => @search_clan.id, :inquiry_text => params[:clan_join_inquiry][:inquiry_text])
+    redirect_to clans_path
+  end
+  
+  def update
+    @squad.users << @inquiry.user
+    @inquiry.destroy
+    flash[:notice] = "User erfolgreich in Clan aufgenommen"
+    redirect_to squads_path
+  end
+  
+  private
+  def init_inquiry
+    @inquiry = ClanJoinInquiry.find params[:id]
+    @clan = @inquiry.clan
+    raise Exceptions::Access unless @user.owns_clan? @clan
+    @squad = Squad.find params[:inquiry][:squad_id]
+    raise Exceptions::Access unless @clan.squads.include? @squad
+  end
+  
+  def squads_path
+    {:controller => "squad", :action => "index", :clan_id => is_portal? ? @clan.id : nil}
+  end
+end

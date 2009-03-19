@@ -1,0 +1,2 @@
+module ClanJoinInquiryHelper
+end

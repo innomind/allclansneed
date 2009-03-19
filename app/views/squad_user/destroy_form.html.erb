@@ -1,5 +1,8 @@
-<%= @msg %>
-<% error_handling_form_for @squad_user, :url => user_path(@squad_user), :html => {:method => :delete} do |form| %>
-	löschen aus: <%= select "target", "type", @select %>
-	<%= form.submit "löschen" %>
+<%= @msg.join("<br>") %>
+
+<% unless @select.empty? %>
+	<% error_handling_form_for @squad_user, :url => user_path(@squad_user), :html => {:method => :delete} do |form| %>
+		löschen aus: <%= select "target", "type", @select %>
+		<%= form.submit "löschen" %>
+	<% end %>
 <% end %>

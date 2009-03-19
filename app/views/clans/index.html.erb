@@ -1,0 +1,11 @@
+<%= access_link "Clan gründen", new_clan_path %> <%= link_to_function "Clan beitreten", "Element.toggle('inquiry_form')" %>
+<div id="inquiry_form" style="display:none">
+<% error_handling_form_for ClanJoinInquiry.new, :url => clan_join_inquiry_index_path do |form| %>
+	<%= form.text_field :clan_name %>
+	<%= form.text_area :inquiry_text, :rows => 5, :cols => 25 %>
+	<%= form.submit "anfrage stellen" %>
+<% end %>
+</div>
+<ul>
+<%= render :partial => "clan", :collection => @clans %>
+</ul>

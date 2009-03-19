@@ -6,7 +6,8 @@ class Forum < ActiveRecord::Base
   
   validates_presence_of :title
   
-  def before_update
+  def after_update
+    return if self.forum_threads.empty?
     f = Forum.find(id, :include => {:forum_threads => :forum_messages})
     if f.intern != intern
       f.forum_threads.each do |t| 

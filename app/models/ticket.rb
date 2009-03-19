@@ -18,8 +18,6 @@ class Ticket < ActiveRecord::Base
   end
   
   def before_create
-    #Category.without_site
     self.status = Category.find :first, :global => true, :conditions => {:controller => "Ticket", :section => "status", :name => "offen"}
-    #Category.with_site
   end
 end

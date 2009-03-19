@@ -3,10 +3,9 @@ class SquadController < ApplicationController
   before_filter :init_clan
   before_filter :init_squad, :only => [:edit, :update, :destroy, :confirm_users, :confirm_users_save]
   
-  add_breadcrumb 'Squads', "squads_path"
-  
   def index
     @squads = @clan.squads.find(:all, :include => :users)
+    @inquiries = @clan.clan_join_inquiries
   end
 
   def new
@@ -21,7 +20,7 @@ class SquadController < ApplicationController
     else
       flash[:error] = @squad.errors.full_messages.join("<br>")
     end
-    redirect_to squads_path
+    redirect_to :action => "index", :clan_id => params[:clan_id]
   end
   
   def edit
@@ -35,17 +34,17 @@ class SquadController < ApplicationController
     else
       flash[:error] = @squad.errors.full_messages.join("<br>") 
     end
-    redirect_to squads_path
+    redirect_to :action => "index", :clan_id => params[:clan_id]
   end
 
   def destroy
-    redirect_to(confirm_users_squad_path(@squad)) and return unless @squad.save_destroy_users?
+    redirect_to(:action => "confirm_user", :id => @squad, :clan_id => params[:id]) and return unless @squad.save_destroy_users?
     if @squad.destroy
       flash[:notice] = "Squad gelöscht"
     else
       flash[:error] = "Squad konnte nicht gelöscht werden"
     end
-    redirect_to squads_path
+    redirect_to :action => "index", :clan_id => params[:clan_id]
   end
 
   def confirm_users
@@ -67,7 +66,15 @@ class SquadController < ApplicationController
   private
 
   def init_clan
-    @clan = current_site.clan
+    if params[:clan_id].nil?
+      @clan = current_site.clan
+      add_breadcrumb 'Squads', "squads_path"
+    else
+      @clan = Clan.find params[:clan_id]
+      raise Exceptions::Access unless @user.owns_clan? @clan
+      add_breadcrumb 'meine Clans', "clans_path"
+      add_breadcrumb @clan.name + " User verwalten"
+    end
   end
   
   def init_squad
