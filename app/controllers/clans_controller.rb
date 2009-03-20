@@ -4,6 +4,7 @@ class ClansController < ApplicationController
   
   def index
     @clans = current_user.clans
+    @inquiries = ClanJoinInquiry.find_all_by_user_id current_user.id
   end
 
   def show

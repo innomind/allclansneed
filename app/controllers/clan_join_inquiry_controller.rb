@@ -1,5 +1,6 @@
 class ClanJoinInquiryController < ApplicationController
   before_filter :init_inquiry, :only => [:update]
+  before_filter :init_destroy, :only => :destroy
   
   def create
     @search_clan = Clan.find_by_uniq params[:clan_join_inquiry][:clan_name]
@@ -17,6 +18,12 @@ class ClanJoinInquiryController < ApplicationController
     redirect_to squads_path
   end
   
+  def destroy
+    @inquiry.destroy
+    flash[:notice] = "Anfrage zurückgezogen" and redirect_to clans_path and return if params[:from] == "user"
+    flash[:notice] = "Anfrage abgelehnt" and redirect_to squads_path
+  end
+  
   private
   def init_inquiry
     @inquiry = ClanJoinInquiry.find params[:id]
@@ -24,6 +31,16 @@ class ClanJoinInquiryController < ApplicationController
     raise Exceptions::Access unless @user.owns_clan? @clan
     @squad = Squad.find params[:inquiry][:squad_id]
     raise Exceptions::Access unless @clan.squads.include? @squad
+  end
+  
+  def init_destroy
+    @inquiry = ClanJoinInquiry.find params[:id]
+    @clan = @inquiry.clan
+    if params[:from] == "user"
+      redirect_to clans_path and flash[:error] = "Fehler beim zurückziehen der Anfrage" and return unless @inquiry.user == current_user
+    else
+      redirect_to squads_path and flash[:error] = "Fehler beim ablehnen der Anfrage" and return unless current_user.owns_clan? @clan
+    end
   end
   
   def squads_path

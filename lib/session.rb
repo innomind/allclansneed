@@ -19,8 +19,12 @@ class Session
     if target.is_a?(String)
       html_options[:method] ||= :get
       
-      #TODO caching
-      check = ActionController::Routing::Routes.recognize_path(target, {:method => html_options[:method].to_sym})
+      begin
+        check = ActionController::Routing::Routes.recognize_path(target, {:method => html_options[:method].to_sym})
+      rescue ActionController::RoutingError
+        check = ActionController::Routing::Routes.recognize_path(target.split("?")[0], {:method => html_options[:method].to_sym})
+      end
+      
     else
       check[:action] = target.delete(:check_action) || target[:action] || "index"
       check[:controller] = target.delete(:check_controller) || target[:controller] || @controller

@@ -8,9 +8,16 @@ class Clan < ActiveRecord::Base
   validates_format_of :uniq, :with => /\A[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\Z/i, :on => :save
   validates_length_of :uniq, :in => 3..14
   validates_uniqueness_of :uniq  
+  validates_presence_of :owner_id
   
   def before_validation
     self.uniq = self.uniq.downcase
+  end
+  
+  def after_create
+    squad = Squad.create(:name => "Main Squad")
+    self.squads << squad
+    squad.users << self.owner
   end
   
 #  def site= site

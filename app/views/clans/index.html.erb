@@ -6,6 +6,11 @@
 	<%= form.submit "anfrage stellen" %>
 <% end %>
 </div>
+<br>
+Meine Clan Anfragen:<br>
+<% @inquiries.each do |i| %>
+	<%= i.clan.name %> <%= access_link "zurückziehen", clan_join_inquiry_path(i, :from => :user), :method => :delete, :confirm => "Beitrittsanfrage wirklich zurückziehen?" %>
+<% end %>
 <ul>
 <%= render :partial => "clan", :collection => @clans %>
 </ul>

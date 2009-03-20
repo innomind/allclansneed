@@ -27,17 +27,6 @@ class Site < ActiveRecord::Base
   PORTAL_ID = 1
   PORTAL_NAME = "A * C * N - Portalseite"
   
-  def after_update
-    debugger
-    return
-  end
-  
-  def after_save
-    debugger
-    return
-  end
-    
-  
   def after_create
     self.forums << Forum.create(:title => "Hauptforum")
     self.forums << Forum.create(:title => "Intern", :intern => true)
