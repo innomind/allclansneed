@@ -4,8 +4,8 @@ namespace :init do
     sh "rake db:drop:all"
     sh "rake db:create:all"
     sh "rake db:migrate"
-    init
-    #sh "rake init:site"
+    #init
+    sh "rake init:site"
     1.upto(4) { |i| sh "rake init:one_site site_id=#{i}" }
   end
   
@@ -75,37 +75,18 @@ namespace :init do
     init_template
   end
   
-  desc "Populates for site_id(1): template, template_areas, template_boxes, template_box_types, navigation_template, navigation"
+  desc "Basic initial settings"
   task :site => :environment do
-
     init
-    user = User.create(dev_users[0])
-    clan = Clan.create(:uniq => "portal")
-    clan.owner = user
-    clan.squads << Squad.create(:name => "Main Squad")
-    clan.squads.first.users << user
-    clan.save
-    site = Site.create()
-    user.sites << site
-    clan.site = site
-    site.template = 
-    site.save
-    
-    t_area = Hash.new
-
   end
   
   task :one_site => :environment do
     site_id = ENV['site_id'].to_i
     user = User.create(dev_users[ENV['site_id'].to_i-1])
     uniq = (site_id == 1 ? "portal" : "clan#{site_id}")
-    clan = Clan.create(:name => uniq, :uniq => uniq)
-    clan.owner = user
-    clan.squads << Squad.create(:name => "Main Squad")
-    clan.squads.first.users << user
+    clan = Clan.create(:name => uniq, :uniq => uniq, :owner_id => user)
     clan.save
     site = Site.create(:owner_id => user.id, :subdomain => uniq)
-    user.sites << site    
     clan.site = site
     clan.save
   end

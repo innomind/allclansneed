@@ -1,6 +1,6 @@
 class Site < ActiveRecord::Base
   has_many :guestbooks, :dependent => :destroy
-  has_many :news_categories, :dependent => :destroy
+  has_many :categories, :dependent => :destroy
   has_many :gallery_categories, :dependent => :destroy
   has_many :gallery_pics, :dependent => :destroy
   has_many :forums, :dependent => :destroy
@@ -28,6 +28,8 @@ class Site < ActiveRecord::Base
   PORTAL_NAME = "A * C * N - Portalseite"
   
   def after_create
+    owner.sites << self
+    self.categories    
     self.forums << Forum.create(:title => "Hauptforum")
     self.forums << Forum.create(:title => "Intern", :intern => true)
     create_boxes

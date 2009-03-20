@@ -1,6 +1,7 @@
 class Category < ActiveRecord::Base
   acts_as_site
   has_many :news
+  belongs_to :site
   
   validates_presence_of :name
   

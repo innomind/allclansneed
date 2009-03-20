@@ -28,7 +28,7 @@ class Session
     else
       check[:action] = target.delete(:check_action) || target[:action] || "index"
       check[:controller] = target.delete(:check_controller) || target[:controller] || @controller
-      target = target.delete(:path) if target.has_key? :path
+      #target = target.delete(:path) if target.has_key? :path
     end
     
     return true if self.can_access? check

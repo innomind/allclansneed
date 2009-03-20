@@ -5,6 +5,7 @@ module RightHelper
   
   def access_link name, target, html_options = {}
     if accessable? target, html_options
+      target = target.delete(:path) if target.has_key?(:path) if target.is_a? Hash
       link_to name, target, html_options
     end
   end

@@ -114,6 +114,7 @@ class User < ActiveRecord::Base
   end
   
   def has_right_for? controller
+    return true if self.owns_current_site?
     !components.select{|c| c.controller == controller}.empty?
   end
   
