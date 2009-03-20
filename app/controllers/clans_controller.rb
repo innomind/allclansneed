@@ -16,7 +16,14 @@ class ClansController < ApplicationController
   end
 
   def create
-    
+    @clan = Clan.new params[:clan]
+    @clan.owner = current_user
+    if @clan.save
+      flash[:notice] = "Clan erfolgreich erstellt"
+      redirect_to clans_path
+    else
+      render :action => "new"
+    end
   end
   
   def leave

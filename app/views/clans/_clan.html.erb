@@ -2,6 +2,7 @@
 	<%= clan.name %> 
 	<%  if @user.owns_clan?(clan) %>
 		<%= link_to( "user verwalten", clan_squads_path(clan)) %>
+		<%= link_to("")%>
 	<% else %>
 		<%= link_to "verlassen", leave_clan_path(clan), :method => :delete, :confirm => "Bist du dir sicher, dass du den Clan verlassen möchtest?" %>
 	<% end %>

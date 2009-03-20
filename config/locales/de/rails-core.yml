@@ -87,6 +87,7 @@ de:
   support:
     array:
       sentence_connector: "und"
+      two_words_connector: " und "
       skip_last_comma: true
         
   activerecord:
@@ -96,7 +97,7 @@ de:
           one: "Konnte dieses {{model}} Objekt nicht speichern: 1 Fehler."
           other: "Konnte dieses {{model}} Objekt nicht speichern: {{count}} Fehler."
         body: "Bitte überprüfen Sie die folgenden Felder:"
- 
+
       messages:
         inclusion: "ist kein gültiger Wert"
         exclusion: "ist nicht verfügbar"

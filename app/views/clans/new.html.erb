@@ -1,2 +1,5 @@
-<h1>Clans#new,</h1>
-<p>Find me in app/views/clans/new,.html.erb</p>
+<% error_handling_form_for @clan do |form| %>
+	<%= form.text_field :uniq %>
+	<%= form.text_field :name%>
+	<%= form.submit :erstellen %>
+<% end %>
