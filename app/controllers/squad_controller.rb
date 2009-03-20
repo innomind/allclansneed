@@ -38,7 +38,7 @@ class SquadController < ApplicationController
   end
 
   def destroy
-    redirect_to(:action => "confirm_user", :id => @squad, :clan_id => params[:id]) and return unless @squad.save_destroy_users?
+    redirect_to(:action => "confirm_users", :id => @squad.id, :clan_id => @clan.id) and return unless @squad.save_destroy_users?
     if @squad.destroy
       flash[:notice] = "Squad gelöscht"
     else

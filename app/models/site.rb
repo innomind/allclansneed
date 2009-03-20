@@ -29,9 +29,14 @@ class Site < ActiveRecord::Base
   
   def after_create
     owner.sites << self
-    self.categories    
+    
+    self.categories << Category.create(:name => "Allgemein", :controller => "News")
+    self.categories << Category.create(:name => "Clan", :controller => "News")
+    self.categories << Category.create(:name => "Intern", :controller => "News", :intern => true)
+    
     self.forums << Forum.create(:title => "Hauptforum")
     self.forums << Forum.create(:title => "Intern", :intern => true)
+    
     create_boxes
   end
   

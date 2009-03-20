@@ -1,7 +1,7 @@
-<% error_handling_form_for @squad, :url => confirm_users_save_squad_path(@squad) do |f| %>
+<% error_handling_form_for @squad, :url => {:action => "confirm_users_save", :id => @squad.id, :clan_id => @clan.id} do |f| %>
 	<% @squad.users.each do |u| %>
 		<%= u.nick %>
-		<%= select("squad_user", u.id, [["aus dem Clan löschen","delete"]] + @clan.squads.collect{|s| ["verschieben nach: "+s.name, s.id]})%><br />
-		<%= f.submit "squad löschen" %>
+		<%= select("squad_user", u.id, (u.owns_clan?(@squad.clan) ? [] : [["aus dem Clan löschen","delete"]]) + (@clan.squads-[@squad]).collect{|s| ["verschieben nach: "+s.name, s.id]})%><br />
 	<% end %>
+	<%= f.submit "squad löschen" %>
 <% end %>

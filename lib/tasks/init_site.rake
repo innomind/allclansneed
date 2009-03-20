@@ -82,9 +82,9 @@ namespace :init do
   
   task :one_site => :environment do
     site_id = ENV['site_id'].to_i
-    user = User.create(dev_users[ENV['site_id'].to_i-1])
+    user = User.create(dev_users[site_id-1])
     uniq = (site_id == 1 ? "portal" : "clan#{site_id}")
-    clan = Clan.create(:name => uniq, :uniq => uniq, :owner_id => user)
+    clan = Clan.create(:name => uniq, :uniq => uniq, :owner_id => user.id)
     clan.save
     site = Site.create(:owner_id => user.id, :subdomain => uniq)
     clan.site = site

@@ -114,8 +114,8 @@ class ApplicationController < ActionController::Base
   def catch_exceptions
     begin
       yield
-    rescue ActiveRecord::RecordNotFound
-      render :template => "errors/RecordNotFound"
+    #rescue ActiveRecord::RecordNotFound
+    #  render :template => "errors/RecordNotFound"
     rescue Exceptions::Access
       render :template => "errors/Access", :layout => !request.xhr?
     #rescue NoMethodError

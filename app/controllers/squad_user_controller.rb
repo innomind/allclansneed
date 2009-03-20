@@ -69,7 +69,7 @@ class SquadUserController < ApplicationController
 
  
   def move
-    @squad_select = (@clan.squads-@user.squads).collect{|s| [s.name,s.id]}
+    @squad_select = (@clan.squads-@squad_user.user.squads).collect{|s| [s.name,s.id]}
     render :layout => false
   end
 
@@ -80,7 +80,7 @@ class SquadUserController < ApplicationController
   end
 
   def copy
-    @squad_select = (@clan.squads-@user.squads).collect{|s| [s.name,s.id]}
+    @squad_select = (@clan.squads-@squad_user.user.squads).collect{|s| [s.name,s.id]}
     render :layout => false
   end
 

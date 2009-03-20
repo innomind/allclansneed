@@ -12,10 +12,12 @@ class ClansController < ApplicationController
   end
 
   def new
+    add_breadcrumb 'Clan gründen'
     @clan = Clan.new
   end
 
   def create
+    add_breadcrumb 'Clan gründen'
     @clan = Clan.new params[:clan]
     @clan.owner = current_user
     if @clan.save
