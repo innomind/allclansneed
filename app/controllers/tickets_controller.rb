@@ -7,13 +7,12 @@ class TicketsController < ApplicationController
   
   def index
     #debugger
-    User.human_attribute_desc "login"
     @tickets = Ticket.paginate :page => params[:page], :per_page => 15, :conditions => @conditions
   end
 
   def show
-    @category = Category.find(:first, :global => true, :conditions => {:id => @ticket.category_id})
-    @status = Category.find(:first, :global => true, :conditions => {:id => @ticket.status_id})
+    @ticket_category = Category.find(:first, :global => true, :conditions => {:id => @ticket.category_id})
+    @ticket_status = Category.find(:first, :global => true, :conditions => {:id => @ticket.status_id})
     @messages = @ticket.ticket_messages
     @answer = TicketMessage.new
     
@@ -35,7 +34,7 @@ class TicketsController < ApplicationController
     @ticket.ticket_messages[0].user = current_user
     @ticket.author = current_user
     if @ticket.save
-      flash[:notice] = 'Ticket was successfully created.'
+      flash[:notice] = 'Ticket erfolgreich geändert.'
       redirect_to(@ticket)
     else
       render :action => "new"
@@ -44,7 +43,7 @@ class TicketsController < ApplicationController
 
   def update
     if @ticket.update_attributes(params[:ticket])
-      flash[:notice] = 'Ticket was successfully updated.'
+      flash[:notice] = 'Ticket erfolgreich geändert.'
       redirect_to(@ticket)
     else
         render :action => "edit"

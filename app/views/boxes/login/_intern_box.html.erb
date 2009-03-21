@@ -10,6 +10,8 @@ Hallo <%= @user.nick %>
 <%= link_to image_tag("email.png") + " Nachrichten", messages_path %><br>
 <%= link_to image_tag("group.png") + " meine Clans", clans_path(:subdomain => false) %><br><br>
 
+<%= link_to image_tag("help.png") + " Hilfe (Tickets)", tickets_path() %><br>
+
 <div id="admin_links">
 	<%= link_to image_tag("user_edit.png") + " User verwalten", :controller => "squads" if @user.owns_current_clan?%><br>
 	<%= access_link image_tag("monitor_edit.png") + " Seite bearbeiten", :controller => "template_boxes" %><br>

@@ -14,6 +14,6 @@ class Category < ActiveRecord::Base
     #r = for_select controller, section
     #with_site
     #r
-    find(:all, :global => true, :conditions => {:controller => controller, :section => section}, :order => :position).collect{|c| [c.name, c.id]}
+    find(:all, :global => true, :conditions => {:controller => controller, :section => (section.blank? ? nil : section)}, :order => :position).collect{|c| [c.name, c.id]}
   end
 end

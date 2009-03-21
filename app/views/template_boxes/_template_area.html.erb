@@ -10,5 +10,5 @@
   <ul id=<%= dom_id(template_area, :edit) %>>
     <%= render :partial => "template_box", :collection => template_area.template_boxes %>
   </ul>
-  <%= sortable_element(dom_id(template_area, :edit), :update => "list_#{dom_id(template_area)}", :url => {:action => :update_positions, :id => template_area.id},  :handle => "sortable_handle") %>
+  <%= sortable_element(dom_id(template_area, :edit), :url => {:action => :update_positions, :id => template_area.id},  :handle => "sortable_handle") %>
 </div>

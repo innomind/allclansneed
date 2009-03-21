@@ -153,7 +153,7 @@ class Site < ActiveRecord::Base
     
     #Galerie
     tb = TemplateBox.create(:name => "Zufalls Bild", :position => 4)
-    tb.template_box_type = TemplateBoxType.find_by_name "Poll"
+    tb.template_box_type = TemplateBoxType.find_by_name "Galerie"
     tb.site = self
     t_area[:linke_seite].template_boxes << tb
     tb.save

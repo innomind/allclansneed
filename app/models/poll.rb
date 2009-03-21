@@ -51,11 +51,13 @@ class Poll < ActiveRecord::Base
   end
   
   def has_voted? user
+    return false if user.nil?
     !self.poll_results.find_by_user_id(user.id).nil?
   end
 
   def self.box_poll user
     @polls = self.find(:all)
+    return @polls.first if user.nil?
     @polls.each do |poll|
       return poll unless poll.has_voted? user
     end
