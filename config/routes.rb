@@ -51,7 +51,7 @@ ActionController::Routing::Routes.draw do |map|
   
   map.resources :classifieds, :as => "kleinanzeigen"
   
-  map.resources :friends, :only => [:index, :destroy],
+  map.resources :friends, :only => [:show, :index, :destroy],
                           :member => [:accept, :reject, :become]
 
   map.resources :groups, :member => [:join, :administrate, :activate, :kick], :shallow => true do |group|

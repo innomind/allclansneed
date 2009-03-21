@@ -9,14 +9,14 @@ class ProfileController < ApplicationController
   end
   
   def show
-    add_breadcrumb current_user.nick
+    
     @current_user = current_user
     
     if @profile.user != current_user
       #if there is a direct connection between the current_user and the profile which is currently viewed
     
     #todo
-      
+    add_breadcrumb @profile.user.nick
      if (@profile.user.is_friends_with? @current_user)
        @connection = "direct"
      elsif ((@profile.user.friends & @current_user.friends).length > 0)

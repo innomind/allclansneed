@@ -59,6 +59,20 @@ namespace :init do
                         :position => 3)
   end
   
+  def init_ticket_categories
+    Category.create(:name => "offen", :controller => "Ticket", :section => "status")
+    Category.create(:name => "Fragen offen", :controller => "Ticket", :section => "status")
+    Category.create(:name => "in Bearbeitung", :controller => "Ticket", :section => "status")
+    Category.create(:name => "geschlossen", :controller => "Ticket", :section => "status")
+    
+    Category.create(:name => "Fehler", :controller => "Ticket")
+    Category.create(:name => "Funktion gewünscht", :controller => "Ticket")
+    Category.create(:name => "Feedback", :controller => "Ticket")
+    Category.create(:name => "sonstiges", :controller => "Ticket")
+    
+    Category.all.each{|c| c.site_id = 1; c.save}
+  end
+  
   def dev_users
     [
       {:login  => "philipp", :password => "test", :email => "pw@allclansneed.de"},
@@ -73,6 +87,7 @@ namespace :init do
     init_box_types
     init_navigations
     init_template
+    init_ticket_categories
   end
   
   desc "Basic initial settings"

@@ -1,9 +1,9 @@
-<% unless (poll.nil? or poll.has_voted? @user)%>
-  <% error_handling_form_for poll, :url => vote_poll_path(poll), :html => {:method => :post} do |form| %>
-    <h2><%= poll.title %></h2>
-    <%= poll.description %><br />
+<% unless (box_poll.nil? or box_poll.has_voted? @user)%>
+  <% error_handling_form_for box_poll, :url => vote_poll_path(box_poll), :html => {:method => :post} do |form| %>
+    <h2><%= box_poll.title %></h2>
+    <%= box_poll.description %><br />
     <ul id="poll">
-      <%= render :partial => "poll/poll_option", :collection => poll.poll_options %>
+      <%= render :partial => "poll/poll_option", :collection => box_poll.poll_options %>
     </ul>
     <%= form.submit "voten" %>
   <%  end %>
