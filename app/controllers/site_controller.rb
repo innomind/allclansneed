@@ -1,7 +1,7 @@
 class SiteController < ApplicationController
   before_filter :check_owner, :only => [:new, :create]
   def new
-    @clan.site = Site.create(:owner_id => current_user.id, :subdomain => @clan.uniq)
+    @clan.site = Site.create(:owner_id => current_user.id, :sub_domain => @clan.uniq)
     @clan.save
     flash[:notice] = "Seite für den Clan erstellt"
     redirect_to clans_path

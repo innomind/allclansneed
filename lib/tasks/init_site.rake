@@ -86,7 +86,7 @@ namespace :init do
     uniq = (site_id == 1 ? "portal" : "clan#{site_id}")
     clan = Clan.create(:name => uniq, :uniq => uniq, :owner_id => user.id)
     clan.save
-    site = Site.create(:owner_id => user.id, :subdomain => uniq)
+    site = Site.create(:owner_id => user.id, :sub_domain => uniq)
     clan.site = site
     clan.save
   end

@@ -93,13 +93,13 @@ class ApplicationController < ActionController::Base
     server = request.server_name.split(".")
     server.delete_at(0) if server[0] == "www"
     if server.count == 3
-      site = Site.find_by_subdomain(server[0])
+      site = Site.find_by_sub_domain(server[0])
     else
       site = Site.find_by_domain(server.join("."))
     end
     
     #self.class.current_site = site || Site.find_by_subdomain("portal")
-    @site = site || Site.find_by_subdomain("portal")
+    @site = site || Site.find_by_sub_domain("portal")
     $site_id = current_site.id
   end
   
