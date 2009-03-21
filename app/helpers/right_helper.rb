@@ -30,8 +30,7 @@ module RightHelper
   def access_remote_link name, target, html_options = {}
     link_to_remote name, target, html_options if accessable?(target, html_options)
   end
-  
-  #ha, this def is sugar
+
   def if_accessible target, &block
     block.call if @current_session.can_access? target
   end

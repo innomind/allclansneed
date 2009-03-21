@@ -40,10 +40,13 @@ class NavigationController < ApplicationController
   end
   
   def update_positions
-   params["navigations"].each_with_index do |id, position|
-     Navigation.update(id, :position => position)
-   end
-   render :nothing => true
+    params["navigations"].each_with_index do |id, position|
+      Navigation.update(id, :position => position)
+    end
+    render :update do |page|
+      page.replace_html(:update_message, "<div id='update_message'>Änderungen wurden gespeichert, aber werden erst nach einem Reload sichtbar</div>")
+      page.visual_effect(:highlight, :update_message)
+    end
   end
   
   def move

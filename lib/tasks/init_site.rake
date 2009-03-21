@@ -36,7 +36,7 @@ namespace :init do
   
   def init_box_types
     TemplateBoxType.create(:name => "Login", :internal_name => "login", :editable => false)
-    TemplateBoxType.create(:name => "Navigation", :internal_name => "navigation", :editable => true, :multiple_allowed => true)
+    TemplateBoxType.create(:name => "Navigation", :internal_name => "navigation", :editable => true, :multiple_allowed => true, :edit_in_new_window => true)
     TemplateBoxType.create(:name => "Forum", :internal_name => "forum", :editable => true)
     TemplateBoxType.create(:name => "Galerie", :internal_name => "gallery_pic", :editable => true)
     TemplateBoxType.create(:name => "Poll", :internal_name => "poll", :editable => true)
@@ -86,7 +86,7 @@ namespace :init do
     uniq = (site_id == 1 ? "portal" : "clan#{site_id}")
     clan = Clan.create(:name => uniq, :uniq => uniq, :owner_id => user.id)
     clan.save
-    site = Site.create(:owner_id => user.id, :domain => uniq)
+    site = Site.create(:owner_id => user.id, :subdomain => uniq)
     clan.site = site
     clan.save
   end

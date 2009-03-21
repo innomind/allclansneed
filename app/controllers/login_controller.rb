@@ -19,7 +19,6 @@ class LoginController < ApplicationController
      end
      render :action => 'index'
    end
-   
    def logout
      reset_session
      @logged_in = false

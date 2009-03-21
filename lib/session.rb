@@ -45,6 +45,26 @@ class Session
     @user.belongs_to_site? site
   end
   
+  def owns_clan? clan
+    return false if @user.nil?
+    @user.owns_clan? clan
+  end
+  
+  def owns_site? site
+    return false if @user.nil?
+    @user.owns_site? site
+  end
+  
+  def owns_current_site?
+    return false if @user.nil?
+    @user.owns_current_site?
+  end
+  
+  def owns_current_clan?
+    return false if @user.nil?
+    @user.owns_current_clan?
+  end
+  
   def is_guest?
     return false if @user.nil?
     @user.is_guest

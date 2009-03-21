@@ -99,6 +99,8 @@ class Site < ActiveRecord::Base
     ["News", "Forum", "Event", "Gallery", "Clanwar", "Poll", "Guestbook"].each {|n|
       tpl = NavigationTemplate.find_by_name n
       nav[n.to_s] = Navigation.create(:name => n, :navigation_template => tpl)
+      nav[n.to_s].site = self
+      nav[n.to_s].save
     }
 
     #Navi1

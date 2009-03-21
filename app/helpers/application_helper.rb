@@ -106,7 +106,7 @@ module ApplicationHelper
     else
       opts[:show_mode] = "mouseover"
     end
-    tooltip name, opts, &proc
+    tooltip name, opts, &proc if opts[:text] = opts.delete(:alternate_text)
   end
   
   def ajax_loading_tag

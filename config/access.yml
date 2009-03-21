@@ -62,9 +62,9 @@ rating:
 shoutbox:
   restful: true
 squad:
-  default: public #right
+  default: member
 squad_user:
-  default: public #right
+  default: member
 template_boxes:
   default: right
 templates:
