@@ -8,9 +8,10 @@ Hallo <%= @user.nick %>
 <%= link_to image_tag("user_go.png") + " mein Profil", profile_path(@user) %>
 <%= link_to image_tag("pencil.png"), edit_profile_path(@user) %><br>
 <%= link_to image_tag("email.png") + " Nachrichten", messages_path %><br>
-<%= link_to image_tag("group.png") + " meine Clans", clans_path(:subdomain => false) %><br><br>
+<%= link_to image_tag("group.png") + " meine Clans", clans_path(:subdomain => false) %><br>
+<%= link_to image_tag("help.png") + " Hilfe (Tickets)", tickets_path() %><br><br>
 
-<%= link_to image_tag("help.png") + " Hilfe (Tickets)", tickets_path() %><br>
+
 
 <div id="admin_links">
 	<%= link_to image_tag("user_edit.png") + " User verwalten", :controller => "squads" if @user.owns_current_clan?%><br>

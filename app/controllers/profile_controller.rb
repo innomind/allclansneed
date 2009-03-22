@@ -9,7 +9,6 @@ class ProfileController < ApplicationController
   end
   
   def show
-    
     @current_user = current_user
     
     if @profile.user != current_user
@@ -27,6 +26,20 @@ class ProfileController < ApplicationController
      else
        @connection = "none"
      end
+    end
+  end
+  
+  def new
+    @new_user = User.new
+  end
+  
+  def create
+    @new_user = User.create params[:user]
+    if @new_user.save
+      flash[:notice] = "Du hast dich erfolgreich registriert. Nachdem du deine Email Adresse bestätigt hast, kannst du dich einloggen"
+      redirect_to :controller => "login"
+    else
+      render :action => "new"
     end
   end
   

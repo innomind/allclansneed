@@ -1,6 +1,6 @@
 <li id="<%= dom_id(squad)%>"> 
 	<b><%=squad.name%></b>
-	<%= ajax_tooltip "neuer user", :update_url => new_squad_user_path(squad), :html => {:method => :get}, :id => dom_id(squad, :user_new) %>
+	<%#= ajax_tooltip "neuer user", :update_url => new_squad_user_path(squad), :html => {:method => :get}, :id => dom_id(squad, :user_new) %>
 	<%= ajax_tooltip "bearbeiten", :update_url => edit_squad_path(squad), :html => {:method => :get}, :id => dom_id(squad, :edit) %>
 	<%= link_to("löschen", squad_path(squad), :method => :delete, :confirm => "Diesen Squad wirklich löschen?") unless @squads.count == 1 %>
 	

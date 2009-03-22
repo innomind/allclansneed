@@ -1,0 +1,186 @@
+de:
+  activerecord:
+    models:
+      article: Artikel
+      category: Kategorie
+      clan: Clan
+      clan_join_inquiry:
+      clanwar: Clanwar
+      clanwar_map: Clanwar Map
+      classified: Kleinanzeige
+      comment: Kommentar
+      component: 
+      daemon_task:
+      event: Kalender
+      forum: Forum
+      forum_message: Post
+      forum_thread: Thread
+      friendship: Freundschaft
+      gallery: Galerie
+      gallery_pic: Galerie Bild
+      group: Gruppe
+      groupmembership: 
+      guestbook: Gästebuch Eintrag
+      message: Nachricht
+      navigation: Navigation
+      navigation_template: Navigations Typ
+      news: News
+      poll: Poll
+      poll_option: Poll Optionen
+      poll_result: Poll Ergebnis
+      profile: Profil
+      right_component:
+      shoutbox: Shoutbox
+      site: Seite
+      squad: Squad
+      squad_user: Squad Mitglied
+      template: Template
+      template_area: Template Area
+      template_box: Template Box
+      template_box_type: Template Box Typ
+      ticket: Ticket
+      ticket_message: Ticket Nachricht
+      user: User
+      user_right: User Recht
+    attributes:
+      default:
+        category_id: Kategorie
+        clan_uniq: Clan-ID
+        clan_uniq_desc: Anhand der Clan-ID ist jeder Clan eindeutig identifizierbar
+        description: Beschreibung
+        email: Email
+        entry: Eintrag
+        intern: Intern
+        intern_desc: falls intern gewählt wird, können nur Clanmitglieder diesen Eintrag lesen
+        message: Nachricht
+        name: Name
+        subject: Betreff
+        title: Titel
+        url: Url
+      article:
+        content: Inhalt
+        content_desc: der Artikel Inhalt
+      category:
+      clan:
+        name_desc: Der Name des Clans, der angezeigt werden soll
+        uniq: Clan-ID
+        uniq_desc: Die Clan-ID identifiziert den Clan. Sie wird auch die <b>Subdomain</b> für den Clan sein!
+      clan_join_inquiry:
+        inquiry_text: Bewerbungs Text
+        inquiry_text_desc: Anhand von diesem Text wird über deine Bewerbung entschieden
+      clanwar:
+        opponent: Gegner
+        opponent_desc: Name des Gegners
+        score: Ergebnis
+        score_desc:
+        score_opponent: Ergebnis Gegner
+        score_opponent_desc:
+        played_at: Gespielt am
+        played_at_desc:
+        squad_id: Squad
+        squad_id_desc:
+      clanwar_map:
+        score:
+        score_desc:
+        score_opponent:
+        score_opponent_desc:
+        clanwar_id:
+        clanwar_id_desc:
+      classified:
+        description: Beschreibung
+        description_desc:
+      component:
+        controller:
+        controller_desc:
+        parent_id:
+        parent_id_desc:
+      daemonTask:
+        task:
+        task_desc:
+        domain:
+        domain_desc:
+        scheduled_at:
+        scheduled_at_desc:
+        processed_at:
+        processed_at_desc:
+        response:
+        response_desc:
+      event:
+        expire_at: Datum / Uhrzeit
+        expire_at_desc:
+        description: Beschreibung
+      forum:
+        subtitle: Untertitel
+        subtitle_desc:
+      forumMessage:
+        message: Nachricht
+        message_desc:
+      gallery_pic:
+        pic: Bild
+      group:
+        moderated: Moderiert
+        moderated_desc: Wenn User eine Moderierte Gruppe beitreten möchten, dann muss der Gründer diese erst <b>bestätigen</b>
+      groupmembership:
+        status: Status
+      guestbook:
+        comment: Kommentar
+      message:
+        sender_id:
+        sender_id_desc:
+        receiver_id: Empfänger
+        receiver_id_desc: Wählen sie einen Empfänger aus ihrer Freundesliste
+      navigation:
+        navigation_template_id: Navigations Typ
+        template_box_id: Box
+      news:
+        subtext: Kurztext
+        subtext_desc: Dieser Text wird in der News Übersicht angezeigt
+        news: Volltext
+        news_desc: Diesen Text sieht man in der Vollansicht einer News
+      profile:
+        firstname: Vorname
+        lastname: Nachname
+      site:
+        page_title:
+        page_title_desc:
+        page_text_1:
+        page_text_1_desc:
+        page_text_2:
+        page_text_2_desc:
+        page_text_3:
+        page_text_3_desc:
+        page_text_4:
+        page_text_4_desc:
+      squad:
+        name:
+        name_desc:
+        clan_id:
+        clan_id_desc:
+      template:
+        name:
+        name_desc:
+        description:
+        description_desc:
+        internal_name:
+        internal_name_desc:
+        page_text_1:
+        page_text_1_desc:
+        page_text_2:
+        page_text_2_desc:
+        page_text_3:
+        page_text_3_desc:
+        page_text_4:
+        page_text_4_desc:
+      template_box:
+        template_area_id: verschieben nach
+        template_box_type_id: Box Typ
+        template_box_type_id_desc: Wähle bitte aus, welche Funktion die Box haben soll. Es werden nur die noch zur verfügung stehenden Typen Angezeigt
+      ticket:
+        admin_id: Admin
+        status_id: Status
+      User:
+        login: User-ID
+        login_desc: Die User-ID identifiziert jeden User und ist <b>einmalig</b>
+        password: Passwort
+        nickname: Nickname
+        nickname_desc: dieser Name wird anderen Usern angezeigt  

@@ -1,4 +1,4 @@
-<% error_handling_form_for :template_box, :url => {:action => "create", :template_area_id => params[:template_area_id]} do |f| %>
+<% error_handling_form_for TemplateBox.new, :url => {:action => "create", :template_area_id => params[:template_area_id]} do |f| %>
     <%= f.select :template_box_type_id, @boxes %>
     <%= f.text_field :name %>
     <%= f.submit 'hinzufügen' %>

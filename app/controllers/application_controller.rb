@@ -118,8 +118,8 @@ class ApplicationController < ActionController::Base
     #  render :template => "errors/RecordNotFound"
     rescue Exceptions::Access
       render :template => "errors/Access", :layout => !request.xhr?
-    #rescue NoMethodError
-    # render :text => "no method exception"
+    #rescue
+    #  render :template => "errors/general", :locals => {:error => "ups. Irgendetwas ging da schief. Bitte wende dich an den Support."}
     end
   end
 end

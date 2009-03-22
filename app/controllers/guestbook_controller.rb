@@ -25,9 +25,9 @@ class GuestbookController < ApplicationController
   def add_comment
     @guestbook = Guestbook.find(params[:id])
     @guestbook.update_attribute(:comment, params[:guestbook][:comment])
-    @guestbook.update_attribute(:comment_author_id, current_user_id)
+    @guestbook.update_attribute(:comment_author_id, current_user.id)
     flash[:notice] = "Kommentar gespeichert"
-    redirect_to guestbook_path
+    redirect_to guestbooks_path
     #return if request.xhr?
   end
 end

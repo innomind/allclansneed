@@ -1,4 +1,0 @@
-de:
-  activerecord:
-    models:
-      forum_thread: "Thread"

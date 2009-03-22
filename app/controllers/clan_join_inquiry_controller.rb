@@ -3,7 +3,7 @@ class ClanJoinInquiryController < ApplicationController
   before_filter :init_destroy, :only => :destroy
   
   def create
-    @search_clan = Clan.find_by_uniq params[:clan_join_inquiry][:clan_name]
+    @search_clan = Clan.find_by_uniq params[:clan_join_inquiry][:clan_uniq]
     redirect_to clans_path and flash[:notice] = "Clan #{params[:clan_join_inquiry][:clan_name]} wurde nicht gefunden" and return if @search_clan.nil?
     redirect_to clans_path and flash[:notice] = "Es existiert bereits eine Anfrage von dir an den Clan '#{params[:clan_join_inquiry][:clan_name]}' bitte warte die Antwort ab" and return unless ClanJoinInquiry.find(:first, :conditions => {:clan_id => @search_clan, :user_id => current_user.id}).nil?
     redirect_to clans_path and flash[:notice] = "Du bist bereits Mitglied im Clan '#{params[:clan_join_inquiry][:clan_name]}'" and return if current_user.clans.include?(@search_clan)

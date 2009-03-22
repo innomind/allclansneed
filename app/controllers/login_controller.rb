@@ -1,6 +1,6 @@
 class LoginController < ApplicationController
    def login
-     nick = params[:user][:nick]
+     nick = params[:user][:login]
      pw = params[:user][:password]
      unless (nick.nil? || pw.nil?)
        usr = User.first :conditions => {:login => nick}
@@ -19,6 +19,7 @@ class LoginController < ApplicationController
      end
      render :action => 'index'
    end
+   
    def logout
      reset_session
      @logged_in = false

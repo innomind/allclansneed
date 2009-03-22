@@ -4,6 +4,6 @@ class ClanJoinInquiry < ActiveRecord::Base
   validates_presence_of :inquiry_text
   #validates_presence_of :clan_name
   
-  def clan_name
+  def clan_uniq
   end
 end

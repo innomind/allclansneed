@@ -58,6 +58,8 @@ poll:
 profile:
   restful: true
   start: member
+  new: public
+  create: public
 rating:
   default: member
 shoutbox:
