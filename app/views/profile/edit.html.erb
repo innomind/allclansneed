@@ -1,8 +1,9 @@
 Profil bearbeiten
 <%#= error_messages_for @profile -%>
 
-<% error_handling_form_for @profile do |f|%>
-	<%= f.text_field 'firstname' %>
-	<%= f.text_field 'lastname' %>
-        <%= f.submit "Änderungen übernehmen" %>
+<% error_handling_form_for @profile, :html => { :multipart => true } do |f|%>
+	<%= f.text_field :firstname %>
+	<%= f.text_field :lastname %>
+	<%= f.file_field :profile_pic %>
+    <%= f.submit "Änderungen übernehmen" %>
 <% end %>

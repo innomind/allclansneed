@@ -1,3 +1,5 @@
+<%= image_tag @profile.profile_pic.url(:thumb) %>
+
 <h3>Verbindung</h3>
 <% if @profile.user == @current_user %>
   <p>Dies bist du selber</p>
