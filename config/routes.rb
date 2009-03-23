@@ -74,6 +74,8 @@ ActionController::Routing::Routes.draw do |map|
       squad.resources :users, :controller => 'squad_user', :member => {:copy => :get, :do_copy => :post, :move => :get, :do_move => :post, :destroy_form => :get}
     end
   end
+  
+  map.resources :sites, :controller => "site", :only => [:update]
 
   map.resources :clan_join_inquiry
 

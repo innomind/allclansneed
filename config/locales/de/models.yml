@@ -140,6 +140,7 @@ de:
       profile:
         firstname: Vorname
         lastname: Nachname
+        profile_pic: Profilbild
       site:
         page_title:
         page_title_desc:

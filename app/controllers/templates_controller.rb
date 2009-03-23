@@ -19,9 +19,5 @@ class TemplatesController < ApplicationController
     redirect_to templates_path
   end
   
-  def edit
-  end
-  
-  def update
-  end
+
 end

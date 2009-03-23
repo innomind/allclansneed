@@ -11,6 +11,19 @@ class SiteController < ApplicationController
     
   end
   
+  def edit
+    
+  end
+  
+  def update
+    if @site.update_attributes params[:site]
+      flash[:notice] = "Seite erfolgreich gändert"
+      redirect_to templates_path
+    else
+      render :action => :edit
+    end
+  end
+  
   private
   
   def check_owner
