@@ -6,4 +6,8 @@ class Navigation < ActiveRecord::Base
   belongs_to :navigation_template
   
   validates_presence_of :name
+  
+  def self.box_entries box
+    
+  end
 end

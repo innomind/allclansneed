@@ -6,7 +6,9 @@ class NavigationTemplate < ActiveRecord::Base
   end
   
   def self.unused_types
-    find :all, :conditions => ["id NOT IN (?)", self.used_types]
+    used = self.used_types
+    conditions = ["id NOT IN (?)", used] unless used.empty?
+    find :all, :conditions => conditions
   end
   
   def self.templates_free?

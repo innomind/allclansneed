@@ -57,6 +57,18 @@ namespace :init do
     template.template_areas << TemplateArea.create(:name => "rechte Seite", 
                         :internal_name => "rechte_seite", 
                         :position => 3)
+                        
+    template = Template.create(:name => "d08", :internal_name => "d08")
+    template.template_areas << TemplateArea.create(:name => "links oben", 
+                        :internal_name => "topleft", 
+                        :position => 1, 
+                        :multiple_boxes_allowed => false)
+    template.template_areas << TemplateArea.create(:name => "linke Seite", 
+                        :internal_name => "leftside", 
+                        :position => 2)
+    template.template_areas << TemplateArea.create(:name => "rechte Seite", 
+                        :internal_name => "rightside", 
+                        :position => 3)    
   end
   
   def init_ticket_categories

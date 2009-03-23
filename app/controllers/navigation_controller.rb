@@ -18,7 +18,7 @@ class NavigationController < ApplicationController
     if @navigation.save
       flash[:notice] = "Navigationspunkt erfolgreich erstellt"
     else
-      flash[:error] = "Fehler beim speichern der Navigation"
+      flash[:error] = "Fehler beim speichern der Navigation: <br>" + @navigation.errors.collect{|attr,msg| "#{attr}: #{msg}" }.join("<br>")
     end
     redirect_to edit_box_navigations_path(:template_box_id => params[:navigation][:template_box_id])
   end

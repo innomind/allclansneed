@@ -1,0 +1,44 @@
+body
+{
+  font-family: Tahoma;
+  font-size: 11px;
+  color: #727374;
+}
+
+.content ul {
+	list-style:none;
+}
+.content li {
+	padding:5px;
+}
+
+.content label {
+	display: inline-block;
+	width:15%;
+}
+
+.content span.field_label {
+	vertical-align:top;
+}
+
+.content h2 {
+	background-color: #BFCBDF;
+	padding:5px;
+	font-size:12px;
+
+}
+
+
+.content input {
+	width:auto;
+	background-color:#EFF3FC;
+	border:1px solid #87A6E7;
+	padding:2px 5px;
+}
+.content textarea {
+	width:450px;
+	height:150px;
+	background-color:#EFF3FC;
+	border:1px solid #87A6E7;
+	padding:2px 5px;
+}
