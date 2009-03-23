@@ -1,31 +1,32 @@
 class ProfileController < ApplicationController
   before_filter :get_profile, :only => [:show]
+  before_filter :init_clan, :only => [:index]
   
   add_breadcrumb "Profile", "profiles_path"
   
   #TODO: Userliste
   def index
-    
+    @squads = @clan.squads.find(:all, :include => :users)
   end
   
   def show
     @current_user = current_user
     
-    if @profile.user != current_user
+    if @profile.user != current_user && @current_session.logged_in?
       #if there is a direct connection between the current_user and the profile which is currently viewed
     
     #todo
     add_breadcrumb @profile.user.nick
-     if (@profile.user.is_friends_with? @current_user)
-       @connection = "direct"
-     elsif ((@profile.user.friends & @current_user.friends).length > 0)
-       @connection = "indirect"
-       #wenn beide mehrere freunde gemeinsam haben wird einer zufällig ausgewählt
-       @friends_of_both = (@profile.user.friends & @current_user.friends)
-       @friend_of_both = @friends_of_both[rand(@friends_of_both.length)]
-     else
-       @connection = "none"
-     end
+      if (@profile.user.is_friends_with? @current_user)
+         @connection = "direct"
+      elsif ((@profile.user.friends & @current_user.friends).length > 0)
+         @connection = "indirect"
+         #wenn beide mehrere freunde gemeinsam haben wird einer zufällig ausgewählt
+         @friends_of_both = (@profile.user.friends & @current_user.friends)
+         @friend_of_both = @friends_of_both[rand(@friends_of_both.length)]
+      else
+         @connection = "none"
+      end
     end
   end
   
@@ -66,6 +67,10 @@ class ProfileController < ApplicationController
   end
   
   protected
+  
+  def init_clan
+    @clan = current_site.clan
+  end
   
   def get_profile
     if is_portal?

@@ -33,7 +33,6 @@ class User < ActiveRecord::Base
   has_many :sites, :through => :user_rights
   has_many :components, :through => :user_rights
 
-
   validates_presence_of :password
   validates_presence_of :email
   #validates_confirmation_of :email

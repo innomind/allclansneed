@@ -179,7 +179,7 @@ de:
       ticket:
         admin_id: Admin
         status_id: Status
-      User:
+      user:
         login: User-ID
         login_desc: Die User-ID identifiziert jeden User und ist <b>einmalig</b>
         password: Passwort

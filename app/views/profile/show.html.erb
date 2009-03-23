@@ -12,6 +12,8 @@
 <% elsif @connection == "none" %>
   <%= become_friends_link @profile.user %> <br />
   Keine Verbindung
+<% elsif !@current_session.logged_in? %>
+  Du musst eingeloggt sein, um die Verbindung zu diesem User sehen zu können und um ihn als Freund hinzuzufügen.
 <% end %>
 
 <br />
