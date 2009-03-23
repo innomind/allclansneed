@@ -23,6 +23,6 @@ class TemplateArea < ActiveRecord::Base
   
   #returns true if a box can be added to that area
   def is_addable?
-    self.multiple_boxes_allowed? ? true : self.template_boxes.empty?
+    self.multiple_boxes_allowed? ? true : (TemplateBox.find_all_by_template_area_id(self.id)).empty?
   end
 end

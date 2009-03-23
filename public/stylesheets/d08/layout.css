@@ -1,3 +1,7 @@
+img {
+ border:0px;
+}
+
 body {
 	font-family: Tahoma, Arial, sans-serif;
 	font-size: 11px;
@@ -8,7 +12,6 @@ body {
 	background-image: url(/images/d08/2.gif);
 	width: 825px;
 	margin: auto;
-	display: table;
 }
 .top {
 	background-image: url(/images/d08/1.gif);

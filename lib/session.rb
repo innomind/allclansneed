@@ -17,10 +17,8 @@ class Session
   def can_access_link? target, html_options = {}
     check = Hash.new
     if target.is_a?(String)
-      html_options[:method] ||= :get
-      
       begin
-        check = ActionController::Routing::Routes.recognize_path(target, {:method => html_options[:method].to_sym})
+        check = ActionController::Routing::Routes.recognize_path(target, {:method => (html_options[:method] || "get").to_sym})
       rescue ActionController::RoutingError
         check = ActionController::Routing::Routes.recognize_path(target.split("?")[0], {:method => html_options[:method].to_sym})
       end

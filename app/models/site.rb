@@ -1,7 +1,6 @@
 class Site < ActiveRecord::Base
   has_many :guestbooks, :dependent => :destroy
   has_many :categories, :dependent => :destroy
-  has_many :gallery_categories, :dependent => :destroy
   has_many :gallery_pics, :dependent => :destroy
   has_many :forums, :dependent => :destroy
   has_many :forum_threads, :dependent => :destroy
@@ -37,7 +36,7 @@ class Site < ActiveRecord::Base
     self.forums << Forum.create(:title => "Hauptforum")
     self.forums << Forum.create(:title => "Intern", :intern => true)
     
-    create_boxes
+    create_boxes_for "dnp"
   end
   
   def is_portal?
@@ -48,46 +47,16 @@ class Site < ActiveRecord::Base
     PORTAL_NAME
   end
   
-  #possibly slower / uglier alternatives for areas
-  #areas = self.template.template_areas.select {|ta| ta.internal_name == ta_name.to_s}
-  #areas = TemplateArea.find :all, :conditions => {:template_id => self.template_id, :internal_name => ta_name}
-  
   def self.get_boxes_for intern_name, template_id
     area = TemplateArea.find :first, :conditions => {:internal_name => intern_name, :template_id => template_id},
                             :joins => [:template_boxes]
-    #TemplateBox.find_for_site :all, 
-     #             :conditions => { :template_area_id => area}, 
-      #            :include => [:template_box_type],
-       #           :order => "position ASC"
     area.template_boxes
-  end
-  
-  def get_box_hash
-    hash = {}
-    def hash.[](ta)
-      get_boxes ta
-    end
-    
-    #mmmh, bad
-    #def hash.each
-    #end
-    hash
-  end
-  
-  # hey, this is fun :)
-  #let's try another
-  # KrAnK
-  def getbs
-    hash = {}
-    areas = self.template.template_areas
-    boxes = TemplateBox.all :conditions => ["site_id = ? AND template_area_id IN (?)", self.id, areas]
-    areas.each {|a| hash[a.to_sym] = boxes[lambda{@i=0 if @i.nil?;@i+=1}.call]}
   end
   
   private
   
-  def create_boxes
-    self.template = Template.find_by_internal_name "dnp"
+  def create_boxes_for tpl
+    self.template = Template.find_by_internal_name tpl
     self.save
     
     t_area = Hash.new
@@ -96,7 +65,7 @@ class Site < ActiveRecord::Base
     t_area[:rechte_seite] = TemplateArea.find_by_name "rechte Seite"
                                             
     nav = Hash.new
-    ["News", "Forum", "Event", "Gallery", "Clanwar", "Poll", "Guestbook"].each {|n|
+    ["News", "Forum", "Kalender", "Galerie", "Clanwars", "Poll", "Gästebuch", "Articles"].each {|n|
       tpl = NavigationTemplate.find_by_name n
       nav[n.to_s] = Navigation.create(:name => n, :navigation_template => tpl)
       nav[n.to_s].site = self
@@ -112,8 +81,8 @@ class Site < ActiveRecord::Base
     
     tb.navigations << nav["News"]
     tb.navigations << nav["Forum"]
-    tb.navigations << nav["Event"]
-    tb.navigations << nav["Gallery"]
+    tb.navigations << nav["Kalender"]
+    tb.navigations << nav["Galerie"]
     
     tb.site = self
     t_area[:topnav].template_boxes << tb
@@ -123,9 +92,9 @@ class Site < ActiveRecord::Base
     tb = TemplateBox.create(:name => "ClanNavi", :position => 1)
     
     tb.template_box_type = navBoxType                                                
-    tb.navigations << nav["Clanwar"]
+    tb.navigations << nav["Clanwars"]
     tb.navigations << nav["Poll"]
-    tb.navigations << nav["Guestbook"]
+    tb.navigations << nav["Gästebuch"]
     tb.site = self
     t_area[:linke_seite].template_boxes << tb
     tb.save
@@ -172,5 +141,4 @@ class Site < ActiveRecord::Base
     t_area[:rechte_seite].template_boxes << tb
     tb.save
   end
-  
 end

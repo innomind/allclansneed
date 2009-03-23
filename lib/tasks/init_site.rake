@@ -5,8 +5,9 @@ namespace :init do
     sh "rake db:create:all"
     sh "rake db:migrate"
     #init
-    sh "rake init:site"
-    1.upto(4) { |i| sh "rake init:one_site site_id=#{i}" }
+    puts "Init"
+    init
+    1.upto(4) { |i| puts "Create Site #{i}"; one_site i }
   end
   
   def create_sites
@@ -29,14 +30,14 @@ namespace :init do
   end
   
   def init_navigations
-    ["News", "Forum", "Event", "Gallery", "Clanwar", "Poll", "Guestbook", "Articles"].each {|n|
-      NavigationTemplate.create(:name => n, :controller => n, :action => "index")
+    [["News", "news_path"], ["Forum", "forums_path"], ["Kalender", "events_path"], ["Galerie", "galleries_path"], ["Clanwars", "clanwars_path"], ["Poll", "polls_path"], ["Gästebuch", "guestbooks_path"], ["Articles", "articles_path"]].each {|n|
+      NavigationTemplate.create(:name => n[0], :link_path => n[1])
     }
   end
   
   def init_box_types
     TemplateBoxType.create(:name => "Login", :internal_name => "login", :editable => false)
-    TemplateBoxType.create(:name => "Navigation", :internal_name => "navigation", :editable => true, :multiple_allowed => true, :edit_in_new_window => true)
+    TemplateBoxType.create(:name => "Navigation", :internal_name => "navigation", :editable => true, :multiple_allowed => true, :edit_in_new_window => true, :link_list => true)
     TemplateBoxType.create(:name => "Forum", :internal_name => "forum", :editable => true)
     TemplateBoxType.create(:name => "Galerie", :internal_name => "gallery_pic", :editable => true)
     TemplateBoxType.create(:name => "Poll", :internal_name => "poll", :editable => true)
@@ -50,6 +51,7 @@ namespace :init do
     template.template_areas << TemplateArea.create(:name => "topnav", 
                         :internal_name => "topnav", 
                         :position => 1, 
+                        :prefered_box_type_id => TemplateBoxType.find_by_name("Navigation").id,
                         :multiple_boxes_allowed => false)
     template.template_areas << TemplateArea.create(:name => "linke Seite", 
                         :internal_name => "linke_seite", 
@@ -62,13 +64,15 @@ namespace :init do
     template.template_areas << TemplateArea.create(:name => "links oben", 
                         :internal_name => "topleft", 
                         :position => 1, 
-                        :multiple_boxes_allowed => false)
+                        :multiple_boxes_allowed => false,
+                        :prefered_box_type_id => TemplateBoxType.find_by_name("Navigation").id,
+                        :max_list_items => 4)
     template.template_areas << TemplateArea.create(:name => "linke Seite", 
                         :internal_name => "leftside", 
                         :position => 2)
     template.template_areas << TemplateArea.create(:name => "rechte Seite", 
                         :internal_name => "rightside", 
-                        :position => 3)    
+                        :position => 3)
   end
   
   def init_ticket_categories
@@ -107,8 +111,8 @@ namespace :init do
     init
   end
   
-  task :one_site => :environment do
-    site_id = ENV['site_id'].to_i
+  def one_site id
+    site_id = id
     user = User.create(dev_users[site_id-1])
     uniq = (site_id == 1 ? "portal" : "clan#{site_id}")
     clan = Clan.create(:name => uniq, :uniq => uniq, :owner_id => user.id)
@@ -116,5 +120,9 @@ namespace :init do
     site = Site.create(:owner_id => user.id, :sub_domain => uniq)
     clan.site = site
     clan.save
+  end
+  
+  task :one_site => :environment do
+    one_site ENV['site_id'].to_i
   end
 end
