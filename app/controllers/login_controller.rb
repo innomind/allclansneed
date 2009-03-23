@@ -12,7 +12,7 @@ class LoginController < ApplicationController
          flash[:notice] = 'login success'
          redirect_to :controller => "profile", :action => "start" and return
        else
-         flash.now[:notice] = 'login failed'+' for "'+params[:nick]+'"'
+         flash.now[:notice] = "Username oder Passwort falsch"
        end
      else
        flash.now[:error] = 'no such nick'
