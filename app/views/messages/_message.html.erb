@@ -1,3 +1,4 @@
 <div id="message<%= message.id %>">
-  <%= message.sender.nick %> | <%= link_to message.subject, message_path(message) %> | <%= message.created_at %>
+  <%= message_pic(message) %> <%= username(message.sender) %> | <%= link_to message.subject, message_path(message) %> | <%= l message.created_at %>
 </div>
+

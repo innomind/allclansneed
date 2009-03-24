@@ -2,7 +2,13 @@ class Squad < ActiveRecord::Base
   #acts_as_delegatable
   belongs_to :clan
   has_many :squad_users
-  has_many :clanwars
+  has_many :clanwars do
+    def overview_wars
+      debugger
+      self.clanwars.pages :page => nil, :per_page => 5
+    end
+  end
+  
   has_many :users, :through => :squad_users
   
   validates_length_of :name, 

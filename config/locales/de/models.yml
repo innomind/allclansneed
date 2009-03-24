@@ -5,10 +5,14 @@ de:
       category: Kategorie
       clan: Clan
       clan_join_inquiry:
-      clanwar: Clanwar
+      clanwar: 
+        one: Clanwar
+        other: Clanwars
       clanwar_map: Clanwar Map
       classified: Kleinanzeige
-      comment: Kommentar
+      comment: 
+        one: Kommentar
+        other: Kommentare
       component: 
       daemon_task:
       event: Kalender
@@ -21,7 +25,9 @@ de:
       group: Gruppe
       groupmembership: 
       guestbook: Gästebuch Eintrag
-      message: Nachricht
+      message: 
+        one: Nachricht
+        other: Nachrichten
       navigation: Navigation
       navigation_template: Navigations Typ
       news: News

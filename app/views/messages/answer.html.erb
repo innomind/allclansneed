@@ -2,10 +2,21 @@
 
 <% error_handling_form_for @message, :url => create_message_path(@message), :html => {:method => :post} do |form| %>
   <p><label>Empfänger</label>: <%= @message.sender.nick %></p>
-  <%= form.hidden_field :receiver_id, :style => "blank" %>
-
+  <%= form.hidden_field :receiver_id, :value => @message.sender.id, :style => "blank" %>
+  <%= form.hidden_field :answered, :value => @message.id, :style => "blank" %>
   <%= form.text_field :subject, :value  => "Re: " + @message.subject, :label => "Betreff" %>
-  <%= form.text_area :message, :value  => render_reply_text(@message.message), :label => "Nachricht" %>
+  <%= form.text_area :message, :value => "", :label => "Nachricht" %>
   
   <%= form.submit "abschicken" %>
+<% end %>
+
+<h2>Verganenen Nachrichten:</h2>
+
+<% @past_messages.each do |message| %>
+<div>
+	<%= "von "%>
+	<%= (message.sender == @user) ? "Dir" : username(message.sender) %> 
+	<%= "am #{l message.created_at}, Thema: #{message.subject}" %><br>
+	<%= message.message %>
+</div>
 <% end %>

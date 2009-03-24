@@ -2,8 +2,8 @@
 	<h2>
             <%= guestbook.name %> 
             am <%= l guestbook.created_at %>
-            <%= mail_to guestbook.email, image_tag("email.png", :border => 0), :encode => "hex" unless guestbook.email.blank? %>
-            <%= link_to image_tag("world_link.png", :border => 0), {:url => guestbook.url}, {:target => "_new"} unless guestbook.url.blank? %>
+            <%= mail_to guestbook.email, image_tag("email.png"), :encode => "hex" unless guestbook.email.blank? %>
+            <%= link_to image_tag("world_link.png"), {:url => guestbook.url}, {:target => "_new"} unless guestbook.url.blank? %>
         </h2>
 	<%= guestbook.entry %><br>
           
@@ -13,7 +13,7 @@
         <% end %>
 
         
-	<%= access_remote_link image_tag("delete.png", :border => 0), guestbook_path(guestbook), :method => "delete",
+	<%= access_remote_link image_tag("delete.png"), :url => guestbook_path(guestbook), :method => :delete,
  												:confirm => "Möchten sie diesen Gästebucheintrag wirklich löschen?"%>
 
         <% if guestbook.comment %>

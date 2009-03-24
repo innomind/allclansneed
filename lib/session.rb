@@ -20,7 +20,7 @@ class Session
       begin
         check = ActionController::Routing::Routes.recognize_path(target, {:method => (html_options[:method] || "get").to_sym})
       rescue ActionController::RoutingError
-        check = ActionController::Routing::Routes.recognize_path(target.split("?")[0], {:method => html_options[:method].to_sym})
+        check = ActionController::Routing::Routes.recognize_path(target.split("?")[0], {:method => (html_options[:method] || "get").to_sym})
       end
       
     else

@@ -1,6 +1,6 @@
 class LoginController < ApplicationController
    def login
-     nick = params[:user][:login]
+     nick = params[:user][:login].underscore
      pw = params[:user][:password]
      unless (nick.nil? || pw.nil?)
        usr = User.first :conditions => {:login => nick}

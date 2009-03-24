@@ -11,7 +11,11 @@
   <% end %>
   gespielt am: <%= l @clanwar.played_at %> <br /><br />
   <h2>Maps</h2>
+<% if @clanwar.clanwar_maps.empty? %>
+	keine Maps eingetragen
+<% else %>
   <%= render :partial => "map", :collection => @clanwar.clanwar_maps %>
+<% end %>
 	<br /><br />
 </div>
 

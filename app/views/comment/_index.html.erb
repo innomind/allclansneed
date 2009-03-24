@@ -13,6 +13,8 @@
 <% end %>
 
 <% comments = get_comments(model) %>
+<br>
+<%= page_entries_info comments %><br>
 <%= will_paginate comments %>
 <%# debugger %>
 <div id="comments">

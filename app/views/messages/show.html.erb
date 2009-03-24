@@ -2,6 +2,6 @@
 
 <h1><%= @message.subject %></h1>
 
-<h2><%= nl2br @message.message %><h2>
+<h2><%= simple_format @message.message %><h2>
 
 <%= link_to "beantworten", answer_message_path(@message) %>

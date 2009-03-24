@@ -27,8 +27,8 @@ module RightHelper
     access_link(name, target, html_options) unless condition
   end
   
-  def access_remote_link name, target, html_options = {}
-    link_to_remote name, target, html_options if accessable?(target, html_options)
+  def access_remote_link name, html_options = {}
+    link_to_remote name, html_options if accessable?(html_options[:url], html_options)
   end
 
   def if_accessible target, &block

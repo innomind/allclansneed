@@ -3,7 +3,13 @@ class ClanwarController < ApplicationController
   add_breadcrumb 'Clanwars', "clanwars_path"
   
   def index
-    @clanwars  = Clanwar.paginate :all
+    if params[:squad_id].nil?
+      @squads = current_site.clan.squads
+    else
+      @squad = current_site.clan.squads.find params[:squad_id]
+      @clanwars = @squad.clanwars.pages
+      render "clanwar/index_clanwars"
+    end
   end
   
   def show

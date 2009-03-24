@@ -6,7 +6,8 @@ class User < ActiveRecord::Base
   has_many :forum_messages
   has_many :guestbooks
   has_many :news
-  has_many :messages
+  has_many :incoming_messages, :class_name => "Message", :foreign_key => :receiver_id
+  has_many :outgoing_messages, :class_name => "Message", :foreign_key => :sender_id
   has_many :comments
   has_many :gallery_categories
   has_many :gallery_pics
@@ -189,6 +190,13 @@ class User < ActiveRecord::Base
 
   def self.get_supporter_for_select
     find(:all, :conditions => {:support_status => 1}).collect{|u| [u.login, u.id]}
+  end
+  
+
+  ### Nachrichten
+  
+  def new_messages
+    self.incoming_messages.count :conditions => {:read => false}
   end
   
   ### remove Functions
