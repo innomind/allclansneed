@@ -13,7 +13,7 @@ class ClanwarController < ApplicationController
   end
   
   def show
-    @clanwar = Clanwar.find_by_id(params[:id])
+    @clanwar = Clanwar.find_by_id(params[:id], :include => :clanwar_screenshots)
     add_breadcrumb "gegen "+@clanwar.opponent
   end
   

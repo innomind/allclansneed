@@ -22,8 +22,6 @@ module ApplicationHelper
     args
   end
   
-
-  
   def username(user)
     link_to user.login, profile_path(user)
   end

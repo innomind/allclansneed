@@ -60,7 +60,9 @@ ActionController::Routing::Routes.draw do |map|
     end
   end
 
-  map.resources :clanwars, :controller => "clanwar"
+  map.resources :clanwars, :controller => "clanwar" do |clanwar|
+    clanwar.resources :clanwar_screenshots, :controller => "clanwar_screenshot"
+  end
   
   map.resources :events, :controller => "event", :collection => {:showDay => :get}
 

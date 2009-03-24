@@ -35,6 +35,10 @@ module RightHelper
     block.call if @current_session.can_access? target
   end
   
+  def access_ajax_tooltip name, options
+    ajax_tooltip(name,options) if accessable? options[:update_url], options
+  end
+  
   def urlize_controller contr_name_or_class
     contr_name_or_class.to_s.underscore.gsub(/_controller$/, '')
   end

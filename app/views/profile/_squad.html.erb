@@ -4,8 +4,9 @@
 	<ul id="<%= dom_id(squad, :users) %>">
 	<% squad.squad_users.each do |m| %>
 	
-	  <li id="<%= dom_id(m) %>"> <%= link_to m.user.nick, profile_path(m.user.id) %> (<%= m.role %>)
+	  <li id="<%= dom_id(m) %>"><%= link_to m.user.nick, profile_path(m.user.id) %> (<%= m.role %>)
 	  </li>
+	
 	<% end %>
 	</ul>
 </li>

@@ -16,8 +16,15 @@
 <% else %>
   <%= render :partial => "map", :collection => @clanwar.clanwar_maps %>
 <% end %>
-	<br /><br />
 </div>
+Screenshots:<br>
+<% @clanwar.clanwar_screenshots.each do |screenshot| %>
+	<%= link_to image_tag(screenshot.screenshot.url(:thumb)), screenshot.screenshot.url(:large) %>
+<% end %>
+<br>
+
+<%= access_ajax_tooltip "screen hochladen", :update_url => new_clanwar_clanwar_screenshot_path(@clanwar) %>
+
+<br>
 
 <%= show_comments @clanwar %>
-

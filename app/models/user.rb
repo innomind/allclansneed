@@ -12,6 +12,7 @@ class User < ActiveRecord::Base
   has_many :gallery_categories
   has_many :gallery_pics
   has_many :clanwars
+  has_many :clanwar_screenshots
   has_many :polls
   has_many :poll_results
   has_many :classifieds
