@@ -28,7 +28,8 @@ class ErrorHandlingFormBuilder < ActionView::Helpers::FormBuilder
       locals = {
         :element => yield,
         :label   => label(field, (options[:label] || field_name)),
-        :desc    => desc
+        :desc    => desc,
+        :post_text => options[:post_text]
       }
       if has_errors_on?(field)
         #flash[:notice].push error_message(field, options)

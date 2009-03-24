@@ -60,7 +60,7 @@ namespace :init do
                         :internal_name => "rechte_seite", 
                         :position => 3)
                         
-    template = Template.create(:name => "d08", :internal_name => "d08")
+    template = Template.create(:name => "d08", :internal_name => "d08", :page_text_1 => "oben links", :page_text_2 => "oben rechts", :page_text_3 => "unten links", :page_text_4 => "unten rechts")
     template.template_areas << TemplateArea.create(:name => "links oben", 
                         :internal_name => "topleft", 
                         :position => 1, 

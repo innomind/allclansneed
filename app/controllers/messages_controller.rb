@@ -8,7 +8,7 @@ class MessagesController < ApplicationController
   
   def new
     @message = Message.new
-    @possible_receiver = User.find(:all)
+    @possible_receiver = current_user.friends
     add_breadcrumb 'Neue Nachricht erstellen'
   end
   

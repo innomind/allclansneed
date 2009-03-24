@@ -65,13 +65,13 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :events, :controller => "event", :collection => {:showDay => :get}
 
   map.resources :squads, :controller => 'squad', :member => {:confirm_users => :get, :confirm_users_save => :put}, :shallow => true do |squad|
-    squad.resources :users, :controller => 'squad_user', :member => {:copy => :get, :do_copy => :post, :move => :get, :do_move => :post, :destroy_form => :get}
+    squad.resources :users, :controller => 'squad_user', :member => {:role => :get, :update_role => :put, :copy => :get, :do_copy => :post, :move => :get, :do_move => :post, :destroy_form => :get}
   end
 
   map.resources :clans, :member => {:leave => :delete} do |clan|
     clan.resource :site, :controller => "site", :only => [:new, :create]
     clan.resources :squads, :controller => "squad", :member => {:confirm_users => :get, :confirm_users_save => :put} do |squad|
-      squad.resources :users, :controller => 'squad_user', :member => {:copy => :get, :do_copy => :post, :move => :get, :do_move => :post, :destroy_form => :get}
+      squad.resources :users, :controller => 'squad_user', :member => {:role => :get, :update_role => :put, :copy => :get, :do_copy => :post, :move => :get, :do_move => :post, :destroy_form => :get}
     end
   end
   

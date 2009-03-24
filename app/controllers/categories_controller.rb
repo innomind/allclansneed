@@ -80,7 +80,7 @@ class CategoriesController < ApplicationController
   end
     
   def init_breadcrumb
-    add_breadcrumb @cat_name, @cat_name.tableize + "_path"
+    #add_breadcrumb @cat_name, @cat_name.tableize + "_path"
     add_breadcrumb "Kategorien verwalten", category_path(@cat_name)
   end
 end

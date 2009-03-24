@@ -5,6 +5,10 @@ class Category < ActiveRecord::Base
   
   validates_presence_of :name
   
+  def before_save
+    self[:section] = nil if self[:section].empty? unless self[:section].nil?
+  end
+  
   def self.for_select controller, section = nil
     find(:all, :conditions => {:controller => controller, :section => section}, :order => :position).collect{|c| [c.name, c.id]}
   end

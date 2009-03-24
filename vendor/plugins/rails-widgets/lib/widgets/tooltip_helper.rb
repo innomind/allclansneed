@@ -72,7 +72,7 @@ module Widgets
     end
 
     def close_tooltip_link(id, message = 'close')
-      message ||= 'close' # if nil is passed I'll force it
+      message ||= 'close'
       link_to_function message, "$('tooltip_#{id}').hide()"
     end
     

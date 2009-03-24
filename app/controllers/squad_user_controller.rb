@@ -21,6 +21,16 @@ class SquadUserController < ApplicationController
     render :layout => false
   end
   
+  def role
+    render :layout => false
+  end
+  
+  def update_role
+    @squad_user.update_attributes params[:squad_user]
+    flash[:notice] = "Funktion geändert"
+    redirect_to squads_path
+  end
+  
   def update
     @user.user_rights.destroy_all
     components = Component.all

@@ -157,6 +157,8 @@ de:
         name_desc:
         clan_id:
         clan_id_desc:
+      squad_user:
+        role: Funktion
       template:
         name:
         name_desc:
