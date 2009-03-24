@@ -30,7 +30,7 @@ namespace :init do
   end
   
   def init_navigations
-    [["News", "news_path"], ["User", "profiles_path"], ["Forum", "forums_path"], ["Kalender", "events_path"], ["Galerie", "galleries_path"], ["Clanwars", "clanwars_path"], ["Poll", "polls_path"], ["Gästebuch", "guestbooks_path"], ["Articles", "articles_path"]].each {|n|
+    [["News", "news_path"], ["User", "profiles_path"], ["Forum", "forums_path"], ["Kalender", "events_path"], ["Galerie", "galleries_path"], ["Clanwars", "clanwars_path"], ["Poll", "polls_path"], ["Gästebuch", "guestbooks_path"], ["Artikel", "articles_path"]].each {|n|
       NavigationTemplate.create(:name => n[0], :link_path => n[1])
     }
   end

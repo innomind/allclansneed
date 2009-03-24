@@ -45,6 +45,8 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :messages, :member => { :create => :post, :answer => :get }
   
   map.resources :messages
+  
+  map.resources :pages
 
   map.resources :categories, :member => {:newcat => :get, :createcat => :post}, :except => :new,
                              :collection => {:update_positions => :post}

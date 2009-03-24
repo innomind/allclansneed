@@ -2,7 +2,7 @@ class NavigationTemplate < ActiveRecord::Base
   has_many :navigations
   
   def self.used_types
-    Navigation.all.collect{|n| n.navigation_template_id }
+    Navigation.all.collect{|n| n.navigation_template_id }.compact
   end
   
   def self.unused_types

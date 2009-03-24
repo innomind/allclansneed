@@ -65,7 +65,7 @@ class Site < ActiveRecord::Base
     t_area[:rechte_seite] = TemplateArea.find_by_name "rechte Seite"
                                             
     nav = Hash.new
-    ["News", "Forum", "User", "Kalender", "Galerie", "Clanwars", "Poll", "Gästebuch", "Articles"].each {|n|
+    ["News", "Forum", "User", "Kalender", "Galerie", "Clanwars", "Poll", "Gästebuch", "Artikel"].each {|n|
       tpl = NavigationTemplate.find_by_name n
       nav[n.to_s] = Navigation.create(:name => n, :navigation_template => tpl)
       nav[n.to_s].site = self
@@ -94,6 +94,7 @@ class Site < ActiveRecord::Base
     tb.template_box_type = navBoxType 
     tb.navigations << nav["User"]                                               
     tb.navigations << nav["Clanwars"]
+    tb.navigations << nav["Artikel"]
     tb.navigations << nav["Poll"]
     tb.navigations << nav["Gästebuch"]
     tb.site = self

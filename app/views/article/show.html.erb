@@ -1,5 +1,5 @@
 <h1><p>Title: <%= @article.title %></p></h1>
-von <%= @article.user.nick %> vor <%= time_ago_in_words @article.created_at %>
+von <%= username(@article.user) %> vor <%= time_ago_in_words @article.created_at %>
 <p><%= @article.content %></p>
 <%= rating_for @article %>
 

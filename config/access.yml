@@ -10,6 +10,8 @@ article:
   restful: true
 clanwar:
   restful: true
+clanwar_screenshots:
+  default: site
 clans:
   default: member
 classifieds:
