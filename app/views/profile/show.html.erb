@@ -36,9 +36,10 @@ Nachname: <%= @profile.lastname %> <br />
 
 
 <h3>Freunde</h3>
+<%= link_to "alle Freunde", friend_path(@profile.user)%>
 <% @profile.user.friends.each do  |f| %>
   <%= show_user f %> 
-<% end %>  
+<% end %>
 <br />
 <br />
 <%= show_comments @profile %>
