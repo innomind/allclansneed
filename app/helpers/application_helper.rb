@@ -28,7 +28,7 @@ module ApplicationHelper
   
   def entry_and_pagination model
     out = "<div>"
-    out << will_paginate(model)
+    out << will_paginate(model).to_s
     out << "<div class='entries'>"
     out << page_entries_info(model)
     out << "</div>"
