@@ -3,8 +3,10 @@ class PagesController < ApplicationController
                              :plugins => [:emotions],
                              :theme_advanced_buttons1_add => [:emotions],
                              #:theme_advanced_disable => [:styleselect, :formatselect, :outdent, :indent, :anchor, :image, :cleanup, :code, :help, :separator, :removeformat, :sub, :sup, :stub, :visualaid, :charmap]
-                             }, 
+                             :theme_advanced_disable => [:strikethrough,:justifyleft,:justifycenter,:justifyright,:justifyfull,:bullist,:numlist,:outdent,:indent,:cut,:copy,:paste,:undo,:redo,:link,:unlink,:image,:cleanup,:help,:code,:hr,:removeformat,:formatselect,:fontselect,:fontsizeselect,:styleselect,:sub,:sup,:forecolor,:backcolor,:forecolorpicker,:backcolorpicker,:charmap,:visualaid,:anchor,:newdocument,:blockquote,:separator]
+                             },
                 :except => [:index, :show, :destroy]
+                
   before_filter :init_breadcrumb, :except => [:show]
   def index
     @pages = Page.find :all

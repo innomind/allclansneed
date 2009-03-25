@@ -4,11 +4,7 @@ class Page < ActiveRecord::Base
   belongs_to :site
   belongs_to :navigation, :dependent => :destroy
   
-  def used_pages
-    
-  end
-  
-  def unused_pages
-    
+  def self.pages_free?
+    !!find(:all, :select => "count(*)", :conditions => {:navigation_id => nil}).size
   end
 end

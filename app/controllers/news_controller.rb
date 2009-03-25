@@ -1,5 +1,21 @@
 class NewsController < ApplicationController
 
+  uses_tiny_mce :options => {:theme => "advanced", 
+                             :plugins => [:emotions],
+                             :theme_advanced_buttons1 => [:emotions],
+                             :theme_advanced_buttons2 => "",
+                             :theme_advanced_buttons3 => ""
+                             },
+                :only => [:new, :create, :edit, :update]
+  
+   uses_tiny_mce :options => {:theme => "advanced", 
+                              :plugins => [:emotions],
+                              :theme_advanced_buttons1 => [:bold, :italic, :emotions],
+                              :theme_advanced_buttons2 => "",
+                              :theme_advanced_buttons3 => ""
+                             },
+                 :only => [:show]
+  
   add_breadcrumb 'News', 'news_path'
   before_filter :init_news, :only => [:show, :destroy, :edit, :update]
   

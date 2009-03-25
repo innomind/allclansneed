@@ -1,4 +1,4 @@
-<%= ajax_tooltip_if NavigationTemplate.templates_free?, image_tag("application_add.png") + " Navigationspunkt erstellen", 
+<%= ajax_tooltip_if (NavigationTemplate.templates_free? || Page.pages_free?), image_tag("application_add.png") + " Navigationspunkt erstellen", 
             :update_url => new_navigation_path(:template_box_id => params[:template_box_id]), 
             :id => "new_navigation",
  			:alternate_text => "es gibt momentan keine freien Navigationspunkte" %>

@@ -1,5 +1,4 @@
 class CommentController < ApplicationController
-  #uses_tiny_mce
 
   def create
     params[:comment].delete(:intern) if params[:comment][:intern].empty?
