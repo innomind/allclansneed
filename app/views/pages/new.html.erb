@@ -1,6 +1,6 @@
 <% error_handling_form_for @page do |f| %>
   <%= f.text_field :title %>
-  <%= f.text_area :content, :rows => 5, :cols => 30 %>
+  <%= f.text_area :content, :rows => 25, :cols => 45, :class => "mceEditor" %>
   <%= f.check_box :intern %>
   <%= f.submit "erstellen" %>
 <% end %>

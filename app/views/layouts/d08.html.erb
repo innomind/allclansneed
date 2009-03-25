@@ -11,8 +11,7 @@
   <%= stylesheet_link_tag "calendar/grey/style.css" %>
   <%= stylesheet_link_tag "d08/layout" %>
   <%= stylesheet_link_tag "d08/style" %>
-  <%# javascript_include_tiny_mce_if_used %>
-  <%# tiny_mce if using_tiny_mce? %>
+  <%= include_tiny_mce_if_needed %>
   <%= yield :header_tags %>
 <%# end %>
 

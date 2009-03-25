@@ -1,4 +1,10 @@
 class PagesController < ApplicationController
+  uses_tiny_mce :options => {:theme => "advanced", 
+                             :plugins => [:emotions],
+                             :theme_advanced_buttons1_add => [:emotions],
+                             #:theme_advanced_disable => [:styleselect, :formatselect, :outdent, :indent, :anchor, :image, :cleanup, :code, :help, :separator, :removeformat, :sub, :sup, :stub, :visualaid, :charmap]
+                             }, 
+                :except => [:index, :show, :destroy]
   before_filter :init_breadcrumb, :except => [:show]
   def index
     @pages = Page.find :all
