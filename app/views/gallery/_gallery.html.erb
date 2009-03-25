@@ -6,4 +6,6 @@
 <% tooltip image_tag("world_link.png"), :show_mode => "mouseover" do  %>
       <%= gallery.description %>
 <% end %>
+<%= access_link image_tag("folder_delete.png"), gallery_path(gallery), :controller => "gallery", :method => "delete", :confirm => "Galerie wirklich löschen?"  %>
+<%= access_link image_tag("folder_edit.png"), edit_gallery_path(gallery) %>
 <br/>

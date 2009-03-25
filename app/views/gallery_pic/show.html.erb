@@ -1,4 +1,6 @@
-<%= @gallery_pic.name %><br>
+<%= @gallery_pic.name %>
+<%= access_link image_tag("folder_delete.png"), pic_path(@gallery_pic), :controller => "gallery_pic", :method => "delete", :confirm => "Wirklich löschen?" %>
+<%= access_link image_tag("folder_edit.png"), edit_pic_path(@gallery_pic)%><br>
 
 <%= link_to image_tag(@gallery_pic.pic.url(:medium)), @gallery_pic.pic.url(:original) %><br>
 Beschreibung: <%= @gallery_pic.description %><br>
