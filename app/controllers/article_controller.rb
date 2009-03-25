@@ -3,7 +3,7 @@ class ArticleController < ApplicationController
   add_breadcrumb 'Artikel', 'articles_path'
 
   def index
-    @articles = Article.find :all
+    @articles = Article.paginate
   end
 
   def show

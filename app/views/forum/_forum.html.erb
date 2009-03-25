@@ -1,8 +1,8 @@
-<li id="forum_<%=  forum.id %>">
-    
-        <%= link_to forum.title, [forum, "forum_threads"] %>
-        (<%= forum.threads_count %>)
-<%= intern_pic forum %>
+<tr>    
+<td>        <%= link_to forum.title, [forum, "forum_threads"] %> <%= intern_pic forum %><br><%= forum.subtitle %></td>
+<td>        <%= forum.threads_count %>/ </td>
+<td>		<%= l Time.now, :format => "short2rows"%> </td>
+<td>
   <span id="forum_links_<%= forum.id %>">
     <%= access_link image_tag("folder_edit.png"), edit_forum_path(forum) %>
     <%= access_link image_tag("folder_delete.png"), forum_path(forum), :method => "delete", :confirm => "Wirklich löschen?" %>
@@ -11,7 +11,7 @@
     
   </span>
   
-  <br><small><%= forum.subtitle %> </small>
+  <br><small> </small>
   <span id="forum_popup_test_<%= forum.id %>" style="display:none;">
   
   </span>
@@ -19,6 +19,5 @@
   
   </span>
 <br>
-
-
-</li>
+</td>
+</tr>

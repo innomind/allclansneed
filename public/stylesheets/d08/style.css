@@ -78,9 +78,14 @@ body {
 }
 
 .content h2 {
-	border-bottom:1px solid;
+	border-bottom:1px solid #888;
 	padding:3px;
 	font-size:14px;
+}
+
+.content h2 span.titlesub {
+	color:#676767;
+	font-size:11px;
 }
 
 .content div.prop {

@@ -2,14 +2,18 @@ de:
   activerecord:
     models:
       article: Artikel
-      category: Kategorie
+      category: 
+        one: Kategorie
+        other: Kategorien
       clan: Clan
       clan_join_inquiry:
       clanwar: 
         one: Clanwar
         other: Clanwars
       clanwar_map: Clanwar Map
-      classified: Kleinanzeige
+      classified: 
+        one: Kleinanzeige
+        other: Kleinanzeigen
       comment: 
         one: Kommentar
         other: Kommentare
@@ -17,21 +21,35 @@ de:
       daemon_task:
       event: Kalender
       forum: Forum
-      forum_message: Post
-      forum_thread: Thread
+      forum_message: 
+        one: Post
+        other: Posts
+      forum_thread:
+        one: Thread
+        other: Threads
       friendship: Freundschaft
-      gallery: Galerie
-      gallery_pic: Galerie Bild
-      group: Gruppe
+      gallery:
+        one: Galerie
+        other: Galerien
+      gallery_pic:
+        one: Bild
+        other: Bilder
+      group:
+        one: Gruppe
+        other: Gruppen
       groupmembership: 
-      guestbook: Gästebuch Eintrag
+      guestbook:
+        one: Gästebuch Eintrag
+        other: Gästebuch Einträge
       message: 
         one: Nachricht
         other: Nachrichten
       navigation: Navigation
       navigation_template: Navigations Typ
       news: News
-      poll: Poll
+      poll:
+        one: Poll
+        other: Polls
       poll_option: Poll Optionen
       poll_result: Poll Ergebnis
       profile: Profil
@@ -39,12 +57,14 @@ de:
       shoutbox: Shoutbox
       site: Seite
       squad: Squad
-      squad_user: Squad Mitglied
+      squad_user: Mitglied
       template: Template
       template_area: Template Area
       template_box: Template Box
       template_box_type: Template Box Typ
-      ticket: Ticket
+      ticket:
+        one: Ticket
+        other: Tickets
       ticket_message: Ticket Nachricht
       user: User
       user_right: User Recht

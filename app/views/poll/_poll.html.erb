@@ -1,12 +1,12 @@
-<div id="poll<%= poll.id %>">
-	Titel: <%= poll.title %> <%= intern_pic poll %> <br />
-	Status: <%= poll.status %> 
-	<%= access_link_if poll.open?, "schließen", close_poll_path(poll) %>
-	<%= access_link_if poll.close?, "öffnen", open_poll_path(poll) %>
-	<br />
-	Beschreibung: <%= poll.description %> <br />
-  <%= access_link "details", poll_path(poll)  %>
-  <%= access_link "bearbeiten", edit_poll_path(poll) %>
-
-	<br /><br />
-</div>
+<tr>
+<td><%= link_to poll.title, poll_path(poll) %> <%= intern_pic poll %> </td>
+<td><%= poll.status %> </td>
+<td><%= username(poll.user) %></td>
+<td><%= l poll.created_at, :format => "short" %> </td>
+<td>
+  
+  <%= access_link image_tag("pencil.png"), edit_poll_path(poll) %>
+  <%= access_link_if poll.open?, "schließen", close_poll_path(poll) %>
+  <%= access_link_if poll.close?, "öffnen", open_poll_path(poll) %>
+</td>
+</tr>

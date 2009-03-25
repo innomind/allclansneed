@@ -79,13 +79,13 @@ module ActiveRecord::Acts::ActsAsDelegatable
         options = args.detect { |argument| argument.is_a?(Hash) }
         if options.nil?
           options = {:page => $page,
-                     :per_page => 2,
+                     :per_page => 15,
                      :order => 'created_at DESC' 
           }
           args << options
         else
           options[:page] ||= $page 
-          options[:per_page] ||= 2
+          options[:per_page] ||= 15
           options[:order] ||= 'created_at DESC'
         end
         args

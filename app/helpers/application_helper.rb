@@ -35,6 +35,8 @@ module ApplicationHelper
     out << "</div>"
   end
   
+  
+    
   def cloud(tags)
     return if tags.blank?
     output = ""

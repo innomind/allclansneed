@@ -1,3 +1,19 @@
-<ul id="forum_root"><%= render :partial => 'forum', :collection => @forums %></ul>
+<h1>Foren Übersicht</h1>
 
-<%= access_link image_tag("folder_add.png") + " Forum hinzufügen", new_forum_path %>
+<div class="userlinks">
+	<%= access_link image_tag("folder_add.png") + " Forum hinzufügen", new_forum_path %>
+</div>
+
+<table class="simple-table" style="width:100%">
+  <thead>
+    <tr> 
+      <th>Forum</th>
+      <th>Threads/Posts</th>
+      <th>Letzter Eintrag</th>
+	  <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= render :partial => 'forum', :collection => @forums %>
+  </tbody>
+</table>

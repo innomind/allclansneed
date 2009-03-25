@@ -1,4 +1,6 @@
-<div>
-  <%= link_to(thread.title, forum_thread_path(thread)) %>
-  (<%= thread.forum_messages_count %>)
-</div>
+<tr>
+<td> <%= link_to(thread.title, forum_thread_path(thread)) %> </td>
+<td> <%= thread.forum_messages_count %> </td>
+<td> <%= username(thread.user)%></td>
+<td> <%= l thread.updated_at, :format => "short2rows"%></td>
+</tr>
