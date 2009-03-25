@@ -53,6 +53,8 @@ navigation:
 news:
   restful: true
   default: right
+pages:
+  restful: true
 poll:
   restful: true
   show: member

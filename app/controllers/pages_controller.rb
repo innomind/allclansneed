@@ -1,4 +1,5 @@
 class PagesController < ApplicationController
+  before_filter :init_breadcrumb, :except => [:show]
   def index
     @pages = Page.find :all
   end
@@ -41,5 +42,11 @@ class PagesController < ApplicationController
   def destroy
     flash[:notice] = "Seite gelöscht" if Page.find(params[:id]).destroy 
     redirect_to pages_path
+  end
+  
+  private
+  def init_breadcrumb
+    add_breadcrumb 'Seite verwalten'
+    add_breadcrumb 'Eigene Seiten verwalten'
   end
 end
