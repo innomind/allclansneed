@@ -1,7 +1,7 @@
 <h1>Nachricht</h1>
 
-<h1><%= @message.subject %></h1>
+<h2>Betreff: <%= @message.subject %></h2>
 
-<h2><%= simple_format @message.message %><h2>
+<%= simple_format @message.message %>
 
-<%= link_to "beantworten", answer_message_path(@message) %>
+<%= link_to image_tag("email_go.png") + " beantworten", answer_message_path(@message) if (@message.receiver == @user) %>

@@ -1,13 +1,4 @@
-img {
- border:0px;
-}
 
-body {
-	font-family: Tahoma, Arial, sans-serif;
-	font-size: 11px;
-	background-color: #03617A;
-	color: #666666;
-}
 .wrapper {
 	background-image: url(/images/d08/2.gif);
 	width: 825px;
@@ -138,6 +129,16 @@ body {
 	margin: 0px;
 	margin-left: 4px;
 }
+
+.box_entry {
+	background-image: url(/images/d08/15.gif);
+	background-repeat: repeat-y;
+	width: 203px;
+	margin: 0px;
+	margin-left: 4px;
+	padding: 7px;
+}
+
 .box_list span {
 	padding: 10px;
 }

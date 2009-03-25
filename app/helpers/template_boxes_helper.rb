@@ -10,7 +10,9 @@ module TemplateBoxesHelper
       link_style ||= ["<li>","</li>"] 
       eval("create_#{box.template_box_type.internal_name}_box box")[0..(box.template_area.max_list_items || -0)-1].collect{|link| link_style[0]+link+link_style[1]}.join
     else
-      render(:partial => "boxes/#{box.template_box_type.internal_name}/show_loader", :locals => {:box => box})
+      ret = "<div class='box_entry'>"
+      ret << render(:partial => "boxes/#{box.template_box_type.internal_name}/show_loader", :locals => {:box => box})
+      ret << "</div>"
     end
   end
 end

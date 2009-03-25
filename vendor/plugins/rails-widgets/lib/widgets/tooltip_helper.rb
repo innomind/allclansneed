@@ -39,6 +39,7 @@ module Widgets
     end
     
     def tooltip_css
+      return ''
       unless @_tooltip_css_done
         @_tooltip_css_done = true
         return render_css('tooltip')

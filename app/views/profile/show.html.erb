@@ -1,5 +1,6 @@
 <%= image_tag @profile.profile_pic.url(:thumb) %>
-
+<br>
+<%= access_link "Nachricht schreiben", new_message_path(:receiver_id => @profile.user.id)%>
 <h3>Verbindung</h3>
 <% if @profile.user == @current_user %>
   <p>Dies bist du selber</p>

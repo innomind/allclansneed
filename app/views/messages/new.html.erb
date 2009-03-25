@@ -1,17 +1,19 @@
-<h1>Send a new message</h1>
-
 <% error_handling_form_for @message do |form| %>
   
-  	<%= text_field_with_auto_complete :user, :login,
+  	<%#= text_field_with_auto_complete :user, :login,
 	                                  { :value  => '',
 	                                    :size  => '20', 
 	                                    :tokens => ','},
-	                                  :indicator => 'status-indicator' %>
-	<span id="status-indicator" style="display: none"><%= image_tag("loading.gif", :border  => "0") %></span>
-	<br/>
-  <%= form.collection_select("receiver_id", @possible_receiver, :id, :login)%>
-  <%= form.text_field :subject, :label => "Betreff" %>
-  <%= form.text_area :message, :label => "Nachricht" %>
+	                                  :indicator => 'status-indicator' 
+	<span id="status-indicator" style="display: none"><%= image_tag("loading.gif", :border  => "0") </span>%>
+	<% if @message.receiver.nil? %>
+  		<%= form.collection_select("receiver_id", @possible_receiver, :id, :login)%>
+	<% else %>
+		<%= form.text_field :receiver_id, :value => @message.receiver.nick %>
+		<%= form.hidden_field :receiver_id, :style => "blank" %>
+	<% end %>
+  <%= form.text_field :subject %>
+  <%= form.text_area :message %>
   
   <%= form.submit "abschicken" %>
 <% end %>

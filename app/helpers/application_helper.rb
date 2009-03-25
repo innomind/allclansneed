@@ -26,6 +26,15 @@ module ApplicationHelper
     link_to user.login, profile_path(user)
   end
   
+  def entry_and_pagination model
+    out = "<div>"
+    out << will_paginate(model)
+    out << "<div class='entries'>"
+    out << page_entries_info(model)
+    out << "</div>"
+    out << "</div>"
+  end
+  
   def cloud(tags)
     return if tags.blank?
     output = ""

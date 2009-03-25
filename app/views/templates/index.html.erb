@@ -1,5 +1,4 @@
 <h2>Seiten Texte</h2>
-
 <% error_handling_form_for @site do |form| %>
 	<%= form.text_field :page_title, :label => "Titel" %>
 	<%= form.text_field :page_text_1, :label => @site.template.page_text_1 unless @site.template.page_text_1.nil? %>

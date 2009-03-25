@@ -3,19 +3,20 @@ class MessagesController < ApplicationController
   add_breadcrumb 'Nachrichten', "messages_path"
   
   def index
-    @messages = Message.paginate :all, :page => params[:page], :per_page => 15, :conditions => { :receiver_id => current_user.id }, :order => "created_at DESC"
+    conditions = params[:folder].nil? ? {:receiver_id => current_user.id} : { :sender_id => current_user.id}
+    @messages = Message.paginate :all, :page => params[:page], :per_page => 15, :conditions => conditions, :order => "created_at DESC"
   end
   
   def new
     @message = Message.new
+    @message.receiver_id = params[:receiver_id]
     @possible_receiver = current_user.friends
     add_breadcrumb 'Neue Nachricht erstellen'
   end
   
   def show
     @message = Message.find(params[:id])
-    @message.read = TRUE;
-    @message.save
+    @message.update_attribute(:read, true) if @message.receiver == current_user
     add_breadcrumb @message.subject
   end
   
