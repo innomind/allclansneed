@@ -1,6 +1,6 @@
 <tr>
 <td><%= link_to poll.title, poll_path(poll) %> <%= intern_pic poll %> </td>
-<td><%= poll.status %> </td>
+<td class="dark"><%= poll.status %> </td>
 <td><%= username(poll.user) %></td>
 <td><%= l poll.created_at, :format => "short" %> </td>
 <td>

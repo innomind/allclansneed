@@ -9,9 +9,7 @@ class Gallery < ActiveRecord::Base
   
   def category_pic
     return_pic = self.gallery_pics.first
-    unless return_pic.nil?
-      return_pic.pic
-    end
+    return return_pic.pic unless return_pic.nil?
   end
   
   def before_update

@@ -19,6 +19,12 @@
 	color: #aaa;
 	padding: 4px 8px;
 }
+
+.simple-table td.dark
+{
+	color: #000;
+}
+
 .simple-table tbody tr:hover td
 {
 	background-color:#efefef;
@@ -157,4 +163,19 @@ body {
   background-color: #fdf389;
 	padding: 5px 20px 0 0 ;
 	margin-top: 20px;
+}
+
+.guestbook_entry {
+	border: 1px solid #aaa;
+	padding: 3px 15px;
+}
+
+.guestbook_comment {
+	border: 1px solid #aaa;
+	border-top: 0px;
+	padding: 3px 15px;
+}
+
+.image {
+
 }

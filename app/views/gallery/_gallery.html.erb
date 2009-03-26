@@ -1,11 +1,27 @@
+
+<tr>
+<td style="width:210px;padding-right:0px">
 <% unless gallery.category_pic.nil? %>
-	<%= image_tag gallery.category_pic.url(:thumb) %>
+	<%= link_to image_tag(gallery.category_pic.url(:thumb)), gallery_path(gallery) %>
+	<%= link_to image_tag(gallery.gallery_pics.rand.pic.url(:thumb)), gallery_path(gallery) %>
 <% end %>
-<%= link_to gallery.name, gallery_path(gallery) %>
-<%= intern_pic gallery %>
-<% tooltip image_tag("world_link.png"), :show_mode => "mouseover" do  %>
-      <%= gallery.description %>
-<% end %>
+</td>
+
+<td style="padding-left:2px">
+	<div class="prop" style="width:100%">
+		<span class="prop" style="width:40%">Name</span>
+		<span class="prop_entry"><%= link_to gallery.name, gallery_path(gallery) %> <%= intern_pic gallery %></span>
+	</div>
+	<div class="prop" style="width:100%">
+		<span class="prop" style="width:40%">Beschreibung</span>
+		<span class="prop_entry"><%= gallery.description %></span>
+	</div>
+	<div class="prop" style="width:100%">
+		<span class="prop" style="width:40%">erstellt</span>
+		<span class="prop_entry"><%= l gallery.created_at, :format => "datelong" %></span>
+	</div>
 <%= access_link image_tag("folder_delete.png"), gallery_path(gallery), :controller => "gallery", :method => "delete", :confirm => "Galerie wirklich löschen?"  %>
 <%= access_link image_tag("folder_edit.png"), edit_gallery_path(gallery) %>
-<br/>
+</td>
+
+</tr>

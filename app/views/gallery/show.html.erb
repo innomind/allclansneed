@@ -1,7 +1,9 @@
-<%= page_entries_info @gallery_pics %>
-<%= will_paginate @gallery_pics %><br />
-<% unless @gallery.gallery_pics.nil? %>
-  <%= render :partial => "pic", :collection => @gallery_pics %>
-<% end %>
-<br><br>
-<%= access_link "Bild hochladen", new_gallery_pic_path(@gallery.id)  %>
+<h1>Gallerie: <%= @gallery.name %></h1>
+<div class="userlinks">
+	<%= access_link image_tag("picture_add.png") + " Bild hochladen", new_gallery_pic_path(@gallery.id)  %>
+</div>
+
+<%= entry_and_pagination @gallery_pics %>
+<div>
+<%= render :partial => "pic", :collection => @gallery_pics %>
+</div>

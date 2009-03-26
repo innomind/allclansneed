@@ -33,6 +33,7 @@ module ApplicationHelper
     out << page_entries_info(model)
     out << "</div>"
     out << "</div>"
+    out << "<div style='clear:both'></div>"
   end
   
   

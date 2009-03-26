@@ -10,16 +10,17 @@ class GuestbookController < ApplicationController
   def create
     @guestbook = Guestbook.new(params[:guestbook])
     if @guestbook.save
-      return if request.xhr?
-      render :partial => 'guestbook', :object => @guestbook
-    end
+      flash[:notice] = "Gästebucheintrag erstellt" 
+    else
+      flash[:error] = "Fehler beim erstellen"
+    end    
+    redirect_to guestbooks_path
   end
   
   def destroy
     @guestbook = Guestbook.find(params[:id])
     @guestbook.destroy
-    return if request.xhr?
-    render :nothing, :status => 200
+    redirect_to guestbook_path
   end
   
   def add_comment

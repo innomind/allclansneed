@@ -77,6 +77,8 @@ Rails::Initializer.run do |config|
 
 end
 
+Paperclip::options[:path] = "test"
+
 ActionMailer::Base.smtp_settings = {
   :address  => "mail.innomind.info",
   :port => "25",

@@ -1,22 +1,21 @@
 <h1>Gästebuch</h1>
 
-<p id="add_link"><%= link_to_function("Eintrag hinzufügen",
-	"Element.hide('add_link');Element.show('add_guestbook')")%>
-</p>
+<div class="userlinks">
+<%= link_to_function( image_tag("note_add.png") + " Eintrag hinzufügen", "Element.hide('add_link');Element.show('add_guestbook')", :id => "add_link")%>
+</div>
 
 <div id="add_guestbook" style="display:none;">
-	<% error_handling_remote_form_for @guestbook, :html => {:id => 'guestbook_form'} do |f| %>
-		<%= f.text_field "name" %>
-        <%= f.text_field "email" %>
-        <%= f.text_field "url" %>
-		<%= f.text_area "entry", :rows => 2, :cols => 25 %>
+	<% error_handling_form_for @guestbook do |f| %>
+		<%= f.text_field :name %>
+        <%= f.text_field :email %>
+        <%= f.text_field :url %>
+		<%= f.text_area :entry, :rows => 2, :cols => 25 %>
 		<%= f.submit 'hinzufügen' %>
 	<% end %>
 </div>
 
-<%= page_entries_info @guestbooks %>
+<%= entry_and_pagination @guestbooks %>
+<br>
 <div id="guestbook_list">
 <%= render :partial => 'guestbook', :collection => @guestbooks %>
 </div>
-
-<%= will_paginate @guestbooks %>
