@@ -23,6 +23,8 @@ de:
       time: "%H:%M"
       long2rows: "%A, %e. %B %Y <br> %H:%M Uhr"
       short2rows: "%e. %B <br> %H:%M Uhr"
+      dateshort: "%e. %b"
+      datelong: "%e. %B %Y"
  
     am: "vormittags"
     pm: "nachmittags"

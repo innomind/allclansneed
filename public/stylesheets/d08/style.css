@@ -63,6 +63,17 @@ body {
 	//color: #666666;
 }
 
+.userlinks a{
+	padding: 5px;
+	color:#000;
+	background-color:#efefef;
+}
+
+.userlinks a:hover{
+	padding: 5px;
+	background-color:#efefef;
+}
+
 .content {
 }
 
@@ -84,6 +95,7 @@ body {
 }
 
 .content h2 span.titlesub {
+	font-weight: normal;
 	color:#676767;
 	font-size:11px;
 }
