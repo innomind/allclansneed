@@ -83,6 +83,8 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :clan_join_inquiry
 
+  map.resources :moderatos, :controller => "moderator"
+
   #map.users 'register', :controller => 'login', :action => 'create'
   #map.login 'login', :controller => 'login', :action => 'login'
   #map.squads ':site_id/create_squad', :controller => 'clan_management', :action => 'create_squad'

@@ -1,6 +1,7 @@
 class ForumController < ApplicationController
   
   add_breadcrumb 'Forum', 'forums_path'
+  before_filter :authorize, :only => [:edit, :delete]
   
   def index
     @forums = Forum.find(:all)
@@ -47,5 +48,10 @@ class ForumController < ApplicationController
   def destroy
     Forum.find_by_id(params[:id]).destroy if flash[:notice] = "Forum gelöscht"
     redirect_to forums_path
+  end
+
+  private
+  def authorize
+    
   end
 end
