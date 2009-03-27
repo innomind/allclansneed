@@ -6,8 +6,8 @@
 
 <% @squads.each do |squad| %>
 	<% clanwars = squad.clanwars.paginate :page => nil, :per_page => 5 %>
-	<h2><%= "Clanwars für #{squad.name}<br><span class='titlesub'>(#{page_entries_info(clanwars)})"%> <%= link_to "alle", clanwars_path(:squad_id => squad.id) %></span></h2>
-
+	<h2 style="margin-bottom:2px"><%= "Clanwars für #{squad.name}" %></h2>
+	<span class='titlesub'>(<%="#{page_entries_info(clanwars)})"%> <%= link_to "alle", clanwars_path(:squad_id => squad.id) %></span>
 	<table class="simple-table" style="width:100%">
 	  <thead>
 	    <tr> 
