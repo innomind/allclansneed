@@ -8,7 +8,7 @@ class GalleryController < ApplicationController
   
   def show
     @gallery = Gallery.find_by_id params[:id], :include => :gallery_pics
-    @gallery_pics = @gallery.gallery_pics.pages
+    @gallery_pics = @gallery.gallery_pics.pages :order => "gallery_pics.created_at ASC"
     add_breadcrumb @gallery.name
   end
   

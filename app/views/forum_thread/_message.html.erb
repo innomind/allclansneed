@@ -1,8 +1,8 @@
-<div>
-    <%# unless message.user? %>
-        erstellt von: <%= username(message.user)  %> 
-    <%# end %>
-  am <%= l message.created_at %> <br>
-  Nachricht: <%= message.message %><br>
-</div>
-<br>
+<tr>
+<td colspan="2" class="post-title">von <%= username(message.user)  %> am <%= l message.created_at %></td>
+</tr>
+
+<tr>
+<td style="width:100px"><%= image_tag(message.user.profile.profile_pic.url(:thumb))%></td>
+<td><%= message.message %></td>
+</tr>

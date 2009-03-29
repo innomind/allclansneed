@@ -10,13 +10,17 @@
   <%= form.submit "abschicken" %>
 <% end %>
 
-<h2>Verganenen Nachrichten:</h2>
-
+<br>
+<table class="simple-post" style="width:100%">
+	<th>letzten Nachrichten</th>
+  <tbody>
 <% @past_messages.each do |message| %>
-<div>
-	<%= "von "%>
-	<%= (message.sender == @user) ? "Dir" : username(message.sender) %> 
-	<%= "am #{l message.created_at}, Thema: #{message.subject}" %><br>
-	<%= message.message %>
-</div>
+	<tr>
+	<td class="post-title">von <%= (message.sender == @user) ? "<b>Dir</b>" : username(message.sender) %> <%= "am #{l message.created_at}<br> Betreff: #{message.subject}" %></td>
+	</tr>
+	<tr>
+		<td><%= message.message %></td>
+	</tr>
 <% end %>
+</tbody>
+</table>

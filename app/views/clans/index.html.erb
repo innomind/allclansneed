@@ -1,16 +1,24 @@
-<%= access_link "Clan gründen", new_clan_path %> <%= link_to_function "Clan beitreten", "Element.toggle('inquiry_form')" %>
-<div id="inquiry_form" style="display:none">
-<% error_handling_form_for ClanJoinInquiry.new, :url => clan_join_inquiry_index_path do |form| %>
-	<%= form.text_field :clan_uniq %>
-	<%= form.text_area :inquiry_text, :rows => 5, :cols => 25 %>
-	<%= form.submit "anfrage stellen" %>
-<% end %>
+<h1>Clan liste</h1>
+<div class="userlinks">
+	<%= link_to image_tag("zoom.png") + " Suche", search_clans_path %>
 </div>
-<br>
-Meine Clan Anfragen:<br>
-<% @inquiries.each do |i| %>
-	<%= i.clan.name %> <%= access_link "zurückziehen", clan_join_inquiry_path(i, :from => :user), :method => :delete, :confirm => "Beitrittsanfrage wirklich zurückziehen?" %>
-<% end %>
-<ul>
-<%= render :partial => "clan", :collection => @clans %>
-</ul>
+
+<div class="embedded" id="serach_clan" style="display:none">
+	<%# %>
+</div>
+
+<table class="simple-table" style="width:100%">
+  <thead>
+    <tr> 
+      <th>Name</th>
+      <th>Clan-ID</th>
+      <th>erstellt am</th>
+	  <th>Squads</th>
+      <th>Mitglieder</th>
+      <th>Spiele</th>
+    </tr>
+  </thead>
+  <tbody>
+	<%= render :partial => "clan_list", :collection => @clans %>
+  </tbody>
+</table>

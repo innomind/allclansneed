@@ -6,4 +6,9 @@
 
 <%= entry_and_pagination @messages %>
 
+<table class="simple-post" style="width:100%">
+	<th colspan="2">Posts</th>
+  <tbody>
 <%= render :partial => "message", :collection => @messages %>
+</tbody>
+</table>

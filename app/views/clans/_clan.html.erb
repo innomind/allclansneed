@@ -1,11 +1,15 @@
-<li>
-	<%= clan.name %> 
-	<%  if @user.owns_clan?(clan) %>
-		<%= link_to( "user verwalten", clan_squads_path(clan)) %>
-		<%= access_link("Seite erstellen", new_clan_site_path(clan)) if clan.site.nil? %>
-	<% else %>
-		<%= link_to "verlassen", leave_clan_path(clan), :method => :delete, :confirm => "Bist du dir sicher, dass du den Clan verlassen möchtest?" %>
-	<% end %>
-	
-	<%= link_to "link zur Seite", root_path(:subdomain => clan.uniq) unless clan.site.nil?  %>
-</li>
+<tr>
+<td>
+	<td><%= link_to clan.name, clan_path(clan, :subdomain => false) %> </td>
+	<td>
+		<%  if @user.owns_clan?(clan) %>
+			<%= link_to("bearbeiten", edit_clan_path(clan))%>
+			<%= link_to( "user verwalten", clan_squads_path(clan)) %>
+			<%= access_link("Seite erstellen", new_clan_site_path(clan)) if clan.site.nil? %>
+		<% else %>
+			<%= link_to "verlassen", leave_clan_path(clan), :method => :delete, :confirm => "Bist du dir sicher, dass du den Clan verlassen möchtest?" %>
+		<% end %>
+		
+		<%= link_to "link zur Seite", root_path(:subdomain => clan.uniq) unless clan.site.nil?  %>
+	</td>
+</tr>

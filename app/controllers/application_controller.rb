@@ -78,7 +78,7 @@ class ApplicationController < ActionController::Base
     @current_session = Session.new
     @current_session.set_controller self.class.to_s.underscore.gsub(/_controller$/, '')
     unless session['user'].nil?
-      @user = User.find session['user'] #, :joins => [:sites, :components]
+      @user = User.find session['user'] , :joins => [{:squads => :clan}, :sites, :components, :clan_ownerships, :site_ownerships]
       @user.logged_in = true
       @user.current_site = @site
       session['error_objects'] = [] 
@@ -114,8 +114,8 @@ class ApplicationController < ActionController::Base
   def catch_exceptions
     begin
       yield
-    #rescue ActiveRecord::RecordNotFound
-    #  render :template => "errors/RecordNotFound"
+    rescue ActiveRecord::RecordNotFound
+      render :template => "errors/RecordNotFound"
     rescue Exceptions::Access
       render :template => "errors/Access", :layout => !request.xhr?
     #rescue

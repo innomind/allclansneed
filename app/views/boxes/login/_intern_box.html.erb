@@ -13,7 +13,7 @@ Hallo <%= @user.nick %>
 <% else %>
 	<%= link_to image_tag("email_open.png") + " Nachrichten", messages_path %><%= " <b>(#{@user.new_messages})</b>" %><br>
 <% end %>
-<%= link_to image_tag("group.png") + " meine Clans", clans_path(:subdomain => false) %><br>
+<%= link_to image_tag("group.png") + " meine Clans", my_clans_path(:subdomain => false) %><br>
 <%= link_to image_tag("user.png") + " meine Freunde", friend_path(@user.id) %><br>
 <%= link_to image_tag("help.png") + " Hilfe (Tickets)", tickets_path() %><br><br>
 

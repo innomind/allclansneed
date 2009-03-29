@@ -2,21 +2,7 @@
 <br>
 <%= access_link "Nachricht schreiben", new_message_path(:receiver_id => @profile.user.id)%>
 <h3>Verbindung</h3>
-<% if @profile.user == @current_user %>
-  <p>Dies bist du selber</p>
-<% end %>
-<% if @connection == "direct" %>
-  <%= show_user @profile.user %> -> <%= show_user @current_user %>
-<% elsif @connection == "indirect" %>
-  <%= become_friends_link @profile.user %> <br />
-  <%= show_user @profile.user %> -> <%= show_user @friend_of_both %> -> <%= show_user @current_user %>
-<% elsif @connection == "none" %>
-  <%= become_friends_link @profile.user %> <br />
-  Keine Verbindung
-<% elsif !@current_session.logged_in? %>
-  Du musst eingeloggt sein, um die Verbindung zu diesem User sehen zu können und um ihn als Freund hinzuzufügen.
-<% end %>
-
+<%= show_connection%>
 <br />
 <br />
 Vorname: <%= @profile.firstname %> <br />

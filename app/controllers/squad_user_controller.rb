@@ -66,12 +66,10 @@ class SquadUserController < ApplicationController
 
   def destroy
     if params[:target][:type] == "clan"
-      destroy_squads = @squad_user.user.squads_in_clan @clan
-      UserRight.destroy_all(:user_id => @squad_user.user.id, :site_id => @clan.site.id)
+      @clan.remove_user @squad_user.user
     else
-      destroy_squads = [@squad_user.squad]
+      @squad_user.user.squads -= [@squad_user.squad]
     end
-    @squad_user.user.squads -= destroy_squads
     flash[:notice] = "erfolgreich gelöscht"
     redirect_to squads_path
     
@@ -114,14 +112,14 @@ class SquadUserController < ApplicationController
   end
 
   def init_squad_user
-    @squad_user = SquadUser.find_by_id params[:id]
+    @squad_user = SquadUser.find_by_id params[:id], :joins => [:user, {:squad => :clan}]
     @squad = @squad_user.squad
     @clan = @squad.clan
     raise Exceptions::Access unless current_user.owns_clan? @clan
   end
   
   def check_owner
-    raise Exceptions::Access if @squad_user.user.owns_clan? @clan
+    #raise Exceptions::Access if @squad_user.user.owns_clan? @clan
   end
   
   def squads_path

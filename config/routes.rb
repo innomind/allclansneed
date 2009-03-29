@@ -25,7 +25,7 @@ ActionController::Routing::Routes.draw do |map|
                             :except => [:new, :update, :edit],
                             :member => {:add_comment => :post}
   
-  map.resources :profiles, :controller => "profile", :collection => {:start => :get}
+  map.resources :profiles, :controller => "profile", :collection => {:start => :get}, :member => {:infobox => :get}
 
   map.resources :articles, :controller => "article"
   
@@ -72,7 +72,7 @@ ActionController::Routing::Routes.draw do |map|
     squad.resources :users, :controller => 'squad_user', :member => {:role => :get, :update_role => :put, :copy => :get, :do_copy => :post, :move => :get, :do_move => :post, :destroy_form => :get}
   end
 
-  map.resources :clans, :member => {:leave => :delete} do |clan|
+  map.resources :clans, :collection => {:my => :get, :search => :get, :do_search => :post}, :member => {:leave => :delete} do |clan|
     clan.resource :site, :controller => "site", :only => [:new, :create]
     clan.resources :squads, :controller => "squad", :member => {:confirm_users => :get, :confirm_users_save => :put} do |squad|
       squad.resources :users, :controller => 'squad_user', :member => {:role => :get, :update_role => :put, :copy => :get, :do_copy => :post, :move => :get, :do_move => :post, :destroy_form => :get}

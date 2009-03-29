@@ -91,6 +91,8 @@ de:
         name_desc: Der Name des Clans, der angezeigt werden soll
         uniq: Clan-ID
         uniq_desc: Die Clan-ID identifiziert den Clan. Sie wird auch die <b>Subdomain</b> für den Clan sein!
+        clan_pic: Clan Logo
+        clan_pic_desc: Wird auf 100x100 Pixel zurechtgeschnitten
       clan_join_inquiry:
         inquiry_text: Bewerbungs Text
         inquiry_text_desc: Anhand von diesem Text wird über deine Bewerbung entschieden

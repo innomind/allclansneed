@@ -1,6 +1,24 @@
+<!--<h2><%=squad.name%>
+<%#=  link_to_function("Show me more", nil, :id => dom_id(squad,:more)) do |page|
+	page.visual_effect(:toggle_blind, dom_id(squad)) 
+    page[dom_id(squad,:more)].toggle
+    page[dom_id(squad,:less)].toggle
+  end
+%>
+<%#=  link_to_function("Show me less", nil, :id => dom_id(squad,:less), :style => "display:none") do |page|
+	page.visual_effect(:toggle_blind, dom_id(squad)) 
+    page[dom_id(squad,:more)].toggle
+    page[dom_id(squad,:less)].toggle
+  end
+%>
+</h2>
+<div id="<%= dom_id(squad) %>" style="display:none">
+-->
+
 <table class="simple-table" style="width:100%">
 	<th colspan="2"><%=squad.name%></th>
   <tbody>
 <%= render :partial => "member", :collection => squad.squad_users %>
 </tbody>
 </table>
+<!--</div>-->

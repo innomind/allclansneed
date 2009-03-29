@@ -21,7 +21,7 @@ class MessagesController < ApplicationController
   end
   
   def answer
-    @message = Message.find(params[:id])
+    @message = Message.find(params[:id], :conditions => {:receiver_id => current_user})
     @past_messages = Message.find :all, :conditions => ["(sender_id = ? AND receiver_id = ?) OR (sender_id = ? AND receiver_id = ?)", current_user.id, @message.sender_id, @message.sender_id, current_user.id ], 
                                         :limit => 10,
                                         :order => "created_at DESC"

@@ -4,15 +4,15 @@ class ClanJoinInquiryController < ApplicationController
   
   def create
     @search_clan = Clan.find_by_uniq params[:clan_join_inquiry][:clan_uniq]
-    redirect_to clans_path and flash[:notice] = "Clan #{params[:clan_join_inquiry][:clan_name]} wurde nicht gefunden" and return if @search_clan.nil?
-    redirect_to clans_path and flash[:notice] = "Es existiert bereits eine Anfrage von dir an den Clan '#{params[:clan_join_inquiry][:clan_name]}' bitte warte die Antwort ab" and return unless ClanJoinInquiry.find(:first, :conditions => {:clan_id => @search_clan, :user_id => current_user.id}).nil?
-    redirect_to clans_path and flash[:notice] = "Du bist bereits Mitglied im Clan '#{params[:clan_join_inquiry][:clan_name]}'" and return if current_user.clans.include?(@search_clan)
+    redirect_to my_clans_path and flash[:notice] = "Clan #{params[:clan_join_inquiry][:clan_name]} wurde nicht gefunden" and return if @search_clan.nil?
+    redirect_to my_clans_path and flash[:notice] = "Es existiert bereits eine Anfrage von dir an den Clan '#{params[:clan_join_inquiry][:clan_name]}' bitte warte die Antwort ab" and return unless ClanJoinInquiry.find(:first, :conditions => {:clan_id => @search_clan, :user_id => current_user.id}).nil?
+    redirect_to my_clans_path and flash[:notice] = "Du bist bereits Mitglied im Clan '#{params[:clan_join_inquiry][:clan_name]}'" and return if current_user.clans.include?(@search_clan)
     ClanJoinInquiry.create(:user_id => current_user.id, :clan_id => @search_clan.id, :inquiry_text => params[:clan_join_inquiry][:inquiry_text])
-    redirect_to clans_path
+    redirect_to my_clans_path
   end
   
   def update
-    @squad.users << @inquiry.user
+    @clan.add_user(@inquiry.user, @squad)
     @inquiry.destroy
     flash[:notice] = "User erfolgreich in Clan aufgenommen"
     redirect_to squads_path
@@ -20,7 +20,7 @@ class ClanJoinInquiryController < ApplicationController
   
   def destroy
     @inquiry.destroy
-    flash[:notice] = "Anfrage zurückgezogen" and redirect_to clans_path and return if params[:from] == "user"
+    flash[:notice] = "Anfrage zurückgezogen" and redirect_to my_clans_path and return if params[:from] == "user"
     flash[:notice] = "Anfrage abgelehnt" and redirect_to squads_path
   end
   
@@ -37,7 +37,7 @@ class ClanJoinInquiryController < ApplicationController
     @inquiry = ClanJoinInquiry.find params[:id]
     @clan = @inquiry.clan
     if params[:from] == "user"
-      redirect_to clans_path and flash[:error] = "Fehler beim zurückziehen der Anfrage" and return unless @inquiry.user == current_user
+      redirect_to my_clans_path and flash[:error] = "Fehler beim zurückziehen der Anfrage" and return unless @inquiry.user == current_user
     else
       redirect_to squads_path and flash[:error] = "Fehler beim ablehnen der Anfrage" and return unless current_user.owns_clan? @clan
     end

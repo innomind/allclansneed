@@ -1,0 +1,8 @@
+<tr>
+    <td><%= link_to clan_list.name, clan_path(clan_list)%></td>
+    <td><%= clan_list.uniq %></td>
+    <td><%= l clan_list.created_at, :format => "datelong" %></td>
+    <td><%= clan_list.squads_count %></td>
+	<td><%= clan_list.members_count %></td>
+    <td>Spiele</td>	
+</tr>

@@ -9,7 +9,7 @@
 	<% if @message.receiver.nil? %>
   		<%= form.collection_select("receiver_id", @possible_receiver, :id, :login)%>
 	<% else %>
-		<%= form.text_field :receiver_id, :value => @message.receiver.nick %>
+		<%= form.text_field :receiver_id, :value => @message.receiver.nick, :readonly => true %>
 		<%= form.hidden_field :receiver_id, :style => "blank" %>
 	<% end %>
   <%= form.text_field :subject %>
