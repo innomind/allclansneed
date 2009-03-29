@@ -1,0 +1,4 @@
+<%= @mod[0].forum.title %> ist moderiert von
+<% @mod.each do |mod| %>
+  <%=  username(mod.user) %> <br>
+<%end%>

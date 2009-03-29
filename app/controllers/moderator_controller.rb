@@ -1,15 +1,13 @@
 class ModeratorController < ApplicationController
 
-  add_breadcrumb 'Moderatoren'#, 'moderators_path'
+  add_breadcrumb 'Moderatoren', 'moderators_path'
 
   def index
-    @moderators = Moderator.find :all
-    @moderators.uniq
+    @moderators = Moderator.find :all, :order => "user_id DESC"
   end
 
   def show
-    @mod = Moderator.find params[:id]
-    add_breadcrumb username(@mod.user)
+    @mod = Moderator.find(:all, :conditions => ["forum_id = ?", params[:id]])
   end
 
   def new
@@ -36,7 +34,7 @@ class ModeratorController < ApplicationController
     @mod = Moderator.find params[:id]
     if @mod.update_attributes(params[:article])
       flash[:notice] = "Moderator erfolgreich geändert"
-      redirect_to moderator_path
+      redirect_to moderators_path
     else
       render :action => "edit"
     end
@@ -44,6 +42,6 @@ class ModeratorController < ApplicationController
 
   def destroy
     flash[:notice] = "Moderator gelöscht" if Moderator.find(params[:id]).destroy
-    redirect_to moderator_path
+    redirect_to moderators_path
   end
 end

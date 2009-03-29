@@ -83,7 +83,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :clan_join_inquiry
 
-  map.resources :moderatos, :controller => "moderator"
+  map.resources :moderators, :controller => "moderator"
 
   #map.users 'register', :controller => 'login', :action => 'create'
   #map.login 'login', :controller => 'login', :action => 'login'
