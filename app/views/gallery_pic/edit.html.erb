@@ -1,3 +1,4 @@
+<h1>Bild bearbeiten</h1>
 <% error_handling_form_for :gallery_pic, @gallery_pic, :url => pic_path(@gallery_pic), :html => { :multipart => true, :method => :put } do |form| %>
   <%= form.file_field :pic %>
   <%= form.text_field :name %>

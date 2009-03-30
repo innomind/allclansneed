@@ -1,3 +1,4 @@
+<h1>Kategorie erstellen</h1>
 <% error_handling_form_for @category, :url => categories_path(:id => @cat_name) do |f| %>
 	<%= f.hidden_field :section, :value => params[:section], :style => "blank" %>
 	<%= f.text_field :name %>
