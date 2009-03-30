@@ -163,14 +163,15 @@ module WillPaginate
     def page_entries_info(collection, options = {})
       entry_name = options[:entry_name] ||
         (collection.empty?? 'Eintrag' : collection.first.class.human_name)
+      plural_entry_name = options[:entry_name].nil? ? (collection.empty?? 'Einträge' : collection.first.class.human_name(:count => 2)) : options[:entry_name].pluralize
       
       if collection.total_pages < 2
         case collection.size
-        when 0; I18n.t("paginate.not_found", :entry => entry_name.pluralize)
-        else; I18n.t("paginate.found", :entry => ((collection.size == 1) ? entry_name : entry_name.pluralize), :count => collection.size)
+        when 0; I18n.t("paginate.not_found", :entry => plural_entry_name)
+        else; I18n.t("paginate.found", :entry => ((collection.size == 1) ? entry_name : plural_entry_name), :count => collection.size)
         end
       else
-        I18n.t("paginate.found.between", :entry => entry_name.pluralize, 
+        I18n.t("paginate.found.between", :entry => plural_entry_name, 
                                          :von => collection.offset + 1, 
                                          :bis => collection.offset + collection.length,
                                          :insgesamt => collection.total_entries)

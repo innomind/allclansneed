@@ -6,7 +6,6 @@ class CategoriesController < ApplicationController
   before_filter :init_category_access
   
   def show
-    params[:section] ||= ""
     @categories = Category.find :all, :conditions => {:controller => @cat_name, :section => params[:section]}, :order => :position
   end
   
@@ -65,11 +64,10 @@ class CategoriesController < ApplicationController
   
   def fetch_object
     begin
-      @cat_object = eval(params[:id])
+      @cat_object = eval(params[:id]) #TODO 
       @cat_name = @cat_object.class_name
-      
     rescue NameError
-      render :layout => true, :text => "ups" and return
+      raise Exceptions::Access
     end
   end
   
@@ -82,7 +80,7 @@ class CategoriesController < ApplicationController
   end
     
   def init_breadcrumb
-    add_breadcrumb @cat_name, @cat_name.tableize + "_path"
+    #add_breadcrumb @cat_name, @cat_name.tableize + "_path"
     add_breadcrumb "Kategorien verwalten", category_path(@cat_name)
   end
 end

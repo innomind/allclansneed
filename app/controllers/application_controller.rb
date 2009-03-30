@@ -12,9 +12,9 @@ class ApplicationController < ActionController::Base
   protected
   
   def init_areas force = false
-    #if not request.xhr? or force
+    if not request.xhr? or force
       @template_areas = TemplateArea.get_areas_for_site current_site
-    #end
+    end
   end
 
   def current_site
@@ -78,7 +78,7 @@ class ApplicationController < ActionController::Base
     @current_session = Session.new
     @current_session.set_controller self.class.to_s.underscore.gsub(/_controller$/, '')
     unless session['user'].nil?
-      @user = User.find session['user'] #, :joins => [:sites, :components]
+      @user = User.find session['user'] , :joins => [{:squads => :clan}, :sites, :components, :clan_ownerships, :site_ownerships]
       @user.logged_in = true
       @user.current_site = @site
       session['error_objects'] = [] 
@@ -92,14 +92,14 @@ class ApplicationController < ActionController::Base
   def init_site
     server = request.server_name.split(".")
     server.delete_at(0) if server[0] == "www"
-    if server.count == 2
-      site = Site.find_by_subdomain(server[0])
+    if server.count == 3
+      site = Site.find_by_sub_domain(server[0])
     else
       site = Site.find_by_domain(server.join("."))
     end
     
     #self.class.current_site = site || Site.find_by_subdomain("portal")
-    @site = site || Site.find_by_subdomain("portal")
+    @site = site || Site.find_by_sub_domain("portal")
     $site_id = current_site.id
   end
   
@@ -118,8 +118,8 @@ class ApplicationController < ActionController::Base
       render :template => "errors/RecordNotFound"
     rescue Exceptions::Access
       render :template => "errors/Access", :layout => !request.xhr?
-    #rescue NoMethodError
-    # render :text => "no method exception"
+    #rescue
+    #  render :template => "errors/general", :locals => {:error => "ups. Irgendetwas ging da schief. Bitte wende dich an den Support."}
     end
   end
 end

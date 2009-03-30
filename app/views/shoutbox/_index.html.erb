@@ -1,13 +1,14 @@
-<%= link_to_function image_tag("comment_add.png", :border => 0), "Element.toggle('add_shout')" %>
+<div id="shoutbox">
+  <%= link_to_function image_tag("comment_add.png", :border => 0), "Element.toggle('add_shout')" %>
+  <div id="add_shout" style="display:none;">
+      <% form_remote_tag :url => {:controller  => 'shoutbox', :action => 'create'}, :html => {:id => "create_shout"} do%>
+          <%= text_area :content, "content", :rows => 2, :cols => 25 %>
+          <%= submit_tag 'Add' %>
+      <% end %>
+  </div>
+  <% shouts = Shoutbox.find(:all, :limit => 10, :order => "created_at DESC") %>
 
-<div id="add_shout" style="display:none;">
-	<% form_remote_tag :url => {:controller  => 'shoutbox', :action => 'create'}, :html => {:id => "create_shout"} do%>
-		<%= text_area :content, "content", :rows => 2, :cols => 25 %>
-		<%= submit_tag 'Add' %>
-	<% end %>
-</div>
-<% shouts = Shoutbox.find(:all) %>
-
-<div id="shouts">
+  <div id="shouts">
     <%= render :partial => "shoutbox/shout", :collection => shouts %>
+  </div>
 </div>

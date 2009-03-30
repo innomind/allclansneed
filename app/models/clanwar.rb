@@ -7,15 +7,14 @@ class Clanwar < ActiveRecord::Base
   belongs_to :site
   belongs_to :user
   has_many :clanwar_maps, :dependent => :destroy
+  has_many :clanwar_screenshots, :dependent => :destroy
   
   after_update :save_maps
   
   validates_associated :clanwar_maps
   
-  validates_presence_of :opponent
-  validates_presence_of :squad_id
-  validates_presence_of :site_id
-  validates_presence_of :user_id
+  validates_presence_of :score, :score_opponent, :opponent, :squad_id, :played_at
+  validates_numericality_of :score, :score_opponent
   
   def clanwarmap_attributes=(clanwarmap_attributes)
     clanwarmap_attributes.each do |attributes|

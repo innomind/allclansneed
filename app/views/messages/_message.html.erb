@@ -1,3 +1,6 @@
-<div id="message<%= message.id %>">
-  <%= message.sender.nick %> | <%= link_to message.subject, message_path(message) %> | <%= message.created_at %>
-</div>
+<tr> 
+  <td><%= message_pic(message) %></td>
+  <td><%= link_to message.subject, message_path(message) %></td>
+  <td><%= username(params[:folder].nil? ? message.sender : message.receiver) %></td>
+  <td><%= l message.created_at %></td>
+</tr>

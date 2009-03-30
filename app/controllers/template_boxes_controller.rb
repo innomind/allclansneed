@@ -1,7 +1,7 @@
 class TemplateBoxesController < ApplicationController
 
   before_filter :init_template_areas
-  before_filter :init_box, :only => [:edit, :update, :do_move, :delete]
+  before_filter :init_box, :only => [:edit, :update, :move, :do_move, :delete]
   
   add_breadcrumb 'Boxen bearbeiten', "boxes_path"
   
@@ -50,16 +50,18 @@ class TemplateBoxesController < ApplicationController
       TemplateBox.update(id, :position => position)
     end
     init_template_areas
-    render :layout => false,
-      :partial => "template_area",
-      :object => @template_areas.find{|a| a.id == params[:id].to_i} #TODO Dry it
+    #render :layout => false,
+    #  :partial => "template_area",
+    #  :object => @template_areas.find{|a| a.id == params[:id].to_i} #TODO Dry it
+    render :update do |page|
+      page.replace_html(:update_message, "<div id='update_message'>Änderungen wurden gespeichert, aber werden erst nach einem Reload sichtbar</div>")
+      page.visual_effect(:highlight, :update_message)
+    end
   end
   
   def move
-    @areas = @template_areas.
-      select{|a| a.is_addable? and
-        not(a.id == params[:template_area_id].to_i) }.
-      collect{|a| [a.name, a.id]}
+    areas = @template_areas.select{|a| a.is_addable?}-[@box.template_area]
+    @areas = areas.collect{|a| [a.name, a.id]}
     render :layout => false
   end
   

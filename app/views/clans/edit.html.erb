@@ -1,0 +1,6 @@
+<h1>Clan bearbeiten</h1>
+<% error_handling_form_for @clan, :html => { :multipart => true } do |form| %>
+	<%= form.text_field :name %>
+	<%= form.file_field :clan_pic %>
+	<%= form.submit "ändern"%>
+<% end %>

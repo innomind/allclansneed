@@ -17,18 +17,16 @@ class Session
   def can_access_link? target, html_options = {}
     check = Hash.new
     if target.is_a?(String)
-      html_options[:method] ||= :get
-      
       begin
-        check = ActionController::Routing::Routes.recognize_path(target, {:method => html_options[:method].to_sym})
+        check = ActionController::Routing::Routes.recognize_path(target, {:method => (html_options[:method] || "get").to_sym})
       rescue ActionController::RoutingError
-        check = ActionController::Routing::Routes.recognize_path(target.split("?")[0], {:method => html_options[:method].to_sym})
+        check = ActionController::Routing::Routes.recognize_path(target.split("?")[0], {:method => (html_options[:method] || "get").to_sym})
       end
       
     else
       check[:action] = target.delete(:check_action) || target[:action] || "index"
       check[:controller] = target.delete(:check_controller) || target[:controller] || @controller
-      target = target.delete(:path) if target.has_key? :path
+      #target = target.delete(:path) if target.has_key? :path
     end
     
     return true if self.can_access? check
@@ -43,6 +41,26 @@ class Session
   def belongs_to_site? site
     return false if @user.nil?
     @user.belongs_to_site? site
+  end
+  
+  def owns_clan? clan
+    return false if @user.nil?
+    @user.owns_clan? clan
+  end
+  
+  def owns_site? site
+    return false if @user.nil?
+    @user.owns_site? site
+  end
+  
+  def owns_current_site?
+    return false if @user.nil?
+    @user.owns_current_site?
+  end
+  
+  def owns_current_clan?
+    return false if @user.nil?
+    @user.owns_current_clan?
   end
   
   def is_guest?

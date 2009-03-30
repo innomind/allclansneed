@@ -1,6 +1,6 @@
 Betreff: <%= @ticket.subject %><br />
-Kategorie: <%= @category.name %><br />
-Status: <%= @status.name %>
+Kategorie: <%= @ticket_category.name %><br />
+Status: <%= @ticket_status.name %>
 <% supporter_area do %>
 	<% error_handling_form_for @ticket do |form| %>
 		<%= form.select :status_id, Category.global_for_select("Ticket", "status")%>

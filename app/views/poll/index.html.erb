@@ -1,7 +1,20 @@
-<%= page_entries_info @polls %>
-<%= will_paginate @polls %>
+<h1>Polls</h1>
 
-<ul id="poll_list">
+<div class="userlinks">
+<%= access_link image_tag("add.png") + "Poll erstellen", new_poll_path %>
+</div>
+<%= entry_and_pagination @polls %>
+<table class="simple-table" style="width:100%">
+  <thead>
+    <tr> 
+      <th>Poll</th>
+      <th>Status</th>
+	  <th>Autor</th>
+      <th>erstellt am</th>
+	  <th></th>
+    </tr>
+  </thead>
+  <tbody>
 <%= render :partial => "poll", :collection => @polls %>
-</ul>
-<%= access_link "Poll erstellen", new_poll_path %>
+  </tbody>
+  </table>

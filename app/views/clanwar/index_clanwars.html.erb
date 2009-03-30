@@ -1,0 +1,19 @@
+<h1>Clanwars <small>für <%= @squad.name %></small></h1>
+<div class="userlinks">
+<%= access_link image_tag("add.png") + "Clanwar hinzufügen", new_clanwar_path %>
+</div>
+
+<%= entry_and_pagination @clanwars %>
+<table class="simple-table" style="width:100%">
+  <thead>
+    <tr> 
+      <th>Gegner</th>
+      <th>Ergebnis</th>
+	  <th>gespielt am</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= render :partial => "clanwar", :collection => @clanwars %>
+  </tbody>
+</table>

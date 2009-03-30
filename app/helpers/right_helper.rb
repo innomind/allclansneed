@@ -5,6 +5,7 @@ module RightHelper
   
   def access_link name, target, html_options = {}
     if accessable? target, html_options
+      target = target.delete(:path) if target.has_key?(:path) if target.is_a? Hash
       link_to name, target, html_options
     end
   end
@@ -26,13 +27,16 @@ module RightHelper
     access_link(name, target, html_options) unless condition
   end
   
-  def access_remote_link name, target, html_options = {}
-    link_to_remote name, target, html_options if accessable?(target, html_options)
+  def access_remote_link name, html_options = {}
+    link_to_remote name, html_options if accessable?(html_options[:url], html_options)
   end
-  
-  #ha, this def is sugar
+
   def if_accessible target, &block
     block.call if @current_session.can_access? target
+  end
+  
+  def access_ajax_tooltip name, options
+    ajax_tooltip(name,options) if accessable? options[:update_url], options
   end
   
   def urlize_controller contr_name_or_class

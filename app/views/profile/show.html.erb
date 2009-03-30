@@ -1,17 +1,8 @@
+<%= image_tag @profile.profile_pic.url(:thumb) %>
+<br>
+<%= access_link "Nachricht schreiben", new_message_path(:receiver_id => @profile.user.id)%>
 <h3>Verbindung</h3>
-<% if @profile.user == @current_user %>
-  <p>Dies bist du selber</p>
-<% end %>
-<% if @connection == "direct" %>
-  <%= show_user @profile.user %> -> <%= show_user @current_user %>
-<% elsif @connection == "indirect" %>
-  <%= become_friends_link @profile.user %> <br />
-  <%= show_user @profile.user %> -> <%= show_user @friend_of_both %> -> <%= show_user @current_user %>
-<% elsif @connection == "none" %>
-  <%= become_friends_link @profile.user %> <br />
-  Keine Verbindung
-<% end %>
-
+<%= show_connection%>
 <br />
 <br />
 Vorname: <%= @profile.firstname %> <br />
@@ -32,9 +23,10 @@ Nachname: <%= @profile.lastname %> <br />
 
 
 <h3>Freunde</h3>
+<%= link_to "alle Freunde", friend_path(@profile.user)%>
 <% @profile.user.friends.each do  |f| %>
   <%= show_user f %> 
-<% end %>  
+<% end %>
 <br />
 <br />
 <%= show_comments @profile %>

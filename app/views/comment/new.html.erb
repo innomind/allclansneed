@@ -1,0 +1,5 @@
+<% error_handling_form_for Comment.new, comments_path(:model => params[:modelname], :id => params[:id]) do |form| %>
+	<%= form.text_area :entry, :rows => 2, :cols => 25, :class => "mceEditor" %>
+	<%= hidden_field :intern, :value => (model.attribute_names.include?("intern")? model.intern : false)%>
+	<%= form.submit 'erstellen' %>
+<% end %>

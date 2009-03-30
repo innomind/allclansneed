@@ -10,6 +10,8 @@ article:
   restful: true
 clanwar:
   restful: true
+clanwar_screenshots:
+  default: site
 clans:
   default: member
 classifieds:
@@ -51,20 +53,25 @@ navigation:
 news:
   restful: true
   default: right
+pages:
+  restful: true
 poll:
   restful: true
-  vote: public
+  show: member
+  vote: member
 profile:
   restful: true
   start: member
+  new: public
+  create: public
 rating:
   default: member
 shoutbox:
   restful: true
 squad:
-  default: public #right
+  default: member
 squad_user:
-  default: public #right
+  default: member
 template_boxes:
   default: right
 templates:
@@ -72,5 +79,5 @@ templates:
 ticket_message:
   default: member
 tickets:
-  default: site
+  default: member
   destroy: right

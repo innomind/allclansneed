@@ -1,0 +1,8 @@
+<ul>
+<li><%= link_to "Profil", profile_path(@profile.user.id)%></li>
+<%= access_link "<li>Nachricht schreiben</li>", new_message_path(:receiver_id => @profile.user.id)%>
+<li>
+<b>Verbindung:</b>
+<%= show_connection %>
+</li>
+</ul>

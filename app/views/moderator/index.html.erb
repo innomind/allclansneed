@@ -1,0 +1,13 @@
+<table class="simple-table" style="width:100%">
+  <thead>
+    <tr>
+      <th>Moderator</th>
+      <th>zuständig für</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= render :partial => "moderator", :collection => @moderators %>
+  </tbody>
+</table>
+<%= access_link image_tag("folder_add.png"), new_moderator_path() %>

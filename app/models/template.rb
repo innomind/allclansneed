@@ -7,7 +7,6 @@ class Template < ActiveRecord::Base
     areas_with_prefered.each { |pa| 
       edit_box = boxes.select{|box| box.template_box_type == pa.template_box_type}.first
       edit_box.template_area = pa
-      debugger
       edit_box.save
       boxes = boxes - [edit_box]
     }

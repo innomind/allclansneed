@@ -1,0 +1,7 @@
+<% error_handling_form_for @new_user, :url => profiles_path do |form| %>
+	<%= form.text_field :login %>
+	<%= form.text_field :nickname %>
+	<%= form.password_field :password %>
+	<%= form.text_field :email %>
+	<%= form.submit "registrieren" %>
+<% end %>

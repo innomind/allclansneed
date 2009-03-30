@@ -2,5 +2,7 @@
 	<%= f.hidden_field :template_box_id, :style => "blank"%>
 	<%= f.text_field :name %>
 	<%= f.select :navigation_template_id, @navigation_templates%>
+	- ODER -
+	<%= f.select :page_id, @pages %>
 	<%= f.submit "erstellen" %>
 <% end %>

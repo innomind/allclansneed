@@ -1,14 +1,14 @@
 <%unless @logged_in%>
   <br/>
 
-  <% error_handling_form_for :login, :url => { :action => 'login' } do |f|%>
-    <%= f.text_field 'nick' %>
-    <%= f.password_field 'password' %>
+  <% error_handling_form_for User.new, :url => {:controller => "login", :action => "login"} do |f| %>
+    <%= f.text_field 'login', :size => 10 %>
+    <%= f.password_field 'password', :size => 10 %>
     <%= f.submit 'log in' %>
   <%end%>
 
   <br/>
-  <%= link_to 'account erstellen', :action => 'create' %>
+  <%= link_to 'account erstellen', new_profile_path %>
 
 <% else %>
   logged in

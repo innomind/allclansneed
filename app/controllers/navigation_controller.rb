@@ -8,17 +8,22 @@ class NavigationController < ApplicationController
   
   def new
     @box = TemplateBox.find params[:template_box_id]
-    @navigation_templates = NavigationTemplate.unused_types.collect{|b| [b.name, b.id]}
+    @navigation_templates = [["- keins -", nil]] + NavigationTemplate.unused_types.collect{|b| [b.name, b.id]}
+    @pages = [["- keins -", nil]] + Page.find(:all, :conditions => {:navigation_id => nil}).collect{|b| [b.title, b.id]}
     @navigation = @box.navigations.new(:template_box_id => @box.id)
     render :layout => false
   end
   
   def create
+    unless (page_id = params[:navigation].delete(:page_id)).empty?
+      page = Page.find page_id
+    end
     @navigation = Navigation.new params[:navigation]
+    @navigation.page = page
     if @navigation.save
       flash[:notice] = "Navigationspunkt erfolgreich erstellt"
     else
-      flash[:error] = "Fehler beim speichern der Navigation"
+      flash[:error] = "Fehler beim speichern der Navigation: <br>" + @navigation.errors.collect{|attr,msg| "#{Navigation.human_attr_name(attr)}: #{msg}" }.join("<br>")
     end
     redirect_to edit_box_navigations_path(:template_box_id => params[:navigation][:template_box_id])
   end
@@ -40,10 +45,14 @@ class NavigationController < ApplicationController
   end
   
   def update_positions
-   params["navigations"].each_with_index do |id, position|
-     Navigation.update(id, :position => position)
-   end
-   render :nothing => true
+    params["navigations"].each_with_index do |id, position|
+      Navigation.update(id, :position => position)
+    end
+    render :update do |page|
+      page.replace_html(:update_message, "<div id='update_message'>Änderungen wurden gespeichert</div>")
+      page.visual_effect(:highlight, :update_message)
+      page.reload
+    end
   end
   
   def move

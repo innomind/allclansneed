@@ -1,0 +1,4 @@
+<% error_handling_form_for [@clanwar, @screenshot], :html => { :multipart => true } do |f|%>
+	<%= f.file_field :screenshot %>
+    <%= f.submit "Screenshot hochladen" %>
+<% end %>

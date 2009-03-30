@@ -1,9 +1,15 @@
 class Squad < ActiveRecord::Base
   #acts_as_delegatable
-  belongs_to :clan
+  belongs_to :clan, :counter_cache => true
   has_many :squad_users
-  has_many :clanwars
+  has_many :clanwars do
+    def overview_wars
+      self.clanwars.pages :page => nil, :per_page => 5
+    end
+  end
+  
   has_many :users, :through => :squad_users
+  has_and_belongs_to_many :games
   
   validates_length_of :name, 
     :within => 3..40, 

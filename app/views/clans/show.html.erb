@@ -1,2 +1,28 @@
-<h1>Clans#show,</h1>
-<p>Find me in app/views/clans/show,.html.erb</p>
+<h1>Clan: <%= @clan.name %></h1>
+<table class="simple-prop">
+	<tbody>
+		<tr>
+			<td rowspan="4"><%= image_tag(@clan.clan_pic.url(:thumb))%></td>
+			<td class="title">Name</td>
+			<td><%= @clan.name %></td>
+		</tr>
+		<tr>
+			<td class="title">Clan-ID</td>
+			<td><%= @clan.uniq %></td>
+		</tr>
+		<tr>
+			<td class="title">dabei seit</td>
+			<td><%= l @clan.created_at, :format => "datelong" %></td>
+		</tr>
+		<tr>
+			<td class="title">Squads</td>
+			<td><%= @clan.squads_count %></td>
+		</tr>
+		<tr>
+			<td class="title">Miglieder</td>
+			<td colspan="2"><%= @clan.members_count %></td>
+		</tr>
+	</tbody>
+</table>
+
+<%= show_comments @clan %>

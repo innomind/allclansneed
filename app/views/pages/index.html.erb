@@ -1,0 +1,16 @@
+<ul id="pages">
+
+<% @pages.each do |p| %>
+  <li>
+    
+    <%= link_to p.title, page_path(p) -%><%= intern_pic p %>
+    von <%= username(p.user) %>
+    <%= access_link image_tag("folder_edit.png"), edit_page_path(p) %>
+    <%= access_link image_tag("folder_delete.png"), page_path(p.id), :method => "delete", :confirm => "Wirklich löschen?" %>
+    
+  </li>
+<% end %>
+
+</ul>
+
+<p><%= access_link image_tag("folder_add.png") + "Seite hinzufügen", new_page_path %></p>

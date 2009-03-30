@@ -25,7 +25,7 @@ ActionController::Routing::Routes.draw do |map|
                             :except => [:new, :update, :edit],
                             :member => {:add_comment => :post}
   
-  map.resources :profiles, :controller => "profile", :collection => {:start => :get}
+  map.resources :profiles, :controller => "profile", :collection => {:start => :get}, :member => {:infobox => :get}
 
   map.resources :articles, :controller => "article"
   
@@ -45,13 +45,15 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :messages, :member => { :create => :post, :answer => :get }
   
   map.resources :messages
+  
+  map.resources :pages
 
   map.resources :categories, :member => {:newcat => :get, :createcat => :post}, :except => :new,
                              :collection => {:update_positions => :post}
   
   map.resources :classifieds, :as => "kleinanzeigen"
   
-  map.resources :friends, :only => [:index, :destroy],
+  map.resources :friends, :only => [:show, :index, :destroy],
                           :member => [:accept, :reject, :become]
 
   map.resources :groups, :member => [:join, :administrate, :activate, :kick], :shallow => true do |group|
@@ -60,22 +62,28 @@ ActionController::Routing::Routes.draw do |map|
     end
   end
 
-  map.resources :clanwars, :controller => "clanwar"
+  map.resources :clanwars, :controller => "clanwar" do |clanwar|
+    clanwar.resources :clanwar_screenshots, :controller => "clanwar_screenshot"
+  end
   
   map.resources :events, :controller => "event", :collection => {:showDay => :get}
 
   map.resources :squads, :controller => 'squad', :member => {:confirm_users => :get, :confirm_users_save => :put}, :shallow => true do |squad|
-    squad.resources :users, :controller => 'squad_user', :member => {:copy => :get, :do_copy => :post, :move => :get, :do_move => :post, :destroy_form => :get}
+    squad.resources :users, :controller => 'squad_user', :member => {:role => :get, :update_role => :put, :copy => :get, :do_copy => :post, :move => :get, :do_move => :post, :destroy_form => :get}
   end
 
-  map.resources :clans, :member => {:leave => :delete} do |clan|
-    
+  map.resources :clans, :collection => {:my => :get, :search => :get, :do_search => :post}, :member => {:leave => :delete} do |clan|
+    clan.resource :site, :controller => "site", :only => [:new, :create]
     clan.resources :squads, :controller => "squad", :member => {:confirm_users => :get, :confirm_users_save => :put} do |squad|
-      squad.resources :users, :controller => 'squad_user', :member => {:copy => :get, :do_copy => :post, :move => :get, :do_move => :post, :destroy_form => :get}
+      squad.resources :users, :controller => 'squad_user', :member => {:role => :get, :update_role => :put, :copy => :get, :do_copy => :post, :move => :get, :do_move => :post, :destroy_form => :get}
     end
   end
+  
+  map.resources :sites, :controller => "site", :only => [:update]
 
   map.resources :clan_join_inquiry
+
+  map.resources :moderators, :controller => "moderator"
 
   #map.users 'register', :controller => 'login', :action => 'create'
   #map.login 'login', :controller => 'login', :action => 'login'

@@ -2,19 +2,28 @@
 <% modelname = model.class.name %>
 
 <% if_accessible :controller => "comments" do %>
+<div class="userlinks" style="float:left">
 	<%= link_to_function image_tag("comment_add.png", :border => 0) + " Comment hinzufügen", "Element.toggle('add_comment')" %>
+</div>
+<% end %>
+
+<% comments = get_comments(model) %>
+<%= entry_and_pagination comments %>
+
+<% if_accessible :controller => "comments" do %>
 	<div id="add_comment" style="display:none;">
 		<% form_remote_tag :url => {:controller  => 'comment', :action => 'create', :model => modelname, :id => model.id}, :html => {:id => "create_comment"} do%>
-			<%= text_area :comment, "entry", :rows => 2, :cols => 25 %>
+			<%= text_area :comment, "entry", :rows => 2, :cols => 25, :class => "mceEditor" %>
 			<%= hidden_field :comment, "intern", :value => (model.attribute_names.include?("intern")? model.intern : false)%>
 			<%= submit_tag 'Add' %>
 		<% end %>
 	</div>
 <% end %>
 
-<% comments = get_comments(model) %>
-<%= will_paginate comments %>
-<%# debugger %>
-<div id="comments">
-    <%= render :partial => "comment/comment", :collection => comments %>
-</div>
+<table class="simple-post" style="width:100%">
+	<th colspan="2">Kommentare</th>
+  <tbody>
+	
+   <%= render :partial => "comment/comment", :collection => comments %>
+</tbody>
+</table>

@@ -38,7 +38,7 @@ class SquadController < ApplicationController
   end
 
   def destroy
-    redirect_to(:action => "confirm_user", :id => @squad, :clan_id => params[:id]) and return unless @squad.save_destroy_users?
+    redirect_to(:action => "confirm_users", :id => @squad.id, :clan_id => @clan.id) and return unless @squad.save_destroy_users?
     if @squad.destroy
       flash[:notice] = "Squad gelöscht"
     else
@@ -71,10 +71,10 @@ class SquadController < ApplicationController
       add_breadcrumb 'Squads', "squads_path"
     else
       @clan = Clan.find params[:clan_id]
-      raise Exceptions::Access unless @user.owns_clan? @clan
       add_breadcrumb 'meine Clans', "clans_path"
       add_breadcrumb @clan.name + " User verwalten"
     end
+    raise Exceptions::Access unless @current_session.owns_clan? @clan
   end
   
   def init_squad

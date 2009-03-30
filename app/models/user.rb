@@ -6,11 +6,13 @@ class User < ActiveRecord::Base
   has_many :forum_messages
   has_many :guestbooks
   has_many :news
-  has_many :messages
+  has_many :incoming_messages, :class_name => "Message", :foreign_key => :receiver_id
+  has_many :outgoing_messages, :class_name => "Message", :foreign_key => :sender_id
   has_many :comments
   has_many :gallery_categories
   has_many :gallery_pics
   has_many :clanwars
+  has_many :clanwar_screenshots
   has_many :polls
   has_many :poll_results
   has_many :classifieds
@@ -30,9 +32,8 @@ class User < ActiveRecord::Base
   has_many :clan_join_inquiries
   
   has_many :user_rights, :dependent => :destroy
-  has_many :sites, :through => :user_rights
+  has_many :sites, :through => :user_rights, :group => "id"
   has_many :components, :through => :user_rights
-
 
   validates_presence_of :password
   validates_presence_of :email
@@ -73,8 +74,12 @@ class User < ActiveRecord::Base
   end
 
   def clans
-    squads.all(:include => :clan).collect{|s| s.clan}.compact.uniq
+    @my_clans ||= squads.all(:include => :clan).collect{|s| s.clan}.compact.uniq
   end
+  
+#  def sites
+#    self.sites.uniq
+#  end
 
   def clans_with_site
     (sites.collect {|s| s.clan}).compact
@@ -88,11 +93,13 @@ class User < ActiveRecord::Base
   ### Rechte
   
   def owns_clan? clan
-    clan_ownerships.include? clan
+    @my_owns_clan ||= Hash.new
+    @my_owns_clan[clan.id] ||= clan_ownerships.include? clan
   end
   
   def owns_site? site
-    site_ownerships.include? site
+    @my_owns_site ||= Hash.new
+    @my_owns_site[site.id] ||= site_ownerships.include? site
   end
   
   def owns_current_site?
@@ -104,9 +111,9 @@ class User < ActiveRecord::Base
   end
   
   #deprecated
-  def has_component? c
-    !!(user_rights.find :first, :conditions => {:site_id => $site_id, :component_id => c})
-  end
+#  def has_component? c
+#    !!(user_rights.find :first, :conditions => {:site_id => $site_id, :component_id => c})
+#  end
   
   # TODO cache
   def components
@@ -114,6 +121,7 @@ class User < ActiveRecord::Base
   end
   
   def has_right_for? controller
+    return true if self.owns_current_site?
     !components.select{|c| c.controller == controller}.empty?
   end
   
@@ -151,7 +159,8 @@ class User < ActiveRecord::Base
   end
   
   def belongs_to_site? site
-    sites.include? site
+    @belongs_to_site ||= Hash.new
+    @belongs_to_site[site.id] ||= sites.include? site
   end
   
   def belongs_to_clan? clan
@@ -189,6 +198,12 @@ class User < ActiveRecord::Base
 
   def self.get_supporter_for_select
     find(:all, :conditions => {:support_status => 1}).collect{|u| [u.login, u.id]}
+  end
+  
+  ### Nachrichten
+  
+  def new_messages
+    self.incoming_messages.count :conditions => {:read => false}
   end
   
   ### remove Functions

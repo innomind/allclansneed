@@ -1,0 +1,5 @@
+<tr>
+  <td><%= username(moderator.user) %></td>
+  <td><%= link_to  moderator.forum.title, moderator_path(moderator.forum_id) -%></td>
+  <td><%= access_link image_tag("folder_delete.png"), moderator_path(moderator), :method => "delete", :confirm => "Moderator wirklich entfernen?" %></td>
+</tr>

@@ -11,8 +11,17 @@ module ActiveRecord::Acts::ActsAsDelegatable
   
   module ClassMethods
     
-    def human_attribute_desc(attr)
-      I18n.t("activerecord.attributes.#{self.name.underscore}.#{attr}_desc", :default => "")
+    def human_attr_desc(attr)
+      translation = I18n.t("activerecord.attributes.#{self.name.underscore}.#{attr}_desc", :default => "")
+      return I18n.t("activerecord.attributes.default.#{attr}_desc", :default => "") if translation.blank?
+      translation
+    end
+    
+    def human_attr_name(attr)
+      translation = I18n.t("activerecord.attributes.#{self.name.underscore}.#{attr}", :default => "")  
+      translation = I18n.t("activerecord.attributes.default.#{attr}", :default => "") if translation.empty?
+      return self.human_attribute_name(attr) if translation.empty?
+      translation
     end
     
     def acts_as_site options = {}

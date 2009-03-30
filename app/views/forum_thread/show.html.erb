@@ -1,7 +1,14 @@
 <h1><%= @thread.title %> </h1>
-<%= access_link "Antworten", new_forum_thread_forum_message_path(@thread) %><br>
-<%= will_paginate @messages %><br>
-<%= page_entries_info @messages %>
-<%= render :partial => "message", :collection => @messages %>
 
-<%= will_paginate @messages %>
+<div class="userlinks">
+	<%= access_link image_tag("note_add.png") + " antworten", new_forum_thread_forum_message_path(@thread) %>
+</div>
+
+<%= entry_and_pagination @messages %>
+
+<table class="simple-post" style="width:100%">
+	<th colspan="2">Posts</th>
+  <tbody>
+<%= render :partial => "message", :collection => @messages %>
+</tbody>
+</table>

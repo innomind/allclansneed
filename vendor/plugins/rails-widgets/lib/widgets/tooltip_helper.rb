@@ -39,6 +39,7 @@ module Widgets
     end
     
     def tooltip_css
+      return ''
       unless @_tooltip_css_done
         @_tooltip_css_done = true
         return render_css('tooltip')
@@ -72,7 +73,7 @@ module Widgets
     end
 
     def close_tooltip_link(id, message = 'close')
-      message ||= 'close' # if nil is passed I'll force it
+      message ||= 'close'
       link_to_function message, "$('tooltip_#{id}').hide()"
     end
     

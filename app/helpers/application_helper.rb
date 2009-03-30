@@ -22,21 +22,23 @@ module ApplicationHelper
     args
   end
   
-  def get_boxes_for internal_name
-    area = @template_areas.find{|a| a.internal_name == internal_name}
-    return(Array('')) if area.nil?
-    area.template_boxes
-  end
-  
-  def create_box box
-    render :partial => "boxes/#{box.template_box_type.internal_name}/show_loader", 
-           :locals => {:box => box}
-  end
-  
   def username(user)
-    link_to user.login, profile_path(user)
+    out = link_to user.login, profile_path(user)
+    out = ajax_tooltip(user.login, :update_url => infobox_profile_path(user))
   end
   
+  def entry_and_pagination model
+    out = "<div>"
+    out << will_paginate(model).to_s
+    out << "<div class='entries'>"
+    out << page_entries_info(model)
+    out << "</div>"
+    out << "</div>"
+    out << "<div style='clear:both'></div>"
+  end
+  
+  
+    
   def cloud(tags)
     return if tags.blank?
     output = ""
@@ -106,7 +108,7 @@ module ApplicationHelper
     else
       opts[:show_mode] = "mouseover"
     end
-    tooltip name, opts, &proc
+    tooltip name, opts, &proc if opts[:text] = opts.delete(:alternate_text)
   end
   
   def ajax_loading_tag

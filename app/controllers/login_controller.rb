@@ -1,6 +1,6 @@
 class LoginController < ApplicationController
    def login
-     nick = params[:user][:nick]
+     nick = params[:user][:login].underscore
      pw = params[:user][:password]
      unless (nick.nil? || pw.nil?)
        usr = User.first :conditions => {:login => nick}
@@ -12,7 +12,7 @@ class LoginController < ApplicationController
          flash[:notice] = 'login success'
          redirect_to :controller => "profile", :action => "start" and return
        else
-         flash.now[:notice] = 'login failed'+' for "'+params[:nick]+'"'
+         flash.now[:notice] = "Username oder Passwort falsch"
        end
      else
        flash.now[:error] = 'no such nick'

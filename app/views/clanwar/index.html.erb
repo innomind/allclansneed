@@ -1,8 +1,24 @@
 <h1>Clanwars</h1>
 
-<ul id="clanwar_list">
-<%= render :partial => "clanwar", :collection => @clanwars %>
-</ul>
-<%= will_paginate @clanwars %>
-<br /><br />
+<div class="userlinks">
 <%= access_link image_tag("add.png") + "Clanwar hinzufügen", new_clanwar_path %>
+</div>
+
+<% @squads.each do |squad| %>
+	<% clanwars = squad.clanwars.paginate :page => nil, :per_page => 5 %>
+	<h2 style="margin-bottom:2px"><%= "Clanwars für #{squad.name}" %></h2>
+	<span class='titlesub'>(<%="#{page_entries_info(clanwars)})"%> <%= link_to "alle", clanwars_path(:squad_id => squad.id) %></span>
+	<table class="simple-table" style="width:100%">
+	  <thead>
+	    <tr> 
+	      <th>Gegner</th>
+	      <th>Ergebnis</th>
+		  <th>gespielt am</th>
+	      <th></th>
+	    </tr>
+	  </thead>
+	  <tbody>
+	<%= render :partial => "clanwar", :collection => clanwars %>
+	  </tbody>
+	</table>
+<% end %>

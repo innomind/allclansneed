@@ -1,9 +1,8 @@
 <li id="navi_left" class="second">
-<% if show.navigation_template.controller.empty? %>
+<% if show.navigation_template.controller.nil? %>
 	<%= link_to show.name, eval(show.navigation_template.link_path) %>
 <% else %>
 	<%= link_to show.name, :controller => show.navigation_template.controller, 
                        :action => show.navigation_template.action %>
-
 <% end%>
 </li>

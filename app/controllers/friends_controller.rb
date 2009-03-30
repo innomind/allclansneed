@@ -1,4 +1,8 @@
 class FriendsController < ApplicationController
+  
+  def show
+    @friend_user = User.find params[:id]
+  end
 
   def accept
     @current_user = current_user
@@ -7,6 +11,8 @@ class FriendsController < ApplicationController
     if @current_user != @become_friend_with
       @current_user.accept_friendship_with @become_friend_with
     end
+    flash[:notice] = "Freundschaft bestätigt"
+    redirect_to profile_path(@become_friend_with)
   end
     
   def destroy
@@ -23,9 +29,10 @@ class FriendsController < ApplicationController
     @current_user = current_user
     
     if @current_user != @want_friend_with
+      flash[:notice] = "Freundschaftsanfrage erstellt"
       current_user.request_friendship_with @want_friend_with
     end
-    render :text => "test"
+    redirect_to profile_path(@want_friend_with)
     #user per mail benachrichtigen
     #muss noch implementiert werden
   end

@@ -21,14 +21,15 @@ class ErrorHandlingFormBuilder < ActionView::Helpers::FormBuilder
       #debugger
       #translate = I18n.t(field.to_s, :default => {:name => nil, :desc => nil},
       #                               :scope => [:dbfields, @object.class.name.tableize])
-      translate = @object.class.human_attribute_name field.to_s if @object.class.methods.include?("human_attribute_name")
-      translate ||= Hash.new
-      desc =  @object.class.human_attribute_desc(field.to_s) if @object.class.methods.include?("human_attribute_desc")
+      field_name = @object.class.human_attr_name(field.to_s) if @object.class.methods.include?("human_attr_name")
+      field_name ||= field
+      desc =  @object.class.human_attr_desc(field.to_s) if @object.class.methods.include?("human_attr_desc")
       desc ||= ""
       locals = {
         :element => yield,
-        :label   => label(field, (options[:label] || translate[:name])),
-        :desc    => desc
+        :label   => label(field, (options[:label] || field_name)),
+        :desc    => desc,
+        :post_text => options[:post_text]
       }
       if has_errors_on?(field)
         #flash[:notice].push error_message(field, options)
