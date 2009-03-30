@@ -47,7 +47,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :messages
   
   map.resources :pages
-
+  
   map.resources :categories, :member => {:newcat => :get, :createcat => :post}, :except => :new,
                              :collection => {:update_positions => :post}
   
@@ -79,7 +79,7 @@ ActionController::Routing::Routes.draw do |map|
     end
   end
   
-  map.resources :sites, :controller => "site", :only => [:update]
+  map.resources :sites, :controller => "site", :only => [:update, :index], :collection => {:toggle_header => :get}
 
   map.resources :clan_join_inquiry
 

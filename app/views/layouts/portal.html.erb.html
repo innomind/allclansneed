@@ -1,0 +1,242 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Allclansneed</title>
+	<%= javascript_include_tag :defaults %>
+	<%= stylesheet_link_tag "calendar/grey/style.css" %>
+	<%= stylesheet_link_tag "portal/layout" %>
+	<%= stylesheet_link_tag "portal/style" %>
+	<%= include_tiny_mce_if_needed %>
+	<%= yield :header_tags %>
+</head>
+
+<body>
+
+<div>
+	<div class="logo">
+    
+    	<div class="logo_format">
+    
+    	<span class="logo_img"></span>
+        <div class="logo_navigation">
+        <li><%= section_link "NETZWERK" %></li>
+        <li class="seperator">|</li>
+        <li><%= section_link "CLANPAGE" %></li>
+        <li class="seperator">|</li>
+        <li><%= section_link "GAME-SERVER", "game_server" %></li>
+        <li class="seperator">|</li>
+        <li><%= link_to_function("SPONSORING") do |page|
+			page.select('div.navigation').each do |value|
+			    value.hide
+			 end
+			page["nav_sponsoring"].show
+		  end %></li>
+        <li class="seperator">|</li>
+        <li><%= link_to_function("LIGA") do |page|
+			page.select('div.navigation').each do |value|
+			    value.hide
+			 end
+			page["nav_liga"].show
+		  end %></li>
+        <li class="seperator">|</li>
+        <li><%= link_to_function("SHOP") do |page|
+			page.select('div.navigation').each do |value|
+			    value.hide
+			 end
+			page["nav_shop"].show
+		  end %></li>
+        </div>
+        <div style="position:relative; top:60px; left:20px;">
+        
+        <ul style="list-style:none;">			
+        <li style="float:left; padding:2px;">Login</li>
+        <li style="float:left; padding:2px;">|</li>
+        <li style="float:left; padding:2px;">Lost Password</li>
+        <li style="float:left; padding:2px;">|</li>
+        <li style="float:left; padding:2px;">Sign Up</li>
+        </ul>
+       <span style="display:block; position:relative; top:10px;"><form><input type="image" src="/images/portal/submit.gif" style="float:left;"  /><input class="input" type="input" name="d" /> </form></span>
+       </div>
+        
+        </div>
+    
+    </div>
+    <div class="navigation_layout">
+	
+	<div style="float:left;margin-left:20px;margin-top:4px">	
+		<%#= link_to_remote "d", :url => toggle_header_sites_path %>
+		<%= link_to_function "d" do |page|
+				page.visual_effect(:toggle_blind, "info_box")
+			end
+		%>
+	</div>
+
+    <div class="navigation" id="nav_netzwerk" style="<%= section_visible "netzwerk" %>">
+    <%= link_to "<span>Clans</span>", clans_path %>
+    <a href="#"><span>User</span></a>
+    <%= link_to "<span>Gruppen</span>", groups_path %>
+    <%= link_to "<span>Forum</span>", forums_path %>
+    </div>
+
+    <div class="navigation" id="nav_clanpage" style="<%= section_visible "clanpage" %>">
+    <a href="#"><span>Anmelden</span></a>
+    <%= link_to "<span>Funktionen</span>", page_path("Funktionen") %>
+    <%= link_to "<span>Liste</span>", sites_path %>
+    <%= link_to "<span>Support</span>", page_path("Support") %>
+    </div>
+
+    <div class="navigation" id="nav_game_server" style="<%= section_visible "game_server" %>">
+    <%= link_to "<span>Aktionen</span>", page_path("Aktionen", :section_id => "Game-server") %>
+    <%= link_to "<span>Preise</span>", page_path("Preise") %>
+    <%= link_to "<span>Hardware</span>", page_path("Hardware") %>
+    <%= link_to "<span>Testserver</span>", page_path("Testserver") %>
+    </div>
+
+	<div class="navigation" id="nav_sponsoring" style="display:none">
+    <a href="#"><span>Einführung</span></a>
+    <a href="#"><span>Anmeldung</span></a>
+    <a href="#"><span></span></a>
+    <a href="#"><span>Testserver</span></a>
+    </div>
+
+	<div class="navigation" id="nav_liga" style="display:none">
+    <a href="#"><span>Aktionen</span></a>
+    <a href="#"><span>Preise</span></a>
+    <a href="#"><span>Hardware</span></a>
+    <a href="#"><span>Testserver</span></a>
+    </div>
+
+	<div class="navigation" id="nav_shop" style="display:none">
+    <a href="#"><span>Aktionen</span></a>
+    <a href="#"><span>Preise</span></a>
+    <a href="#"><span>Hardware</span></a>
+    <a href="#"><span>Testserver</span></a>
+    </div>
+
+    </div>
+
+	<div id="info_box">
+    	<div class="info_box"></div>
+    	<div class="info_box_navigation">
+    	
+    	<div class="info_box_navigation_layout">
+    	<span class="button_ia"></span>
+    	<span class="button_a"></span>
+    	<span class="button_ia"></span>
+    	<span class="button_ia"></span>
+    	<span class="button_ia"></span>
+    	</div>
+    	
+    	</div>
+    </div>
+
+    <div class="content">
+    
+    <div class="content_layout">
+    
+    <%= show_breadcrumb %>
+<!-- CONTENT START -->
+	<%= yield %>
+<!-- CONTENT END -->  
+    
+	</div>
+
+    <div class="box_right">
+    <span class="box_right_img"></span>
+
+	<% get_boxes_for("rechte_leiste").each do |b| %>
+    <span class="box_right_start">
+    <label class="info_title"><%= b.name %></label>
+    <br />
+	    <%= create_box(b,["<p class='box_list'><span>","</span></p>"]) %>
+	<span style="clear:both; display:block; padding-top:30px; padding-bottom:10px;"><img src="/images/portal/dot.gif" border="0" alt="" /></span>
+	<% end %>
+    
+    <span class="box_right_start">
+    <label class="info_title">Verwandte Themen</label>
+    <br />
+
+    <span class="info_picture"><img alt="" border="0" src="/images/portal/p.gif" /></span>
+    <span class="info_text"><b>AION</b> ekklusive Vorschau auf das neue Grafik und MMORPG Wunder</span>
+    <span class="info_clear"></span>
+    
+    <span class="info_picture"><img alt="" border="0" src="/images/portal/p.gif" /></span>
+    <span class="info_text"><b>AION</b> ekklusive Vorschau auf das neue Grafik und MMORPG Wunder</span>
+    <span class="info_clear"></span>
+    
+    <span class="info_picture"><img alt="" border="0" src="/images/portal/p.gif" /></span>
+    <span class="info_text"><b>AION</b> ekklusive Vorschau auf das neue Grafik und MMORPG Wunder</span>
+    <span class="info_clear"></span>    
+    <span style="clear:both; display:block; padding-top:30px; padding-bottom:10px;"><img src="/images/portal/dot.gif" border="0" alt="" /></span>
+    
+    
+    
+    <label style=" display:block; font-size:18px; color:#00557C; text-align:center;">TOP 5 Games im Mai</label>
+    <span style="display:block; padding-top:5px;"><img src="/images/portal/top_1.gif" border="0" alt="" /></span>
+    
+    <ul style="list-style:none;">
+    <li><b>Age of Canon</b></li> 
+    <li>2. Forsaken</li>  
+    <li>3. World of Warcraft</li>  
+    <li>4. GTA 5</li>  
+    <li>5. Warhammer Online</li>   
+    </ul>
+    
+    <span style="clear:both; display:block; padding-top:30px; padding-bottom:10px;"><img src="/images/portal/dot.gif" border="0" alt="" /></span>
+</span>
+    <span class="box_right_end"></span>
+    </div>
+    <p>&nbsp;</p>
+    
+    
+    </div>
+    <div class="footer">
+    
+    <div class="footer_layout">
+    
+    <span>
+    <ul>
+    <li><label>Tour</label></li>
+    <li>Home</li>
+    <li>Liga</li>
+    <li>Clan</li>
+    </ul>
+    </span>
+    
+    
+    <span>
+    <ul>
+    <li><label>Forum</label></li>
+    <li>Home</li>
+    <li>Liga</li>
+    <li>Clan</li>
+    </ul>
+    </span>
+    
+    <span>
+    <ul>
+    <li><label>Support</label></li>
+    <li>Home</li>
+    <li>Liga</li>
+    <li>Clan</li>
+    </ul>
+    </span>
+    
+    <span>
+    <ul>
+    <li><label>About</label></li>
+    <li>Home</li>
+    <li>Liga</li>
+    <li>Clan</li>
+    </ul>
+    </span>
+    
+    </div>
+    
+    
+    </div>
+</div>
+
+</body>
+</html>

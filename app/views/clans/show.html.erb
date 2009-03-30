@@ -3,26 +3,35 @@
 	<tbody>
 		<tr>
 			<td rowspan="4"><%= image_tag(@clan.clan_pic.url(:thumb))%></td>
-			<td class="title">Name</td>
+			<th>Name</th>
 			<td><%= @clan.name %></td>
 		</tr>
 		<tr>
-			<td class="title">Clan-ID</td>
+			<th>Clan-ID</th>
 			<td><%= @clan.uniq %></td>
 		</tr>
 		<tr>
-			<td class="title">dabei seit</td>
+			<th>dabei seit</th>
 			<td><%= l @clan.created_at, :format => "datelong" %></td>
 		</tr>
 		<tr>
-			<td class="title">Squads</td>
-			<td><%= @clan.squads_count %></td>
+			<th>Link</th>
+			<td><%= link_to "link", root_path(:subdomain => @clan.uniq) %></td>
 		</tr>
+		<tr><th colspan="3" class="title">Squads</th></tr>
+<% @clan.squads.each do |squad| %>
 		<tr>
-			<td class="title">Miglieder</td>
-			<td colspan="2"><%= @clan.members_count %></td>
+			<th><%= squad.name %></th>
+			<td colspan="2">
+				<% squad.squad_users.each do |squad_user|%>
+					<%= username(squad_user.user) %>
+				<% end %>
+			</td>
 		</tr>
+<% end %>
 	</tbody>
 </table>
+
+<div style="height:25px"></div>
 
 <%= show_comments @clan %>

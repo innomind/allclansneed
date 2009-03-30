@@ -1,10 +1,11 @@
 class ClansController < ApplicationController
-  add_breadcrumb "Clans Verwalten", "clans_path"
-  before_filter :init_clan, :only => [:show, :update, :leave, :edit]
+  add_breadcrumb "Clans Verwalten", "clans_path", :except => [:index, :show]
+  before_filter :init_clan, :only => [:update, :leave, :edit]
   before_filter :check_member, :only => [:leave]
   before_filter :check_owner, :only => [:edit, :update]
   
   def index
+    add_breadcrumb "Clan Liste"
     @clans = Clan.paginate :page => params[:page], :per_page => 25
   end
 
@@ -14,7 +15,9 @@ class ClansController < ApplicationController
   end
 
   def show
-    
+    add_breadcrumb "Clan Liste", "clans_path"
+    @clan = Clan.find params[:id], :include => {:squads => {:squad_users => :user}}
+    add_breadcrumb @clan.name 
   end
 
   def new

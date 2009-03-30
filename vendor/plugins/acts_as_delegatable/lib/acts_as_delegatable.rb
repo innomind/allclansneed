@@ -46,11 +46,12 @@ module ActiveRecord::Acts::ActsAsDelegatable
           with_scope(:find => { :conditions => conditions }) do
             r = super(*args)
             if r.nil?
-              with_exclusive_scope(:find => {  }) do
-                unless super(*args).nil?
-                  raise ActiveRecord::RecordNotFound
-                end
-              end
+              raise ActiveRecord::RecordNotFound
+              #with_exclusive_scope(:find => {  }) do
+              #  unless super(*args).nil?
+              #    raise ActiveRecord::RecordNotFound
+              #  end
+              #end
             end
             r
           end
