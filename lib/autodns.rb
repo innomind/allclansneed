@@ -26,7 +26,8 @@ class Autodns
   end
  
   def request
-    @http = Net::HTTP.new('gateway.autodns3.de', 443)
+    #@http = Net::HTTP.new('gateway.autodns3.de', 443)
+    @http = Net::HTTP.new('demo.autodns2.de', 443)
     @http.use_ssl = true
     @http.start() {|http|
       resp, data = http.post('/', @document.to_s)
