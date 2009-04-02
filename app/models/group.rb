@@ -9,6 +9,10 @@ class Group < ActiveRecord::Base
   validates_presence_of :name
   validates_presence_of :founder_id
   
+  has_attached_file :group_pic,
+    :styles => {
+      :thumb => "100x100#" }
+  
   def founder
     User.find_by_id(self.founder_id)
   end

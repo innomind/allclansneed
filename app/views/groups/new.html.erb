@@ -1,6 +1,7 @@
-<% error_handling_form_for @group do |form| %>
+<% error_handling_form_for @group, :html => { :multipart => true } do |form| %>
       <%= form.text_field :name %>
       <%= form.check_box(:moderated, {}, "true", "false") %>
       <%= form.text_area :description %>
+	  <%= form.file_field :group_pic %>
       <%= form.submit "erstellen" %>
 <% end %>

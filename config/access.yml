@@ -55,6 +55,7 @@ news:
   default: right
 pages:
   restful: true
+  index: right
 poll:
   restful: true
   show: member
@@ -67,6 +68,8 @@ profile:
 rating:
   default: member
 shoutbox:
+  restful: true
+site:
   restful: true
 squad:
   default: member

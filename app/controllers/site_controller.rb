@@ -1,5 +1,10 @@
 class SiteController < ApplicationController
   before_filter :check_owner, :only => [:new, :create]
+  
+  def index
+    @sites = Site.paginate :page => params[:page], :per_page => 25
+  end
+  
   def new
     @clan.site = Site.create(:owner_id => current_user.id, :sub_domain => @clan.uniq)
     @clan.save
@@ -22,6 +27,19 @@ class SiteController < ApplicationController
     else
       render :action => :edit
     end
+  end
+  
+  def toggle_header
+    if session[:header_style] == "display:none"
+      session[:header_style] = "" 
+    elsif session[:header_style] == ""
+      session[:header_style] = "display:none"
+    end
+    session[:header_style] = "display:none" if session[:header_style].nil?
+    
+    render :update do |page|
+	  	page.visual_effect(:toggle_blind, "info_box")
+	  end
   end
   
   private

@@ -13,7 +13,11 @@ class PagesController < ApplicationController
   end
 
   def show
-    @page = Page.find params[:id]
+    if params[:id].to_i.to_s == params[:id]
+      @page = Page.find params[:id]
+    else
+      @page = Page.find :first, :conditions => { :title => params[:id] }
+    end
     add_breadcrumb @page.title
   end
 

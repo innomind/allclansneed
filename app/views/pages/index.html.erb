@@ -1,3 +1,7 @@
+<h1>Eigene Seiten verwalten</h1>
+<div class="userlinks">
+	<%= access_link image_tag("folder_add.png") + "Seite hinzufügen", new_page_path %>
+</div>
 <ul id="pages">
 
 <% @pages.each do |p| %>
@@ -12,5 +16,3 @@
 <% end %>
 
 </ul>
-
-<p><%= access_link image_tag("folder_add.png") + "Seite hinzufügen", new_page_path %></p>

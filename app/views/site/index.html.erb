@@ -1,0 +1,21 @@
+<h1>Clanseiten Liste</h1>
+<div class="userlinks">
+	<%= link_to image_tag("zoom.png") + " Suche" %>
+</div>
+
+<div class="embedded" id="serach_clan" style="display:none">
+	<%# %>
+</div>
+
+<table class="simple-table" style="width:100%">
+  <thead>
+    <tr> 
+      <th>Clan</th>
+      <th>erstellt am</th>
+      <th>link</th>
+    </tr>
+  </thead>
+  <tbody>
+	<%= render :partial => "site", :collection => @sites %>
+  </tbody>
+</table>

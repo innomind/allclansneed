@@ -1,3 +1,7 @@
+<h1>Kalender</h1>
+<div class="userlinks">
+	<%= access_link image_tag("add.png") + "Eintrag hinzufügen", new_event_path %>
+</div>
 <pre>
 <%= calendar({:year => @year, :month => @month, :first_day_of_week => 1, :abbrev => (0..-1), :previous_month_text   => link_to("<<", :year => @year, :month => @month-1), :next_month_text   => link_to(">>", :year => @year, :month => @month+1)}) do |d|
       cell_text = link_to(d.mday, showDay_events_path(:date => d)) + "<br />"
@@ -12,4 +16,3 @@
     end %>
 </pre>
 
-<%= access_link image_tag("add.png") + "Eintrag hinzufügen", new_event_path %>

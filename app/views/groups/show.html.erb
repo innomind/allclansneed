@@ -1,33 +1,74 @@
 <h1>Gruppe <%= @group.name %></h1>
-
+<div class="userlinks">
 <% if @group.founder == @user %>
 	<%= link_to "Mitglieder verwalten", administrate_group_path(@group)%>
 	<%= link_to "Gruppe bearbeiten", edit_group_path(@group)%>
 <% end %>
+</div>
 
-<h3>Beschreibung</h3>
-  <%= @group.description %><br />
 
-<h3>Gründer</h3>
-  <%= @group.founder.login %>
+<table class="simple-prop">
+	<tbody>
+		<tr>
+			<td rowspan="4"><%= image_tag(@group.group_pic.url(:thumb))%></td>
+			<td class="title">Name</td>
+			<td><%= @group.name %></td>
+		</tr>
+		<tr>
+			<td class="title">Beschreibung</td>
+			<td><%= @group.description %></td>
+		</tr>
+		<tr>
+			<td class="title">Gegründet</td>
+			<td>am <%= l @group.created_at, :format => "datelong" %> von <%= username(@group.founder) %></td>
+		</tr>
+		<tr>
+			<td class="title">Dein Status</td>
+			<td>
+				<% if (@user.status_for_group @group) == "active" %>
+			    Du bist Mitglied 
+				<%= link_to("verlassen", leave_group_path(@group), :confirm => "Bist du dir sicher, dass du die Gruppe verlassen möchtest?") unless (@group.founder == @user) %>
+			  <% elsif (@user.status_for_group @group) == "pending" %>
+			    Deine Mitgliedschaft wird überprüft
+			  <% else %>
+			    <%= link_to "Mitglied werden", join_group_path(@group) %> 
+			  <% end %>
+			</td>
+		</tr>
+		<tr>
+			<td class="title">Mitglieder</td>
+			<td colspan="2">
+				<% @group.users.each do |user|%>
+					<%= username(user) %>
+				<% end %>
+			</td>
+		</tr>
+	</tbody>
+</table>
 
-<h3>Status</h3>
-  <% if (@user.status_for_group @group) == "active" %>
-    Du bist Mitglied 
-	<%= link_to("verlassen", leave_group_path(@group), :confirm => "Bist du dir sicher, dass du die Gruppe verlassen möchtest?") unless (@group.founder == @user) %>
-  <% elsif (@user.status_for_group @group) == "pending" %>
-    Deine Mitgliedschaft wird überprüft
-  <% else %>
-    <%= link_to "Mitglied werden", join_group_path(@group) %> 
-  <% end %>
 
-<h3>Mitglieder</h3>
+<h2>Mitglieder</h2>
   <%= render :partial => 'user', :collection => @active_memberships %>
 
 
-<%= access_link "Neuen Thread erstellen", new_group_forum_thread_path(@group)  %>
+
 <h2>Threads:</h2>
-<%= link_to "alle Threads", group_forum_threads_path(@group)%>
-<%= will_paginate @threads %>
-<%= page_entries_info @threads %>
-<%= render :partial => "forum_thread/thread", :collection => @threads %>
+<div class="userlinks" style="float:left">
+	<%= access_link "Neuen Thread erstellen", new_group_forum_thread_path(@group)  %>  
+	<%= link_to "alle Threads", group_forum_threads_path(@group)%>
+</div>
+<%= entry_and_pagination @threads %>
+
+<table class="simple-table" style="width:100%">
+  <thead>
+    <tr> 
+      <th>Thread</th>
+      <th>Posts</th>
+	  <th>Autor</th>
+      <th>Letzter Eintrag</th>
+    </tr>
+  </thead>
+  <tbody>
+		<%= render :partial => "forum_thread/thread", :collection => @threads %>
+	</tbody>
+</table>

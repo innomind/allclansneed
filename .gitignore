@@ -6,6 +6,8 @@ db/*.sqlite3
 public/pics/**/*
 public/profile_pics/**/*
 public/screenshots/**/*
+public/clan_pics/**/*
+public/group_pics/**/*
 nbproject/**/*
 nbproject/build-impl.xml
 nbproject/genfiles.properties
