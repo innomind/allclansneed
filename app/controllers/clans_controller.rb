@@ -1,5 +1,5 @@
 class ClansController < ApplicationController
-  add_breadcrumb "Clans Verwalten", "clans_path", :except => [:index, :show]
+  add_breadcrumb "Clans Verwalten", "my_clans_path", :except => [:index, :show]
   before_filter :init_clan, :only => [:update, :leave, :edit]
   before_filter :check_member, :only => [:leave]
   before_filter :check_owner, :only => [:edit, :update]

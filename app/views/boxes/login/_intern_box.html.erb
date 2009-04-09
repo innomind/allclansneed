@@ -19,7 +19,7 @@ Hallo <%= @user.nick %>
 
 
 <div id="admin_links">
-	<%= link_to image_tag("user_edit.png") + " User verwalten", :controller => "squads" if @user.owns_current_clan?%><br>
+	<%= link_to image_tag("user_edit.png") + " User verwalten", :controller => "squads" if @user.owns_current_site?%><br>
 	<%= access_link image_tag("monitor_edit.png") + " Seite bearbeiten", :controller => "template_boxes" %><br>
 	<%= access_link image_tag("page_world.png") + " Template verwalten", templates_path%><br />
 </div>

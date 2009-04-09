@@ -1,6 +1,9 @@
 <h1>meine Clans</h1>
 <div class="userlinks">
-  <%= access_link image_tag("add.png") + " Clan gründen", new_clan_path %> <%= link_to_function "Clan beitreten", "Element.toggle('inquiry_form')" %>
+  <%= access_link image_tag("add.png") + " Clan gründen", new_clan_path %> 
+	<%= link_to_function "Clan beitreten" do |page|
+			page.visual_effect(:toggle_blind, "inquiry_form")
+	end	%>  
 </div>
 
 <div id="inquiry_form" class="embedded" style="display:none">
@@ -10,6 +13,7 @@
 	<%= form.submit "anfrage stellen" %>
 <% end %>
 </div>
+
 <br>
 <% unless @inquiries.empty?%>
 	<div class="embedded">

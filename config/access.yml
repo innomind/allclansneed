@@ -39,7 +39,7 @@ gallery_pic:
 groups: 
   default: member
   index: public
-  show: public
+  show: member
 guestbook:
   default: public
   destroy: right

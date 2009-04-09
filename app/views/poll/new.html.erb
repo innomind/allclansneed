@@ -7,7 +7,9 @@
   <div id="poll_options">
     <%= render :partial => 'newoption', :collection => @poll.poll_options %>
   </div>
-    <p><%= add_option_link "Option hinzufügen" %></p>
+  <div class="userlinks">
+    <%= add_option_link image_tag("add.png") + "Option hinzufügen" %>
+  </div>
   <%= form.check_box :intern %>
   <%= form.submit "erstellen" %>
 <% end %>

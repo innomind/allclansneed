@@ -285,6 +285,124 @@ body {
 	padding: 3px 15px;
 }
 
-.image {
 
+/* 
+	Kalender Box
+*/
+
+
+.box_calendar {
+	width:100%;
+  margin: auto;
+  color: white;
+  text-align: center;
+}
+
+.box_calendar thead tr {
+  color: black;
+}
+
+
+.box_calendar th.dayName {
+  font-size: 0.7em;
+  padding-top: 0.6em;
+  padding-bottom: 0.3em;
+  background-color: #303030;
+  color: white;
+  border-bottom: 1px solid white;
+}
+
+.box_calendar td.otherMonth, td.day, td.specialDay {
+  border-right: 1px solid #111111;
+}
+
+.box_calendar td.otherMonth {
+  color: #999999;
+  background-color: #4f4f5b;
+}
+
+.box_calendar td.day, td.specialDay {
+  border-bottom: 1px solid #111111;
+  background-color: #333333;
+}
+.box_calendar td.specialDay {
+  background-color: #a8a8a8;
+  color: black;
+}
+.box_calendar td.specialDay a, td.specialDay a:visited, td.specialDay a:hover {
+  color: white;
+  text-decoration: none;
+}
+.box_calendar td.specialDay a:hover {
+  color: white;
+  background-color: black;
+}
+.box_calendar td.weekendDay {
+  background-color: #787888;
+}
+.box_calendar td.today {
+	background-color: white;
+	color: black;
+}
+
+
+/*
+ 		Kalender Modul
+*/
+
+
+.calendar {
+	width:100%;
+  margin: auto;
+  color: white;
+  text-align: center;
+}
+
+.calendar thead tr {
+  color: black;
+}
+
+
+.calendar th.dayName {
+  font-size: 0.7em;
+  padding-top: 0.6em;
+  padding-bottom: 0.3em;
+  background-color: #303030;
+  color: white;
+  border-bottom: 1px solid white;
+}
+
+.calendar td.otherMonth, td.day, td.specialDay  {
+  padding: 0.7em 1em;
+  border-right: 1px solid #111111;
+}
+
+.calendar td.otherMonth {
+  color: #999999;
+  background-color: #4f4f5b;
+}
+
+.calendar td.day, td.specialDay {
+  border-bottom: 1px solid #111111;
+  background-color: #333333;
+}
+.calendar td.specialDay {
+  background-color: #a8a8a8;
+  color: black;
+}
+.calendar td.specialDay a, td.specialDay a:visited, td.specialDay a:hover {
+  color: white;
+  text-decoration: none;
+  padding: 1em;
+}
+.calendar td.specialDay a:hover {
+  color: white;
+  background-color: black;
+}
+.calendar td.weekendDay {
+  background-color: #787888;
+}
+.calendar td.today {
+	background-color: white;
+	color: black;
 }
