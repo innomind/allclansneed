@@ -4,8 +4,8 @@ class GalleryPicController < ApplicationController
   
   def show
     @gallery_pic = GalleryPic.find params[:id], :joins => :gallery
-    @next_pic = @gallery_pic.gallery.gallery_pics.find :first, :conditions => ["created_at > ?", @gallery_pic.created_at]
-    @prev_pic = @gallery_pic.gallery.gallery_pics.find :first, :conditions => ["created_at < ?", @gallery_pic.created_at]
+    @next_pic = @gallery_pic.gallery.gallery_pics.find( :all, :limit => 1, :conditions => ["created_at > ?", @gallery_pic.created_at]).first
+    @prev_pic = @gallery_pic.gallery.gallery_pics.find( :all, :limit => 1, :conditions => ["created_at < ?", @gallery_pic.created_at]).first
     add_breadcrumb @gallery_pic.gallery.name, "gallery_path(#{@gallery_pic.gallery.id})"
     add_breadcrumb @gallery_pic.name
   end
