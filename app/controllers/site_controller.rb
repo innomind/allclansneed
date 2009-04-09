@@ -9,7 +9,7 @@ class SiteController < ApplicationController
     @clan.site = Site.create(:owner_id => current_user.id, :sub_domain => @clan.uniq)
     @clan.save
     flash[:notice] = "Seite für den Clan erstellt"
-    redirect_to clans_path
+    redirect_to my_clans_path
   end
   
   def create

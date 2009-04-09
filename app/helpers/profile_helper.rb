@@ -1,8 +1,5 @@
 module ProfileHelper
-  def show_user user
-    link_to user.login, profile_path(user)
-  end
-  
+
   def show_connection
     if @profile.user == @current_user
       return "Dies bist du selber"

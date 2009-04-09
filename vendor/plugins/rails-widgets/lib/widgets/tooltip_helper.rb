@@ -78,7 +78,7 @@ module Widgets
     end
     
     def render_tooltip(name, content, opts)
-      render :partial => "boxes/layouts/standard", :locals => { :opts => opts,
+      render :partial => "boxes/tooltip/standard", :locals => { :opts => opts,
                                                                 :content => content,
                                                                 :name => name }
     end
