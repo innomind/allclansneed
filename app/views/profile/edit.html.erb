@@ -1,6 +1,4 @@
-Profil bearbeiten
-<%#= error_messages_for @profile -%>
-
+<h1>Profil bearbeiten</h1>
 <% error_handling_form_for @profile, :html => { :multipart => true } do |f|%>
 	<%= f.text_field :firstname %>
 	<%= f.text_field :lastname %>

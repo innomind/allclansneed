@@ -179,6 +179,7 @@ body {
 }
 
 .userlinks a{
+	border: 1px solid #ccc;
 	padding: 5px;
 	color:#000;
 	background-color:#efefef;

@@ -6,8 +6,8 @@ class GalleryPic < ActiveRecord::Base
     :styles => {
       :thumb => "100x100#",
       :medium => "300x300>",
-      :small  => "150x150>" },
-    :path => "/mnt/www1/:attachment/:id/:style/:basename.:extension"
+      :small  => "150x150>" }#,
+    #:path => "/mnt/www1/:attachment/:id/:style/:basename.:extension"
 
   belongs_to :site
   belongs_to :gallery
