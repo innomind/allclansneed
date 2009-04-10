@@ -71,6 +71,8 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :squads, :controller => 'squad', :member => {:confirm_users => :get, :confirm_users_save => :put}, :shallow => true do |squad|
     squad.resources :users, :controller => 'squad_user', :member => {:role => :get, :update_role => :put, :copy => :get, :do_copy => :post, :move => :get, :do_move => :post, :destroy_form => :get}
   end
+  
+  map.resources :search, :only => [:index]
 
   map.resources :clans, :collection => {:my => :get, :search => :get, :do_search => :post}, :member => {:leave => :delete} do |clan|
     clan.resource :site, :controller => "site", :only => [:new, :create]
@@ -78,6 +80,8 @@ ActionController::Routing::Routes.draw do |map|
       squad.resources :users, :controller => 'squad_user', :member => {:role => :get, :update_role => :put, :copy => :get, :do_copy => :post, :move => :get, :do_move => :post, :destroy_form => :get}
     end
   end
+  
+  map.resources :users, :only => [:index]
   
   map.resources :sites, :controller => "site", :only => [:update, :index], :collection => {:toggle_header => :get}
 

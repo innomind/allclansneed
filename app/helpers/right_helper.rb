@@ -1,7 +1,4 @@
 module RightHelper
-
-  #target is the known :contr =>... :action pair
-  #action is mandatory
   
   def access_link name, target, html_options = {}
     if accessable? target, html_options
@@ -14,7 +11,6 @@ module RightHelper
     accessable? check
   end
   
-  # why is logic in the helper file?
   def accessable? target, html_options = {}
     @current_session.can_access_link? target, html_options
   end
@@ -24,7 +20,9 @@ module RightHelper
   end
   
   def access_link_unless condition, name, target, html_options = {}
-    access_link(name, target, html_options) unless condition
+    alternate = html_options.delete(:alternate_text)
+    return access_link(name, target, html_options) unless condition
+    tooltip(name, :show_mode => "mouseover", :text => alternate) unless alternate.nil?
   end
   
   def access_remote_link name, html_options = {}
@@ -39,7 +37,4 @@ module RightHelper
     ajax_tooltip(name,options) if accessable? options[:update_url], options
   end
   
-  def urlize_controller contr_name_or_class
-    contr_name_or_class.to_s.underscore.gsub(/_controller$/, '')
-  end
 end

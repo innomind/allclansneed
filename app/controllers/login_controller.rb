@@ -28,6 +28,7 @@ class LoginController < ApplicationController
    end
      
    def index
+     render :layout => false if request.xhr?
    end
    
    def create

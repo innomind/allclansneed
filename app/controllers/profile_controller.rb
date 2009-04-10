@@ -61,16 +61,14 @@ class ProfileController < ApplicationController
   end
   
   def get_profile
-    if is_portal?
+    if is_portal? || (params[:action] == "infobox")
       @profile = Profile.find_by_user_id(params[:id])
     else
       #TODO nur user für diese Seite anzeigen      
       #geht nicht:
-      user = User.find :first, 
-                       :conditions => ["users.id=? AND user_rights.site_id = ?",params[:id],current_site.id],
-                       :joins => [:sites, :profile]
+      user = User.find :first, :conditions => ["users.id=? AND user_rights.site_id = ?",params[:id],current_site.id], :joins => [:sites, :profile]
       if user.nil?
-        redirect_to profile_path(params[:id], :subdomain => false) 
+        redirect_to profile_path(params[:id], :subdomain => false) and return
       else
         @profile = user.profile
       end

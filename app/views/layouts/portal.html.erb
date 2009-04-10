@@ -50,13 +50,15 @@
         <div style="position:relative; top:60px; left:20px;">
         
         <ul style="list-style:none;">			
-        <li style="float:left; padding:2px;">Login</li>
+        <li style="float:left; padding:2px;"><%= ajax_tooltip "Login", :update_url => {:controller => "login"} %></li>
         <li style="float:left; padding:2px;">|</li>
         <li style="float:left; padding:2px;">Lost Password</li>
         <li style="float:left; padding:2px;">|</li>
-        <li style="float:left; padding:2px;">Sign Up</li>
+        <li style="float:left; padding:2px;"><%= link_to 'Registrieren', new_profile_path %></li>
         </ul>
-       <span style="display:block; position:relative; top:10px;"><form><input type="image" src="/images/portal/submit.gif" style="float:left;"  /><input class="input" type="input" name="d" /> </form></span>
+       <span style="display:block; position:relative; top:10px;"><form method="post" action="/search"><input type="image" src="/images/portal/submit.gif" style="float:left;"  /><input class="input" type="input" name="search" value="Clan oder User ID"/>
+	
+	 </form></span>
        </div>
         
         </div>
@@ -74,7 +76,7 @@
 
     <div class="navigation" id="nav_netzwerk" style="<%= section_visible "netzwerk" %>">
     <%= link_to "<span>Clans</span>", clans_path %>
-    <a href="#"><span>User</span></a>
+    <%= link_to "<span>User</span>", users_path %>
     <%= link_to "<span>Gruppen</span>", groups_path %>
     <%= link_to "<span>Forum</span>", forums_path %>
     </div>
@@ -94,29 +96,23 @@
     </div>
 
 	<div class="navigation" id="nav_sponsoring" style="display:none">
-    <a href="#"><span>Einführung</span></a>
-    <a href="#"><span>Anmeldung</span></a>
-    <a href="#"><span></span></a>
-    <a href="#"><span>Testserver</span></a>
+    	<%= link_to "<span>Einführung</span>", page_path("Einleitung") %>
+    	<%= link_to "<span>Anmelden</span>" %>
+		<%= link_to "<span>Aktionen</span>" %>
+		<%= link_to "<span>Preise</span>" %>
     </div>
 
 	<div class="navigation" id="nav_liga" style="display:none">
-    <a href="#"><span>Aktionen</span></a>
-    <a href="#"><span>Preise</span></a>
-    <a href="#"><span>Hardware</span></a>
-    <a href="#"><span>Testserver</span></a>
+   		<span>coming soon!</span>
     </div>
 
 	<div class="navigation" id="nav_shop" style="display:none">
-    <a href="#"><span>Aktionen</span></a>
-    <a href="#"><span>Preise</span></a>
-    <a href="#"><span>Hardware</span></a>
-    <a href="#"><span>Testserver</span></a>
+		<span>coming soon!</span>
     </div>
 
     </div>
 
-	<div id="info_box">
+	<div id="info_box" style="display:none">
     	<div class="info_box"></div>
     	<div class="info_box_navigation">
     	

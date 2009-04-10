@@ -3,6 +3,7 @@
 <%= access_link "Nachricht schreiben", new_message_path(:receiver_id => @profile.user.id)%>
 <h3>Verbindung</h3>
 <%= show_connection%>
+<%= become_friends_link @profile.user%>
 <br />
 <br />
 Vorname: <%= @profile.firstname %> <br />
@@ -26,7 +27,7 @@ Nachname: <%= @profile.lastname %> <br />
 <h3>Freunde</h3>
 <%= link_to "alle Freunde", friend_path(@profile.user)%>
 <% @profile.user.friends.each do  |f| %>
-  <%= show_user f %> 
+  <%= username f %> 
 <% end %>
 <br />
 <br />

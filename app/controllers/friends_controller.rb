@@ -1,7 +1,12 @@
 class FriendsController < ApplicationController
   
+  def index
+    @friends = current_user.friends
+  end
+  
   def show
     @friend_user = User.find params[:id]
+    @friends = @friend_user.friends
   end
 
   def accept
@@ -21,7 +26,9 @@ class FriendsController < ApplicationController
     
     if @current_user != @become_friend_with
       @current_user.delete_friendship_with @become_friend_with
+      flash[:notice] = "Freundschaft beendet"
     end
+    redirect_to start_profiles_path
   end
   
   def become
@@ -35,9 +42,5 @@ class FriendsController < ApplicationController
     redirect_to profile_path(@want_friend_with)
     #user per mail benachrichtigen
     #muss noch implementiert werden
-  end
-  
-  def index
-    @friends = current_user.friends
   end
 end

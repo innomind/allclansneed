@@ -6,8 +6,6 @@
 
 <%= entry_and_pagination @news %>
 
-<ul id="news_list">
 <%= render :partial => "news", :collection => @news %>
-</ul>
 
 <%= cloud(@tags) %> 

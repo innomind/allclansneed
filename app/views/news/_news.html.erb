@@ -1,11 +1,16 @@
-<div id="news_<%= news.id %>">
-	Titel: <%= link_to news.title, onenews_path(news) %> <%= intern_pic news %><br />
-	Kategorie: <%= news.category.name unless news.category.nil?%><br />
-	Tags: <%= news.tag_list.join(" ") %> <br />
-  	erstellt: <%= l news.created_at, :format => :long %> <br />
-	Kurztext: <%= news.subtext %> <br />
+<h2><%= link_to news.title, onenews_path(news) %> <%= intern_pic news %></h2>
+<%= news.subtext %>
+
+<div class="prop" style="width:100%">
+	<span class="prop">Kategorie</span>
+	<span class="prop_entry"><%= news.category.name unless news.category.nil?%></span>
+	<span class="prop">Tags</span>
+	<span class="prop_entry"><%= news.tag_list.join(" ") %></span>
+	<span class="prop">erstellt am</span>
+	<span class="prop_entry"><%= l news.created_at, :format => :long %></span>
+	<span class="prop">von</span>
+	<span class="prop_entry"><%= username(news.user) %></span>
+</div>
 
 	<%= access_link image_tag('delete.png', :border => 0), onenews_path(news), :method => :delete, :confirm => "Möchten sie diese News wirklich löschen?" -%>
 	<%= access_link image_tag("page_edit.png", :border => 0), edit_onenews_path(news) %>
-	<br /><br />
-</div>

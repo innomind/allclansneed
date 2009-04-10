@@ -21,4 +21,5 @@ class Navigation < ActiveRecord::Base
   
   def page_id
   end
+  
 end

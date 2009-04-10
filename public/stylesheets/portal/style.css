@@ -274,6 +274,14 @@ body {
 	margin-top: 20px;
 }
 
+.infobox_links a{
+	display: block;
+}
+
+.infobox_links a:hover{
+	background-color:#ccc;
+	text-decoration: none;
+}
 
 .tooltip {
   position: absolute;

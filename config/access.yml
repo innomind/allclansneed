@@ -13,6 +13,8 @@ clanwar:
 clanwar_screenshots:
   default: site
 clans:
+  index: public
+  show: public
   default: member
 classifieds:
   restful: true
@@ -71,6 +73,7 @@ shoutbox:
   restful: true
 site:
   restful: true
+  new: member
 squad:
   default: member
 squad_user:
@@ -84,3 +87,5 @@ ticket_message:
 tickets:
   default: member
   destroy: right
+users:
+  default: public

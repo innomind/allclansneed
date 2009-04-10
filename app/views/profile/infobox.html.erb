@@ -1,8 +1,12 @@
-<ul>
-<li><%= link_to "Profil", profile_path(@profile.user.id)%></li>
-<%= access_link "<li>Nachricht schreiben</li>", new_message_path(:receiver_id => @profile.user.id)%>
-<li>
-<b>Verbindung:</b>
-<%= show_connection %>
-</li>
-</ul>
+<div style="float:left">
+	<%= image_tag(@profile.profile_pic.url(:thumb)) %>
+</div>
+<div style="float:left">
+	<div class="infobox_links">
+	<%= link_to "Profil", profile_path(@profile.user.id)%>
+	<%= access_link "Nachricht schreiben", new_message_path(:receiver_id => @profile.user.id)%>
+	</div>
+	<b>Verbindung:</b><br>
+	<%= show_connection %><br>
+	<%= become_friends_link @profile.user %>
+</div>

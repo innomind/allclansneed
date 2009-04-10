@@ -156,7 +156,7 @@ de:
         sender_id:
         sender_id_desc:
         receiver_id: Empfänger
-        receiver_id_desc: Wählen sie einen Empfänger aus ihrer Freundesliste
+        receiver_id_desc: Wähle einen Empfänger aus deiner Freundesliste
       navigation:
         navigation_template_id: Navigations Typ
         template_box_id: Box

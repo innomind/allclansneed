@@ -24,6 +24,19 @@ module ActiveRecord::Acts::ActsAsDelegatable
       translation
     end
     
+    def validates_site_uniqueness_of(*attr_names)
+      configuration = { :message => I18n.t("activerecord.errors.messages.taken") }
+      configuration.update(attr_names.pop) if attr_names.last.is_a?(Hash)
+      validates_each attr_names do |m, a, v| 
+        if m.new_record?
+          m.errors.add(a, configuration[:message]) if find(:all, :conditions => {:title => v}).size > 0
+        else
+          m.errors.add(a, configuration[:message]) if find(:all, :conditions => {:title => v}).size > 0 unless eval("m.class.find(m.id).#{a}") == v
+        end
+      end
+    end
+
+    
     def acts_as_site options = {}
       
       #def self.human_name(options = {})
