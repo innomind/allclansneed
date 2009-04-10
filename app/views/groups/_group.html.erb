@@ -1,6 +1,6 @@
 <tr>
 	<td><%= image_tag(group.group_pic.url(:thumb))%></td>
 	<td><%= link_to group.name, group_path(group) %></td>
-	<td>x</td>
-	<td><%= group.threads_count %>/x</td>
+	<td><%= group.groupmemberships_count %></td>
+	<td><%= group.threads_count %></td>
 </tr>

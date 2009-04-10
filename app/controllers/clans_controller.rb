@@ -38,6 +38,7 @@ class ClansController < ApplicationController
   end
   
   def edit
+    add_breadcrumb @clan.name + " bearbeiten"
   end
   
   def update

@@ -56,7 +56,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :friends, :only => [:show, :index, :destroy],
                           :member => [:accept, :reject, :become]
 
-  map.resources :groups, :member => [:join, :administrate, :activate, :kick], :shallow => true do |group|
+  map.resources :groups, :member => [:leave, :join, :administrate, :activate, :kick], :shallow => true do |group|
     group.resources :forum_threads, :controller => "forum_thread", :as => "threads" do |thread|
       thread.resources :forum_messages, :controller => "forum_message", :shallow => true, :as => "posts"
     end

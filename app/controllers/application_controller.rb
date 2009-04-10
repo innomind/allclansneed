@@ -36,8 +36,21 @@ class ApplicationController < ActionController::Base
     current_site.is_portal?    
   end
   
+  def self.comment_mce_for only = :show
+    uses_tiny_mce :options => {:theme => "advanced", 
+                             :plugins => [:emotions],
+                            :width => "auto",
+                             :theme_advanced_buttons1 => [:bold, :italic, :emotions],
+                             :theme_advanced_buttons2 => "",
+                             :theme_advanced_buttons3 => ""
+                            },
+                :only => only
+  end
+  
   ################# protected #################
   protected
+  
+
   
   def add_breadcrumb name, url = ''  
     @breadcrumbs ||= []  

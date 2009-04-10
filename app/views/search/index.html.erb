@@ -23,14 +23,12 @@
   <thead>
     <tr> 
       <th>Name</th>
-      <th>Clan-ID</th>
-      <th>erstellt am</th>
-	  <th>Squads</th>
-      <th>Mitglieder</th>
+      <th>User-ID</th>
+      <th>registriert am</th>
       <th>Spiele</th>
     </tr>
   </thead>
   <tbody>
-	<%= render :partial => "clans/clan_list", :collection => @clans %>
+	<%= render :partial => "users/user", :collection => @users %>
   </tbody>
 </table>

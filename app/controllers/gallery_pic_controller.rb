@@ -1,7 +1,7 @@
 class GalleryPicController < ApplicationController
   add_breadcrumb 'Gallerie', "galleries_path"
   before_filter :init_gallery, :only => [:new, :create]
-  
+  comment_mce_for
   def show
     @gallery_pic = GalleryPic.find params[:id], :joins => :gallery
     @next_pic = @gallery_pic.gallery.gallery_pics.find( :all, :limit => 1, :conditions => ["created_at > ?", @gallery_pic.created_at]).first

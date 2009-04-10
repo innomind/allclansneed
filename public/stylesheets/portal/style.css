@@ -259,6 +259,7 @@ body {
 }
 
 .infobox {
+  background-color: #fff;
   position: absolute;
   z-index: 100;
 	border: 4px solid #ccc;

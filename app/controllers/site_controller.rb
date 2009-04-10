@@ -2,6 +2,7 @@ class SiteController < ApplicationController
   before_filter :check_owner, :only => [:new, :create]
   
   def index
+    add_breadcrumb "Clanseitenliste"
     @sites = Site.paginate :page => params[:page], :per_page => 25
   end
   

@@ -75,6 +75,7 @@
 	</div>
 
     <div class="navigation" id="nav_netzwerk" style="<%= section_visible "netzwerk" %>">
+    <%= link_to "<span>News</span>", news_path %>
     <%= link_to "<span>Clans</span>", clans_path %>
     <%= link_to "<span>User</span>", users_path %>
     <%= link_to "<span>Gruppen</span>", groups_path %>
@@ -89,17 +90,19 @@
     </div>
 
     <div class="navigation" id="nav_game_server" style="<%= section_visible "game_server" %>">
-    <%= link_to "<span>Aktionen</span>", page_path("Aktionen", :section_id => "Game-server") %>
-    <%= link_to "<span>Preise</span>", page_path("Preise") %>
-    <%= link_to "<span>Hardware</span>", page_path("Hardware") %>
-    <%= link_to "<span>Testserver</span>", page_path("Testserver") %>
+	<span>coming soon!</span>
+    <%#= link_to "<span>Aktionen</span>", page_path("Aktionen", :section_id => "Game-server") %>
+    <%#= link_to "<span>Preise</span>", page_path("Preise") %>
+    <%#= link_to "<span>Hardware</span>", page_path("Hardware") %>
+    <%#= link_to "<span>Testserver</span>", page_path("Testserver") %>
     </div>
 
 	<div class="navigation" id="nav_sponsoring" style="display:none">
-    	<%= link_to "<span>Einführung</span>", page_path("Einleitung") %>
-    	<%= link_to "<span>Anmelden</span>" %>
-		<%= link_to "<span>Aktionen</span>" %>
-		<%= link_to "<span>Preise</span>" %>
+		<span>coming soon!</span>
+    	<%#= link_to "<span>Einführung</span>", page_path("Einleitung") %>
+    	<%#= link_to "<span>Anmelden</span>" %>
+		<%#= link_to "<span>Aktionen</span>" %>
+		<%#= link_to "<span>Preise</span>" %>
     </div>
 
 	<div class="navigation" id="nav_liga" style="display:none">
@@ -160,43 +163,45 @@
     
     <div class="footer_layout">
     
-    <span>
-    <ul>
-    <li><label>Tour</label></li>
-    <li>Home</li>
-    <li>Liga</li>
-    <li>Clan</li>
-    </ul>
-    </span>
+
     
     
     <span>
     <ul>
-    <li><label>Forum</label></li>
-    <li>Home</li>
-    <li>Liga</li>
-    <li>Clan</li>
+    <li><label>Kontakt</label></li>
+	<li>Philipp Wesner</li>
+    <li>support@allclansneed.de</li>
+    <li></li>
     </ul>
     </span>
     
     <span>
     <ul>
-    <li><label>Support</label></li>
-    <li>Home</li>
-    <li>Liga</li>
-    <li>Clan</li>
+    <li><label>Bankverbindung</label></li>
+    <li>Kontoinhaber: innomind GmbH</li>
+    <li>Knr: 1100517622</li>
+	<li>BLZ: 86055592</li>
     </ul>
     </span>
     
     <span>
     <ul>
-    <li><label>About</label></li>
-    <li>Home</li>
-    <li>Liga</li>
-    <li>Clan</li>
+    <li><label>Adresse</label></li>
+    <li>innomind GmbH</li>
+    <li>Mittelstraße 9</li>
+    <li>04416 Markkleeberg</li>
     </ul>
     </span>
-    
+
+    <span>
+    <ul>
+    <li><label>Rechtliches</label></li>
+    <li>HRB: 11905 (Amtsgericht Borna)</li>
+    <li>Ust</li>
+    <li></li>
+    </ul>
+    </span>    
+
     </div>
     
     

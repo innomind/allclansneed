@@ -1,7 +1,7 @@
 class ProfileController < ApplicationController
   before_filter :get_profile, :only => [:show, :infobox]
   before_filter :init_clan, :only => [:index]
-  
+  comment_mce_for
   add_breadcrumb "Profile", "profiles_path"
   
   #TODO: Userliste
