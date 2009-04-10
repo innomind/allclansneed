@@ -254,6 +254,9 @@ body {
 	padding:2px 5px;
 }
 
+.infobox img {
+	padding-right: 4px;
+}
 
 .infobox {
   position: absolute;
@@ -262,7 +265,6 @@ body {
 }
 
 .infobox_content {
-	padding: 5px;
   background-color: #fff;
 }
 
@@ -273,6 +275,7 @@ body {
 	padding: 5px 20px 0 0 ;
 	margin-top: 20px;
 }
+
 
 .infobox_links a{
 	display: block;

@@ -8,7 +8,7 @@ role :app, "dev.innomind.info"
 role :web, "dev.innomind.info"
 role :db, "dev.innomind.info", :primary => true
 
-set :user, "www-data"
+set :user, "root"
 set :use_sudo, false
 set :deploy_via, :remote_cache
 

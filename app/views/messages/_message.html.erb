@@ -3,4 +3,5 @@
   <td><%= link_to message.subject, message_path(message) %></td>
   <td><%= username(params[:folder].nil? ? message.sender : message.receiver) %></td>
   <td><%= l message.created_at %></td>
+  <%#= "<td>" + access_link image_tag("email_delete.png"), message_path(message), :method => :delete, :confirm => "Nachricht wirklich löschen?" + "</td>"%>
 </tr>

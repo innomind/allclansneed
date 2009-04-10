@@ -2,6 +2,8 @@ class MessagesController < ApplicationController
   auto_complete_for :user, :login
   add_breadcrumb 'Nachrichten', "messages_path"
   
+  before_filter :get_message, :only => [:show, :answer, :destroy]
+  
   def index
     conditions = params[:folder].nil? ? {:receiver_id => current_user.id} : { :sender_id => current_user.id}
     @messages = Message.paginate :all, :page => params[:page], :per_page => 15, :conditions => conditions, :order => "created_at DESC"
@@ -15,13 +17,11 @@ class MessagesController < ApplicationController
   end
   
   def show
-    @message = Message.find(params[:id])
     @message.update_attribute(:read, true) if @message.receiver == current_user
     add_breadcrumb @message.subject
   end
   
   def answer
-    @message = Message.find(params[:id], :conditions => {:receiver_id => current_user})
     @past_messages = Message.find :all, :conditions => ["(sender_id = ? AND receiver_id = ?) OR (sender_id = ? AND receiver_id = ?)", current_user.id, @message.sender_id, @message.sender_id, current_user.id ], 
                                         :limit => 10,
                                         :order => "created_at DESC"
@@ -45,5 +45,16 @@ class MessagesController < ApplicationController
     else
       render :action => new
     end
+  end
+  
+  def destroy
+    flash[:notice] = "Nachricht gelöscht" if @message.destroy
+    redirect_to messages_path
+  end
+  
+  private
+  
+  def get_message
+    @message = Message.find(params[:id], :conditions => ["receiver_id = ? OR sender_id = ?", current_user, current_user])
   end
 end

@@ -148,6 +148,7 @@ de:
       group:
         moderated: Moderiert
         moderated_desc: Wenn User eine Moderierte Gruppe beitreten möchten, dann muss der Gründer diese erst <b>bestätigen</b>
+        group_pic: Gruppenbild
       groupmembership:
         status: Status
       guestbook:
