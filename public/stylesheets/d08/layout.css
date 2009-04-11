@@ -90,6 +90,11 @@
 	left: 10px;
 	top: 2px;
 }
+
+.logo_subnavi a {
+	color: black;
+}
+
 .logo_subnavi span {
 	padding: 5px; color: #fff;
 }
