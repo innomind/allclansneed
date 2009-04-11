@@ -61,7 +61,7 @@ class NewsController < ApplicationController
   end
   
   def findByTag
-    @news = News.find_tagged_with(params[:id], :conditions  => {:site_id  => current_site_id})
+    @news = News.find_tagged_with(params[:id], :conditions  => {:site_id  => current_site})
   end
   
   def auto_complete_for_news_tags
