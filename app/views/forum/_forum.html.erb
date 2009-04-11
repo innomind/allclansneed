@@ -1,6 +1,6 @@
 <tr>    
 <td>        <%= link_to forum.title, [forum, "forum_threads"] %> <%= intern_pic forum %><br><%= forum.subtitle %></td>
-<td>        <%= forum.threads_count %>/ </td>
+<td>        <%= forum.threads_count %> </td>
 <td>		<%= l Time.now, :format => "short2rows"%> </td>
 <td>
   <span id="forum_links_<%= forum.id %>">

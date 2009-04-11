@@ -34,7 +34,7 @@ class Site < ActiveRecord::Base
     self.forums << Forum.create(:title => "Hauptforum")
     self.forums << Forum.create(:title => "Intern", :intern => true)
     
-    create_boxes_for "dnp"
+    create_boxes_for "d08"
   end
   
   def is_portal?
