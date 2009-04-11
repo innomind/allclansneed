@@ -1,3 +1,12 @@
+
+body {
+	font-family: Tahoma, Arial, sans-serif;
+	font-size: 11px;
+	background-color: #03617A;
+	/* color: #666666; */
+}
+
+
 .simple-table
 {
 	margin-top: 0px;
@@ -168,12 +177,6 @@ a:hover{
   text-decoration: underline;
 }
 
-body {
-	font-family: Tahoma, Arial, sans-serif;
-	font-size: 11px;
-	background-color: #03617A;
-	/* color: #666666; */
-}
 
 /* User admin links (direkt unter den h1 überschriften) */
 
