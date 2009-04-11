@@ -172,6 +172,7 @@ de:
         profile_pic: Profilbild
         bday: Geburtstag
         interests: Interessen
+        created_at: registriert vor
       site:
         page_title:
         page_title_desc:
