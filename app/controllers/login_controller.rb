@@ -12,7 +12,7 @@ class LoginController < ApplicationController
          flash[:notice] = 'erfolgreich eingeloggt'
          redirect_to :controller => "profile", :action => "start" and return
        else
-         flash.now[:notice] = "Username oder Passwort falsch"
+         flash.now[:error] = "Username oder Passwort falsch<br><b>Wichtig!</b> Falls du bereits Mitglied im 'alten' Allclansneed warst musst du dich leider neu registrieren."
        end
      else
        flash.now[:error] = 'Nick nicht gefunden'

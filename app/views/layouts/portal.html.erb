@@ -133,6 +133,12 @@
     <div class="content">
     
     <div class="content_layout">
+	
+		<%if flash[:notice]%><p class="notice"><%= flash[:notice] %></p>
+		<%end%>
+		<%if flash[:error]%><p class="error"><%= flash[:error] %></p>
+		<%end%>
+	
     	<div>
 	    <%= show_breadcrumb %>
 		</div>
