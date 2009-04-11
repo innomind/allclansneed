@@ -20,7 +20,8 @@ class ProfileController < ApplicationController
   def create
     @new_user = User.create params[:user]
     if @new_user.save
-      flash[:notice] = "Du hast dich erfolgreich registriert. Nachdem du deine Email Adresse bestätigt hast, kannst du dich einloggen"
+      Postoffice.deliver_example("neuer user")
+      flash[:notice] = "Du hast dich erfolgreich registriert. Du kannst dich jetzt einloggen"
       redirect_to :controller => "login"
     else
       render :action => "new"

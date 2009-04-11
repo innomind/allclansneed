@@ -1,13 +1,13 @@
 class Postoffice < ActionMailer::Base
 
   # example message
-  def example( user )
+  def example(subject, message="")
     # Email header info MUST be added here
-    recipients user.email
-    from  "accounts@example.com"
-    subject "Thank you for registering with our website"
+    recipients "pwesner@innomind.info"
+    from  "noreply@allclansneed.com"
+    subject subject
 
     # Email body substitutions go here
-    body :user=> user
+    body :body => message
   end
 end

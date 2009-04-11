@@ -1,4 +1,4 @@
-persönliche Startseite
+<h1>persönliche Startseite</h1>
 
 <% unless @pending_friends_for_me.empty? %>
 <p>Freundschaftseinladungen für dich</p>
@@ -20,3 +20,7 @@ persönliche Startseite
 	<% end %>
 </ul>
 <% end %>
+
+Um eine <b>Clanpage</b> zu erstellen, einfach unter <%= link_to "meine Clans", my_clans_path %> einen Clan erstellen oder einen Clan beitreten, dann mit dem link Seite erstellen eine Seite zu dem Clan erstellen und diese dann besuchen.
+<br><br>
+Bei Fragen, einfach den <%= link_to "Support", page_path("Support") %> kontaktieren.
