@@ -1,9 +1,6 @@
 class NewsController < ApplicationController
   uses_tiny_mce :options => {:theme => "advanced", 
                              :plugins => [:emotions],
-                             :theme_advanced_buttons1 => [:emotions],
-                             :theme_advanced_buttons2 => "",
-                             :theme_advanced_buttons3 => ""
                              },
                :only => [:new, :create, :edit, :update]
   
