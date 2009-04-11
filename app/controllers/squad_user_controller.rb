@@ -26,7 +26,8 @@ class SquadUserController < ApplicationController
   end
   
   def update_role
-    @squad_user.update_attributes params[:squad_user]
+    @squad_user.role = params[:squad_user][:role]
+    @squad_user.save
     flash[:notice] = "Funktion geändert"
     redirect_to squads_path
   end
@@ -112,7 +113,7 @@ class SquadUserController < ApplicationController
   end
 
   def init_squad_user
-    @squad_user = SquadUser.find_by_id params[:id], :joins => [:user, {:squad => :clan}]
+    @squad_user = SquadUser.find_by_id params[:id] #, :joins => [:user, {:squad => :clan}]
     @squad = @squad_user.squad
     @clan = @squad.clan
     raise Exceptions::Access unless current_user.owns_clan? @clan

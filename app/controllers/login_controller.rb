@@ -9,13 +9,13 @@ class LoginController < ApplicationController
          #session['user_sites'] = usr.sites
          session['']
          @logged_in = true
-         flash[:notice] = 'login success'
+         flash[:notice] = 'erfolgreich eingeloggt'
          redirect_to :controller => "profile", :action => "start" and return
        else
          flash.now[:notice] = "Username oder Passwort falsch"
        end
      else
-       flash.now[:error] = 'no such nick'
+       flash.now[:error] = 'Nick nicht gefunden'
      end
      render :action => 'index'
    end

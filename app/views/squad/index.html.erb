@@ -1,4 +1,7 @@
 <h1> alle squads von <%=@clan.name%></h1>
+<div class="userlinks">
+	<%= ajax_tooltip image_tag("group_add.png") + " Squad erstellen", :update_url => new_squad_path, :html => {:method => :get}, :id => dom_id(@clan, :new_squad)  %>
+</div>
 
 <% unless @inquiries.empty? %>
 	Es gibt folgende Anfragen von Usern, den clan beizutreten:
@@ -21,8 +24,6 @@
 
 <% end %>
 
-<%= ajax_tooltip "Squad erstellen", :update_url => new_squad_path, :html => {:method => :get}, :id => dom_id(@clan, :new_squad)  %>
-
-<ul id="squads_list">
+<%#<ul id="squads_list">%>
 	<%= render :partial => "squad", :collection => @squads %>
-</ul>
+<%#</ul>%>

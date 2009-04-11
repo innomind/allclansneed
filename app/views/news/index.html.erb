@@ -1,7 +1,7 @@
 <h1>News Übersicht</h1>
 
 <div class="userlinks">
-	<%= access_link "Neue News erstellen", new_onenews_path %> <%= categories_link "News" %>
+	<%= access_link image_tag("add.png") + " Neue News erstellen", new_onenews_path %> <%= categories_link "News" %>
 </div>
 
 <%= entry_and_pagination @news %>

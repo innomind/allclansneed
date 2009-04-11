@@ -1,16 +1,22 @@
-<h2><%= link_to news.title, onenews_path(news) %> <%= intern_pic news %></h2>
+<h3 class="news_title"><%= link_to news.title, onenews_path(news) %> <%= intern_pic news %></h3>
+
 <%= news.subtext %>
 
-<div class="prop" style="width:100%">
-	<span class="prop">Kategorie</span>
-	<span class="prop_entry"><%= news.category.name unless news.category.nil?%></span>
-	<span class="prop">Tags</span>
-	<span class="prop_entry"><%= news.tag_list.join(" ") %></span>
-	<span class="prop">erstellt am</span>
-	<span class="prop_entry"><%= l news.created_at, :format => :long %></span>
-	<span class="prop">von</span>
-	<span class="prop_entry"><%= username(news.user) %></span>
-</div>
+<dl class="meta">
+	<dt>Kategorie</dt>
+	<dd><%= news.category.name unless news.category.nil?%></dd>
+	
+	<dt>Tags</dt>
+	<dd><%= news.tag_list.join(" ") %>&nbsp;<dd>
+		
+	<dt>erstellt am</dt>
+	<dd><%= l news.created_at, :format => :long %><dd>
+		
+	<dt>von</dt>
+	<dd><%= username(news.user) %><dd>
+</dl>
 
-	<%= access_link image_tag('delete.png', :border => 0), onenews_path(news), :method => :delete, :confirm => "Möchten sie diese News wirklich löschen?" -%>
-	<%= access_link image_tag("page_edit.png", :border => 0), edit_onenews_path(news) %>
+<div class="edit">
+	<%= access_link image_tag('delete.png', :border => 0) + " löschen", onenews_path(news), :method => :delete, :confirm => "Möchten sie diese News wirklich löschen?" -%>
+	<%= access_link image_tag("page_edit.png", :border => 0) + " bearbeiten", edit_onenews_path(news) %>
+</div>

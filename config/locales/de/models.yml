@@ -170,6 +170,8 @@ de:
         firstname: Vorname
         lastname: Nachname
         profile_pic: Profilbild
+        bday: Geburtstag
+        interests: Interessen
       site:
         page_title:
         page_title_desc:

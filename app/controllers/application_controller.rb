@@ -73,6 +73,7 @@ class ApplicationController < ActionController::Base
 
   def init
     init_site
+    init_stylesheets
     init_user
 
     add_breadcrumb 'Home', '/'
@@ -114,6 +115,9 @@ class ApplicationController < ActionController::Base
     #self.class.current_site = site || Site.find_by_subdomain("portal")
     @site = site || Site.find_by_sub_domain("portal")
     $site_id = current_site.id
+  end
+  
+  def init_stylesheets
   end
   
   def init_access

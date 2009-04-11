@@ -2,6 +2,13 @@
 <% error_handling_form_for @profile, :html => { :multipart => true } do |f|%>
 	<%= f.text_field :firstname %>
 	<%= f.text_field :lastname %>
+	<%= f.text_field :bday %>
+	<%= f.text_field :icq %>
+	<%= f.text_field :skype %>
+	<%= f.text_field :msn %>
+	<%= f.text_area :motto %>
+	<%= f.text_area :hardware %>
+	<%= f.text_area :interests %>
 	<%= f.file_field :profile_pic %>
     <%= f.submit "Änderungen übernehmen" %>
 <% end %>

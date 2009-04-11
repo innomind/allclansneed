@@ -1,4 +1,4 @@
 <div id="shout_<%= shout.id %>">
-  am <%= l shout.created_at %> von <%= username(shout.user) %><br>
+  vor <%= time_ago_in_words shout.created_at %> von <%= username(shout.user) %><br>
   <%= shout.content  %><br><br>
 </div>

@@ -7,11 +7,12 @@
 }
 .simple-table th
 {
-	font-weight: normal;
-	color: #000;
+	font-weight:normal;
+	background-color: #eee;
+	color: black;
 	padding: 5px 8px;
 	border-bottom: 2px solid #6678b1;
-	font-size: 14px;
+	font-size: 11px;
 }
 .simple-table td
 {
@@ -171,15 +172,17 @@ body {
 	font-family: Tahoma, Arial, sans-serif;
 	font-size: 11px;
 	background-color: #03617A;
-	//color: #666666;
+	/* color: #666666; */
 }
+
+/* User admin links (direkt unter den h1 überschriften) */
 
 .userlinks {
 	margin-bottom: 10px;
+/*	float:left;*/
 }
 
 .userlinks a{
-	border: 1px solid #ccc;
 	padding: 5px;
 	color:#000;
 	background-color:#efefef;
@@ -190,8 +193,26 @@ body {
 	background-color:#efefef;
 }
 
+/* Content */
+
 .content {
 }
+
+/* Messages */
+
+.notice {
+	background-color: #B3F4B6;
+	border: 1px solid #0C3;
+	padding:10px;
+}
+
+.error {
+	background-color: #B3F4B6;
+	border: 1px solid #0C3;
+	padding:10px;
+}
+
+/* Überschriften */
 
 .content h1 {
 	border-bottom:1px solid;
@@ -216,6 +237,18 @@ body {
 	font-size:11px;
 }
 
+.content h3 {
+	margin-top:5px;
+	padding-left: 5px;
+	border-left-width: 2px;
+	background-color: #eee;
+	border-left-style: solid;
+	border-left-color: #6678B1;
+	line-height: 20px;
+}
+
+/* TODO mit dl ersetzen */
+
 .content div.prop {
 	border-bottom:1px solid;
 	border-color:#CCCCCC;
@@ -233,6 +266,152 @@ body {
 	display: inline-block;
 }
 
+/* Avatar */
+
+.avatar {
+	position:absolute;
+	top:5px;
+	left:10px;
+}
+.avatar img {
+	background-color: #fff;
+	padding: 1px;
+	border: 1px solid #ddd;
+}
+.avatar a {
+	background-color: #eee;
+	padding: 2px;
+	margin-bottom: 2px;
+	display:block;
+	text-align:left;
+}
+
+/* Default DL */
+
+.content dt, .content dl {
+	line-height:15px;
+}
+
+.content dl {
+	padding-top: 2px;
+	padding-right: 2px;
+	padding-bottom: 2px;
+	padding-left: 5px;
+	margin-bottom: 20px;
+}
+
+.content dt {
+	float:left;
+	margin-right: 10px;
+	width:70px;
+	text-align:right;
+	color:#666;
+}
+.content dd {		
+	margin-left: 85px; 
+}
+
+/* Profile */
+
+.profile {
+	padding-left: 130px;
+}
+
+.profile ul, .profile p{
+	padding-left: 20px;
+}
+
+	.profile ul{
+	padding-top: 0px;
+	padding-right: 0px;
+	padding-bottom: 0px;
+	list-style:none;
+}
+	.profile ul li {
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #eee;
+	line-height: 15px;
+	clear:both;
+	padding-top: 0px;
+	padding-right: 0px;
+	padding-bottom: 5px;
+	padding-left: 0px;
+	font-weight: bold;
+}
+	.profile ul li img {
+	margin-right: 10px;
+	float:left;
+	margin-bottom: 10px;
+}
+	.profile ul li div {
+	color: #666;
+	font-weight: normal;
+}
+	.profile ul li a, .profile ul li a:link, .profile ul li a:visited {
+	display:block;
+	vertical-align: middle;
+}
+	.profile ul li a:hover, .profile ul li a:focus {
+	background-color: #eee;
+	text-decoration: none;
+}
+	.profile ul li.shared_friends {
+	list-style:none;
+	border:none;
+	text-align: right;
+	margin-top: 5px;
+		}	
+	.profile ul li.shared_friends a, .profile ul li.shared_friends a:link, .profile ul li.shared_friends a:visited{
+	display:inline;
+
+		}	
+	.profile ul li.shared_friends a:hover, .profile ul li.shared_friends a:focus{ background:none;
+		}
+		
+
+/* Listen */
+
+.simple-list{
+	padding-left: 20px;
+	padding-top: 0px;
+	padding-right: 0px;
+	padding-bottom: 0px;
+	list-style:none;
+}
+	.simple-list li {
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #eee;
+	line-height: 15px;
+	clear:both;
+	padding-top: 0px;
+	padding-right: 0px;
+	padding-bottom: 5px;
+	padding-left: 0px;
+	font-weight: bold;
+}
+	.simple-list li img {
+	margin-right: 10px;
+	float:left;
+	margin-bottom: 10px;
+}
+	.simple-list li div {
+	color: #666;
+	font-weight: normal;
+}
+
+	.simple-list li a, .simple-list li a:link, .simple-list li a:visited {
+	vertical-align: middle;
+}
+
+	.simple-list li a:hover, .simple-list li a:focus {
+	background-color: #eee;
+	text-decoration: none;
+}
+
+
+/* Formular */
 
 .content label {
 	display: inline-block;
@@ -255,6 +434,8 @@ body {
 	padding:2px 5px;
 }
 
+/* Tooltips */
+
 .tooltip {
   position: absolute;
   background-image: url(/images/widgets/tooltip_arrow.gif); 
@@ -275,26 +456,19 @@ body {
 	margin-top: 20px;
 }
 
-.guestbook_entry {
-	border: 1px solid #aaa;
-	padding: 3px 15px;
-}
 
-.guestbook_comment {
-	border: 1px solid #aaa;
-	border-top: 0px;
-	padding: 3px 15px;
+.infobox img {
+	padding-right: 4px;
 }
-
 
 .infobox {
+  background-color: #fff;
   position: absolute;
   z-index: 100;
 	border: 4px solid #ccc;
 }
 
 .infobox_content {
-	padding: 5px;
   background-color: #fff;
 }
 
@@ -307,11 +481,72 @@ body {
 }
 
 
+.infobox_links a{
+	display: block;
+}
+
+.infobox_links a:hover{
+	background-color:#ccc;
+	text-decoration: none;
+}
+
+
+/* News */
+
+.content dl.meta{
+	border-top-width: 1px;
+	border-top-style: solid;
+	border-top-color: #eee;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #eee;
+	margin-bottom:0px;
+}
+
+/* edit */
+
+.content .edit {
+	text-align: right;
+}
+
+.content .edit a {
+	background-repeat: no-repeat;
+	background-position: 3px center;
+	padding-left: 25px;
+	padding-top: 5px;
+	padding-bottom: 5px;	
+}
+
+/* Tags */
+
+	.tagcloud {
+	margin-top: 20px;
+	padding-left: 20px;
+	width: 200px;
+	margin-right: auto;
+	margin-left: auto;
+	text-align: center;
+	margin-bottom: 20px;
+}
+
+
+/* Gästebuch */
+
+.guestbook_entry {
+	border: 1px solid #aaa;
+	padding: 3px 15px;
+}
+
+.guestbook_comment {
+	border: 1px solid #aaa;
+	border-top: 0px;
+	padding: 3px 15px;
+}
 
 
 /* 
 	Kalender Box
-*/
+
 
 
 .box_calendar {
@@ -336,7 +571,7 @@ body {
 }
 
 .box_calendar td.otherMonth, td.day, td.specialDay {
-  border-right: 1px solid #111111;
+  border-right: 1px solid #111111; 
 }
 
 .box_calendar td.otherMonth {
@@ -376,56 +611,103 @@ body {
 
 .calendar {
 	width:100%;
-  margin: auto;
-  color: white;
-  text-align: center;
+	text-align: center;
 }
 
 .calendar thead tr {
-  color: black;
+	color: black;
+	line-height:30px;
+}
+
+.calendar .monthName {
+	font-size: 16px;
+}
+
+.calendar tr.dayName {
+	color: #333;
+	background-color: #eee;
+
+}
+.calendar tr.dayName th {
+	line-height:40px;
+	font-weight: normal;
+	border-bottom-width: 2px;
+	border-bottom-style: solid;
+	border-bottom-color: #6678B1;
+	width: 60px;
+
 }
 
 
-.calendar th.dayName {
-  font-size: 0.7em;
-  padding-top: 0.6em;
-  padding-bottom: 0.3em;
-  background-color: #303030;
-  color: white;
-  border-bottom: 1px solid white;
+
+.calendar tbody {
+	font-size: 16px;
+}
+.calendar tbody td:hover{
+	background-color: #eee;
+}
+.calendar tbody td.otherMonth:hover{
+	background-color: #fff;
+}
+.calendar tbody a{
+	line-height:40px;
+}
+.calendar tbody a:hover{
+	background-color: #eee;
 }
 
-.calendar td.otherMonth, td.day, td.specialDay  {
-  padding: 0.7em 1em;
-  border-right: 1px solid #111111;
-}
+
+
 
 .calendar td.otherMonth {
-  color: #999999;
-  background-color: #4f4f5b;
+  color: #999999; 	
+  font-size: 16px;
+  line-height:40px;
 }
+.calendar td.weekendDay { 	
+font-weight: bold;
+}
+.calendar td.day{
+	font-size: 16px;
 
-.calendar td.day, td.specialDay {
-  border-bottom: 1px solid #111111;
-  background-color: #333333;
-}
-.calendar td.specialDay {
-  background-color: #a8a8a8;
-  color: black;
-}
-.calendar td.specialDay a, td.specialDay a:visited, td.specialDay a:hover {
-  color: white;
-  text-decoration: none;
-  padding: 1em;
-}
-.calendar td.specialDay a:hover {
-  color: white;
-  background-color: black;
-}
-.calendar td.weekendDay {
-  background-color: #787888;
 }
 .calendar td.today {
-	background-color: white;
-	color: black;
+	background-color:#F4F4F4;
+}
+.calendar td.today a {
+	color: #F33;
+	font-weight:bold;
+}
+
+
+
+
+.calendar td.day, .calendar td.specialDay{
+
+}
+.calendar td.specialDay {
+	line-height:30px;
+	position:relative;
+  
+}
+.calendar td.specialDay br {
+	display:none;
+  
+}
+.calendar td.specialDay a:first-child {
+	font-size: 16px;
+		position:relative;
+			display: block;
+}
+.calendar td.specialDay a  {
+  text-decoration: none;
+	font-weight: normal;
+	display: none;
+	line-height:10px;
+	position:absolute;
+	margin-top:10px;
+	
+}
+.calendar td.specialDay:hover a  { 			display: block;
+
 }

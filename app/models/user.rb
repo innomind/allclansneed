@@ -212,4 +212,5 @@ class User < ActiveRecord::Base
     self.squads -= leave_clan.squads
     UserRight.destroy_all :site_id => leave_clan.site.id
   end
+  
 end

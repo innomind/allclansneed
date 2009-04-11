@@ -51,13 +51,13 @@ de:
         other: 'etwa {{count}} Stunden'
       x_days:
         one: '1 Tag'
-        other: '{{count}} Tage'
+        other: '{{count}} Tagen'
       about_x_months:
         one: 'etwa 1 Monat'
         other: 'etwa {{count}} Monate'
       x_months:
         one: '1 Monat'
-        other: '{{count}} Monate'
+        other: '{{count}} Monaten'
       about_x_years:
         one: 'etwa 1 Jahr'
         other: 'etwa {{count}} Jahre'

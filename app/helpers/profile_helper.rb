@@ -1,4 +1,8 @@
 module ProfileHelper
+  
+  def show_profile_prop name, func = ""
+    return "<dt>#{Profile.human_attr_name(name)}</dt><dd>#{eval(func + " @profile." + name)}</dd>" unless eval("@profile." + name).to_s.empty?		
+  end
 
   def show_connection
     if @profile.user == @current_user
