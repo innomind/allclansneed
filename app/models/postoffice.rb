@@ -19,4 +19,13 @@ class Postoffice < ActionMailer::Base
     # Email body substitutions go here
     body :sender => sender, :receiver => receiver
   end
+  
+  def become_friend(become, become_with)
+    recipients become_with.email
+    from  "noreply@allclansneed.com"
+    subject "Neue Freundschaftseinladung"
+
+    # Email body substitutions go here
+    body :become => become, :become_with => become_with
+  end
 end

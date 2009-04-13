@@ -36,6 +36,7 @@ class FriendsController < ApplicationController
     @current_user = current_user
     
     if @current_user != @want_friend_with
+      Postoffice.deliver_become_friend(current_user, @want_friend_with)
       flash[:notice] = "Freundschaftsanfrage erstellt"
       current_user.request_friendship_with @want_friend_with
     end
