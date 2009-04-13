@@ -34,7 +34,7 @@ class Site < ActiveRecord::Base
     self.forums << Forum.create(:title => "Hauptforum")
     self.forums << Forum.create(:title => "Intern", :intern => true)
     
-    create_boxes_for "dnp"
+    create_boxes_for "d08"
   end
   
   def is_portal?
@@ -58,9 +58,9 @@ class Site < ActiveRecord::Base
     self.save
     
     t_area = Hash.new
-    t_area[:topnav] = TemplateArea.find_by_name "topnav"
-    t_area[:linke_seite] = TemplateArea.find_by_name "linke Seite"
-    t_area[:rechte_seite] = TemplateArea.find_by_name "rechte Seite"
+    t_area[:topnav] = self.template.template_areas.find_by_internal_name "topleft"
+    t_area[:linke_seite] = self.template.template_areas.find_by_internal_name "leftside"
+    t_area[:rechte_seite] = self.template.template_areas.find_by_internal_name "rightside"
                                             
     nav = Hash.new
     ["News", "Forum", "User", "Kalender", "Galerie", "Clanwars", "Poll", "Gästebuch", "Artikel"].each {|n|

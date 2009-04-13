@@ -2,12 +2,12 @@
 
 <h3>Ausstehende Mitglieder</h3>
 <% @pending_memberships.each do |member| %>
-	<%= show_user member.user %>
+	<%= username member.user %>
 	<%= link_to image_tag("accept.png"), activate_group_path(@group, :membership_id => member) %>
 <% end %>
 
 <h3>Aktive Mitglieder</h3>
 <% @active_memberships.each do |member| %>
-	<%= show_user member.user %>
+	<%= username member.user %>
 	<%= link_to image_tag("delete.png"), kick_group_path(@group, :membership_id => member), :confirm => "Möchten sie wirklich den User löschen?" %>
 <% end %>

@@ -1,6 +1,7 @@
+<h1>Seite bearbeiten</h1>
 <% error_handling_form_for @page do |form| %>
 	<%= form.text_field :title %>
-	<%= form.text_area :content, :rows => 5, :cols => 30 %>
+  	<%= form.text_area :content, :rows => 25, :cols => 45, :class => "mceEditor" %>
 	<%= form.check_box :intern %>
 	<%= form.submit "Seite bearbeiten"%>
 <% end %>

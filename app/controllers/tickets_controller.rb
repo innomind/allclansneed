@@ -34,6 +34,7 @@ class TicketsController < ApplicationController
     @ticket.ticket_messages[0].user = current_user
     @ticket.author = current_user
     if @ticket.save
+      Postoffice.deliver_example("neues ticket", @ticket.ticket_messages.first.message)
       flash[:notice] = 'Ticket erfolgreich geändert.'
       redirect_to(@ticket)
     else

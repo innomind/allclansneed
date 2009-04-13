@@ -1,11 +1,11 @@
-persönliche Startseite
+<h1>persönliche Startseite</h1>
 
 <% unless @pending_friends_for_me.empty? %>
 <p>Freundschaftseinladungen für dich</p>
 <ul>
 	<% @pending_friends_for_me.each do |friend| %>
 		<li>
-			<%= show_user(friend) %> <%= link_to "annehmen", accept_friend_path(friend) %> 
+			<%= username(friend) %> <%= link_to "annehmen", accept_friend_path(friend) %> 
 			<%= link_to "ablehnen", friend_path(friend), :method => :delete, :confirm => "Einladung wirklich ablehnen?" %>
 		</li>
 	<% end %>
@@ -16,7 +16,11 @@ persönliche Startseite
 <p>Noch nicht bestätigte Freundschaftseinladungen von dir</p>
 <ul>
 	<% @pending_friends_by_me.each do |friend| %>
-		<li><%= show_user(friend) %> <%= link_to "zurückziehen", friend_path(friend), :method => :delete %></li>
+		<li><%= username(friend) %> <%= link_to "zurückziehen", friend_path(friend), :method => :delete %></li>
 	<% end %>
 </ul>
 <% end %>
+
+Um eine <b>Clanpage</b> zu erstellen, einfach unter <%= link_to "meine Clans", my_clans_path %> einen Clan erstellen oder einen Clan beitreten, dann mit dem link Seite erstellen eine Seite zu dem Clan erstellen und diese dann besuchen.
+<br><br>
+Bei Fragen, einfach den <%= link_to "Support", page_path("Support") %> kontaktieren.

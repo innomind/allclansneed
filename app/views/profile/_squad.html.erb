@@ -15,10 +15,7 @@
 <div id="<%= dom_id(squad) %>" style="display:none">
 -->
 
-<table class="simple-table" style="width:100%">
-	<th colspan="2"><%=squad.name%></th>
-  <tbody>
-<%= render :partial => "member", :collection => squad.squad_users %>
-</tbody>
-</table>
-<!--</div>-->
+<h3><%=squad.name%></h3>                    
+<ul class="simple-list">
+	<%= render :partial => "member", :collection => squad.squad_users %>
+</ul>

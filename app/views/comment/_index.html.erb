@@ -12,8 +12,8 @@
 
 <% if_accessible :controller => "comments" do %>
 	<div id="add_comment" style="display:none;" class="embedded">
-		<% form_remote_tag :url => {:controller  => 'comment', :action => 'create', :model => modelname, :id => model.id}, :html => {:id => "create_comment"} do%>
-			<%= text_area :comment, "entry", :rows => 2, :cols => 25, :class => "mceEditor" %>
+		<% form_remote_tag :before => "tinyMCE.triggerSave(true,true)", :url => {:controller  => 'comment', :action => 'create', :model => modelname, :id => model.id}, :html => {:id => "create_comment"} do%>
+			<%= text_area :comment, "entry", :class => "mceEditor" %>
 			<%= hidden_field :comment, "intern", :value => (model.attribute_names.include?("intern")? model.intern : false)%>
 			<%= submit_tag 'Add' %>
 		<% end %>

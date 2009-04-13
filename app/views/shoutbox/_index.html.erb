@@ -1,4 +1,5 @@
 <div id="shoutbox">
+<% if @current_session.logged_in? %>
   <%= link_to_function image_tag("comment_add.png", :border => 0), "Element.toggle('add_shout')" %>
   <div id="add_shout" style="display:none;">
       <% form_remote_tag :url => {:controller  => 'shoutbox', :action => 'create'}, :html => {:id => "create_shout"} do%>
@@ -6,9 +7,9 @@
           <%= submit_tag 'Add' %>
       <% end %>
   </div>
-  <% shouts = Shoutbox.find(:all, :limit => 10, :order => "created_at DESC") %>
+<% end %>
 
   <div id="shouts">
-    <%= render :partial => "shoutbox/shout", :collection => shouts %>
+    <%= render :partial => "shoutbox/shout", :collection => Shoutbox.find(:all, :limit => 10, :order => "created_at DESC") %>
   </div>
 </div>

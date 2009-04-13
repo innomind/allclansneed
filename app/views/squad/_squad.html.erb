@@ -1,20 +1,21 @@
-<li id="<%= dom_id(squad)%>"> 
-	<b><%=squad.name%></b>
-	<%#= ajax_tooltip "neuer user", :update_url => new_squad_user_path(squad), :html => {:method => :get}, :id => dom_id(squad, :user_new) %>
-	<%= ajax_tooltip "bearbeiten", :update_url => edit_squad_path(squad), :html => {:method => :get}, :id => dom_id(squad, :edit) %>
-	<%= link_to("löschen", squad_path(squad), :method => :delete, :confirm => "Diesen Squad wirklich löschen?") unless @squads.count == 1 %>
-	
-	<ul id="<%= dom_id(squad, :users) %>">
+<h3>
+	<%=squad.name%>
+	<%= ajax_tooltip image_tag("group_edit.png"), :update_url => edit_squad_path(squad), :html => {:method => :get}, :id => dom_id(squad, :edit) %>
+	<%= link_to( image_tag("group_delete.png"), squad_path(squad), :method => :delete, :confirm => "Diesen Squad wirklich löschen?") unless @squads.count == 1 %>
+</h3>
+	<ul id="<%= dom_id(squad, :users) %>" class="simple-list">
 	<% squad.squad_users.each do |m|%>
 	
-	  <li id="<%= dom_id(m) %>"> <%="#{m.user.nick}"%>(<%= m.role %>)
+	  <li id="<%= dom_id(m) %>"> 
+		<%= image_tag(m.user.profile.profile_pic(:thumb), :width => 30, :height => 30)%>
+		<%="#{m.user.nick}"%>(<%= m.role %>)
+		<div>
 	    <%= ajax_tooltip "Rechte", :update_url => edit_user_path(m), :method => :get unless m.user.owns_clan?(@clan)%>
 		<%= ajax_tooltip "Funktion", :update_url => role_user_path(m) %>
 		<%= ajax_tooltip "löschen", :update_url => destroy_form_user_path(m) %>
 	    <%= ajax_tooltip "kopieren", :update_url => copy_user_path(m) %>
 	    <%= ajax_tooltip "verschieben", :update_url => move_user_path(m) %>
-
+		</div>
 	  </li>
 	<%end%>
 	</ul>
-</li>

@@ -1,6 +1,6 @@
 class PollController < ApplicationController
   add_breadcrumb 'Polls', "polls_path"
-    
+  comment_mce_for
   def index
     @polls = Poll.paginate(:all, :order => "created_at DESC")
   end

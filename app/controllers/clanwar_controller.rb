@@ -19,7 +19,7 @@ class ClanwarController < ApplicationController
   
   def new
     @clanwar = Clanwar.new
-    @squads = Clan.find(:first).squads
+    @squads = current_site.clan.squads
     2.times { @clanwar.clanwar_maps.build }
     add_breadcrumb 'Clanwar hinzufügen'
   end

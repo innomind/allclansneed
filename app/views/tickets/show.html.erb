@@ -1,32 +1,24 @@
 <h1>Ticket</h1>
 
-<table class="simple-prop">
-	<tbody>
-		<tr>
-			<th>Betreff</th>
-			<td><%= @ticket.subject %></td>
-		</tr>
-		<tr>
-			<th>Kategorie</th>
-			<td><%= @ticket_category.name %></td>
-		</tr>
-		<tr>
-			<th>Status</th>
-			<td><%= @ticket_status.name %></td>
-		</tr>
-		<% supporter_area do %>
-		<tr>
-			<th>Admin</th>
-			<td><% error_handling_form_for @ticket do |form| %>
-				  <%= form.select :status_id, Category.global_for_select("Ticket", "status")%>
-				  <%= form.select :admin_id, [["keiner", nil]] + User.get_supporter_for_select %>
-				  <%= form.submit "ändern" %>
-				<% end %>
-			</td>
-		</tr>
-		<% end %>
-	</tbody>
-</table>
+<dl class="meta">
+	<dt>Betreff</dt>
+	<dd><%= @ticket.subject %></dd>
+	<dt>Kategorie</dt>
+	<dd><%= @ticket_category.name %></dd>
+	<dt>Status</dt>
+	<dd><%= @ticket_status.name %></dd>
+</dl>
+<% supporter_area do %>
+<dl class="meta">
+	<dt>Admin</dt>
+	<dd><% error_handling_form_for @ticket do |form| %>
+	  <%= form.select :status_id, Category.global_for_select("Ticket", "status")%>
+	  <%= form.select :admin_id, [["keiner", nil]] + User.get_supporter_for_select %>
+	  <%= form.submit "ändern" %>
+	<% end %>
+	</dd>
+</dl>
+<% end %>
 
 <h2>Nachrichten</h2>
 <table class="simple-post" style="width:100%">

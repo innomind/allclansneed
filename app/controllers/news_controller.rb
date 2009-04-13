@@ -1,20 +1,10 @@
 class NewsController < ApplicationController
-
   uses_tiny_mce :options => {:theme => "advanced", 
                              :plugins => [:emotions],
-                             :theme_advanced_buttons1 => [:emotions],
-                             :theme_advanced_buttons2 => "",
-                             :theme_advanced_buttons3 => ""
                              },
-                :only => [:new, :create, :edit, :update]
+               :only => [:new, :create, :edit, :update]
   
-   uses_tiny_mce :options => {:theme => "advanced", 
-                              :plugins => [:emotions],
-                              :theme_advanced_buttons1 => [:bold, :italic, :emotions],
-                              :theme_advanced_buttons2 => "",
-                              :theme_advanced_buttons3 => ""
-                             },
-                 :only => [:show]
+  comment_mce_for
   
   add_breadcrumb 'News', 'news_path'
   before_filter :init_news, :only => [:show, :destroy, :edit, :update]
@@ -71,7 +61,7 @@ class NewsController < ApplicationController
   end
   
   def findByTag
-    @news = News.find_tagged_with(params[:id], :conditions  => {:site_id  => current_site_id})
+    @news = News.find_tagged_with(params[:id], :conditions  => {:site_id  => current_site})
   end
   
   def auto_complete_for_news_tags

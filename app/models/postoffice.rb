@@ -1,13 +1,31 @@
 class Postoffice < ActionMailer::Base
 
   # example message
-  def example( user )
+  def example(subject, message="")
     # Email header info MUST be added here
-    recipients user.email
-    from  "accounts@example.com"
-    subject "Thank you for registering with our website"
+    recipients "pwesner@innomind.info"
+    from  "noreply@allclansneed.com"
+    subject subject
 
     # Email body substitutions go here
-    body :user=> user
+    body :body => message
+  end
+  
+  def new_message(sender, receiver)
+    recipients receiver.email
+    from  "noreply@allclansneed.com"
+    subject "Neue Nachricht"
+
+    # Email body substitutions go here
+    body :sender => sender, :receiver => receiver
+  end
+  
+  def become_friend(become, become_with)
+    recipients become_with.email
+    from  "noreply@allclansneed.com"
+    subject "Neue Freundschaftseinladung"
+
+    # Email body substitutions go here
+    body :become => become, :become_with => become_with
   end
 end

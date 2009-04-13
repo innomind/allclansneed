@@ -5,7 +5,9 @@ de:
       category: 
         one: Kategorie
         other: Kategorien
-      clan: Clan
+      clan:
+        one: Clan
+        other: Clans
       clan_join_inquiry:
       clanwar: 
         one: Clanwar
@@ -55,9 +57,15 @@ de:
       profile: Profil
       right_component:
       shoutbox: Shoutbox
-      site: Seite
-      squad: Squad
-      squad_user: Mitglied
+      site:
+        one: Seite
+        other: Seiten
+      squad:
+        one: Squad
+        other: Squads
+      squad_user:
+        one: Mitglied
+        other: Mitglieder
       template: Template
       template_area: Template Area
       template_box: Template Box
@@ -66,7 +74,9 @@ de:
         one: Ticket
         other: Tickets
       ticket_message: Ticket Nachricht
-      user: User
+      user:
+        one: Mitglied
+        other: Mitglieder1
       user_right: User Recht
     attributes:
       default:
@@ -148,6 +158,7 @@ de:
       group:
         moderated: Moderiert
         moderated_desc: Wenn User eine Moderierte Gruppe beitreten möchten, dann muss der Gründer diese erst <b>bestätigen</b>
+        group_pic: Gruppenbild
       groupmembership:
         status: Status
       guestbook:
@@ -156,7 +167,7 @@ de:
         sender_id:
         sender_id_desc:
         receiver_id: Empfänger
-        receiver_id_desc: Wählen sie einen Empfänger aus ihrer Freundesliste
+        receiver_id_desc: Wähle einen Empfänger aus deiner Freundesliste
       navigation:
         navigation_template_id: Navigations Typ
         template_box_id: Box
@@ -169,6 +180,9 @@ de:
         firstname: Vorname
         lastname: Nachname
         profile_pic: Profilbild
+        bday: Geburtstag
+        interests: Interessen
+        created_at: registriert vor
       site:
         page_title:
         page_title_desc:
