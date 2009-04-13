@@ -67,6 +67,8 @@ profile:
   start: member
   new: public
   create: public
+  edit: member
+  update: member
 rating:
   default: member
 shoutbox:

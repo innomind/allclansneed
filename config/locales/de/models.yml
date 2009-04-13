@@ -5,7 +5,9 @@ de:
       category: 
         one: Kategorie
         other: Kategorien
-      clan: Clan
+      clan:
+        one: Clan
+        other: Clans
       clan_join_inquiry:
       clanwar: 
         one: Clanwar
@@ -55,9 +57,15 @@ de:
       profile: Profil
       right_component:
       shoutbox: Shoutbox
-      site: Seite
-      squad: Squad
-      squad_user: Mitglied
+      site:
+        one: Seite
+        other: Seiten
+      squad:
+        one: Squad
+        other: Squads
+      squad_user:
+        one: Mitglied
+        other: Mitglieder
       template: Template
       template_area: Template Area
       template_box: Template Box
@@ -66,7 +74,9 @@ de:
         one: Ticket
         other: Tickets
       ticket_message: Ticket Nachricht
-      user: User
+      user:
+        one: Mitglied
+        other: Mitglieder1
       user_right: User Recht
     attributes:
       default:
