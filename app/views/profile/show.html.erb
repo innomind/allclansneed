@@ -50,7 +50,7 @@
     
     
     <h3 class="simple-list">Gemeinsame Freunde</h3>
-    <ul>
+    <ul class="simple-list">
 		<% (@friends_of_both || []).each do  |f| %>
 		  <li><%= username f %>
 			<div><!-- befreundet seit <%#= time_ago_in_words f.friendship(@current_user).created_at %> --></div></li>
