@@ -34,6 +34,7 @@ forum_thread:
 friends:
   default: member
   index: public
+  show: public
 gallery:
   restful: true
 gallery_pic:
