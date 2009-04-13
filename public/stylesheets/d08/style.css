@@ -250,6 +250,13 @@ a:hover{
 	line-height: 20px;
 }
 
+h4 {
+	margin: 1px;
+	padding-left: 5px;
+	color: #aaa;
+	font-weight: normal;
+}
+
 /* TODO mit dl ersetzen */
 
 .content div.prop {
@@ -291,11 +298,11 @@ a:hover{
 
 /* Default DL */
 
-.content dt, .content dl {
+dt, dl {
 	line-height:15px;
 }
 
-.content dl {
+dl {
 	padding-top: 2px;
 	padding-right: 2px;
 	padding-bottom: 2px;
@@ -303,14 +310,14 @@ a:hover{
 	margin-bottom: 20px;
 }
 
-.content dt {
+dt {
 	float:left;
 	margin-right: 10px;
 	width:70px;
 	text-align:right;
 	color:#666;
 }
-.content dd {		
+dd {		
 	margin-left: 85px; 
 }
 
@@ -496,7 +503,7 @@ a:hover{
 
 /* News */
 
-.content dl.meta{
+dl.meta{
 	border-top-width: 1px;
 	border-top-style: solid;
 	border-top-color: #eee;

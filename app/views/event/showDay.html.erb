@@ -1,3 +1,6 @@
+<h1>Events am Tag</h1>
+<dl>
 <% @events.each do |event| %>
-  <%= leading_zero(event.expire_at.hour) %>:<%= leading_zero(event.expire_at.min) %> <%= link_to(event.name, event_path(event)) %><br />
+  <dt><%= leading_zero(event.expire_at.hour) %>:<%= leading_zero(event.expire_at.min) %></dt><dd> <%= link_to(event.name, event_path(event)) %></dd>
 <% end %>
+</dl>
