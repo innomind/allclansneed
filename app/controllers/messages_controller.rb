@@ -40,6 +40,7 @@ class MessagesController < ApplicationController
     @message.read = FALSE
     @message.answered = FALSE
     if @message.save
+      Postoffice.deliver_new_message(current_user, @message.receiver)
       flash[:notice] = "Nachricht erfolgreich gesendet"
       redirect_to messages_path
     else
