@@ -40,8 +40,8 @@
 		<% end %>
     </ul>
 
-    <h3 class="simple-list">Freunde</h3>
-    <ul>
+    <h3>Freunde</h3>
+    <ul class="simple-list">
 		<% @profile.user.friends.each do  |f| %>
 		  <li><%= image_tag(f.profile.profile_pic.url(:thumb), :width => 30, :height => 30) + username(f) %>
 		<div><!-- befreundet seit <%#= time_ago_in_words f.friendship(@current_user).created_at %> --></div></li>
