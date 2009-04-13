@@ -15,7 +15,7 @@
 		<% form_remote_tag :before => "tinyMCE.triggerSave(true,true)", :url => {:controller  => 'comment', :action => 'create', :model => modelname, :id => model.id}, :html => {:id => "create_comment"} do%>
 			<%= text_area :comment, "entry", :class => "mceEditor" %>
 			<%= hidden_field :comment, "intern", :value => (model.attribute_names.include?("intern")? model.intern : false)%>
-			<%= submit_tag 'Add' %>
+			<%= submit_tag 'hinzufügen' %>
 		<% end %>
 	</div>
 <% end %>

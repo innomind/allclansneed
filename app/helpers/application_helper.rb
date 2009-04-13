@@ -24,7 +24,7 @@ module ApplicationHelper
   
   def username(user)
     #out = link_to user.login, profile_path(user)
-    out = ajax_tooltip(user.login, :update_url => infobox_profile_path(user), :class => "infobox")
+    out = ajax_tooltip(user.nick, :update_url => infobox_profile_path(user), :class => "infobox")
   end
   
   def entry_and_pagination model

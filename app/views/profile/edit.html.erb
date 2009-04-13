@@ -1,5 +1,9 @@
 <h1>Profil bearbeiten</h1>
 <% error_handling_form_for @profile, :html => { :multipart => true } do |f|%>
+	<% f.fields_for @profile.user do |uf| %>
+		<%= uf.text_field :nickname %>
+	<% end %>
+	
 	<%= f.text_field :firstname %>
 	<%= f.text_field :lastname %>
 	<%= f.text_field :bday %>

@@ -34,9 +34,11 @@ class ProfileController < ApplicationController
   
   def update
     @profile = current_user.profile
+    @profile.user.update_attributes(params[:profile].delete(:user))
     @profile.update_attributes(params[:profile])
     if @profile.save
-       redirect_to profile_path(@profile.user_id)
+      #flash[:notice] = "Profil erfolgreich geändert"
+      redirect_to profile_path(@profile.user_id)
     else
       render :action => "edit"
     end
