@@ -69,6 +69,7 @@ profile:
   create: public
   edit: member
   update: member
+  infobox: public
 rating:
   default: member
 shoutbox:

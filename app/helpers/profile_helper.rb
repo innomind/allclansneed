@@ -15,13 +15,12 @@ module ProfileHelper
     elsif @connection == "none"
       return "Keine Verbindung"
     elsif !@current_session.logged_in?
-      return "Du musst eingeloggt sein, um die Verbindung zu diesem User sehen zu können und um ihn als Freund hinzuzufügen."
+      return "du musst angemeldet sein"
     end
   end
   
   def become_friends_link user
-
-    
+    return "" unless @current_session.logged_in?
     if @current_user.is_pending_friends_with? user
       "Freundschaft abwarten"
 
