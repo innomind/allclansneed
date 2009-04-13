@@ -3,12 +3,12 @@
       #cell_text = link_to(d.mday, showDay_events_path(:date => d)) + "<br />"
       cell_text = d.mday
       cell_attrs = {:class => 'day', :width => 20, :height => 20}
-        @events.each do |e|
-          if e.expire_at.to_date == d
-            cell_text = link_to(d.mday, event_path(e))  << "<br />"
-            cell_attrs[:class] = 'specialDay'
-          end
+      @events.each do |e|
+        if e.expire_at.to_date == d
+          cell_text = link_to(d.mday, showDay_events_path(:date => d))  << "<br />"
+          cell_attrs[:class] = 'specialDay'
         end
+      end
       [cell_text, cell_attrs]
     end %>
 </pre>

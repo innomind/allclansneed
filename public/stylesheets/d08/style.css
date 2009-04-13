@@ -255,6 +255,7 @@ h4 {
 	padding-left: 5px;
 	color: #aaa;
 	font-weight: normal;
+	border-bottom: 1px dotted #ccc;
 }
 
 /* TODO mit dl ersetzen */

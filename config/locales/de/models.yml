@@ -76,7 +76,7 @@ de:
       ticket_message: Ticket Nachricht
       user:
         one: Mitglied
-        other: Mitglieder1
+        other: Mitglieder
       user_right: User Recht
     attributes:
       default:

@@ -2,7 +2,7 @@ if @shout.new_record?
   page.alert @shout.errors.full_messages.join("\n")
 else
   page.replace_html "shoutbox", :partial => 'shoutbox/index'
-    page.visual_effect :pulsate, "shout_#{@shout.id}"
-    page.form.reset "create_shout"
-    page.hide "add_shout"
+  page.visual_effect :pulsate, "shout_#{@shout.id}"
+  page.form.reset "create_shout"
+  #page.hide "add_shout"
 end
