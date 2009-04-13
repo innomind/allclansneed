@@ -2,7 +2,7 @@ class ProfileController < ApplicationController
   before_filter :get_profile, :only => [:show, :infobox]
   before_filter :init_clan, :only => [:index]
   comment_mce_for
-  add_breadcrumb "Profile", "profiles_path"
+  add_breadcrumb "User", "profiles_path"
   
   #TODO: Userliste
   def index
@@ -30,10 +30,14 @@ class ProfileController < ApplicationController
   
   def edit
     @profile = current_user.profile
+    add_breadcrumb @profile.user.nick, "profiles_path(@profile.user.id)"
+    add_breadcrumb "bearbeiten"
   end
   
   def update
     @profile = current_user.profile
+    add_breadcrumb @profile.user.nick, "profiles_path(@profile.user.id)"
+    add_breadcrumb "bearbeiten"
     @profile.user.update_attributes(params[:profile].delete(:user))
     @profile.update_attributes(params[:profile])
     if @profile.save
