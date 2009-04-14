@@ -38,12 +38,12 @@ namespace :init do
   def init_box_types
     TemplateBoxType.create(:name => "Login", :internal_name => "login", :editable => false)
     TemplateBoxType.create(:name => "Navigation", :internal_name => "navigation", :editable => true, :multiple_allowed => true, :edit_in_new_window => true, :link_list => true)
-    TemplateBoxType.create(:name => "Forum", :internal_name => "forum", :editable => true)
-    TemplateBoxType.create(:name => "Galerie", :internal_name => "gallery_pic", :editable => true)
-    TemplateBoxType.create(:name => "Poll", :internal_name => "poll", :editable => true)
-    TemplateBoxType.create(:name => "Clanwars", :internal_name => "clanwar", :editable => true)
-    TemplateBoxType.create(:name => "Kalender", :internal_name => "calendar", :editable => true)
-    TemplateBoxType.create(:name => "Shoutbox", :internal_name => "shoutbox", :editable => true)
+    TemplateBoxType.create(:name => "Forum", :internal_name => "forum")
+    TemplateBoxType.create(:name => "Galerie", :internal_name => "gallery_pic")
+    TemplateBoxType.create(:name => "Poll", :internal_name => "poll")
+    TemplateBoxType.create(:name => "Clanwars", :internal_name => "clanwar")
+    TemplateBoxType.create(:name => "Kalender", :internal_name => "calendar")
+    TemplateBoxType.create(:name => "Shoutbox", :internal_name => "shoutbox")
   end
   
   def init_template

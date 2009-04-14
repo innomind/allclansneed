@@ -58,11 +58,11 @@ class User < ActiveRecord::Base
   end
   
   def nick= nickname
-    self[:login] = nickname
+    self[:nickname] = nickname
   end
   
   def nick
-    self[:login]
+    self[:nickname] || self[:login]
   end
   
   def password= pw

@@ -4,6 +4,8 @@ class ClansController < ApplicationController
   before_filter :check_member, :only => [:leave]
   before_filter :check_owner, :only => [:edit, :update]
   
+  comment_mce_for
+  
   def index
     add_breadcrumb "Clan Liste"
     @clans = Clan.paginate :page => params[:page], :per_page => 25

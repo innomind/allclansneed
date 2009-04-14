@@ -255,6 +255,7 @@ h4 {
 	padding-left: 5px;
 	color: #aaa;
 	font-weight: normal;
+	border-bottom: 1px dotted #ccc;
 }
 
 /* TODO mit dl ersetzen */
@@ -399,7 +400,6 @@ dd {
 	padding-right: 0px;
 	padding-bottom: 5px;
 	padding-left: 0px;
-	font-weight: bold;
 }
 	.simple-list li img {
 	margin-right: 10px;
@@ -412,11 +412,11 @@ dd {
 }
 
 	.simple-list li a, .simple-list li a:link, .simple-list li a:visited {
+	font-weight: bold;
 	vertical-align: middle;
 }
 
 	.simple-list li a:hover, .simple-list li a:focus {
-	background-color: #eee;
 	text-decoration: none;
 }
 

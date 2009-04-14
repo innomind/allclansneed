@@ -1,37 +1,30 @@
 <h1>Clan: <%= @clan.name %></h1>
-<table class="simple-prop">
-	<tbody>
-		<tr>
-			<td rowspan="4"><%= image_tag(@clan.clan_pic.url(:thumb))%></td>
-			<th>Name</th>
-			<td><%= @clan.name %></td>
-		</tr>
-		<tr>
-			<th>Clan-ID</th>
-			<td><%= @clan.uniq %></td>
-		</tr>
-		<tr>
-			<th>dabei seit</th>
-			<td><%= l @clan.created_at, :format => "datelong" %></td>
-		</tr>
-		<tr>
-			<th>Link</th>
-			<td><%= link_to "link", root_path(:subdomain => @clan.uniq) %></td>
-		</tr>
-		<tr><th colspan="3" class="title">Squads</th></tr>
-<% @clan.squads.each do |squad| %>
-		<tr>
-			<th><%= squad.name %></th>
-			<td colspan="2">
-				<% squad.squad_users.each do |squad_user|%>
-					<%= username(squad_user.user) %>
-				<% end %>
-			</td>
-		</tr>
-<% end %>
-	</tbody>
-</table>
 
-<div style="height:25px"></div>
+<div style="float:left">
+	<%= image_tag(@clan.clan_pic.url(:thumb))%>
+</div>
+
+<div style="float:left">
+	<dl class="meta">
+		<dt>Name</dt><dd><%= @clan.name %></dd>
+		<dt>Clan-ID</dt><dd><%= @clan.uniq %></dd>
+		<dt>Gegründet am</dt><dd><%= l @clan.created_at, :format => "datelong" %> von <%= username(@clan.owner) %></dd>
+		<dt>Link</dt><dd><%= link_to "link", root_path(:subdomain => @clan.uniq) %></dd>
+	</dl>
+</div>
+
+<div style="clear:both"></div>
+
+<h2>Squads</h2>
+
+<% @clan.squads.each do |squad| %>
+	<h3><%= squad.name %></h3>
+	<ul class="simple-list">
+	   <% squad.squad_users.each do |squad_user|%>
+			<li><%= image_tag(squad_user.user.profile.profile_pic.url(:thumb), :width => 30, :height => 30) + username(squad_user.user) %>
+			<div>seit <%= time_ago_in_words squad_user.created_at %></div></li>
+	   <% end %>
+	</ul>
+<% end %>
 
 <%= show_comments @clan %>
