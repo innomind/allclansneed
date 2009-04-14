@@ -1,6 +1,6 @@
 <h1>Eigene Seiten verwalten</h1>
 <div class="userlinks">
-	<%= access_link image_tag("folder_add.png") + "Seite hinzufügen", new_page_path %>
+	<%= access_link image_tag("page_add.png") + " Seite hinzufügen", new_page_path %>
 </div>
 <ul id="pages">
 
@@ -9,8 +9,8 @@
     
     <%= link_to p.title, page_path(p) -%><%= intern_pic p %>
     von <%= username(p.user) %>
-    <%= access_link image_tag("folder_edit.png"), edit_page_path(p) %>
-    <%= access_link image_tag("folder_delete.png"), page_path(p.id), :method => "delete", :confirm => "Wirklich löschen?" %>
+    <%= access_link image_tag("page_edit.png"), edit_page_path(p) %>
+    <%= access_link image_tag("page_delete.png"), page_path(p.id), :method => "delete", :confirm => "Wirklich löschen?" %>
     
   </li>
 <% end %>

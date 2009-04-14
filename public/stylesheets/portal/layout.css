@@ -176,6 +176,8 @@ body {
 .content_layout {
 	float:left;
 	width:600px;
+	margin-right:10px;
+	margin-bottom: 25px;
 }
 #con label {
 	color:#337796;
@@ -209,6 +211,7 @@ body {
 	float:left;
 	background:url(/images/portal/4.gif) repeat-y;
 	width:242px;
+	margin-bottom: 25px;
 }
 .box_right_img {
 	display:block;

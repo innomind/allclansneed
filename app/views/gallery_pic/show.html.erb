@@ -13,25 +13,13 @@
 <%= link_to image_tag(@gallery_pic.pic.url(:medium)), @gallery_pic.pic.url(:original) %>
 </div>
 
-<table class="simple-prop">
-	<tbody>
-		<tr>
-			<td class="title">Beschreibung:</td>
-			<td><%= @gallery_pic.description %></td>
-		</tr>
-		<tr>
-			<td class="title">Hochgeladen von:</td>
-			<td><%= username(@gallery_pic.user) %></td>
-		</tr>
-		<tr>
-			<td class="title">Hochgeladen am:</td>
-			<td><%= l @gallery_pic.created_at %></td>
-		</tr>
-		<tr>
-			<td class="title">Rating:</td>
-			<td><%= rating_for @gallery_pic %></td>
-		</tr>
-	</tbody>
-</table>
-<div style="margin:25px"></div>
+<dl class="meta">
+	<dt>Beschreibung</dt><dd><%= @gallery_pic.description %></dd>
+	<dt>von</dt><dd><%= username(@gallery_pic.user) %></dd>
+	<dt>am</dt><dd><%= l @gallery_pic.created_at %></dd>
+	<dt>Rating</dt><dd><%= rating_for @gallery_pic %></dd>
+</dl>
+
+<div style="height:25px"></div>
+
 <%= show_comments @gallery_pic %>

@@ -2,7 +2,7 @@ module PortalHelper
   def section_visible? section
     
     @section_links ||= {
-      :netzwerk => {:controller => [:news, :tickets, :friends, :profile, :messages, :clans, :groups, :forum, :users], :pages => []},
+      :netzwerk => {:controller => [:news, :tickets, :friends, :profile, :messages, :clans, :groups, :forum, :forum_thread, :forum_message, :users], :pages => []},
       :clanpage => {:controller => [:site], :pages => [:Support, :Funktionen]},
       :game_server => {:controller => [], :pages => [:Aktionen, :Preise, :Hardware, :Testserver]}
     }

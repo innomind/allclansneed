@@ -1,7 +1,7 @@
 <h1>meine Clans</h1>
 <div class="userlinks">
   <%= access_link image_tag("add.png") + " Clan gründen", new_clan_path %> 
-	<%= link_to_function "Clan beitreten" do |page|
+	<%= link_to_function image_tag("group_go.png") + " Clan beitreten" do |page|
 			page.visual_effect(:toggle_blind, "inquiry_form")
 	end	%>  
 </div>

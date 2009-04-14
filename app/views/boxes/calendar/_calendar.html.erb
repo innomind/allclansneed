@@ -1,4 +1,4 @@
-<pre>
+
 <%= calendar({:year => @year, :month => @month, :first_day_of_week => 1, :table_class => "box_calendar"}) do |d|
       #cell_text = link_to(d.mday, showDay_events_path(:date => d)) + "<br />"
       cell_text = d.mday
@@ -11,4 +11,3 @@
       end
       [cell_text, cell_attrs]
     end %>
-</pre>

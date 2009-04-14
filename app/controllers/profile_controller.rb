@@ -30,7 +30,7 @@ class ProfileController < ApplicationController
   
   def edit
     @profile = current_user.profile
-    add_breadcrumb @profile.user.nick, "profiles_path(@profile.user.id)"
+    add_breadcrumb @profile.user.nick, "profile_path(#{@profile.user.id})"
     add_breadcrumb "bearbeiten"
   end
   
