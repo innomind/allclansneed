@@ -1,3 +1,5 @@
+#require 'mongrel_cluster/recipes'
+
 set :application, "rallclansneed"
 set :scm, :git
 set :repository,  "git@dev.innomind.info:rallclansneed.git"
