@@ -1,0 +1,17 @@
+development: 
+  adapter: postgresql
+  encoding: unicode
+  database: acn_development
+  username: allclansneed
+  password: allclansneed
+  host: database.innomind.info
+
+test: development
+
+production:
+  adapter: postgresql
+  encoding: unicode
+  database: acn_production
+  username: allclansneed
+  password: allclansneed
+  host: database.innomind.info
