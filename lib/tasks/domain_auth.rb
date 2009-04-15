@@ -5,9 +5,9 @@ def build_auth_tag
   auth.add_element("password")
   auth.add_element("context")
     
-  auth.elements["user"].text = "innomind"
-  auth.elements["password"].text = "pa78xcv"
-  auth.elements["context"].text = "4"
+  auth.elements["user"].text = "2009_04_16_innomind_th"
+  auth.elements["password"].text = "wesner"
+  auth.elements["context"].text = "1"
     
   #adding authorization-tag to document
   @document.elements["request"].elements << auth
