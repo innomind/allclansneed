@@ -415,9 +415,13 @@ a:hover{
 
 /* Formular */
 
+.fieldWithErrors {
+	display: inline;
+}
+
 .content label {
 	display: inline-block;
-	width:15%;
+	width:20%;
 }
 
 .content span.field_label {

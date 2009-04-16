@@ -423,22 +423,26 @@ dd {
 
 /* Formular */
 
-.content label {
-	display: inline-block;
-	width:15%;
+.fieldWithErrors {
+	display: inline;
 }
 
-.content span.field_label {
+label {
+	display: inline-block;
+	width:20%;
+}
+
+span.field_label {
 	vertical-align:top;
 }
 
-.content input {
+input {
 	width:auto;
 	background-color:#EFF3FC;
 	border:1px solid #87A6E7;
 	padding:2px 5px;
 }
-.content textarea {
+textarea {
 	background-color:#EFF3FC;
 	border:1px solid #87A6E7;
 	padding:2px 5px;
