@@ -3,7 +3,7 @@
 
 <% if_accessible :controller => "comments" do %>
 <div class="userlinks" style="float:left">
-	<%= link_to_function image_tag("comment_add.png", :border => 0) + " Komentar hinzufügen", "Element.toggle('add_comment')" %>
+	<%= link_to_function image_tag("comment_add.png") + "Komentar hinzufügen", "Element.toggle('add_comment')" %>
 </div>
 <% end %>
 

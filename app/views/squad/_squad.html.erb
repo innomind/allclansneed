@@ -1,21 +1,21 @@
 <h3>
 	<%=squad.name%>
-	<%= ajax_tooltip image_tag("group_edit.png"), :update_url => edit_squad_path(squad), :html => {:method => :get}, :id => dom_id(squad, :edit) %>
-	<%= link_to( image_tag("group_delete.png"), squad_path(squad), :method => :delete, :confirm => "Diesen Squad wirklich löschen?") unless @squads.count == 1 %>
+	<%= ajax_tooltip image_tag("group_edit.png", :class => "icon"), :update_url => edit_squad_path(squad), :html => {:method => :get}, :id => dom_id(squad, :edit) %>
+	<%= link_to( image_tag("group_delete.png", :class => "icon"), squad_path(squad), :method => :delete, :confirm => "Diesen Squad wirklich löschen?") unless @squads.count == 1 %>
 </h3>
-	<ul id="<%= dom_id(squad, :users) %>" class="simple-list">
-	<% squad.squad_users.each do |m|%>
-	
-	  <li id="<%= dom_id(m) %>"> 
-		<%= image_tag(m.user.profile.profile_pic(:thumb), :width => 30, :height => 30)%>
-		<%="#{m.user.nick}"%>(<%= m.role %>)
-		<div>
-	    <%= ajax_tooltip "Rechte", :update_url => edit_user_path(m), :method => :get unless m.user.owns_clan?(@clan)%>
-		<%= ajax_tooltip "Funktion", :update_url => role_user_path(m) %>
-		<%= ajax_tooltip "löschen", :update_url => destroy_form_user_path(m) %>
-	    <%= ajax_tooltip "kopieren", :update_url => copy_user_path(m) %>
-	    <%= ajax_tooltip "verschieben", :update_url => move_user_path(m) %>
-		</div>
-	  </li>
-	<%end%>
-	</ul>
+<ul id="<%= dom_id(squad, :users) %>" class="edit_list">
+<% squad.squad_users.each do |m|%>
+  <li id="<%= dom_id(m) %>">
+	<span class="title"><%="#{m.user.nick}"%> <small><%= m.role %></small></span>
+	<span class="links">
+		<% unless m.user.owns_clan?(@clan) %>
+    		<%= ajax_tooltip image_tag("key.png") + "Rechte", :update_url => edit_user_path(m), :link_class => "first", :method => :get %>
+		<% else; func_link_class = "first"; end %>
+		<%= ajax_tooltip image_tag("textfield_rename.png") + "Funktion", :update_url => role_user_path(m), :link_class => func_link_class %>
+		<%= ajax_tooltip image_tag("user_delete.png") + "löschen", :update_url => destroy_form_user_path(m) %>
+    	<%= ajax_tooltip image_tag("user_add.png") + "kopieren", :update_url => copy_user_path(m) %>
+    	<%= ajax_tooltip image_tag("user_go.png") + "verschieben", :update_url => move_user_path(m) %>
+	</span>
+  </li>
+<%end%>
+</ul>

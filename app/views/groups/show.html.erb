@@ -1,8 +1,8 @@
 <h1>Gruppe <%= @group.name %></h1>
 <div class="userlinks">
 <% if @group.founder == @user %>
-	<%= link_to image_tag("group_edit.png") + " Mitglieder verwalten", administrate_group_path(@group)%>
-	<%= link_to image_tag("folder_edit.png") + " Gruppe bearbeiten", edit_group_path(@group)%>
+	<%= link_to image_tag("group_edit.png") + "Mitglieder verwalten", administrate_group_path(@group)%>
+	<%= link_to image_tag("folder_edit.png") + "Gruppe bearbeiten", edit_group_path(@group)%>
 <% end %>
 </div>
 
@@ -12,10 +12,10 @@
 </div>
 
 <div style="float:left">
-	<dl>
+	<dl class="main_info">
 		<dt>Name</dt><dd><%= @group.name %></dd>
-		<dt>Gegründet am</dt><dd><%= l @group.created_at, :format => "datelong" %> von <%= username(@group.founder) %></dd>
-		<dt>Dein Status</dt>
+		<dt>gegründet</dt><dd><%= l @group.created_at, :format => "datelong" %> von <%= username(@group.founder) %></dd>
+		<dt>Status</dt>
 			<dd>
 				<% if (@user.status_for_group @group) == "active" %>
 			    	Du bist Mitglied 
@@ -30,13 +30,13 @@
 <div style="clear:both"></div>
 
 <h3>Beschreibung</h3>
-<p><%= @group.description %></p>
+<p><%= simple_format @group.description %></p>
 
 <h3>Mitglieder</h3>
-<ul class="simple-list">
+<ul class="simple-list three_cols">
   <%= render :partial => 'user', :collection => @active_memberships %>
 </ul>
-
+<div style="clear:both"></div>
 
 <h3>Threads:</h3>
 <div class="userlinks" style="float:left">

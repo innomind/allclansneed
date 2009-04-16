@@ -6,7 +6,7 @@
 <% end %>
 
 <div class="userlinks">
-	<%= access_link_unless @user.friends.empty?, image_tag("email_add.png") + " Nachricht versenden", new_message_path, :alternate_text => "du hast keine Freunde, denen du eine Nachricht schreiben könntest" %>
+	<%= access_link_unless @user.friends.empty?, image_tag("email_add.png") + "Nachricht versenden", new_message_path, :alternate_text => "du hast keine Freunde, denen du eine Nachricht schreiben könntest" %>
 </div>
 
 <%= entry_and_pagination @messages %>
