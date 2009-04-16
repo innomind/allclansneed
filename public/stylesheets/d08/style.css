@@ -297,6 +297,55 @@ h4 {
 	text-align:left;
 }
 
+
+/* Boxen */
+.edit_boxes_title {}
+.edit_boxes_title a img{ margin-bottom:-3px;}
+.edit_boxes {
+	list-style-type: none;
+	padding-left: 20px;
+}
+.edit_boxes li {
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #ddd;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	text-align:right;
+}
+.edit_boxes li a {
+	padding-left: 5px;
+	margin-left:5px;
+	border-left-width: 1px;
+	border-left-style: solid;
+	border-left-color: #ddd;
+}
+.edit_boxes li a.first {
+	border:none;
+}
+.edit_boxes li a img {
+margin-bottom:-3px;
+}
+.sortable_handle {
+	background-image: url(sort.png);
+	background-repeat: no-repeat;
+	background-position: 5px center;
+	padding-left: 25px;
+	cursor: move;
+	font-weight: bold;
+	padding-top:5px;
+	padding-bottom:5px;
+	float:left;
+	}
+.sortable_handle em {
+	font-style: normal;
+	text-transform: uppercase;
+	color: #999;
+	margin-left:5px;
+	font-weight: normal;
+}
+
+
 /* Default DL */
 
 dt, dl {

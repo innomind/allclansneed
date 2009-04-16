@@ -17,9 +17,9 @@ module Widgets
       result << tooltip_css
       
       if opts[:show_mode] == "ajax"
-        result << tooltip_link_ajax(opts[:id], name, opts[:update_url])
+        result << tooltip_link_ajax(opts[:id], name, opts[:update_url], opts[:link_class])
       else
-        result << tooltip_link(opts[:id],name)
+        result << tooltip_link(opts[:id],name, opts[:link_class])
       end
       
       if opts[:show_mode] == "mouseover"
@@ -55,12 +55,12 @@ module Widgets
       return image_tag("loading.gif") if opts[:show_mode] == "ajax"
     end
        
-    def tooltip_link(id, name)
-      link_to name, 'javascript:void(0)', :id => "tooltip_link_#{id}"
+    def tooltip_link(id, name, link_class = "")
+      link_to name, 'javascript:void(0)', :id => "tooltip_link_#{id}", :class => link_class
     end
     
-    def tooltip_link_ajax(id, name, update_url)
-      link_to_function name, "showAjaxTooltip('#{id}', '#{url_for(update_url)}')", :id => "tooltip_link_#{id}"
+    def tooltip_link_ajax(id, name, update_url, link_class = "")
+      link_to_function name, "showAjaxTooltip('#{id}', '#{url_for(update_url)}')", :id => "tooltip_link_#{id}", :class => link_class
     end
     
     def tooltip_link_function_klick(id)
