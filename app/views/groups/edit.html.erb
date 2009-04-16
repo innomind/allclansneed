@@ -1,3 +1,4 @@
+<h1>Gruppe bearbeiten</h1>
 <% error_handling_form_for @group, :html => { :multipart => true } do |form| %>
       <%= form.text_field :name %>
       <%= form.check_box(:moderated, {}, "true", "false") %>

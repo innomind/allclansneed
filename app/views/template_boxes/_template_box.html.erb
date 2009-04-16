@@ -1,8 +1,7 @@
-<li id="<%= dom_id(template_box, :edit) %>"  style="position: relative;">
+<li id="<%= dom_id(template_box, :edit) %>">
     
-<span class="sortable_handle"><%= image_tag("sort.png") %>
-<%= template_box.name %> <em><%= template_box.template_box_type.name %></em></span>
-
+<span class="sortable_handle title"><%= template_box.name %> <em>[<%= template_box.template_box_type.name %>]</em></span>
+<span class="links">
     <%= ajax_tooltip image_tag("textfield_rename.png"), :update_url => {:action => "edit", :template_box_id => template_box.id}, :id => dom_id(template_box, :rename), :link_class => "first"  %>
 
     <%= ajax_tooltip image_tag("application_go.png"), :update_url => {:action => "move", :template_box_id => template_box.id, :template_area_id => template_box.template_area_id}, :id => dom_id(template_box, :move) %>
@@ -21,4 +20,5 @@
     <% end %>
 
     <%= access_link image_tag("application_delete.png"), { :action => "delete", :template_box_id => template_box.id}, :confirm => "Soll die Box '#{template_box.name}' wirklich gelöscht werden?" %>
+</span>
 </li>

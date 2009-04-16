@@ -19,12 +19,13 @@
 
 <% @clan.squads.each do |squad| %>
 	<h3><%= squad.name %></h3>
-	<ul class="simple-list">
+	<ul class="simple-list three_cols">
 	   <% squad.squad_users.each do |squad_user|%>
 			<li><%= image_tag(squad_user.user.profile.profile_pic.url(:thumb), :width => 30, :height => 30) + username(squad_user.user) %>
 			<div>seit <%= time_ago_in_words squad_user.created_at %></div></li>
 	   <% end %>
 	</ul>
+	<div style="clear:both"></div>
 <% end %>
 
 <%= show_comments @clan %>
