@@ -1,8 +1,6 @@
 #!/bin/sh
-/var/www/xxxx/current/script/process/spawner mongrel \
+/home/deploy/rallclansneed/current/script/process/spawner mongrel \
 	--environment=production \
-	--instances=1 \
+	--instances=3 \
 	--address=127.0.0.1 \
 	--port=8000
-
-
