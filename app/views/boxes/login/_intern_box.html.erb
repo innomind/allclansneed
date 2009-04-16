@@ -22,7 +22,6 @@ Hallo <b><%= @user.nick %></b>
 	<%= link_to "<li>" + image_tag("user_edit.png") + "User verwalten</li>", :controller => "squads" if @user.owns_current_site?%>
 	<%= access_link "<li>" + image_tag("monitor_edit.png") + "Seite bearbeiten</li>", :controller => "template_boxes" %>
 	<%= access_link "<li>" + image_tag("page_world.png") + "Template verwalten</li>", templates_path%>
+	<li><%= link_to image_tag("door_out.png") + " logout", :controller => "login", :action => "logout" %></li>
 </ul>
-<br>
-<%= link_to image_tag("door_out.png") + " logout", :controller => "login", :action => "logout" %>
 </div>
