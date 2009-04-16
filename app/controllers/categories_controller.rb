@@ -31,7 +31,10 @@ class CategoriesController < ApplicationController
    params["categories"].each_with_index do |id, position|
      Category.update(id, :position => position)
    end
-   render :nothing => true
+   flash[:notice] = "Reihenfolge gespeichert"
+   render :update do |page|
+     page.reload
+   end
   end
   
   def edit

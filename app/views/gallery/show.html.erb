@@ -1,6 +1,6 @@
 <h1>Gallerie: <%= @gallery.name %></h1>
 <div class="userlinks">
-	<%= access_link image_tag("picture_add.png") + " Bild hochladen", new_gallery_pic_path(@gallery.id)  %>
+	<%= access_link image_tag("picture_add.png") + "Bild hochladen", new_gallery_pic_path(@gallery.id)  %>
 </div>
 
 <%= entry_and_pagination @gallery_pics %>

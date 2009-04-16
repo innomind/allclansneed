@@ -53,9 +53,9 @@ class TemplateBoxesController < ApplicationController
     #render :layout => false,
     #  :partial => "template_area",
     #  :object => @template_areas.find{|a| a.id == params[:id].to_i} #TODO Dry it
+    flash[:notice] = "Reihenfolge gespeichert"
     render :update do |page|
-      page.replace_html(:update_message, "<div id='update_message'>Änderungen wurden gespeichert, aber werden erst nach einem Reload sichtbar</div>")
-      page.visual_effect(:highlight, :update_message)
+      page.reload
     end
   end
   

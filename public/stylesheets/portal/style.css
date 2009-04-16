@@ -4,6 +4,114 @@ body {
 }
 
 
+/* Formular */
+
+.fieldWithErrors {
+	display: inline;
+}
+
+.content label {
+	display: inline-block;
+	width:20%;
+}
+
+.content span.field_label {
+	vertical-align:top;
+}
+
+.content input {
+	width:auto;
+	background-color:#EFF3FC;
+	border:1px solid #87A6E7;
+	padding:2px 5px;
+}
+.content textarea {
+	background-color:#EFF3FC;
+	border:1px solid #87A6E7;
+	padding:2px 5px;
+}
+
+/* Tooltips */
+
+.tooltip {
+  position: absolute;
+  background-image: url(/images/widgets/tooltip_arrow.gif); 
+  background-repeat: no-repeat; 
+  z-index: 100;
+	text-align: left;
+}
+
+.tooltip_content {
+  padding: 10px 20px 20px 20px;
+  margin-top: 0px;
+  background-color: #fdf389;
+}
+
+.tooltip_close {
+	text-align: right;
+  background-color: #fdf389;
+	padding: 5px 20px 0 0 ;
+	margin-top: 20px;
+}
+
+/* Infobox */
+.infobox {
+  background-color: #fff;
+  position: absolute;
+  z-index: 100;
+	border: 4px solid #ccc;
+	font-size:12px;
+}
+.infobox_close {
+	position:absolute;
+	bottom: 0px;
+	right: 0px;
+	display:none;
+}
+.infobox:hover .infobox_close {
+	display:block;
+}
+.infobox img {
+	float:left;
+	margin-bottom: 0px !important;
+}
+.infobox_container {
+	float:left;
+	padding: 3px;
+	line-height: 20px;
+}
+
+
+.infobox_container h4{
+	padding:0;
+	margin:0;
+}
+
+
+/* link list */
+.link_list {
+	list-style:none;
+	padding:0px;
+	padding-left:0px;
+}
+.link_list a {
+	margin:0px;
+}
+.link_list li {
+	padding: 2px;
+	width:100% !important;
+	border-bottom: 1px solid #eee;
+	clear:both;
+}
+.link_list li:hover{
+	background-color:#eee;
+	text-decoration: none;
+}
+.link_list img {
+	
+}
+
+/* Tabellen */
 
 .simple-table
 {
@@ -208,8 +316,8 @@ a:hover{
 }
 
 .error {
-	background-color: #ff6565;
-	border: 1px solid #bb1515;
+	background-color: #B3F4B6;
+	border: 1px solid #0C3;
 	padding:10px;
 }
 
@@ -246,6 +354,18 @@ a:hover{
 	border-left-style: solid;
 	border-left-color: #6678B1;
 	line-height: 20px;
+}
+
+.content h3 small {
+	font-weight: normal;
+}
+
+h4 {
+	margin: 1px;
+	padding-left: 5px;
+	color: #aaa;
+	font-weight: normal;
+	border-bottom: 1px dotted #ccc;
 }
 
 /* TODO mit dl ersetzen */
@@ -287,13 +407,21 @@ a:hover{
 	text-align:left;
 }
 
+
+.userlinks img, img.icon, .link_list img, .edit_list li a img {
+	margin-bottom:-3px;
+	margin-right: 3px;
+}
+
+
+
 /* Default DL */
 
-.content dt, .content dl {
+dt, dl {
 	line-height:15px;
 }
 
-.content dl {
+dl {
 	padding-top: 2px;
 	padding-right: 2px;
 	padding-bottom: 2px;
@@ -301,15 +429,39 @@ a:hover{
 	margin-bottom: 20px;
 }
 
-.content dt {
+dt {
 	float:left;
 	margin-right: 10px;
 	width:70px;
 	text-align:right;
 	color:#666;
 }
-.content dd {		
+dd {		
 	margin-left: 85px; 
+}
+
+/* Main info */
+dl.main_info{
+	font-size:14px;
+	line-height:20px;
+}
+dl.main_info dt{
+	line-height:20px;
+	font-weight:bold;
+}
+dl.main_info dd{
+	line-height:20px;
+}
+
+/* meta */
+dl.meta{
+	border-top-width: 1px;
+	border-top-style: solid;
+	border-top-color: #eee;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #eee;
+	margin-bottom:0px;
 }
 
 /* Profile */
@@ -374,6 +526,61 @@ a:hover{
 
 /* Listen */
 
+/* Boxen */
+.edit_list {
+	list-style-type: none;
+	padding-left: 20px;
+}
+.edit_list li {
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #ddd;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	text-align:right;
+	position: relative;
+}
+
+li span.links a {
+	padding-left: 5px;
+	margin-left:5px;
+	border-left-width: 1px;
+	border-left-style: solid;
+	border-left-color: #ddd;
+}
+li span.links a.first {
+	border:none;
+}
+
+.sortable_handle {
+	background-image: url(/images/sort.png);
+	background-repeat: no-repeat;
+	background-position: 5px center;
+	padding-left: 25px;
+	cursor: move;
+}
+.edit_list span.title {
+	font-weight: bold;
+	padding-top:5px;
+	padding-bottom:5px;
+	float:left;
+}
+.edit_list em {
+	font-style: normal;
+	text-transform: uppercase;
+	color: #999;
+	margin-left:5px;
+	font-weight: normal;
+}
+
+.edit_list small {
+	font-style: normal;
+	color: #999;
+	margin-left:5px;
+	font-weight: normal;
+}
+
+/* simple */
 .simple-list{
 	padding-left: 20px;
 	padding-top: 0px;
@@ -391,7 +598,6 @@ a:hover{
 	padding-right: 0px;
 	padding-bottom: 5px;
 	padding-left: 0px;
-	font-weight: bold;
 }
 	.simple-list li img {
 	margin-right: 10px;
@@ -404,106 +610,26 @@ a:hover{
 }
 
 	.simple-list li a, .simple-list li a:link, .simple-list li a:visited {
+	font-weight: bold;
 	vertical-align: middle;
 }
 
+	.simple-list li div a, .simple-list li div a:link, .simple-list li div a:visited {
+	font-weight:normal;
+}
+
 	.simple-list li a:hover, .simple-list li a:focus {
-	background-color: #eee;
 	text-decoration: none;
 }
 
-
-/* Formular */
-
-.content label {
-	display: inline-block;
-	width:15%;
-}
-
-.content span.field_label {
-	vertical-align:top;
-}
-
-.content input {
-	width:auto;
-	background-color:#EFF3FC;
-	border:1px solid #87A6E7;
-	padding:2px 5px;
-}
-.content textarea {
-	background-color:#EFF3FC;
-	border:1px solid #87A6E7;
-	padding:2px 5px;
-}
-
-/* Tooltips */
-
-.tooltip {
-  position: absolute;
-  background-image: url(/images/widgets/tooltip_arrow.gif); 
-  background-repeat: no-repeat; 
-  z-index: 100;
-}
-
-.tooltip_content {
-  padding: 10px 20px 20px 20px;
-  margin-top: 0px;
-  background-color: #fdf389;
-}
-
-.tooltip_close {
-	text-align: right;
-  background-color: #fdf389;
-	padding: 5px 20px 0 0 ;
-	margin-top: 20px;
+ul.three_cols li{
+	width:33%;
+	float: left;
+	clear:none;
+	border:none;
 }
 
 
-.infobox img {
-	padding-right: 4px;
-}
-
-.infobox {
-  background-color: #fff;
-  position: absolute;
-  z-index: 100;
-	border: 4px solid #ccc;
-}
-
-.infobox_content {
-  background-color: #fff;
-}
-
-.infobox_close {
-	display:none;
-	text-align: right;
-  background-color: #fff;
-	padding: 5px 20px 0 0 ;
-	margin-top: 20px;
-}
-
-
-.infobox_links a{
-	display: block;
-}
-
-.infobox_links a:hover{
-	background-color:#ccc;
-	text-decoration: none;
-}
-
-
-/* News */
-
-.content dl.meta{
-	border-top-width: 1px;
-	border-top-style: solid;
-	border-top-color: #eee;
-	border-bottom-width: 1px;
-	border-bottom-style: solid;
-	border-bottom-color: #eee;
-	margin-bottom:0px;
-}
 
 /* edit */
 

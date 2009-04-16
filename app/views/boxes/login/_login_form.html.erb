@@ -5,4 +5,11 @@
   <%end%>
 
   <br/>
-  <%= link_to 'account erstellen', new_profile_path %>
+<h1 class="info_title">Account erstellen</h1>
+<% error_handling_form_for User.new, :url => profiles_path do |form| %>
+	<%= form.text_field :login, :size => 10 %>
+	<%= form.text_field :nickname, :size => 10 %>
+	<%= form.password_field :password, :size => 10 %>
+	<%= form.text_field :email, :size => 10 %>
+	<%= form.submit "registrieren" %>
+<% end %>

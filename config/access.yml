@@ -28,7 +28,7 @@ forum:
 forum_message:
   default: member
 forum_thread:
-  restful:true
+  restful: true
   new: member
   create: member
 friends:

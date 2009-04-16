@@ -1,7 +1,9 @@
+#require 'mongrel_cluster/recipes'
+
 set :application, "rallclansneed"
 set :scm, :git
 set :repository,  "git@dev.innomind.info:rallclansneed.git"
-set :branch, "master"
+set :branch, "online"
 set :deploy_to, "/home/deploy/rallclansneed"
 set :mongrel_conf, "#{current_path}/config/mongrel_cluster.yml"
 

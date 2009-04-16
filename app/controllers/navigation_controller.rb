@@ -48,9 +48,8 @@ class NavigationController < ApplicationController
     params["navigations"].each_with_index do |id, position|
       Navigation.update(id, :position => position)
     end
+    flash[:notice] = "Reihenfolge gespeichert"
     render :update do |page|
-      page.replace_html(:update_message, "<div id='update_message'>Änderungen wurden gespeichert</div>")
-      page.visual_effect(:highlight, :update_message)
       page.reload
     end
   end

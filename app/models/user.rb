@@ -39,7 +39,7 @@ class User < ActiveRecord::Base
   validates_presence_of :email
   #validates_confirmation_of :email
   validates_uniqueness_of :login
-  validates_format_of :login, :with => /\A[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\Z/i, :on => :save
+  validates_format_of :login, :with => /\A[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\Z/i, :on => :save, :message => "Darf nur Buchstaben, Zahlen und '-' (nur eins hintereinander) haben"
   validates_length_of :login, :in => 3..14
   validates_uniqueness_of :email
   validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i, :on => :save

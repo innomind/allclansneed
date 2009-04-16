@@ -1,10 +1,10 @@
 <h1>Tickets</h1>
 
 <div class="userlinks">
-	<%= link_to 'Neues Ticket', new_ticket_path %>
+	<%= link_to image_tag("note_add.png") + 'Neues Ticket', new_ticket_path %>
 	<% supporter_area do %>
-		<%= link_to "Kategorien bearbeiten", category_path("Ticket")%>
-		<%= link_to "Status verwalten", category_path("Ticket", :section => "status")%>
+		<%= link_to image_tag("folder_edit.png") + "Kategorien bearbeiten", category_path("Ticket")%>
+		<%= link_to image_tag("folder_edit.png") + "Status verwalten", category_path("Ticket", :section => "status")%>
 	<% end %>
 </div>
 <%= entry_and_pagination @tickets %>

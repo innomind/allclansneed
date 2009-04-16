@@ -1,15 +1,14 @@
-<tr>
-<td>
-	<td><%= link_to clan.name, clan_path(clan, :subdomain => false) %> </td>
-	<td>
+<li>
+	<span class="title"><%= link_to clan.name, clan_path(clan, :subdomain => false) %></span>
+	<span class="links">
 		<% if @user.owns_clan?(clan) %>
-			<%= link_to("bearbeiten", edit_clan_path(clan))%>
-			<%= link_to( "user verwalten", clan_squads_path(clan)) %>
-			<%= access_link("Seite erstellen", new_clan_site_path(clan)) if clan.site.nil? %>
+			<%= link_to(image_tag("pencil.png") + "bearbeiten", edit_clan_path(clan), :class => "first")%>
+			<%= link_to(image_tag("group.png") + "user verwalten", clan_squads_path(clan)) %>
+			<%= access_link(image_tag("page_add.png") + "Seite erstellen", new_clan_site_path(clan)) if clan.site.nil? %>
 		<% else %>
-			<%= link_to "verlassen", leave_clan_path(clan), :method => :delete, :confirm => "Bist du dir sicher, dass du den Clan verlassen möchtest?" %>
+			<%= link_to image_tag("group_delete.png") + "verlassen", leave_clan_path(clan), :method => :delete, :confirm => "Bist du dir sicher, dass du den Clan verlassen möchtest?", :class => "first" %>
 		<% end %>
 		
-		<%= link_to "link zur Seite", root_path(:subdomain => clan.uniq) unless clan.site.nil?  %>
-	</td>
-</tr>
+		<%= link_to image_tag("page_go.png") + "link zur Seite", root_path(:subdomain => clan.uniq) unless clan.site.nil?  %>
+	</span>
+</li>
