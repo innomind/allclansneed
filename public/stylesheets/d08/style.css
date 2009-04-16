@@ -470,6 +470,7 @@ dl.meta{
 
 .profile {
 	padding-left: 130px;
+	position: relative;
 }
 
 .profile ul, .profile p{
