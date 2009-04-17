@@ -75,7 +75,8 @@ class ApplicationController < ActionController::Base
     init_site
     init_stylesheets
     init_user
-
+    init_paperclip
+    
     add_breadcrumb 'Home', '/'
 
     $page = params[:page].nil? ? 1 : params[:page]
@@ -131,6 +132,13 @@ class ApplicationController < ActionController::Base
       flash[:error] = "Du hast nicht das nötige Recht um diese Seite sehen zu können"
       redirect_to "/"
       #render :template => "errors/Access"
+    end
+  end
+  
+  def init_paperclip
+    if RAILS_ENV == "production"
+      Paperclip::Attachment.default_options[:path] = "/upload/:attachment/:id/:style/:basename.:extension"
+      Paperclip::Attachment.default_options[:url] = "/mnt/static.allclansneed.de/:attachment/:id/:style/:basename.:extension"
     end
   end
 

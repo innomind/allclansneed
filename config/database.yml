@@ -1,17 +1,12 @@
-development: 
-  adapter: postgresql
+#philipp's database.yml
+development:
+  adapter: sqlite3
   encoding: unicode
   database: acn_development
-  username: allclansneed
-  password: allclansneed
-  host: database.innomind.info
 
-test: development
-
-production:
-  adapter: postgresql
+test:
+  adapter: sqlite3
   encoding: unicode
-  database: acn_production
-  username: allclansneed
-  password: allclansneed
-  host: database.innomind.info
+  database: acn_test
+
+production: development
