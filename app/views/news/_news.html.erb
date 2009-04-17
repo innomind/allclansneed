@@ -7,13 +7,13 @@
 	<dd><%= news.category.name unless news.category.nil?%></dd>
 	
 	<dt>Tags</dt>
-	<dd><%= news.tag_list.join(" ") %>&nbsp;<dd>
+	<dd><%= news.tag_list.join(" ") %>&nbsp;</dd>
 		
 	<dt>erstellt am</dt>
-	<dd><%= l news.created_at, :format => :long %><dd>
+	<dd><%= l news.created_at, :format => :long %></dd>
 		
 	<dt>von</dt>
-	<dd><%= username(news.user) %><dd>
+	<dd><%= username(news.user) %></dd>
 </dl>
 
 <div class="edit">
