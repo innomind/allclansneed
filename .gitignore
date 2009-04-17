@@ -2,6 +2,7 @@
 log/*.log
 tmp/**/*
 db/*.sqlite3
+config/database.yml
 public/pics/**/*
 public/profile_pics/**/*
 public/screenshots/**/*
