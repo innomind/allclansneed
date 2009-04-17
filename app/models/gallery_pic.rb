@@ -7,8 +7,8 @@ class GalleryPic < ActiveRecord::Base
       :thumb => "100x100#",
       :medium => "300x300>",
       :small  => "150x150>" },
-    :url => "/upload/:class/:attachment/:id/:style_:basename.:extension",
-    :path => "/mnt/static.allclansneed.de/:class/:attachment/:id/:style/:basename.:extension"
+    :url => "/upload/:attachment/:id/:style_:basename.:extension",
+    :path => "/mnt/static.allclansneed.de/:attachment/:id/:style/:basename.:extension"
       
   belongs_to :site
   belongs_to :gallery
