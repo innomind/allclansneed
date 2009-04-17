@@ -123,9 +123,15 @@ class ApplicationController < ActionController::Base
   def init_access
     controller = self.class.to_s.underscore.gsub(/_controller$/, '')
     check = {:controller => controller, :action => params[:action]}
-    return if @current_session.can_access? check #Rights.lookup_class(check[:controller], check[:action]) == "public"
-    #return if @user.can_access? check
-    render :template => "errors/Access"
+    return if @current_session.can_access? check
+    if Rights.lookup_class(check[:controller], check[:action]) == "member"
+      flash[:error] = "Du musst eingeloggt sein um diese Seite sehen zu können"
+      redirect_to :controller => "login"
+    else
+      flash[:error] = "Du hast nicht das nötige Recht um diese Seite sehen zu können"
+      redirect_to "/"
+      #render :template => "errors/Access"
+    end
   end
 
   def catch_exceptions

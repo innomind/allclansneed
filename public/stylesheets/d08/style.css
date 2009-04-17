@@ -318,10 +318,11 @@ a:hover{
 }
 
 .error {
-	background-color: #B3F4B6;
-	border: 1px solid #0C3;
+	background-color: #ff9a9a;
+	border: 1px solid red;
 	padding:10px;
 }
+
 
 /* Überschriften */
 
