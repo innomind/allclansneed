@@ -29,7 +29,7 @@ namespace :db do
       encoding: unicode
       database: acn_development
       username: allclansneed
-      password: allclansneed
+      password: #{password}
       host: database.innomind.info
 
     test: development
@@ -39,7 +39,7 @@ namespace :db do
       encoding: unicode
       database: acn_production
       username: allclansneed
-      password: allclansneed
+      password: #{password}
       host: database.innomind.info
     EOF
 
