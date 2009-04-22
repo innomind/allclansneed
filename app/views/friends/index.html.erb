@@ -1,2 +1,5 @@
 <h1>Meine Freunde</h1>
-<%= render :partial => 'friend', :collection => @friends %>
+
+<ul class="simple-list">
+<%= render :partial => 'users/user_list', :collection => @friends %>
+</ul>

@@ -1,3 +1,5 @@
 <h1>Freunde von <%= username(@friend_user) %></h1>
 <%#= entry_and_pagination @friends %>
-<%= render :partial => 'friend', :collection => @friends %>
+<ul class="simple-list">
+<%= render :partial => 'users/user_list', :collection => @friends %>
+</ul>

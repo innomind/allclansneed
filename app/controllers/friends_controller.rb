@@ -33,15 +33,17 @@ class FriendsController < ApplicationController
   
   def become
     @want_friend_with = User.find_by_id(params[:id])
-    @current_user = current_user
-    
-    if @current_user != @want_friend_with
+    if current_user == @want_friend_with
+      flash[:notice] = "Du kannst nicht mit dir selber Freundschaft schließen" 
+    elsif current_user.is_friends_with? @want_friend_with
+      flash[:notice] = "Ihr seid bereits Freunde"
+    elsif current_user.is_pending_friends_with? @want_friend_with
+      flash[:notice] = "Freundschaftsanfrage wurde schon erstellt. Du musst noch die Bestätigung abwarten"
+    else
       Postoffice.deliver_become_friend(current_user, @want_friend_with)
       flash[:notice] = "Freundschaftsanfrage erstellt"
       current_user.request_friendship_with @want_friend_with
     end
     redirect_to profile_path(@want_friend_with)
-    #user per mail benachrichtigen
-    #muss noch implementiert werden
   end
 end
