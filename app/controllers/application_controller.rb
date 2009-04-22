@@ -99,9 +99,9 @@ class ApplicationController < ActionController::Base
       session['error_objects'] = [] 
       @current_session.set_user @user
       
-      $user_belongs_to_site = @current_session.belongs_to_current_site? || false
       $user_id = @user.id unless @user.nil?
     end
+    $user_belongs_to_site = @current_session.belongs_to_current_site? || false
   end
 
   def init_site
