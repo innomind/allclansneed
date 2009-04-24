@@ -86,6 +86,7 @@ de:
         description: Beschreibung
         email: Email
         entry: Eintrag
+        content: Inhalt
         intern: Intern
         intern_desc: falls intern gewählt wird, können nur Clanmitglieder diesen Eintrag lesen
         message: Nachricht

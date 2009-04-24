@@ -13,9 +13,12 @@ module TemplateBoxesHelper
   def create_box box, link_style = nil, entry_style = nil
     return "&nbsp;" if box.nil?
     if (box.template_box_type.link_list)
-      link_style ||= ["<li>","</li>"] 
+      around = ["<div class='box_entry'><ul class=\"link_list\">","</ul></div>"] if link_style.nil?
+      around ||= ["",""]
+      link_style ||= ["<li>","</li>"]
       i = 0
-      eval("create_#{box.template_box_type.internal_name}_box box")[0..(box.template_area.max_list_items || -0)-1].collect{ |link|
+      out = around[0]
+      out << eval("create_#{box.template_box_type.internal_name}_box box")[0..(box.template_area.max_list_items || -0)-1].collect{ |link|
         if link_style.count == 3
           i += 1
           index = (i%2 == 1) ? 0 : 1
@@ -24,6 +27,7 @@ module TemplateBoxesHelper
         end 
         link_style[index]+link+link_style.last
       }.join
+      out << around[1]
     else
       entry_style ||= ["<div class='box_entry'>", "</div>"]
       ret = entry_style[0]

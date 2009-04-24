@@ -61,6 +61,7 @@ body {
 	width: 169px;
 	height: 23px;
 	margin: 0px;
+	color: black;
 }
 .box_cat span {
 	position: relative; left: 10px; top: 5px;

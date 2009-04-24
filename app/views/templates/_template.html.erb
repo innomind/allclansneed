@@ -1,8 +1,2 @@
-<div class="prop" style="width:60%">
-<span class="prop" style="width:30%">
-	<%= template.name %>
-</span>
-<span class="prop_entry">
-	<%= access_link_unless (@site.template == template), "auswählen", choose_template_path(template) %>
-</span>
-</div>
+<dt><%= template.name %></dt>
+<dd><%= (access_link_unless (@site.template == template), "auswählen", choose_template_path(template)) || "&nbsp;" %></dd>

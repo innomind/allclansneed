@@ -6,6 +6,16 @@ body {
 	margin: 0px;
 	background-color: #464646;
 }
+
+.cats, .box, .box2, .box3 {
+	color: black;
+}
+
+.cats a, .box a, .box2 a, .box3 a {
+	color: #ccc;
+}
+
+
 .wrapper {
 	background-image: url(/images/d12/4.gif);
 	width: 948px;

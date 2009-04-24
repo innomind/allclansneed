@@ -39,7 +39,7 @@ class ApplicationController < ActionController::Base
   def self.comment_mce_for only = :show
     uses_tiny_mce :options => {:theme => "advanced", 
                              :plugins => [:emotions],
-                            :width => "auto",
+                             :width => "auto",
                              :theme_advanced_buttons1 => [:bold, :italic, :emotions],
                              :theme_advanced_buttons2 => "",
                              :theme_advanced_buttons3 => ""

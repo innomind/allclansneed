@@ -2,8 +2,36 @@
 body {
 	font-family: Tahoma, Arial, sans-serif;
 	font-size: 11px;
-	/* color: #666666; */
+	color: black;
 }
+
+
+/* Progressbar */
+
+div.progressbar {
+ border: 1px solid #ccc; 
+ width: 100px; 
+ margin: 2px 5px 2px 0; 
+ padding: 1px; 
+ float: left; 
+ background: white;
+}
+
+div.progressbar > div {
+ height: 12px;
+ float: left;
+}
+
+div.progressbar > div.progressbar_color_0 { background-color: #ACE97C; }
+div.progressbar > div.progressbar_color_1 { background-color: #E35E5D; }
+div.progressbar > div.progressbar_color_2 { background-color: #302B26; }
+div.progressbar > div.progressbar_color_3 { background-color: #93D3D4; }
+div.progressbar > div.progressbar_color_4 { background-color: #FFA300; }
+div.progressbar > div.progressbar_color_5 { background-color: #8E709E; }
+div.progressbar > div.progressbar_color_6 { background-color: #FFD8C7; }
+div.progressbar > div.progressbar_color_7 { background-color: #0D4006; }
+div.progressbar > div.progressbar_color_8 { background-color: gray; }
+div.progressbar > div.progressbar_color_9 { background-color: #EDE9DD; }
 
 /* Formular */
 
@@ -22,18 +50,46 @@ span.field_label {
 
 input {
 	width:auto;
-	background-color:#EFF3FC;
-	border:1px solid #87A6E7;
+	background-color: #eee;
+	border:1px solid #6678B1;
 	padding:2px 5px;
 }
 textarea {
-	background-color:#EFF3FC;
-	border:1px solid #87A6E7;
+	background-color: #eee;
+	border:1px solid #6678B1;
 	padding:2px 5px;
 }
 
 /* Tooltips */
 
+.tooltip {
+  position: absolute;
+  /*background-image: url(/images/widgets/tooltip_arrow.gif); 
+  background-repeat: no-repeat; */
+  z-index: 100;
+	text-align: left;
+	border: 1px solid #ccc;
+	background-color: #ddd;
+}
+
+.tooltip_content {
+  padding: 5px 20px;
+  margin-top: 0px;
+}
+
+.tooltip_close {
+	position:absolute;
+	top: 0px;
+	right: 0px;
+	display:none;
+}
+
+.tooltip:hover .tooltip_close {
+	display:block;
+}
+
+
+/* ALT
 .tooltip {
   position: absolute;
   background-image: url(/images/widgets/tooltip_arrow.gif); 
@@ -54,7 +110,7 @@ textarea {
 	padding: 5px 20px 0 0 ;
 	margin-top: 20px;
 }
-
+*/
 /* Infobox */
 .infobox {
   background-color: #fff;
@@ -82,7 +138,6 @@ textarea {
 	line-height: 20px;
 }
 
-
 .infobox_container h4{
 	padding:0;
 	margin:0;
@@ -93,15 +148,14 @@ textarea {
 .link_list {
 	list-style:none;
 	padding:0px;
-	padding-left:0px;
+	margin:0px;
 }
 .link_list a {
 	margin:0px;
 }
 .link_list li {
 	padding: 3px;
-	width:100% !important;
-	border-bottom: 1px solid #eee;
+	border-bottom: 1px solid #ccc;
 	clear:both;
 }
 .link_list li:hover{
@@ -117,7 +171,6 @@ textarea {
 .simple-table
 {
 	margin-top: 0px;
-	background: #fff;
 	border-collapse: collapse;
 	text-align: left;
 }
@@ -127,25 +180,25 @@ textarea {
 	background-color: #eee;
 	color: black;
 	padding: 5px 8px;
-	border-bottom: 2px solid #6678b1;
+	border-bottom: 2px solid #6678B1;
 	font-size: 11px;
 }
 .simple-table td
 {
 	border-bottom: 1px solid #ccc;
-	color: #aaa;
+	color: #888;
 	padding: 4px 8px;
 }
 
 .simple-table td.dark
 {
-	color: #000;
+	color: black;
 }
 
 .simple-table tbody tr:hover td
 {
-	background-color:#efefef;
-	color: #000;
+	background-color: #eee;
+	color: black;
 }
 
 
@@ -194,46 +247,44 @@ textarea {
 .simple-post
 {
 	margin-top: 0px;
-	background: #fff;
 	border-collapse: collapse;
 	text-align: left;
 }
 .simple-post th
 {
 	font-weight: normal;
-	color: #000;
 	padding: 5px 8px;
-	border-bottom: 2px solid #6678b1;
+	border-bottom: 2px solid #6678B1;
 	font-size: 14px;
 }
 .simple-post td
 {
-	color: #888;
+	color:  #888;
 	padding: 4px 8px;
 	vertical-align: top;
 }
 
 .simple-post td.dark
 {
-	color: #000;
+	color: black;
 }
 
 .simple-post td.post-title {
-	color: #000;
+	color: black;
 	border-bottom: 1px solid #ccc;
-	border-top: 1px solid #000;
-	background: #eee;
+	border-top: 1px solid black;
+	background:  #eee;
 }
 
 .simple-post tbody tr:hover td
 {
-	color: #000;
+	color: black;
 }
 
 
 .embedded {
 	border: 1px solid #ccc;
-	background-color: #efefef;
+	background-color: #ddd;
 	padding: 5px;
 	margin-bottom: 10px;
 }
@@ -280,7 +331,7 @@ a{
 }
  
 a:hover{
-  color:#000;
+  color: #000;
   text-decoration: underline;
 }
 
@@ -294,13 +345,13 @@ a:hover{
 
 .userlinks a{
 	padding: 5px;
-	color:#000;
-	background-color:#efefef;
+	color: black;
+	background-color: #eee;
 }
 
 .userlinks a:hover{
 	padding: 5px;
-	background-color:#efefef;
+	background-color: #eee;
 }
 
 /* Content */
@@ -313,12 +364,14 @@ a:hover{
 .notice {
 	background-color: #B3F4B6;
 	border: 1px solid #0C3;
+	color: black;
 	padding:10px;
 }
 
 .error {
 	background-color: #ff9a9a;
 	border: 1px solid red;
+	color: black;
 	padding:10px;
 }
 
@@ -365,7 +418,7 @@ a:hover{
 h4 {
 	margin: 1px;
 	padding-left: 5px;
-	color: #aaa;
+	color: #888;
 	font-weight: normal;
 	border-bottom: 1px dotted #ccc;
 }
@@ -436,7 +489,7 @@ dt {
 	margin-right: 10px;
 	width:70px;
 	text-align:right;
-	color:#666;
+	color: #888;
 }
 dd {		
 	margin-left: 85px; 
@@ -459,10 +512,10 @@ dl.main_info dd{
 dl.meta{
 	border-top-width: 1px;
 	border-top-style: solid;
-	border-top-color: #eee;
+	border-top-color: #ccc;
 	border-bottom-width: 1px;
 	border-bottom-style: solid;
-	border-bottom-color: #eee;
+	border-bottom-color: #ccc;
 	margin-bottom:0px;
 }
 
@@ -486,7 +539,7 @@ dl.meta{
 	.profile ul li {
 	border-bottom-width: 1px;
 	border-bottom-style: solid;
-	border-bottom-color: #eee;
+	border-bottom-color: #ccc;
 	line-height: 15px;
 	clear:both;
 	padding-top: 0px;
@@ -607,7 +660,7 @@ li span.links a.first {
 	margin-bottom: 10px;
 }
 	.simple-list li div {
-	color: #666;
+	color: #888;
 	font-weight: normal;
 }
 
@@ -756,7 +809,6 @@ ul.three_cols li{
 .calendar tr.dayName {
 	color: #333;
 	background-color: #eee;
-
 }
 .calendar tr.dayName th {
 	line-height:40px;

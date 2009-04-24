@@ -43,8 +43,8 @@ body {
 .logo_cat_content {
 	float: left;
 	position: relative;
-	top: 84px;
-	left: 30px;
+	top: 68px;
+	left: 74px;
 	color: #fff;
 	width: 463px;
 }
@@ -81,6 +81,15 @@ body {
 	width: 153px;
 	padding-top: 10px;
 }
+
+.box a, .box_two a {
+	color: black;
+}
+
+.box h4, .box_two h4 {
+	color: black;
+}
+
 .box_cat {
 	background-image: url(/images/d05/6.gif);
 	height: 20px;
@@ -94,7 +103,7 @@ body {
 	margin: 0px;
 }
 .box_content span {
-	padding: 5px;
+	/* padding: 5px; */
 }
 .box_end {
 	background-image: url(/images/d05/8.gif);

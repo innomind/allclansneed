@@ -2,8 +2,36 @@
 body {
 	font-family: Tahoma, Arial, sans-serif;
 	font-size: 11px;
-	/* color: #666666; */
+	color: black;
 }
+
+
+/* Progressbar */
+
+div.progressbar {
+ border: 1px solid #ccc; 
+ width: 100px; 
+ margin: 2px 5px 2px 0; 
+ padding: 1px; 
+ float: left; 
+ background: white;
+}
+
+div.progressbar > div {
+ height: 12px;
+ float: left;
+}
+
+div.progressbar > div.progressbar_color_0 { background-color: #ACE97C; }
+div.progressbar > div.progressbar_color_1 { background-color: #E35E5D; }
+div.progressbar > div.progressbar_color_2 { background-color: #302B26; }
+div.progressbar > div.progressbar_color_3 { background-color: #93D3D4; }
+div.progressbar > div.progressbar_color_4 { background-color: #FFA300; }
+div.progressbar > div.progressbar_color_5 { background-color: #8E709E; }
+div.progressbar > div.progressbar_color_6 { background-color: #FFD8C7; }
+div.progressbar > div.progressbar_color_7 { background-color: #0D4006; }
+div.progressbar > div.progressbar_color_8 { background-color: gray; }
+div.progressbar > div.progressbar_color_9 { background-color: #EDE9DD; }
 
 /* Formular */
 
@@ -22,18 +50,46 @@ span.field_label {
 
 input {
 	width:auto;
-	background-color:#EFF3FC;
-	border:1px solid #87A6E7;
+	background-color: #ccc;
+	border:1px solid #2e5002;
 	padding:2px 5px;
 }
 textarea {
-	background-color:#EFF3FC;
-	border:1px solid #87A6E7;
+	background-color: #ccc;
+	border:1px solid #2e5002;
 	padding:2px 5px;
 }
 
 /* Tooltips */
 
+.tooltip {
+  position: absolute;
+  /*background-image: url(/images/widgets/tooltip_arrow.gif); 
+  background-repeat: no-repeat; */
+  z-index: 100;
+	text-align: left;
+	border: 1px solid #bbb;
+	background-color: #aaa;
+}
+
+.tooltip_content {
+  padding: 5px 20px;
+  margin-top: 0px;
+}
+
+.tooltip_close {
+	position:absolute;
+	top: 0px;
+	right: 0px;
+	display:none;
+}
+
+.tooltip:hover .tooltip_close {
+	display:block;
+}
+
+
+/* ALT
 .tooltip {
   position: absolute;
   background-image: url(/images/widgets/tooltip_arrow.gif); 
@@ -54,7 +110,7 @@ textarea {
 	padding: 5px 20px 0 0 ;
 	margin-top: 20px;
 }
-
+*/
 /* Infobox */
 .infobox {
   background-color: #fff;
@@ -82,7 +138,6 @@ textarea {
 	line-height: 20px;
 }
 
-
 .infobox_container h4{
 	padding:0;
 	margin:0;
@@ -93,19 +148,18 @@ textarea {
 .link_list {
 	list-style:none;
 	padding:0px;
-	padding-left:0px;
+	margin:0px;
 }
 .link_list a {
 	margin:0px;
 }
 .link_list li {
 	padding: 3px;
-	width:100% !important;
-	border-bottom: 1px solid #eee;
+	border-bottom: 1px solid #bbb;
 	clear:both;
 }
 .link_list li:hover{
-	background-color:#eee;
+	background-color:#ccc;
 	text-decoration: none;
 }
 .link_list img {
@@ -117,35 +171,34 @@ textarea {
 .simple-table
 {
 	margin-top: 0px;
-	background: #fff;
 	border-collapse: collapse;
 	text-align: left;
 }
 .simple-table th
 {
 	font-weight:normal;
-	background-color: #eee;
+	background-color: #ccc;
 	color: black;
 	padding: 5px 8px;
-	border-bottom: 2px solid #6678b1;
+	border-bottom: 2px solid #2e5002;
 	font-size: 11px;
 }
 .simple-table td
 {
-	border-bottom: 1px solid #ccc;
-	color: #aaa;
+	border-bottom: 1px solid #bbb;
+	color: #666;
 	padding: 4px 8px;
 }
 
 .simple-table td.dark
 {
-	color: #000;
+	color: black;
 }
 
 .simple-table tbody tr:hover td
 {
-	background-color:#efefef;
-	color: #000;
+	background-color: #ccc;
+	color: black;
 }
 
 
@@ -194,46 +247,44 @@ textarea {
 .simple-post
 {
 	margin-top: 0px;
-	background: #fff;
 	border-collapse: collapse;
 	text-align: left;
 }
 .simple-post th
 {
 	font-weight: normal;
-	color: #000;
 	padding: 5px 8px;
-	border-bottom: 2px solid #6678b1;
+	border-bottom: 2px solid #2e5002;
 	font-size: 14px;
 }
 .simple-post td
 {
-	color: #888;
+	color:  #666;
 	padding: 4px 8px;
 	vertical-align: top;
 }
 
 .simple-post td.dark
 {
-	color: #000;
+	color: black;
 }
 
 .simple-post td.post-title {
-	color: #000;
-	border-bottom: 1px solid #ccc;
-	border-top: 1px solid #000;
-	background: #eee;
+	color: black;
+	border-bottom: 1px solid #bbb;
+	border-top: 1px solid black;
+	background:  #ccc;
 }
 
 .simple-post tbody tr:hover td
 {
-	color: #000;
+	color: black;
 }
 
 
 .embedded {
-	border: 1px solid #ccc;
-	background-color: #efefef;
+	border: 1px solid #bbb;
+	background-color: #aaa;
 	padding: 5px;
 	margin-bottom: 10px;
 }
@@ -256,7 +307,7 @@ textarea {
 
 
 .entries {
-	border: 1px solid #ccc;
+	border: 1px solid #bbb;
 	padding: 3px 8px;
 	float:right;
 }
@@ -264,7 +315,7 @@ textarea {
 .pagination{
 	text-align: right;
 	padding: 3px 8px;
-	border: 1px solid #ccc;
+	border: 1px solid #bbb;
 	float:right;
 }
 
@@ -275,12 +326,12 @@ img {
 }
 
 a{
-  color: #03617A;
+  color: #2e5002;
   text-decoration: none;
 }
  
 a:hover{
-  color:#000;
+  color: black;
   text-decoration: underline;
 }
 
@@ -294,13 +345,13 @@ a:hover{
 
 .userlinks a{
 	padding: 5px;
-	color:#000;
-	background-color:#efefef;
+	color: black;
+	background-color: #ccc;
 }
 
 .userlinks a:hover{
 	padding: 5px;
-	background-color:#efefef;
+	background-color: #ccc;
 }
 
 /* Content */
@@ -313,12 +364,14 @@ a:hover{
 .notice {
 	background-color: #B3F4B6;
 	border: 1px solid #0C3;
+	color: black;
 	padding:10px;
 }
 
 .error {
 	background-color: #ff9a9a;
 	border: 1px solid red;
+	color: black;
 	padding:10px;
 }
 
@@ -352,9 +405,9 @@ a:hover{
 	margin-top:5px;
 	padding-left: 5px;
 	border-left-width: 2px;
-	background-color: #eee;
+	background-color: #ccc;
 	border-left-style: solid;
-	border-left-color: #6678B1;
+	border-left-color: #2e5002;
 	line-height: 20px;
 }
 
@@ -365,9 +418,9 @@ a:hover{
 h4 {
 	margin: 1px;
 	padding-left: 5px;
-	color: #aaa;
+	color: #666;
 	font-weight: normal;
-	border-bottom: 1px dotted #ccc;
+	border-bottom: 1px dotted #bbb;
 }
 
 /* TODO mit dl ersetzen */
@@ -402,7 +455,7 @@ h4 {
 	border: 1px solid #ddd;
 }
 .avatar a {
-	background-color: #eee;
+	background-color: #ccc;
 	padding: 2px;
 	margin-bottom: 2px;
 	display:block;
@@ -436,7 +489,7 @@ dt {
 	margin-right: 10px;
 	width:70px;
 	text-align:right;
-	color:#666;
+	color: #666;
 }
 dd {		
 	margin-left: 85px; 
@@ -459,10 +512,10 @@ dl.main_info dd{
 dl.meta{
 	border-top-width: 1px;
 	border-top-style: solid;
-	border-top-color: #eee;
+	border-top-color: #bbb;
 	border-bottom-width: 1px;
 	border-bottom-style: solid;
-	border-bottom-color: #eee;
+	border-bottom-color: #bbb;
 	margin-bottom:0px;
 }
 
@@ -486,7 +539,7 @@ dl.meta{
 	.profile ul li {
 	border-bottom-width: 1px;
 	border-bottom-style: solid;
-	border-bottom-color: #eee;
+	border-bottom-color: #bbb;
 	line-height: 15px;
 	clear:both;
 	padding-top: 0px;
@@ -509,7 +562,7 @@ dl.meta{
 	vertical-align: middle;
 }
 	.profile ul li a:hover, .profile ul li a:focus {
-	background-color: #eee;
+	background-color: #ccc;
 	text-decoration: none;
 }
 	.profile ul li.shared_friends {
@@ -756,14 +809,13 @@ ul.three_cols li{
 .calendar tr.dayName {
 	color: #333;
 	background-color: #eee;
-
 }
 .calendar tr.dayName th {
 	line-height:40px;
 	font-weight: normal;
 	border-bottom-width: 2px;
 	border-bottom-style: solid;
-	border-bottom-color: #6678B1;
+	border-bottom-color: #2e5002;
 	width: 60px;
 
 }

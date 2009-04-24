@@ -8,18 +8,17 @@
 </td>
 
 <td style="padding-left:2px" class="dark">
-	<div class="prop" style="width:100%">
-		<span class="prop" style="width:40%">Name</span>
-		<span class="prop_entry"><%= link_to gallery.name, gallery_path(gallery) %> <%= intern_pic gallery %></span>
-	</div>
-	<div class="prop" style="width:100%">
-		<span class="prop" style="width:40%">Beschreibung</span>
-		<span class="prop_entry"><%= gallery.description %></span>
-	</div>
-	<div class="prop" style="width:100%">
-		<span class="prop" style="width:40%">erstellt</span>
-		<span class="prop_entry"><%= l gallery.created_at, :format => "datelong" %></span>
-	</div>
+	<dl>
+		<dt>Name</dt>
+		<dd><%= link_to gallery.name, gallery_path(gallery) %> <%= intern_pic gallery %></dd>
+		
+		<dt>Beschreibung</dt>
+		<dd><%= gallery.description %>&nbsp;</dd>
+		
+		<dt>erstellt</dt>
+		<dd><%= l gallery.created_at, :format => "datelong" %></dd>
+	</dl>
+	
 <%= access_link image_tag("folder_delete.png"), gallery_path(gallery), :controller => "gallery", :method => "delete", :confirm => "Galerie wirklich löschen?"  %>
 <%= access_link image_tag("folder_edit.png"), edit_gallery_path(gallery) %>
 </td>
