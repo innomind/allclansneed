@@ -139,6 +139,7 @@ class ApplicationController < ActionController::Base
     if RAILS_ENV == "production"
       Paperclip::Attachment.default_options[:url] = "/upload/:attachment/:id/:style/:basename.:extension"
       Paperclip::Attachment.default_options[:path] = "/mnt/static.allclansneed.de/:attachment/:id/:style/:basename.:extension"
+      Paperclip::Attachment.default_options[:default_url] = "/upload/:attachment/:style/missing.png"
     end
   end
 
