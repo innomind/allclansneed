@@ -7,5 +7,9 @@
 	
 <% end %>
 </dl>
-<%= progressbar [35,78,15] %>
+
+<% for option in @poll.poll_options %>
+	<%= option.name %><br><%= option.vote_count.to_s %><%= progressbar ((option.vote_count.to_f/@poll.vote_count.to_f)*100).to_i %><br><br>
+<% end %>
+
 <%= show_comments @poll %>
