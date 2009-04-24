@@ -7,5 +7,6 @@ class Profile < ActiveRecord::Base
   has_attached_file :profile_pic,
     :styles => {
       :thumb => "100x100#" }#,
+    #:default_url => "/:attachment/:style/missing.png"
     #:path => "/mnt/www1/:attachment/:id/:style/:basename.:extension"
 end

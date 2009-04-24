@@ -3,7 +3,7 @@
     <%= f.password_field 'password', :size => 10 %>
     <%= f.submit 'log in' %>
   <%end%>
-
+<%= link_to 'Passwort vergessen', :controller => "login", :action => "request_password"%>
   <br/>
 <h1 class="info_title">Account erstellen</h1>
 <% error_handling_form_for User.new, :url => profiles_path do |form| %>

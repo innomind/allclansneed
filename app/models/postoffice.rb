@@ -28,4 +28,11 @@ class Postoffice < ActionMailer::Base
     # Email body substitutions go here
     body :become => become, :become_with => become_with
   end
+  
+  def reset_password(user)
+    recipients user.email
+    from  "noreply@allclansneed.com"
+    subject "Neues Passwort"
+    body :new_pw_user => user
+  end
 end

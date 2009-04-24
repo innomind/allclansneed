@@ -24,6 +24,7 @@ class ProfileController < ApplicationController
       flash[:notice] = "Du hast dich erfolgreich registriert. Du kannst dich jetzt einloggen"
       redirect_to :controller => "login"
     else
+      @new_user.password = ""
       render :action => "new"
     end
   end

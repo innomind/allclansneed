@@ -9,7 +9,7 @@
 
   <br/>
   <%= link_to 'account erstellen', new_profile_path %>
-
+  <%= link_to 'Passwort vergessen', :controller => "login", :action => "request_password"%>
 <% else %>
   logged in
 <% end %>

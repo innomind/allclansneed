@@ -45,12 +45,24 @@ class User < ActiveRecord::Base
   validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i, :on => :save
    
   def before_validation
-    self.email = self.email.downcase
-    self.login = self.login.downcase
+    self.email = self.email.downcase unless self.email.nil?
+    self.login = self.login.downcase unless self.login.nil?
   end 
    
   def after_create
     self.profile = Profile.create
+  end
+  
+  def before_create
+    self[:password] = encrypt self[:password]
+  end
+  
+  def set_password pw
+    self[:password] = pw.nil? ? "" : (encrypt pw)
+  end
+  
+  def generate_password_reset_key
+    self.update_attribute("password_reset_key", encrypt("fahsdf9023ioasf" + Time.now.to_s))
   end
   
   def encrypt str
@@ -65,9 +77,9 @@ class User < ActiveRecord::Base
     self[:nickname] || self[:login]
   end
   
-  def password= pw
-    self[:password] = encrypt pw
-  end
+#  def password= pw
+#    self[:password] = encrypt pw
+#  end
   
   def check_pw pw
     (encrypt pw) == (self[:password])
