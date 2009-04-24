@@ -68,7 +68,7 @@ class ApplicationController < ActionController::Base
   private
 
   def set_layout
-    current_site.template.internal_name
+    params[:layout] || current_site.template.internal_name
   end
 
   def init

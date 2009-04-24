@@ -1,0 +1,159 @@
+body {
+	font-family: Tahoma, Arial, sans-serif;
+	font-size: 11px;
+	margin: 0px;
+	background-color: #000000;
+	color: #999999;
+}
+.wrapper {
+	background-image: url(/images/d06/6.gif);
+	width: 990px;
+	margin: auto;
+	display: table;
+}
+.logo {
+	background-image: url(/images/d06/1.gif);
+	height: 140px;
+	text-align: center;
+}
+.logo_text {
+	position: relative;
+	top: 70px;
+	font-size: 20px;
+	font-weight: bold;
+	color: #ffffff;
+}
+.logo_subtext {
+	position: relative;
+	top: 70px;
+}
+.navi {
+	background-image: url(/images/d06/2.gif);
+	height: 45px;
+}
+.float_left {
+	float: left;
+}
+.navi_nor {
+	background-image: url(/images/d06/button.gif);
+	width: 116px;
+	height: 45px;
+	list-style: none;
+	float: left;
+}
+.navi_nor_text {
+	position: relative;
+	left: 28px;
+	top:2px;
+	font-size: 14px;
+	font-weight: bold;
+}
+.navi_nor_subtext {
+	position: relative;
+	left:28px;
+	color: #000000;
+}
+.navi_act {
+	background-image: url(/images/d06/button_aktiv.gif);
+	width: 116px;
+	height: 45px;
+	list-style: none;
+	float: left;
+}
+.navi_act_text {
+	position: relative;
+	left: 28px;
+	top:2px;
+	font-size: 14px;
+	font-weight: bold;
+	color: #000000;
+}
+.navi_act_subtext {
+	position: relative;
+	left:28px;
+	color: #000000;
+}
+.float_right {
+	float: right;
+}
+.content {
+	clear:right;
+	float: left;
+	width: 519px;
+	padding: 1px;
+	padding-top: 5px;
+}
+.content_title {
+	background-image: url(/images/d06/7.gif);
+	width: 516px;
+	height: 25px;
+	margin: 0px;
+}
+.content_title_text {
+	position: relative;
+	left: 15px;
+	top: 5px;
+	font-size: 13px;
+	color: #FFFFFF;
+	font-weight: bold;
+}
+.content_title_subtext {
+	position: relative;
+	left: 10px;
+	color: #cccccc;
+	font-size: 9px;
+}
+.padding {
+	padding: 5px;
+}
+.box_left {
+	float: left;
+	width: 194px;
+	padding: 1px;
+	padding-top: 5px;
+}
+.box_left_cat {
+	background-image: url(/images/d06/8.gif);
+	width: 189px;
+	height: 25px;
+	margin: 0px;
+}
+.box_left_text {
+	position: relative;
+	left: 15px;
+	top: 5px;
+	font-size: 13px;
+	color: #FFFFFF;
+	font-weight: bold;
+}
+.box_left_subtext {
+	position: relative;
+	left: 10px;
+	color: #cccccc;
+	font-size: 9px;
+}
+.box_right {
+	float: left;
+	width: 271px;
+	padding-top: 5px;
+}
+.box_right_cat {
+	background-image: url(/images/d06/9.gif);
+	width: 271px;
+	height: 25px;
+	margin: 0px;
+}
+.box_right_text {
+	position: relative;
+	left: 15px;
+	top: 5px;
+	font-size: 13px;
+	color: #FFFFFF;
+	font-weight: bold;
+}
+.box_right_subtext {
+	position: relative;
+	left: 10px;
+	color: #cccccc;
+	font-size: 9px;
+}

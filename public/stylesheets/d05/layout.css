@@ -1,0 +1,131 @@
+body {
+	background-image: url(/images/d05/1.gif);
+	background-repeat: repeat-x;
+	font-size: 11px;
+	font-family: Tahoma, Arial, sans-serif;
+	margin: 0px;
+	background-color: #313117;
+}
+.box_entry {
+	padding: 4px;
+}
+.wrapper {
+	background-image: url(/images/d05/3.gif);
+	width: 978px;
+	margin: auto;
+	display: table;
+}
+.logo {
+	background-image: url(/images/d05/2.gif);
+	height: 139px;
+}
+.logo_top {
+	position: relative;
+	top: 10px;
+	left: 110px;
+	color: #fff;
+}
+.logo_text {
+	position: relative;
+	top: 40px;
+	left: 100px;
+	color: #fff;
+	font-size: 20px;
+}
+.logo_cat_left {
+	float: left;
+	position: relative;
+	top: 84px;
+	left: 30px;
+	color: #fff;
+	width: 153px;
+}
+.logo_cat_content {
+	float: left;
+	position: relative;
+	top: 84px;
+	left: 30px;
+	color: #fff;
+	width: 463px;
+}
+.logo_cat_two {
+	float: left;
+	position: relative;
+	top: 84px;
+	left: 40px;
+	color: #fff;
+	width: 155px;
+}
+.logo_cat_right {
+	float: left;
+	position: relative;
+	top: 84px;
+	left: 40px;
+	color: #fff;
+	width: 153px;
+}
+.img_left {
+	float: left;
+	width: 22px;
+	height: 39px;
+	background-image: url(/images/d05/4.gif);
+	background-repeat: no-repeat;
+}
+.content {
+	float: left;
+	width: 463px;
+	padding: 5px;
+}
+.box {
+	float: left;
+	width: 153px;
+	padding-top: 10px;
+}
+.box_cat {
+	background-image: url(/images/d05/6.gif);
+	height: 20px;
+	margin: 0px;
+}
+.box_cat span {
+	position: relative; top: 3px; left: 10px; color: #cccccc;
+}
+.box_content {
+	background-image: url(/images/d05/7.gif);
+	margin: 0px;
+}
+.box_content span {
+	padding: 5px;
+}
+.box_end {
+	background-image: url(/images/d05/8.gif);
+	height: 16px;
+	margin: 0px;
+}
+.box_two {
+	float: left;
+	width: 155px;
+	padding-top: 10px;
+}
+.box_two_cat {
+	background-image: url(/images/d05/6.gif);
+	width: 153px;
+	height: 20px;
+	margin: 0px;
+}
+.box_two_cat span {
+	position: relative; top: 3px; left: 10px; color: #cccccc;
+}
+.box_two_content {
+	background-image: url(/images/d05/7.gif);
+	width: 153px;
+	margin: 0px;
+}
+.box_two_content span {
+	padding: 5px;
+}
+.box_two_end {
+	background-image: url(/images/d05/8.gif);
+	width: 153px;
+	height: 16px;
+	margin: 0px;
+}

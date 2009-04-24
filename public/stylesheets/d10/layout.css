@@ -1,0 +1,161 @@
+body {
+	font-family: Tahoma, Arial, sans-serif;
+	font-size: 11px;
+	color: #cccccc;
+	background-color: #232122;
+}
+.wrapper {
+	background-image: url(/images/d10/2.gif);
+	width: 896px;
+	border: 1px;
+	border-color: #fff;
+	margin: auto;
+	border-style: outset;
+	display: table;
+}
+.logo {
+	background-image: url(/images/d10/1.gif);
+	height: 219px;
+}
+.logo_top_left {
+	float: left;
+	padding: 3px;
+	color: #fff;
+	font-weight: bold;
+}
+.logo_top_right {
+	float: right;
+	padding: 3px;
+	color: #fff;
+	font-weight: bold;
+}
+.logo_text {
+	clear:left;
+	position: relative;
+	left: 15px;
+	top: 50px;
+	color: #fff;
+	font-weight: bold;
+	font-size: 40px;
+	height: 166px;
+}
+.logo_navi {
+	height: 38px;
+}
+.navi {
+	float:left;
+	background-image: url(/images/d10/button.gif);
+	height: 24px;
+	width: 93px;
+	text-align: center;
+	padding-top: 10px;
+	margin-left: 5px;
+	font-weight: bold;
+}
+.navi_act {
+	float:left;
+	background-image: url(/images/d10/button2.gif);
+	height: 24px;
+	width: 93px;
+	text-align: center;
+	color: #000000;
+	padding-top: 10px;
+	margin-left: 5px;
+	font-weight: bold;
+}
+.subnavi {
+	position: relative;
+	left: 5px;
+	height: 150px;
+}
+.subnavi span {
+	padding: 5px;
+}
+.subnavi_background {
+	background-image: url(/images/d10/3.gif);
+	height: 22px;
+}
+.box {
+	float: left;
+	width: 169px;
+}
+.box_cat {
+	background-image: url(/images/d10/4.gif);
+	height: 24px;
+}
+.box_cat_left {
+	float:left;
+	position: relative;
+	left: 15px;
+	top: 3px;
+	font-weight: bold;
+}
+.box_cat_right {
+	float:right;
+	position: relative;
+	right: 2px;
+	top: 1px;
+}
+.padding {
+	padding: 5px;
+}
+.content {
+	float: left;
+	width: 388px;
+}
+.content_info {
+	background-image: url(/images/d10/5.gif);
+	height: 24px;
+}
+.content_info_left {
+	float:left;
+	position: relative;
+	left: 15px;
+	top: 3px;
+	font-weight: bold;
+}
+.content_info_right {
+	float:right;
+	position: relative;
+	right: 2px;
+	top: 1px;
+}
+.content_box_cat {
+	background-image: url(/images/d10/6.gif);
+	height: 16px;
+	width: 373px;
+	margin: auto;
+	margin-top: 3px;
+	padding: 3px;
+}
+.content_box_cat_left {
+	float: left;
+	font-weight: bold;
+}
+.content_box_cat_right {
+	float: right;
+}
+.content_box {
+	background-image: url(/images/d10/7.gif);
+	width: 369px;
+	margin: auto;
+	padding: 5px;
+}
+.img {
+	background-image: url(/images/d10/news.gif);
+	height: 39px;
+	width: 370px;
+	margin: 0px;
+}
+.img_left {
+	position: relative;
+	top: 8px;
+	left: 5px;
+	font-size: 18px;
+}
+.box_end {
+	background-image: url(/images/d10/8.gif);
+	height: 1px;
+	width: 379px;
+	margin: auto;
+}
