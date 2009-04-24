@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+	<title><%= @site.site_title %></title>
+
+		<%# bundle do %>
+		  <%= javascript_include_tag :defaults%>
+		  <%= stylesheet_link_tag "d06/layout" %>
+		  <%= stylesheet_link_tag "d06/style" %>
+		  <%= include_tiny_mce_if_needed %>
+		  <%= yield :header_tags %>
+		<%# end %>
+</head>
+
+<body>
+
+
+<div class="wrapper">
+    <div class="logo">
+        <div class="logo_text">Mein Clan</div>
+        <div class="logo_subtext">sub clan</div>
+    </div>
+    <div class="navi">
+     <div class="float_left"><img src="images/3.gif"; /></div>
+     <div class="float_left">
+            <li class="navi_nor">
+            <div class="navi_nor_text">News o?</div><div class="navi_nor_subtext">subtitel bla</div></li>
+            <li class="navi_nor">
+            <div class="navi_nor_text">News o?</div><div class="navi_nor_subtext">subtitel bla</div></li>
+            <li class="navi_act">
+            <div class="navi_act_text">News o?</div><div class="navi_act_subtext">subtitel bla</div></li>
+            <li class="navi_nor">
+            <div class="navi_nor_text">News o?</div><div class="navi_nor_subtext">subtitel bla</div></li>
+            <li class="navi_nor">
+            <div class="navi_nor_text">News o?</div><div class="navi_nor_subtext">subtitel bla</div></li>
+            <li class="navi_nor">
+            <div class="navi_nor_text">News o?</div><div class="navi_nor_subtext">subtitel bla</div></li>
+            <li class="navi_nor">
+            <div class="navi_nor_text">News o?</div><div class="navi_nor_subtext">subtitel bla</div></li>
+     </div>
+     <div class="float_right"><img src="images/4.gif"; /></div>
+    </div>
+    <div class="content">
+        <p class="content_title"><span class="content_title_text">cio<span class="content_title_subtext">hallo?</span></span></p>
+        <div class="padding">Drücken Sie die STRG-Taste beim Klicken auf Links (oder verwenden Sie die mittlere Maustaste).
+Klicken Sie mit der mittleren Maustaste auf eine Registerkarte, um sie zu schließen.
+Drücken Sie ALT+Eingabe in der Adressleiste oder im Suchfeld, um ein Ergebnis in einer neuen Registerkarte zu öffnen. 
+	</div>
+    <p class="content_title"><span class="content_title_text">cio<span class="content_title_subtext">hallo?</span></span></p>
+        <div style="padding: 5px;">Drücken Sie die STRG-Taste beim Klicken auf Links (oder verwenden Sie die mittlere Maustaste).
+Klicken Sie mit der mittleren Maustaste auf eine Registerkarte, um sie zu schließen.
+Drücken Sie ALT+Eingabe in der Adressleiste oder im Suchfeld, um ein Ergebnis in einer neuen Registerkarte zu öffnen.
+    </div>
+    </div>
+    <div class="box_left">
+      <p class="box_left_cat"><span class="box_left_text">News<span class="box_left_subtext">hallo?</span></span></p>
+        <div class="padding">Drücken Sie die STRG-Taste beim Klicken auf Links (oder verwenden Sie die mittlere Maustaste).
+Klicken Sie mit der mittleren Maustaste auf eine Registerkarte, um sie zu schließen.
+Drücken Sie ALT+Eingabe in der Adressleiste oder im Suchfeld, um ein Ergebnis in einer neuen Registerkarte zu öffnen. </div>
+
+      <p class="box_left_cat"><span class="box_left_text">News<span class="box_left_subtext">hallo?</span></span></p>
+        <div class="padding">Drücken Sie die STRG-Taste beim Klicken auf Links (oder verwenden Sie die mittlere Maustaste).
+Klicken Sie mit der mittleren Maustaste auf eine Registerkarte, um sie zu schließen.
+Drücken Sie ALT+Eingabe in der Adressleiste oder im Suchfeld, um ein Ergebnis in einer neuen Registerkarte zu öffnen. </div>
+
+    </div>
+    <div class="box_right">
+      <p class="box_right_cat"><span class="box_right_text">News<span class="box_right_subtext">hallo?</span></span></p>
+        <div class="padding">Drücken Sie die STRG-Taste beim Klicken auf Links (oder verwenden Sie die mittlere Maustaste).
+Klicken Sie mit der mittleren Maustaste auf eine Registerkarte, um sie zu schließen.
+Drücken Sie ALT+Eingabe in der Adressleiste oder im Suchfeld, um ein Ergebnis in einer neuen Registerkarte zu öffnen. </div
+    ></div>
+</div>
+
+</body>
+
+</html>

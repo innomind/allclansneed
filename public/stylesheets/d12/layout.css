@@ -1,0 +1,130 @@
+body {
+	background-image: url(/images/d12/1.gif);
+	background-repeat: repeat-x;
+	font-family: Tahoma, Arial, sans-serif;
+	font-size: 11px;
+	margin: 0px;
+	background-color: #464646;
+}
+.wrapper {
+	background-image: url(/images/d12/4.gif);
+	width: 948px;
+	display: table;
+	margin: auto;
+}
+.logo {
+	background-image: url(/images/d12/2.gif);
+	height: 151px;
+}
+.logo_top {
+	position: relative;
+	left: 250px;
+	top: 20px;
+	color: #FFFFFF;
+}
+.logo_text {
+	position: relative;
+	left: 220px;
+	top: 50px;
+	color: #FFFFFF;
+	font-size: 20px;
+}
+.logo_sub {
+	position: relative;
+	left: 470px;
+	top: 65px;
+	color: #FFFFFF;
+}
+.cats {
+	background-image: url(/images/d12/3.gif);
+	height: 28px;
+}
+.cat_title {
+	float: left;
+	width: 155px;
+	position: relative;
+	top: 12px;
+	left: 10px;
+}
+.cat_title_content {
+	float: left;
+	width: 470px;
+	position: relative;
+	top: 12px;
+	left: 20px;
+}
+.cat_title_left {
+	float: left;
+	width: 169px;
+	position: relative;
+	top: 12px;
+	left: 10px;
+}
+.cat_title_right {
+	float: left;
+	width: 154px;
+	position: relative;
+	top: 12px;
+	left: 10px;
+}
+.box {
+	float: left;
+	width: 155px;
+}
+.box_content {
+	padding: 8px;
+	margin: 0px;
+}
+.box_cat {
+	background-image: url(/images/d12/5.gif);
+	height: 18px;
+	margin: 0px;
+	padding-left: 10px;
+}
+.box_cat span {
+	position: relative; left: 10px; top: 2px;
+}
+.content {
+	float: left;
+	width: 454px;
+	padding: 8px;
+}
+.box2 {
+	float: left;
+	width: 169px;
+}
+.box2_content {
+	padding: 8px;
+	margin: 0px;
+}
+.box2_cat {
+	background-image: url(/images/d12/6.gif);
+	height: 18px;
+	margin: 0px;
+	padding-left: 10px;
+}
+.box2_cat span {
+	position: relative; left: 10px; top: 2px;
+}
+.box3 {
+	float: left;
+	width: 154px;
+}
+.box3_content {
+	padding: 8px;
+	margin: 0px;
+}
+.box3_cat {
+	background-image: url(/images/d12/7.gif);
+	height: 18px;
+	margin: 0px;
+	padding-left: 10px;
+}
+.box3_cat span {
+	position: relative; left: 10px; top: 2px;
+}
+.footer {
+	clear: left;
+	background-image: url(/images/d12/8.gif);
+	height: 34px;
+}

@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+	<title><%= @site.site_title %></title>
+
+		<%# bundle do %>
+		  <%= javascript_include_tag :defaults%>
+		  <%= stylesheet_link_tag "d15/layout" %>
+		  <%= stylesheet_link_tag "d15/style" %>
+		  <%= include_tiny_mce_if_needed %>
+		  <%= yield :header_tags %>
+		<%# end %>
+</head>
+<body>
+
+
+<div class="wrapper">
+
+    <div class="logo">
+    	<span><%= @site.page_title %></span>
+    </div>
+    <div class="bar">
+    	<div class="bar_text"><%= get_boxes_for("leftside", true).first.name %></div>
+        <div class="bar_text2"><%= get_boxes_for("rightside", true).first.name %></div>
+    </div>
+
+
+    <div class="box">
+		
+		<% get_boxes_for("leftside").each do |b| %>
+			<% unless get_boxes_for("leftside").first.id == b.id %>
+				<p class="box_cat"><span><%= b.name %></span></p>
+			<% end %>
+		    <%= create_box(b, ["<p class=\"box_list\">", "</p>"], ["<div class=\"box_content\">", "</div>"]) %>
+		<% end %>
+		
+    </div>
+    <div class="content">
+	<div style="padding: 5px">
+		<%= show_breadcrumb %>
+		<%= show_notice_and_error %>
+		<%= yield %>
+	</div>
+</div>
+
+    <div class="box2">
+		<% get_boxes_for("rightside").each do |b| %>
+			<% unless get_boxes_for("rightside").first.id == b.id %>
+				<p class="box_cat"><span><%= b.name %></span></p>
+			<% end %>
+		    <%= create_box(b, ["<p class=\"box_list\">", "</p>"], ["<div class=\"box_content\">", "</div>"]) %>
+		<% end %>
+
+    </div>
+</div>
+
+
+</body>
+
+</html>

@@ -184,8 +184,10 @@ de:
         interests: Interessen
         created_at: registriert vor
       site:
-        page_title:
-        page_title_desc:
+        site_title: Seitentitel
+        site_title_desc: Der Seitentitel wird in der oberen Leiste des Browsers angezeigt
+        page_title: Titel
+        page_title_desc: Dies ist der Titel, der auf der Seite angezeigt wird
         page_text_1:
         page_text_1_desc:
         page_text_2:

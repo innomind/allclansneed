@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+	<title><%= @site.site_title %></title>
+
+		<%# bundle do %>
+		  <%= javascript_include_tag :defaults%>
+		  <%= stylesheet_link_tag "d05/layout" %>
+		  <%= stylesheet_link_tag "d05/style" %>
+		  <%= include_tiny_mce_if_needed %>
+		  <%= yield :header_tags %>
+		<%# end %>
+</head>
+
+<body>
+
+
+<div class="wrapper">
+              <div class="logo">
+                    <div class="logo_top"><%= @site.page_text_1 %></div>
+                    <div class="logo_text"><%= @site.page_title %></div>
+                    <div class="logo_cat_left"><%= @site.page_text_2 %></div>
+                    <div class="logo_cat_content"><%= show_breadcrumb %></div>
+                    <div class="logo_cat_two"><%= @site.page_text_3 %></div>
+                    <div class="logo_cat_right"><%= @site.page_text_4 %></div>
+              </div>
+              <div class="img_left"></div>
+              <div class="box">
+				
+				<% get_boxes_for("leftside").each do |b| %>
+					<p class="box_cat"><span><%= b.name %></span></p>
+					<p class="box_content"><span>
+				    	<%= create_box(b) %>
+					</span></p>
+					<p class="box_end"></p>
+                 	<br />
+				<% end %>
+              </div>
+              <div class="content">
+					<%= show_notice_and_error %>
+					<%= yield %>
+              </div>
+              <div class="box_two">
+	
+				<% get_boxes_for("rightside1").each do |b| %>
+					<p class="box_two_cat"><span><%= b.name %></span></p>
+					<p class="box_two_content"><span>
+				    	<%= create_box(b) %>
+					</span></p>
+					<p class="box_two_end"></p>
+                 	<br />
+				<% end %>
+				
+              </div>
+              <div class="box">
+	
+				<% get_boxes_for("rightside2").each do |b| %>
+					<p class="box_cat"><span><%= b.name %></span></p>
+					<p class="box_content"><span>
+				    	<%= create_box(b) %>
+					</span></p>
+					<p class="box_end"></p>
+                 	<br />
+				<% end %>
+
+                 <img src="images/9.gif" alt="" style="float: right;" />
+              </div>
+              <div style="width: 22px; height: 28px; background-image: url(images/5.gif); background-repeat: no-repeat;"></div>
+              <div style="clear: left; background-image: url(images/10.gif); height: 106px;"></div>
+ </div>
+</body>
+
+</html>

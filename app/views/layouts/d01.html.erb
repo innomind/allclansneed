@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<title><%= @site.site_title %></title>
+
+	<%# bundle do %>
+	  <%= javascript_include_tag :defaults%>
+	  <%= stylesheet_link_tag "d01/layout" %>
+	  <%= stylesheet_link_tag "d01/style" %>
+	  <%= include_tiny_mce_if_needed %>
+	  <%= yield :header_tags %>
+	<%# end %>
+</head>
+
+<body>
+<div class="wrapper">
+   <div class="header">
+      <div id="header" class="top"><%= @site.page_text_1 %></div>
+      <div id="header" class="text"><%= @site.page_title %></div>
+      <div id="header" class="content"></div>
+   </div>
+   <div class="content_left">
+   <!-- NAVI START -->
+   
+	
+		<% get_boxes_for("leftside").each do |b| %>
+			<ul class="navi_left">
+				<li id="navi_left" class="top"><%= b.name %></li>
+				<%= create_box(b,["<li id=\"navi_left\" class=\"first\">","<li id=\"navi_left\" class=\"second\">","</li>"]) %>
+				<li id="navi_left" class="bottom">&nbsp;</li>
+			</ul>
+		<% end %>
+   
+   
+   </div>
+   <div class="content_middle content">
+		<%= show_breadcrumb %>
+		<%= show_notice_and_error %>
+		<%= yield %></div>
+   <div class="content_right">
+   <!-- NAVI START -->
+
+	<% get_boxes_for("rightside").each do |b| %>
+		<ul class="navi_right">
+			<li id="navi_right" class="top"><%= b.name %></li>
+			<%= create_box(b,["<li id=\"navi_right\" class=\"first\">","<li id=\"navi_right\" class=\"second\">","</li>"]) %>
+			<li id="navi_right" class="bottom">&nbsp;</li>
+		</ul>
+	<% end %>
+
+   </div>
+   <div class="bottom_left"></div>
+   <div class="bottom_right"></div>
+    <div class="bottom"><span></span></div>
+</div>
+</body>
+</html>
