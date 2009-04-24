@@ -79,7 +79,7 @@ class CategoriesController < ApplicationController
   end
     
   def init_category_access
-    raise Exceptions::Access unless current_user.has_right_for? ((@category.nil? ? @cat_name : @category.controller).underscore)
+    raise Exceptions::Access unless current_user.has_right_for?((@category.nil? ? @cat_name : @category.controller).underscore)
   end
     
   def init_breadcrumb
