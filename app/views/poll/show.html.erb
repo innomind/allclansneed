@@ -1,7 +1,9 @@
 <h1>Poll: <%= @poll.title %></h1>
-<% init_progress_bar %>
+<%# init_progress_bar %>
+<dl>
 <% for option in @poll.poll_options %>
-	<%= option.name %> votes: <%= option.vote_count.to_s %><br />
-	<%= progress_bar %>
+	<dt><%= option.name %></dt><dd> <%= option.vote_count.to_s %></dd>
+	<%#= progress_bar %>
 <% end %>
+</dl>
 <%= show_comments @poll %>

@@ -24,7 +24,6 @@ class Template < ActiveRecord::Base
         boxes = boxes - [box]
       }
     }
-    
     last_area = areas.select{|area| area.is_addable? && area.template_box_type.nil?}.first
     boxes.each{|box| box.template_area = last_area; box.save}
   end

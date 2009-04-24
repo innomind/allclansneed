@@ -11,6 +11,9 @@ class Poll < ActiveRecord::Base
   after_update :save_options
   has_many :comments, :as => :commentable, :dependent => :destroy  
   
+  validates_associated :poll_options
+  validates_presence_of :title
+  
   def before_update
     p = Poll.find(id, :include => :comments)
     if p.intern != intern

@@ -1,12 +1,15 @@
 <h1>Neuen Poll erstellen</h1>
 
 <% error_handling_form_for @poll do |form| %>
+<h3>allgemein</h3>
   <%= form.text_field :title, :label => "Titel:" %>
   <%= form.text_field :description, :label => "Beschreibung:" %>
 
+<h3>Optionen</h3>
   <div id="poll_options">
     <%= render :partial => 'newoption', :collection => @poll.poll_options %>
   </div>
+<br>
   <div class="userlinks">
     <%= add_option_link image_tag("add.png") + "Option hinzufügen" %>
   </div>

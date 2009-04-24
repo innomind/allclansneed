@@ -1,6 +1,7 @@
 class ClanwarController < ApplicationController
   
   add_breadcrumb 'Clanwars', "clanwars_path"
+  comment_mce_for
   
   def index
     if params[:squad_id].nil?
