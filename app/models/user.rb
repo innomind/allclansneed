@@ -32,7 +32,7 @@ class User < ActiveRecord::Base
   has_many :clan_join_inquiries
   
   has_many :user_rights, :dependent => :destroy
-  has_many :sites, :through => :user_rights, :group => "sites.id"
+  has_many :sites, :through => :user_rights
   has_many :components, :through => :user_rights
 
   validates_presence_of :password
