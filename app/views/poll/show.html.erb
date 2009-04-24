@@ -4,6 +4,8 @@
 <% for option in @poll.poll_options %>
 	<dt><%= option.name %></dt><dd> <%= option.vote_count.to_s %></dd>
 	<%#= progress_bar %>
+	
 <% end %>
 </dl>
+<%= progressbar [35,78,15] %>
 <%= show_comments @poll %>
