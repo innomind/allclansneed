@@ -25,7 +25,8 @@ ActionController::Routing::Routes.draw do |map|
                             :except => [:new, :update, :edit],
                             :member => {:add_comment => :post}
   
-  map.resources :profiles, :controller => "profile", :collection => {:start => :get}, :member => {:infobox => :get}
+  map.resources :profiles, :controller => "profile", :collection => {:start => :get}, 
+                                                     :member => {:infobox => :get, :edit_pic => :get, :update_pic => :put}
 
   map.resources :articles, :controller => "article"
   

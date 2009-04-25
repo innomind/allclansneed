@@ -22,6 +22,7 @@ body {
 .content {
 	float: left;
 	width: 441px;
+	position: relative;
 }
 .navi_cat {
 	background-image: url(/images/d02/m_1.gif);
@@ -41,9 +42,11 @@ body {
 .navi_list a {
 	color: white;
 }
-.navi_list a {
+
+.navi_list a:hover {
 	color: white;
 }
+
 .top_left {
 	float:left;
 	position: relative;

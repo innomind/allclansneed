@@ -77,6 +77,10 @@ textarea {
   margin-top: 0px;
 }
 
+.tooltip p {
+	margin: 0px;
+}
+
 .tooltip_close {
 	position:absolute;
 	top: 0px;
@@ -186,7 +190,7 @@ textarea {
 .simple-table td
 {
 	border-bottom: 1px solid #ccc;
-	color: #ccc;
+	color: #aaa;
 	padding: 4px 8px;
 }
 
@@ -259,7 +263,7 @@ textarea {
 }
 .simple-post td
 {
-	color:  #ccc;
+	color:  #aaa;
 	padding: 4px 8px;
 	vertical-align: top;
 }
@@ -418,7 +422,7 @@ a:hover{
 h4 {
 	margin: 1px;
 	padding-left: 5px;
-	color: #ccc;
+	color: #aaa;
 	font-weight: normal;
 	border-bottom: 1px dotted #ccc;
 }
@@ -489,7 +493,7 @@ dt {
 	margin-right: 10px;
 	width:70px;
 	text-align:right;
-	color: #ccc;
+	color: #aaa;
 }
 dd {		
 	margin-left: 85px; 
@@ -660,7 +664,7 @@ li span.links a.first {
 	margin-bottom: 10px;
 }
 	.simple-list li div {
-	color: #ccc;
+	color: #aaa;
 	font-weight: normal;
 }
 

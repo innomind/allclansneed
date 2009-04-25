@@ -93,7 +93,7 @@ class ApplicationController < ActionController::Base
     @current_session = Session.new
     @current_session.set_controller self.class.to_s.underscore.gsub(/_controller$/, '')
     unless session['user'].nil?
-      @user = User.find session['user']# , :joins => [{:squads => :clan}, :sites, :components, :clan_ownerships, :site_ownerships]
+      @user = User.find session['user'], :include => :sites # , :joins => [{:squads => :clan}, :sites, :components, :clan_ownerships, :site_ownerships]
       @user.logged_in = true
       @user.current_site = @site
       session['error_objects'] = [] 

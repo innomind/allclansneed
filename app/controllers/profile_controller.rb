@@ -29,6 +29,20 @@ class ProfileController < ApplicationController
     end
   end
   
+  def edit_pic
+    add_breadcrumb current_user.nick, "profile_path(#{current_user.id})"
+    add_breadcrumb "bearbeiten"
+  end
+  
+  def update_pic
+    current_user.update_attributes(params[:user])
+    if current_user.save
+      redirect_to profile_path(current_user.id)
+    else
+      render :action => "edit_pic"
+    end
+  end
+  
   def edit
     @profile = current_user.profile
     add_breadcrumb @profile.user.nick, "profile_path(#{@profile.user.id})"
@@ -68,28 +82,20 @@ class ProfileController < ApplicationController
   end
   
   def get_profile
-    if is_portal? || (params[:action] == "infobox")
-      @profile = Profile.find_by_user_id(params[:id])
-    else
-      #TODO nur user für diese Seite anzeigen      
-      #geht nicht:
-      user = User.find :first, :conditions => ["users.id=? AND user_rights.site_id = ?",params[:id],current_site.id], :joins => [:sites, :profile]
-      if user.nil?
-        redirect_to profile_path(params[:id], :subdomain => false) and return
-      else
-        @profile = user.profile
-      end
-    end
 
+    @profile = Profile.find params[:id], :include => [{:user => {:squads => :clan}}]
+    
+    unless current_site.is_portal?
+      redirect_to profile_path(params[:id], :subdomain => false) and return unless @profile.user.belongs_to_site?(current_site)
+    end
+    
     @current_user = current_user
     if @profile.user != current_user && @current_session.logged_in?
-      
       @friends_of_both = (@profile.user.friends & @current_user.friends)
       if (@profile.user.is_friends_with? @current_user)
          @connection = "direct"
       elsif ((@profile.user.friends & @current_user.friends).length > 0)
          @connection = "indirect"
-         #wenn beide mehrere freunde gemeinsam haben wird einer zufällig ausgewählt
          @friend_of_both = @friends_of_both[rand(@friends_of_both.length)]
       else
          @connection = "none"

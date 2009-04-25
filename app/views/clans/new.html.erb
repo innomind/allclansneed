@@ -3,5 +3,7 @@
 <% error_handling_form_for @clan do |form| %>
 	<%= form.text_field :uniq %>
 	<%= form.text_field :name%>
+	<%= form.text_field :clan_tag %>
+	<%= form.text_area :description %>
 	<%= form.submit :erstellen %>
 <% end %>

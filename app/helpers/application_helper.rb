@@ -1,7 +1,5 @@
-# Methods added to this helper will be available to all templates in the application.
 module ApplicationHelper
   
-  #some stuff for tag-clouding :)
   include TagsHelper
   
   def error_handling_form_for(record_or_name_or_array, *args, &proc)
@@ -23,7 +21,9 @@ module ApplicationHelper
   end
   
   def username(user)
-    out = link_to user.nick, profile_path(user)
+    #out = link_to user.clans.first.clan_tag, clan_path(user.clans.first) unless user.clans.first.clan_tag.nil?
+    #out ||= ""
+    out = link_to(user.nick, profile_path(user))
     #out = ajax_tooltip(user.nick, :update_url => infobox_profile_path(user), :class => "infobox")
   end
   

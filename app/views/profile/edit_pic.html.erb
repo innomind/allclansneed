@@ -1,0 +1,8 @@
+<h1>Profil bearbeiten</h1>
+
+<%= render :partial => "edit_links" %>
+
+<% error_handling_form_for @user, :url => update_pic_profile_path(@user), :html => { :multipart => true } do |f|%>
+	<%= f.file_field :profile_pic %>
+    <%= f.submit "Änderungen übernehmen" %>
+<% end %>

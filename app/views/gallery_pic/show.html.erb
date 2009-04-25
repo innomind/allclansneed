@@ -1,7 +1,7 @@
 <h1><%= @gallery_pic.name %></h1>
 <div class="userlinks">
-	<%= access_link image_tag("folder_delete.png") + "löschen", pic_path(@gallery_pic), :controller => "gallery_pic", :method => "delete", :confirm => "Wirklich löschen?" %>
-	<%= access_link image_tag("folder_edit.png") + "bearbeiten", edit_pic_path(@gallery_pic)%><br>
+	<%= access_link image_tag("picture_delete.png") + "löschen", pic_path(@gallery_pic), :controller => "gallery_pic", :method => "delete", :confirm => "Wirklich löschen?" %>
+	<%= access_link image_tag("picture_edit.png") + "bearbeiten", edit_pic_path(@gallery_pic)%><br>
 </div>
 
 <div>

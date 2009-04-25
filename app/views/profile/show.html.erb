@@ -1,6 +1,6 @@
 <div class="profile">
 <div class="avatar">
-        <%= image_tag @profile.profile_pic.url(:thumb) %><br />		
+        <%= image_tag @profile.user.profile_pic.url(:thumb) %><br />		
         <%= access_link "Nachricht schreiben", new_message_path(:receiver_id => @profile.user.id)%>
 		<%= become_friends_link @profile.user%>
 		<%= link_to "alle Freunde", friend_path(@profile.user)%>
@@ -24,7 +24,7 @@
     <%= show_connection%>
 
 
-    <h3>Clans</h3>                    
+    <h3>Clans</h3>
     <ul class="simple-list">
 		<% @profile.user.clans.each do  |c| %>
 		  <li><%= link_to image_tag(c.clan_pic.url(:thumb), :width => 30, :height => 30) + c.name, clan_path(c, :subdomain => false) %>
@@ -36,25 +36,25 @@
     <ul class="simple-list">
 		<% @profile.user.groups.each do  |g| %>
 		  <li><%= link_to image_tag(g.group_pic.url(:thumb), :width => 30, :height => 30) + g.name, :controller => "groups", :action => "show", :id => g.id %>
-			<div><%= g.groupmemberships_count %> Member - dabei seit <%= time_ago_in_words g.created_at %></div></li>
+			<div><%= g.groupmemberships_count %> Member - dabei seit <%#= time_ago_in_words g.created_at %></div></li>
 		<% end %>
     </ul>
 
     <h3>Freunde</h3>
     <ul class="simple-list">
 		<% @profile.user.friends.each do  |f| %>
-		  <li><%= image_tag(f.profile.profile_pic.url(:thumb), :width => 30, :height => 30) + username(f) %>
+		  <li><%= image_tag(f.profile_pic.url(:thumb), :width => 30, :height => 30) + username(f) %>
 		<div><!-- befreundet seit <%#= time_ago_in_words f.friendship(@current_user).created_at %> --></div></li>
 		<% end %>
     </ul>
     
-    
-    <h3 class="simple-list">Gemeinsame Freunde</h3>
+    <h3>Gemeinsame Freunde</h3>
     <ul class="simple-list">
 		<% (@friends_of_both || []).each do  |f| %>
-		  <li><%= username f %>
+		  <li><%= image_tag(f.profile_pic.url(:thumb), :width => 30, :height => 30) + username(f) %>
 			<div><!-- befreundet seit <%#= time_ago_in_words f.friendship(@current_user).created_at %> --></div></li>
 		<% end %>
     </ul>
 </div>
+<div style="clear:both"></div>
 <%= show_comments @profile %>

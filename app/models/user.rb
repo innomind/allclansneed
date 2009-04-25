@@ -44,6 +44,10 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :email
   validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i, :on => :save
    
+  has_attached_file :profile_pic,
+    :styles => {
+      :thumb => "100x100#" }
+   
   def before_validation
     self.email = self.email.downcase unless self.email.nil?
     self.login = self.login.downcase unless self.login.nil?
@@ -86,7 +90,8 @@ class User < ActiveRecord::Base
   end
 
   def clans
-    @my_clans ||= squads.all(:include => :clan).collect{|s| s.clan}.compact.uniq
+    @my_clans ||= squads.collect{|s| s.clan}.compact.uniq
+    #@my_clans ||= squads.all(:include => :clan).collect{|s| s.clan}.compact.uniq
   end
   
 #  def sites
@@ -99,7 +104,8 @@ class User < ActiveRecord::Base
   
   #alle squads, in denen der user in DIESEM clan ist
   def squads_in_clan c
-    c.squads.select{|s| s.users.include? self}
+    squads.select{|s| s.clan == c}
+    #c.squads.select{|s| s.users.include? self}
   end
 
   ### Rechte

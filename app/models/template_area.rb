@@ -16,7 +16,7 @@ class TemplateArea < ActiveRecord::Base
       :conditions => ["template_id = ? AND template_boxes.site_id = ?",site.template_id,site.id],
       :include => [ :template_boxes => 
                         [ :template_box_type, 
-                         {:navigations => :navigation_template} ]
+                         {:navigations => [:navigation_template, :page]} ]
                    ],
       :order => "template_areas.position, template_boxes.position, navigations.position"
   end
