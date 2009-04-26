@@ -1,4 +1,9 @@
 
+
+body {
+	background-color: #03617A;
+}
+
 .wrapper {
 	background-image: url(/images/d08/2.gif);
 	width: 825px;
