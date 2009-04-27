@@ -22,6 +22,8 @@
       	<div class="top_right"><span><%= @site.page_text_3 %></span></div>
     </div>
     <div class="logo"><span><%= @site.page_title %></span></div>
+
+
     <div class="navi_left">
 	
 		<% get_boxes_for("leftside").each do |b| %>
@@ -32,29 +34,30 @@
     </div>
     <div class="content">
 
-<div class="clear_left">
+	<div class="clear_left">
+		
+	  <div style="padding: 5px">
+		<%= show_notice_and_error %>
+		<%= yield %>
+	  </div>
 	
-  <div style="padding: 5px">
-	<%= show_notice_and_error %>
-	<%= yield %>
-  </div>
-
-</div>
-
-</div>
+	</div>
+	
+	</div>
+	
     <div class="navi_two">
             <% get_boxes_for("first_rightside").each do |b| %>
 				<p class="navi_cat"><%= b.name %></p>
 			    <%= create_box(b,["<p class=\"navi_list\">","</p>"]) %>
 			<% end %>
 
-</div>
+		</div>
         <div class="navi_right">
             <% get_boxes_for("second_rightside").each do |b| %>
 				<p class="navi_cat"><%= b.name %></p>
 			    <%= create_box(b,["<p class=\"navi_list\">","</p>"]) %>
 			<% end %>
-</div>
+		</div>
 </div>
 </body>
 

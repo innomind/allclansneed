@@ -11,7 +11,6 @@ body {
 	border-color: #fff;
 	margin: auto;
 	border-style: outset;
-	display: table;
 }
 .logo {
 	background-image: url(/images/d10/1.gif);

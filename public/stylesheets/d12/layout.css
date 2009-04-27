@@ -19,7 +19,6 @@ body {
 .wrapper {
 	background-image: url(/images/d12/4.gif);
 	width: 948px;
-	display: table;
 	margin: auto;
 }
 .logo {

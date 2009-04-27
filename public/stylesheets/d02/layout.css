@@ -9,7 +9,6 @@ body {
 	width: 980px;
 	background-image: url(/images/d02/3.gif);
 	margin:auto;
-	display: table;
 }
 .top {
 	background-image: url(/images/d02/1.gif);

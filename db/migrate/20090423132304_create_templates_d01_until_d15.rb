@@ -8,14 +8,14 @@ class CreateTemplatesD01UntilD15 < ActiveRecord::Migration
       tpl.save
     end
     
-    unless Template.find_by_internal_name "d03"
-      tpl = Template.create(:name => "d03", :internal_name => "d03", :page_text_1 => "oben links", :page_text_2 => "oben rechts")
-      tpl.template_areas << TemplateArea.create(:name => "linke Seite", :internal_name => "leftside", :position => 0)
-      tpl.template_areas << TemplateArea.create(:name => "rechte Seite", :internal_name => "rightside", :position => 1)
-      tpl.template_areas << TemplateArea.create(:name => "rechts alleine 1", :internal_name => "rightsingle1", :position => 2, :multiple_boxes_allowed => false)
-      tpl.template_areas << TemplateArea.create(:name => "rechts alleine 2", :internal_name => "rightsingle2", :position => 3, :multiple_boxes_allowed => false)
-      tpl.save
-    end
+    #unless Template.find_by_internal_name "d03"
+    #  tpl = Template.create(:name => "d03", :internal_name => "d03", :page_text_1 => "oben links", :page_text_2 => "oben rechts", :account_type => "bug")
+    #  tpl.template_areas << TemplateArea.create(:name => "linke Seite", :internal_name => "leftside", :position => 0)
+    #  tpl.template_areas << TemplateArea.create(:name => "rechte Seite", :internal_name => "rightside", :position => 1)
+    #  tpl.template_areas << TemplateArea.create(:name => "rechts alleine 1", :internal_name => "rightsingle1", :position => 2, :multiple_boxes_allowed => false)
+    #  tpl.template_areas << TemplateArea.create(:name => "rechts alleine 2", :internal_name => "rightsingle2", :position => 3, :multiple_boxes_allowed => false)
+    #  tpl.save
+    #end
     
     unless Template.find_by_internal_name "d05"
       tpl = Template.create(:name => "d05", :internal_name => "d05", :page_text_1 => "oben links", :page_text_2 => "linke Leiste", :page_text_3 => "1. rechte Leiste", :page_text_4 => "2. rechte Leiste")
@@ -57,7 +57,7 @@ class CreateTemplatesD01UntilD15 < ActiveRecord::Migration
     end
     
     unless Template.find_by_internal_name "d15"
-      tpl = Template.create(:name => "d15", :internal_name => "d15")
+      tpl = Template.create(:name => "d15", :internal_name => "d15", :account_type => "beta")
       tpl.template_areas << TemplateArea.create(:name => "linke Seite", :internal_name => "leftside", :position => 0)
       tpl.template_areas << TemplateArea.create(:name => "rechte Seite", :internal_name => "rightside", :position => 1)
       tpl.save

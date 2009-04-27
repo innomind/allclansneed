@@ -6,7 +6,6 @@ body {
 .wrapper {
 	width: 986px;
 	background-image: url(/images/d13/1.gif);
-	display: table;
 	margin: auto;
 }
 .logo {

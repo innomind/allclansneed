@@ -33,7 +33,6 @@
       </div>
     </div>
 
-
     <div class="box">
 		<% get_boxes_for("leftside").each do |b| %>
 			<% unless get_boxes_for("leftside").first.id == b.id %>
@@ -51,6 +50,8 @@
 		<%= yield %>
 			
     </div>
+
+
     <div class="box2">
 		<div style="padding:3px">
 		<% get_boxes_for("rightside1").each do |b| %>
@@ -59,6 +60,7 @@
 		<% end %>
 		</div>
     </div>
+
     
     <div class="box3">
 	
