@@ -35,4 +35,11 @@ class Postoffice < ActionMailer::Base
     subject "Neues Passwort"
     body :new_pw_user => user
   end
+  
+  def welcome_site(site)
+    recipients site.owner.email
+    from "support@allclansneed.de"
+    subject "Willkommen bei Allclansneed"
+    body :site => site
+  end
 end

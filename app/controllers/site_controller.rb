@@ -3,7 +3,7 @@ class SiteController < ApplicationController
   
   def index
     add_breadcrumb "Clanseitenliste"
-    @sites = Site.paginate :page => params[:page], :per_page => 25
+    @sites = Site.paginate :page => params[:page], :include => :clan, :per_page => 25, :order => :sub_domain
   end
   
   def new

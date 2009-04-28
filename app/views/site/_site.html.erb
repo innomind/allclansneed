@@ -1,5 +1,6 @@
 <tr>
 	<td><%= link_to site.clan.name, site.clan %></td>
+	<td><%= site.sub_domain %></td>
 	<td><%= l site.created_at, :format => "datelong"%></td>
 	<td><%= link_to "link", root_path(:subdomain => site.sub_domain) %></td>
 </tr>

@@ -8,7 +8,7 @@ class ClansController < ApplicationController
   
   def index
     add_breadcrumb "Clan Liste"
-    @clans = Clan.paginate :page => params[:page], :per_page => 25
+    @clans = Clan.paginate :page => params[:page], :per_page => 25, :order => :uniq
   end
 
   def my
