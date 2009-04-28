@@ -29,10 +29,10 @@ namespace :maintenance do
   end
 
   def welcome_site_mailing
-    Site.find(:all, :include => :owner, :conditions => ["created_at < ? and welcome_mailing = ? ", 2.day.ago, false]).each do |site|
-      unless site.nil?
-        Postoffice.deliver_welcome_site(site)
-        site.update_attribute("welcome_mailing", true)
+    Site.find(:all, :include => :owner, :conditions => ["created_at < ? and welcome_mailing = ? ", 2.day.ago, false]).each do |current_site|
+      unless current_site.nil?
+        Postoffice.deliver_welcome_site(current_site)
+        current_site.update_attribute("welcome_mailing", true)
       end
     end
   end

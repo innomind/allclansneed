@@ -6,7 +6,12 @@ namespace :init do
     sh "rake db:migrate"
     #init
     puts "Init"
-    init
+    #init
+    init_components
+    init_box_types
+    init_navigations
+    init_ticket_categories
+    init_templates
     1.upto(4) { |i| puts "Create Site #{i}"; one_site i }
   end
   
@@ -15,7 +20,7 @@ namespace :init do
   end
   
   def init_components
-    Component.create(:name => "Artikel", :controller => "artikel")
+    Component.create(:name => "Artikel", :controller => "article")
     Component.create(:name => "Clanwar", :controller => "clanwar_map", :parent_id => Component.create(:name => "Clanwar", :controller => "clanwar"))
     Component.create(:name => "Kalender", :controller => "event")
     forum = Component.create(:name => "Forum", :controller => "forum")
@@ -46,20 +51,8 @@ namespace :init do
     TemplateBoxType.create(:name => "Shoutbox", :internal_name => "shoutbox")
   end
   
-  def init_template
-    template = Template.create(:name => "DNP", :internal_name => "dnp")
-    template.template_areas << TemplateArea.create(:name => "topnav", 
-                        :internal_name => "topnav", 
-                        :position => 1, 
-                        :prefered_box_type_id => TemplateBoxType.find_by_name("Navigation").id,
-                        :multiple_boxes_allowed => false)
-    template.template_areas << TemplateArea.create(:name => "linke Seite", 
-                        :internal_name => "linke_seite", 
-                        :position => 2)
-    template.template_areas << TemplateArea.create(:name => "rechte Seite", 
-                        :internal_name => "rechte_seite", 
-                        :position => 3)
-                        
+  def init_templates
+    puts "template init"
     template = Template.create(:name => "d08", :internal_name => "d08", :page_text_1 => "oben links", :page_text_2 => "oben rechts", :page_text_3 => "unten links", :page_text_4 => "unten rechts")
     template.template_areas << TemplateArea.create(:name => "links oben", 
                         :internal_name => "topleft", 
@@ -105,7 +98,6 @@ namespace :init do
     init_components
     init_box_types
     init_navigations
-    init_template
     init_ticket_categories
   end
   

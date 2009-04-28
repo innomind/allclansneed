@@ -59,6 +59,7 @@ class User < ActiveRecord::Base
   
   def before_create
     self[:password] = encrypt self[:password]
+    self[:email_activation_key] = encrypt("fahsdf9023ioasf" + Time.now.to_s)
   end
   
   def set_password pw
@@ -144,22 +145,24 @@ class User < ActiveRecord::Base
   end
   
   def can_access? check
+    #debugger
     check[:action] ||= "index"
     right = Rights.lookup_class(check[:controller], check[:action])
     return true if owns_current_site?
     
     case right
-    when "public"
-      true
-    when "member"
-      logged_in?
-    when "site"
-      belongs_to_current_site?
-    when "right"
-      has_right_for? check[:controller]
-    else 
-      true
+      when "public"
+        true
+      when "member"
+        logged_in?
+      when "site"
+        belongs_to_current_site?
+      when "right"
+        has_right_for? check[:controller]
+      else
+        true
     end
+    
   end
   
   ## Session

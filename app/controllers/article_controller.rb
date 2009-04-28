@@ -1,7 +1,8 @@
 class ArticleController < ApplicationController
 
   add_breadcrumb 'Artikel', 'articles_path'
-
+  comment_mce_for
+  
   def index
     @articles = Article.paginate
   end

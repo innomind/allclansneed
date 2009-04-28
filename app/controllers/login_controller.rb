@@ -1,13 +1,17 @@
 class LoginController < ApplicationController
   def login
     nick = params[:user][:login].underscore
-    pw = params[:user][:password]
+    pw = params[:user][:password]    
     unless (nick.nil? || pw.nil?)
       usr = User.first :conditions => {:login => nick}
+      
+      unless usr.email_activation_key.nil?
+        flash[:error] = "Dein Account ist noch nicht aktiv. Du musst ihn mit dem Link, den wir dir per email zugeschickt haben aktivieren. Bei Problemen melde dich bei support@allclansneed.de"
+        redirect_to :action => "index" and return
+      end
+      
       if !usr.nil? && usr.check_pw(pw)
         session['user'] = usr.id
-        #session['user_sites'] = usr.sites
-        session['']
         @logged_in = true
         flash[:notice] = 'erfolgreich eingeloggt'
         redirect_to :controller => "profile", :action => "start" and return
@@ -29,19 +33,6 @@ class LoginController < ApplicationController
     
   def index
     render :layout => false if request.xhr?
-  end
-  
-  def create
-    unless params['user'].nil?
-      @user = User.new params[:user]
-      @user.user_rights[0] = UserRight.new(:user_id => @user.id, :site_id => params[:site_id], :level => 1)
-      if !@user.save
-        flash[:errors] = @user.errors
-      else
-        render :partial => 'create_success'
-      end
-    end
-    @pages = Site.all
   end
   
   def request_password

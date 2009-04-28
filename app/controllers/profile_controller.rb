@@ -21,12 +21,24 @@ class ProfileController < ApplicationController
     @new_user = User.create params[:user]
     if @new_user.save
       Postoffice.deliver_example("neuer user")
-      flash[:notice] = "Du hast dich erfolgreich registriert. Du kannst dich jetzt einloggen"
+      Postoffice.deliver_email_activation(@new_user)
+      flash[:notice] = "Du hast dich erfolgreich registriert. Nachdem du deine Email adresse bestätigt hast kannst du dich einloggen. Einen Link zur Bestätigung haben wir dir per Email geschickt"
       redirect_to :controller => "login"
     else
       @new_user.password = ""
       render :action => "new"
     end
+  end
+  
+  def email_activation
+    user = User.find_by_email_activation_key params[:k]
+    if user.nil? || params[:k].nil?
+      flash[:error] = "Der Email Aktivierungs Code ist leider Falsch. Bitte wende dich bei Problemen an support@allclansneed.de"
+    else
+      user.update_attribute("email_activation_key", nil)
+      flash[:notice] = "Dein Account wurde Aktiviert, du kannst dich jetzt einloggen."
+    end
+    redirect_to :controller => "login"
   end
   
   def edit_pic

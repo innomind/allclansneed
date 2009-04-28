@@ -65,6 +65,7 @@ poll:
   vote: member
 profile:
   restful: true
+  email_activation: public
   start: member
   new: public
   create: public
