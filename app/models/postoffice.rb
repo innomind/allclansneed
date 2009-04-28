@@ -37,6 +37,8 @@ class Postoffice < ActionMailer::Base
   end
   
   def welcome_site(site)
+    return "" if site.nil?
+    return "" if site.owner.nil?
     recipients site.owner.email
     from "support@allclansneed.de"
     subject "Willkommen bei Allclansneed"
