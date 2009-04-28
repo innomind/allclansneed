@@ -34,13 +34,12 @@ class SquadUserController < ApplicationController
   
   def update
     user = @squad_user.user
-    debugger
     user.user_rights.destroy_all
     components = Component.all
     component_list = params[:component_list].delete_if{|k,v| v == "0"}
     component_list.each do |co,v|
       UserRight.create(:user_id => user.id, :site_id => current_site.id, :component_id => co)
-      components.select{|comp| comp.id == co.to_i}.first.children.each{|comp| UserRight.create(:user_id => user, :site_id => current_site.id, :component_id => comp.id)}
+      components.select{|comp| comp.id == co.to_i}.first.children.each{|comp| UserRight.create(:user_id => user.id, :site_id => current_site.id, :component_id => comp.id)}
       #@user.components.push Component.find c
       #@user.user_rights << UserRight.create(:site_id => current_site.id, :user_id => @user.id, :right_type => c)
     end

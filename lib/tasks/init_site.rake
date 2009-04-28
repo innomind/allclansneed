@@ -21,13 +21,13 @@ namespace :init do
   
   def init_components
     Component.create(:name => "Artikel", :controller => "article")
-    Component.create(:name => "Clanwar", :controller => "clanwar_map", :parent_id => Component.create(:name => "Clanwar", :controller => "clanwar"))
+    Component.create(:name => "Clanwar", :controller => "clanwar_map", :parent_id => Component.create(:name => "Clanwar", :controller => "clanwar").id)
     Component.create(:name => "Kalender", :controller => "event")
     forum = Component.create(:name => "Forum", :controller => "forum")
-    Component.create(:name => "Forum Thread", :controller => "forum_thread", :parent_id => forum)
-    Component.create(:name => "Forum Message", :controller => "forum_message", :parent_id => forum)
+    Component.create(:name => "Forum Thread", :controller => "forum_thread", :parent_id => forum.id)
+    Component.create(:name => "Forum Message", :controller => "forum_message", :parent_id => forum.id)
     gallery = Component.create(:name => "Galerie", :controller => "gallery")
-    Component.create(:name => "Gallery Pic", :controller => "gallery_pic", :parent_id => gallery)
+    Component.create(:name => "Gallery Pic", :controller => "gallery_pic", :parent_id => gallery.id)
     Component.create(:name => "Gästebuch", :controller => "guestbook")
     Component.create(:name => "News", :controller => "news")
     Component.create(:name => "Poll", :controller => "poll")

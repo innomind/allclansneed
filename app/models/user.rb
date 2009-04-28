@@ -145,7 +145,7 @@ class User < ActiveRecord::Base
   end
   
   def can_access? check
-    #debugger
+  #  debugger
     check[:action] ||= "index"
     right = Rights.lookup_class(check[:controller], check[:action])
     return true if owns_current_site?
