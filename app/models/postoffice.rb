@@ -8,6 +8,13 @@ class Postoffice < ActionMailer::Base
     body :body => message
   end
   
+  def new_ticket(supporter, ticket)
+    recipients supporter.collect{|u| u.email}
+    from "support@allclansneed.de"
+    subject "Neues Ticket"
+    body :ticket => ticket
+  end
+  
   def email_activation user
     recipients user.email
     from  "support@allclansneed.de"

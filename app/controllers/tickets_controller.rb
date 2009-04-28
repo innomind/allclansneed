@@ -34,8 +34,8 @@ class TicketsController < ApplicationController
     @ticket.ticket_messages[0].user = current_user
     @ticket.author = current_user
     if @ticket.save
-      Postoffice.deliver_example("neues ticket", @ticket.ticket_messages.first.message)
-      flash[:notice] = 'Ticket erfolgreich geändert.'
+      Postoffice.deliver_new_ticket(User.find(:all, :conditions => ["support_status NOT ?", nil]), @ticket)
+      flash[:notice] = 'Ticket erfolgreich erstellt.'
       redirect_to(@ticket)
     else
       render :action => "new"
