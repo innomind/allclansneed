@@ -1,5 +1,5 @@
 <div id="polloption_<%= poll_option.id %>">
 <% fields_for :poll_result, :builder => ErrorHandlingFormBuilder do |poll_result_form| %>
-  <%= poll_result_form.radio_button("poll_option_id", poll_option.id, :label => poll_option.name ) %>
+  <%= poll_result_form.radio_button("poll_option_id", poll_option.id, :label => "&nbsp;", :post_text => poll_option.name, :style => "blank") %>
 <% end %>
 </div>
