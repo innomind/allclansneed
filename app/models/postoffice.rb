@@ -52,4 +52,24 @@ class Postoffice < ActionMailer::Base
     body :site => site
   end
   
+  def join_inquiry clan, applicant
+    recipients clan.owner.email
+    from  "support@allclansneed.de"
+    subject "Neue Mitglieds Anfrage für clan #{clan.name}"
+    body :clan => clan, :owner => clan.owner, :applicant => applicant
+  end
+  
+  def join_inquiry_accepted inquiry
+    recipients inquiry.user.email
+    from  "support@allclansneed.de"
+    subject "Aufgenommen in Clan #{inquiry.clan.name}"
+    body :clan => inquiry.clan, :applicant => inquiry.user
+  end
+  
+  def join_inquiry_denied inquiry
+    recipients inquiry.user.email
+    from  "support@allclansneed.de"
+    subject "Abgelehnt von Clan #{inquiry.clan.name}"
+    body :clan => inquiry.clan, :applicant => inquiry.user
+  end
 end

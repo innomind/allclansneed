@@ -9,14 +9,14 @@
 	<% @inquiries.each do |inquiry| %>
 		<li>
 			<%= username(inquiry.user)%> 
-			<%= tooltip "Anfrage Text", :show_mode => "mouseover", :text => inquiry.inquiry_text %>
+			<%= tooltip "Anfrage Text", :show_mode => "mouseover", :text => simple_format(inquiry.inquiry_text) %>
 			<% tooltip "annehmen" do %>
 				<% error_handling_form_for inquiry do |f| %>
 					<%= select("inquiry", "squad_id", @squads.collect{|s| [s.name, s.id]}) %>
 					<%= f.submit "User aufnehmen" %>
 				<% end %>
 			<% end %>
-			<%= access_link "ablehnen", squads_path %>
+			<%= access_link "ablehnen", clan_join_inquiry_path(inquiry), :method => :delete, :confirm => "Beitrittsanfrage wirklich ablehnen?" %>
 		</li>
 	<% end %>
 	</ul>

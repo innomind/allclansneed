@@ -11,6 +11,13 @@
 		<dt>Clan-Tag</dt><dd><%= @clan.clan_tag %></dd>
 		<dt>Gegründet am</dt><dd><%= l @clan.created_at, :format => "datelong" %> von <%= username(@clan.owner) %></dd>
 		<dt>Link</dt><dd><%= link_to "link", root_path(:subdomain => @clan.uniq) %></dd>
+		<dt>beitreten</dt><dd>
+			<% if @current_session.logged_in? %>
+				<%= ajax_tooltip "hier klicken", :update_url => new_clan_join_inquiry_path(:clan_id => @clan.uniq) %>
+			<% else %>
+				<%= tooltip "hier klicken", :text => "du musst eingeloggt sein, um den clan beitreten zu können"%>
+			<% end %>
+		</dd>
 	</dl>
 </div>
 

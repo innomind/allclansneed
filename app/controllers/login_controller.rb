@@ -4,13 +4,13 @@ class LoginController < ApplicationController
     pw = params[:user][:password]    
     unless (nick.nil? || pw.nil?)
       usr = User.first :conditions => {:login => nick}
-      
+      flash[:error] = "User-ID unbekannt" and render :action => 'index' and return if usr.nil?
       unless usr.email_activation_key.nil?
         flash[:error] = "Dein Account ist noch nicht aktiv. Du musst ihn mit dem Link, den wir dir per email zugeschickt haben aktivieren. Bei Problemen melde dich bei support@allclansneed.de"
         redirect_to :action => "index" and return
       end
       
-      if !usr.nil? && usr.check_pw(pw)
+      if usr.check_pw(pw)
         session['user'] = usr.id
         @logged_in = true
         flash[:notice] = 'erfolgreich eingeloggt'
