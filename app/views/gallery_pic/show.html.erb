@@ -10,7 +10,7 @@
 </div>
 
 <div class="gallery_pic">
-<%= link_to image_tag(@gallery_pic.pic.url(:medium)), @gallery_pic.pic.url(:original) %>
+<%= debugger; link_to image_tag(@gallery_pic.pic.url(:medium)), url_for(:host => (ActionController::Base.asset_host.empty? ? "" : "static0.allclansneed.de"), :controller => @gallery_pic.pic.url(:original)) %>
 </div>
 
 <dl class="meta">
