@@ -5,13 +5,13 @@ namespace :maintenance do
   end
   
   # Maintenance Tasks that will be executed monthly
-  task :monthly do
+  task :monthly => :environment do
     init
     report(:month)
   end
   
   # Maintenance Tasks that will be executed weekly
-  task :weekly do
+  task :weekly => :environment do
     init
     report(:week)
   end
@@ -24,7 +24,7 @@ namespace :maintenance do
   end
   
   # Maintenance Tasks that will be executed hourly
-  task :hourly do
+  task :hourly => :environment do
     init
   end
 
@@ -44,12 +44,13 @@ namespace :maintenance do
     time_now = Time.now
     
     stat = Array.new
+    stat << ["Aktive Mitglieder", User.find(:all, :conditions => ["last_activity_at > ?", time_past]).size, "-"]
     [User, Clan, Site].each do |klass|
       count = klass.find(:all, :conditions => ["created_at > ?", time_past]).size
       count_reference = klass.find(:all, :conditions => ["created_at > ? AND created_at < ?", time_past_reference, time_past]).size
-      stat << [klass.human_name, count, count_reference]
+      stat << [klass.human_name(:count => 2), count, count_reference]
     end
-    puts stat.inspect
+    Postoffice.deliver_reporting(stat, intervall)
   end
 
 end

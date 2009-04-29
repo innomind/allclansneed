@@ -72,4 +72,11 @@ class Postoffice < ActionMailer::Base
     subject "Abgelehnt von Clan #{inquiry.clan.name}"
     body :clan => inquiry.clan, :applicant => inquiry.user
   end
+  
+  def reporting stats, intervall
+    recipients "pwesner@innomind.info"
+    from  "support@allclansneed.de"
+    subject "#{intervall} reporting"
+    body :stats => stats
+  end
 end

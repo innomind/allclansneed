@@ -98,7 +98,7 @@ class ApplicationController < ActionController::Base
       @user.current_site = @site
       session['error_objects'] = [] 
       @current_session.set_user @user
-      
+      @user.update_attribute("last_activity_at", Time.now)
       $user_id = @user.id unless @user.nil?
     end
     $user_belongs_to_site = @current_session.belongs_to_current_site? || false
