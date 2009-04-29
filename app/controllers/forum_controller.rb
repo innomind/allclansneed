@@ -11,7 +11,11 @@ class ForumController < ApplicationController
     @anchor = Forum.find params[:id]
     @threads = @anchor.forum_threads.pages :all
     add_breadcrumb @anchor.title, @anchor
-    render :template => 'forum_thread/index'
+    
+    respond_to do |format|
+      format.html { render :template => 'forum_thread/index' }
+      format.rss { render :layout => false }
+    end
   end
     
   def new

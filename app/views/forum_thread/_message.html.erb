@@ -4,5 +4,5 @@
 
 <tr>
 <td style="width:100px"><%= image_tag(message.user.profile_pic.url(:thumb))%></td>
-<td><%= message.message %></td>
+<td><%= simple_format message.message %></td>
 </tr>
