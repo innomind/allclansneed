@@ -1,0 +1,9 @@
+Hallo <%= @owner.nick%>,
+
+<%= @applicant.nick %> hat gerade eine Anfrage gestellt, dem Clan <%= @clan.name %> beizutreten.
+Du kannst diese Anfrage unter <%= url_for(:host => "allclansneed.com", :controller => clan_squads_path(@clan)) %> annehmen, oder ablehnen.
+
+Falls du eine Clanseite bei Allclansneed hast kannst du die Anfrage auch dort unter "User verwalten" bearbeiten.
+
+Grüße,
+Allclansneed Support

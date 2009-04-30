@@ -4,7 +4,6 @@
 <td><%= username(poll.user) %></td>
 <td><%= l poll.created_at, :format => "short" %> </td>
 <td>
-  
   <%= access_link image_tag("pencil.png"), edit_poll_path(poll) %>
   <%= access_link_if poll.open?, "schließen", close_poll_path(poll) %>
   <%= access_link_if poll.close?, "öffnen", open_poll_path(poll) %>

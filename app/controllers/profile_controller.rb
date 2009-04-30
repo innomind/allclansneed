@@ -20,7 +20,6 @@ class ProfileController < ApplicationController
   def create
     @new_user = User.create params[:user]
     if @new_user.save
-      Postoffice.deliver_example("neuer user")
       Postoffice.deliver_email_activation(@new_user)
       flash[:notice] = "Du hast dich erfolgreich registriert. Nachdem du deine Email adresse bestätigt hast kannst du dich einloggen. Einen Link zur Bestätigung haben wir dir per Email geschickt"
       redirect_to :controller => "login"

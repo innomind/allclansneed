@@ -10,7 +10,7 @@
 </div>
 
 <div class="gallery_pic">
-<%= link_to image_tag(@gallery_pic.pic.url(:medium)), @gallery_pic.pic.url(:original) %>
+	<%= gallery_pic_link_for(@gallery_pic) %>
 </div>
 
 <dl class="meta">

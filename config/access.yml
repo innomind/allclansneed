@@ -63,6 +63,8 @@ poll:
   restful: true
   show: member
   vote: member
+  close: right
+  open: right
 profile:
   restful: true
   email_activation: public
