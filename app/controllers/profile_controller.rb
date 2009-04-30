@@ -95,6 +95,7 @@ class ProfileController < ApplicationController
   def get_profile
 
     @profile = Profile.find params[:id], :include => [{:user => {:squads => :clan}}]
+    raise ActiveRecord::RecordNotFound if @profile.nil?
     
     unless current_site.is_portal?
       redirect_to profile_path(params[:id], :subdomain => false) and return unless @profile.user.belongs_to_site?(current_site)
