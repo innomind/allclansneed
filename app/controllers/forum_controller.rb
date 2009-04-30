@@ -9,7 +9,6 @@ class ForumController < ApplicationController
   
   def show
     @anchor = Forum.find params[:id]
-    @anchor = nil
     @threads = @anchor.forum_threads.pages :all
     add_breadcrumb @anchor.title, @anchor
     
