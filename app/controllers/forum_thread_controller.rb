@@ -10,7 +10,7 @@ class ForumThreadController < ApplicationController
   
   #show thread
   def show
-    @messages = ForumMessage.paginate :conditions => {:forum_thread_id => @thread}
+    @messages = ForumMessage.paginate :conditions => {:forum_thread_id => @thread}, :order => "created_at ASC"
     add_breadcrumb @thread.title
   end
   
