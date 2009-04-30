@@ -1,4 +1,4 @@
-<li><%= image_tag(user_list.profile.profile_pic.url(:thumb), :width => 30, :height => 30) + username(user_list) %>
+<li><%= image_tag(user_list.profile_pic.url(:thumb), :width => 30, :height => 30) + username(user_list) %>
 <div>
 	<% if @current_session.logged_in? %>
 		<span class="links">
