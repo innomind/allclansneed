@@ -27,10 +27,10 @@
     </div>
     <div class="cats">
 
-        <div class="cat_title"><%= get_boxes_for("leftside").first.name %></div>
+        <div class="cat_title"><%= get_boxes_for("leftside", true).first.name %></div>
         <div class="cat_title_content"><%= @site.page_text_2 %></div>
-        <div class="cat_title_left"><%= get_boxes_for("rightside1").first.name %></div>
-        <div class="cat_title_right"><%= get_boxes_for("rightside2").first.name %></div>
+        <div class="cat_title_left"><%= get_boxes_for("rightside1", true).first.name %></div>
+        <div class="cat_title_right"><%= get_boxes_for("rightside2", true).first.name %></div>
 
     </div>
 
