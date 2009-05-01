@@ -15,6 +15,20 @@ class Postoffice < ActionMailer::Base
     body :ticket => ticket
   end
   
+  def new_ticket_message_user ticket_message, recipients
+    recipients recipients
+    from  "support@allclansneed.de"
+    subject "Neue Nachricht zum Ticket #{ticket_message.ticket.subject}"
+    body :message => ticket_message
+  end  
+  
+  def new_ticket_message_support ticket_message, recipients
+    recipients recipients
+    from  "support@allclansneed.de"
+    subject "Neue Nachricht zum Ticket #{ticket_message.ticket.subject}"
+    body :message => ticket_message
+  end
+  
   def email_activation user
     recipients user.email
     from  "support@allclansneed.de"
@@ -79,4 +93,5 @@ class Postoffice < ActionMailer::Base
     subject "#{intervall} reporting"
     body :stats => stats
   end
+  
 end
