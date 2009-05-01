@@ -7,7 +7,7 @@ class GalleryPic < ActiveRecord::Base
       :thumb => "100x100#",
       :medium => "300x300>",
       :small  => "150x150>" }
-  
+
   belongs_to :site
   belongs_to :gallery
   belongs_to :user

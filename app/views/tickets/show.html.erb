@@ -1,0 +1,35 @@
+<h1>Ticket</h1>
+
+<dl class="meta">
+	<dt>Betreff</dt>
+	<dd><%= @ticket.subject %></dd>
+	<dt>Kategorie</dt>
+	<dd><%= @ticket_category.name %></dd>
+	<dt>Status</dt>
+	<dd><%= @ticket_status.name %></dd>
+</dl>
+<% supporter_area do %>
+<dl class="meta">
+	<dt>Admin</dt>
+	<dd><% error_handling_form_for @ticket do |form| %>
+	  <%= form.select :status_id, Category.global_for_select("Ticket", "status")%>
+	  <%= form.select :admin_id, [["keiner", nil]] + User.get_supporter_for_select %>
+	  <%= form.submit "ändern" %>
+	<% end %>
+	</dd>
+</dl>
+<% end %>
+
+<h2>Nachrichten</h2>
+<table class="simple-post" style="width:100%">
+	<tbody>
+<%= render :partial => "message", :collection => @messages %>
+	</tbody>
+</table>
+
+<h2>Antwort</h2>
+<% error_handling_form_for @answer do |form| %>
+      <%= form.hidden_field :ticket_id, :value => @ticket.id, :style => "blank" %>
+      <%= form.text_area :message, :rows => 5, :cols => 30%>
+      <%= form.submit "erstellen" %>
+<% end %>

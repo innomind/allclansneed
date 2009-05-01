@@ -38,6 +38,7 @@ module Paperclip
       def flush_writes #:nodoc:
         logger.info("[paperclip] Writing files for #{name}")
         @queued_for_write.each do |style, file|
+          logger.info("[paperclip] mkdir #{File.dirname(path(style))}")
           FileUtils.mkdir_p(File.dirname(path(style)))
           logger.info("[paperclip] -> #{path(style)}")
           result = file.stream_to(path(style))

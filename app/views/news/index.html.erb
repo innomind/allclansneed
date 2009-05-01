@@ -1,13 +1,11 @@
-<h1><%= t "news.welcome" %></h1>
+<h1>News Übersicht</h1>
 
-<ul id="news_list">
+<div class="userlinks">
+	<%= access_link image_tag("add.png") + "Neue News erstellen", new_onenews_path %> <%= categories_link "News" %>
+</div>
+
+<%= entry_and_pagination @news %>
+
 <%= render :partial => "news", :collection => @news %>
-</ul>
-
-<%= will_paginate @news%>
-<br />
-<%= access_link "Neue News erstellen", new_onenews_path %>
-<%= access_link "Kategorien bearbeiten", category_path("News")%>
-<br /><br />
 
 <%= cloud(@tags) %> 

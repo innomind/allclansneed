@@ -1,1 +1,18 @@
+<h1>Template verwalten</h1>
+<h2>Seiten Texte</h2>
+<div class="embedded">
+<% error_handling_form_for @site do |form| %>
+	<%= form.text_field :site_title %>
+	<%= form.text_field :page_title %>
+	<%= form.text_field :page_text_1, :label => @site.template.page_text_1 unless @site.template.page_text_1.nil? %>
+	<%= form.text_field :page_text_2, :label => @site.template.page_text_2 unless @site.template.page_text_2.nil? %>
+	<%= form.text_field :page_text_3, :label => @site.template.page_text_3 unless @site.template.page_text_3.nil? %>
+	<%= form.text_field :page_text_4, :label => @site.template.page_text_4 unless @site.template.page_text_4.nil? %>
+	<%= form.submit "ändern"%>
+<% end %>
+</div>
+<h2>Template wechseln</h2>
+
+<dl>
 <%= render :partial => "template", :collection => @templates %>
+</dl>

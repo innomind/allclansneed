@@ -1,0 +1,12 @@
+#philipp's database.yml
+development:
+  adapter: sqlite3
+  encoding: unicode
+  database: acn_development
+
+test:
+  adapter: sqlite3
+  encoding: unicode
+  database: acn_test
+
+production: development

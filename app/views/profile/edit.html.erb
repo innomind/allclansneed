@@ -1,8 +1,20 @@
-Profil bearbeiten
-<%#= error_messages_for @profile -%>
+<h1>Profil bearbeiten</h1>
+
+<%= render :partial => "edit_links" %>
 
 <% error_handling_form_for @profile do |f|%>
-	<%= f.text_field 'firstname' %>
-	<%= f.text_field 'lastname' %>
-        <%= f.submit "Änderungen übernehmen" %>
+	<% f.fields_for @profile.user do |uf| %>
+		<%= uf.text_field :nickname %>
+	<% end %>
+	
+	<%= f.text_field :firstname %>
+	<%= f.text_field :lastname %>
+	<%= f.text_field :bday %>
+	<%= f.text_field :icq %>
+	<%= f.text_field :skype %>
+	<%= f.text_field :msn %>
+	<%= f.text_area :motto %>
+	<%= f.text_area :hardware %>
+	<%= f.text_area :interests %>
+    <%= f.submit "Änderungen übernehmen" %>
 <% end %>

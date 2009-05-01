@@ -1,4 +1,2 @@
-<div id="<%= dom_id(template) %>">
-	<%= template.name %>
-	<%= access_link_unless (@site.template == template), "auswählen", choose_template_path(template) %>
-</div>
+<dt><%= template.name %></dt>
+<dd><%= (access_link_unless (@site.template == template), "auswählen", choose_template_path(template)) || "&nbsp;" %></dd>

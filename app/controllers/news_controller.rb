@@ -1,10 +1,16 @@
 class NewsController < ApplicationController
-  #ACTION_LEVELS = {:new => LEVEL_SITE_ADMIN}
+  uses_tiny_mce :options => {:theme => "advanced", 
+                             :plugins => [:emotions],
+                             },
+               :only => [:new, :create, :edit, :update]
+  
+  comment_mce_for
+  
   add_breadcrumb 'News', 'news_path'
   before_filter :init_news, :only => [:show, :destroy, :edit, :update]
   
   def index
-    @news = News.paginate(:all)
+    @news = News.paginate(:all, :include => [:category, :tags])
     @tags = News.tag_counts(:order => 'count desc', :conditions  => {:site_id  => current_site.id})
   end
   
@@ -39,7 +45,7 @@ class NewsController < ApplicationController
   end
   
   def edit
-    @tags = News.tag_counts(:order => 'count desc', :conditions  => {:site_id  => current_site_id})
+    @tags = News.tag_counts(:order => 'count desc', :conditions  => {:site_id  => current_site.id})
   end
   
   def update
@@ -55,7 +61,7 @@ class NewsController < ApplicationController
   end
   
   def findByTag
-    @news = News.find_tagged_with(params[:id], :conditions  => {:site_id  => current_site_id})
+    @news = News.find_tagged_with(params[:id], :conditions  => {:site_id  => current_site})
   end
   
   def auto_complete_for_news_tags

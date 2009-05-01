@@ -1,0 +1,21 @@
+<h1><%= @anchor.title %></h1>
+
+<div class="userlinks">
+	<%= access_link image_tag("folder_add.png") + "Thread erstellen", new_thread_link(@anchor)  %>
+</div>
+
+<%= entry_and_pagination @threads %>
+
+<table class="simple-table" style="width:100%">
+  <thead>
+    <tr> 
+      <th>Thread</th>
+      <th>Posts</th>
+	  <th>Autor</th>
+      <th>Letzter Eintrag</th>
+    </tr>
+  </thead>
+  <tbody>
+<%= render :partial => "forum_thread/thread", :collection => @threads %>
+</tbody>
+</table>

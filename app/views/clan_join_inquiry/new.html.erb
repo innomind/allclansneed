@@ -1,0 +1,5 @@
+<% error_handling_form_for ClanJoinInquiry.new, :url => clan_join_inquiry_index_path do |form| %>
+	<%= form.text_field :clan_uniq, :value => params[:clan_id], :readonly => true %>
+	<%= form.text_area :inquiry_text, :rows => 5, :cols => 25 %>
+	<%= form.submit "anfrage stellen" %>
+<% end %>

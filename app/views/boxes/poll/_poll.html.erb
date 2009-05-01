@@ -1,0 +1,9 @@
+<% unless (box_poll.nil? or box_poll.has_voted? @user)%>
+  <% error_handling_form_for box_poll, :url => vote_poll_path(box_poll), :html => {:method => :post} do |form| %>
+    <h3><%= box_poll.title %></h3>
+      <%= render :partial => "poll/poll_option", :collection => box_poll.poll_options %>
+    <%= form.submit "voten" %>
+  <%  end %>
+<% else %>
+Derzeit keine Polls.
+<% end %>

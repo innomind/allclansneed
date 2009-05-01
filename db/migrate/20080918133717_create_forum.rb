@@ -5,7 +5,7 @@ class CreateForum < ActiveRecord::Migration
       t.column :subtitle, :string
       t.column :position, :integer
       t.column :parent_id, :integer
-      t.column :forum_threads_count, :integer
+      t.column :forum_threads_count, :integer, :default => 0
       t.belongs_to :site
       t.timestamps
     end

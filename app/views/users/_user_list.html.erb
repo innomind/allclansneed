@@ -1,0 +1,10 @@
+<li><%= image_tag(user_list.profile_pic.url(:thumb), :width => 30, :height => 30) + username(user_list) %>
+<div>
+	<% if @current_session.logged_in? %>
+		<span class="links">
+			<%= link_to image_tag("email.png") + "Nachricht schreiben", messages_path, :class => "first" %>
+			<%= access_link image_tag("user_add.png") + "Freund werden", become_friend_path(user_list) %>
+		</span>
+	<% end %>
+</div>
+</li>

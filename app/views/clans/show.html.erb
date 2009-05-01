@@ -1,8 +1,43 @@
-<p>
-  <b>Name:</b>
-  <%=h @clan.name %>
-</p>
+<h1>Clan: <%= @clan.name %></h1>
 
+<div style="float:left">
+	<%= image_tag(@clan.clan_pic.url(:thumb))%>
+</div>
 
-<%= link_to 'Edit', edit_clan_path(@clan) %> |
+<div style="float:left">
+	<dl class="meta">
+		<dt>Name</dt><dd><%= @clan.name %>&nbsp;</dd>
+		<dt>Clan-ID</dt><dd><%= @clan.uniq %>&nbsp;</dd>
+		<dt>Clan-Tag</dt><dd><%= @clan.clan_tag %>&nbsp;</dd>
+		<dt>Gegründet am</dt><dd><%= l @clan.created_at, :format => "datelong" %> von <%= username(@clan.owner) %></dd>
+		<dt>Link</dt><dd><%= link_to "link", root_path(:subdomain => @clan.uniq) %></dd>
+		<dt>beitreten</dt><dd>
+			<% if @current_session.logged_in? %>
+				<%= ajax_tooltip "hier klicken", :update_url => new_clan_join_inquiry_path(:clan_id => @clan.uniq) %>
+			<% else %>
+				<%= tooltip "hier klicken", :text => "du musst eingeloggt sein, um den clan beitreten zu können"%>
+			<% end %>
+		</dd>
+	</dl>
+</div>
 
+<div style="clear:both"></div>
+
+<h2>Beschreibung</h2>
+
+<%= simple_format @clan.description %>
+
+<h2>Squads</h2>
+
+<% @clan.squads.each do |squad| %>
+	<h3><%= squad.name %></h3>
+	<ul class="simple-list three_cols">
+	   <% squad.squad_users.each do |squad_user|%>
+			<li><%= image_tag(squad_user.user.profile_pic.url(:thumb), :width => 30, :height => 30) + username(squad_user.user) %>
+			<div>seit <%= time_ago_in_words squad_user.created_at %></div></li>
+	   <% end %>
+	</ul>
+	<div style="clear:both"></div>
+<% end %>
+
+<%= show_comments @clan %>

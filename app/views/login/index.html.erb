@@ -1,31 +1,15 @@
-<div style="width:70%">
-  <%= render :partial => 'login' %>
-</div>
+<%unless @current_session.logged_in? %>
+  <br/>
 
+  <% error_handling_form_for User.new, :url => {:controller => "login", :action => "login"} do |f| %>
+    <%= f.text_field 'login', :size => 10 %>
+    <%= f.password_field 'password', :size => 10 %>
+    <%= f.submit 'log in' %>
+  <%end%>
 
-<pre>
-
-
-<%#=YAML.dump session[:rights]%>
-
-<%=access_link 'ClanManagement', {:controller => 'clan_management', :action => 'index'}%>
-<%=access_link 'test1', {:action => 'test1'}%>
-<%=access_link 'test2', {:action => 'test2'}%>
-<%=access_link 'test3', {:action => 'test3'}%>
-
-<% if_accessible({:action => "login"}) do %>
-  <div style="color:red;border:solid">
-  <%="accessible"%>
-  </div>
-<%end%>
-
-<%
-#small scripz ciddies choke (no, it's only vs of course ;) want you to see the 3 funcs from right_helper.rb in action )
-#of course you can remove this
-%>
-<%if accessible?({:controller => 'login', :action => 'index'}) %>
-  <%="you're hacked! @philipp: plz l00k @ login/index.html"%>
-<%else%>
-  <%="OK, you're NOT hacked ;)"%>
-<%end%>
-</pre>
+  <br/>
+  <%= link_to 'account erstellen', new_profile_path %>
+  <%= link_to 'Passwort vergessen', :controller => "login", :action => "request_password"%>
+<% else %>
+  logged in
+<% end %>

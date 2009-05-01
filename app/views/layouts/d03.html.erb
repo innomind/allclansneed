@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<title><%= @site.site_title %></title>
+
+		<%# bundle do %>
+		  <%= javascript_include_tag :defaults%>
+		  <%= stylesheet_link_tag "d03/layout" %>
+		  <%= stylesheet_link_tag "d03/style" %>
+		  <%= include_tiny_mce_if_needed %>
+		  <%= yield :header_tags %>
+		<%# end %>
+</head>
+
+<body>
+
+
+       <div class="wrapper">
+       <div class="top">
+            <div class="top_left"><%= @site.page_text_1 %></div>
+            <div class="top_right"><%= @site.page_text_2 %></div>
+
+			<% get_boxes_for("single_1").each do |b| %>
+				<div class="top_menu"><%= b.name %></div>
+			<% end %>
+            
+       </div>
+       <div class="logo_left">
+		<% get_boxes_for("leftside").each do |b| %>
+            <div class="logo_left_menu_cat"><%= b.name %></div>
+            <div class="logo_left_menu_content"><%= create_box(b) %></div>
+		<% end %>
+       </div>
+       <div class="logo">	
+
+		
+           <div class="logo_box"><%= create_box(get_boxes_for("rightsingle1").first) %></div>
+			
+			<% get_boxes_for("rightsingle2", true).each do |b| %>
+				<div class="logo_catbox_left"><%= b.name %></div>
+			<% end %>
+			
+            <div class="logo_contentcat">content</div>
+            <div class="logo_login"><%= show_breadcrumb %></div>
+        </div>
+       <div class="box">
+        <div class="box_content_two"><%= create_box(get_boxes_for("rightsingle2").first) %></div>
+
+		<% get_boxes_for("rightside").each do |b| %>
+            <div class="box_cattitle"><%= b.name %></div>
+             <div class="box_menu"><%= create_box(b) %></div>
+		<% end %>
+
+</div>
+		<div class="content">
+			asdf asdf 
+			asdf
+			 asdf
+			 asdf adsföo ahsdfliu hasdf
+			a sdf
+			 a
+			sd fa sdf
+			
+			
+			asdfaödsifhu
+			<%#= show_notice_and_error %>
+			<%= yield %>
+		</div>
+      <div class="content_footer"></div>
+</div>
+</body>
+
+</html>

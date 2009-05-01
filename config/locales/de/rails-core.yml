@@ -21,6 +21,10 @@ de:
       short: "%e. %B, %H:%M Uhr"
       long: "%A, %e. %B %Y, %H:%M Uhr"
       time: "%H:%M"
+      long2rows: "%A, %e. %B %Y <br> %H:%M Uhr"
+      short2rows: "%e. %B <br> %H:%M Uhr"
+      dateshort: "%e. %b"
+      datelong: "%e. %B %Y"
  
     am: "vormittags"
     pm: "nachmittags"
@@ -47,13 +51,13 @@ de:
         other: 'etwa {{count}} Stunden'
       x_days:
         one: '1 Tag'
-        other: '{{count}} Tage'
+        other: '{{count}} Tagen'
       about_x_months:
         one: 'etwa 1 Monat'
         other: 'etwa {{count}} Monate'
       x_months:
         one: '1 Monat'
-        other: '{{count}} Monate'
+        other: '{{count}} Monaten'
       about_x_years:
         one: 'etwa 1 Jahr'
         other: 'etwa {{count}} Jahre'
@@ -87,6 +91,7 @@ de:
   support:
     array:
       sentence_connector: "und"
+      two_words_connector: " und "
       skip_last_comma: true
         
   activerecord:
@@ -96,7 +101,7 @@ de:
           one: "Konnte dieses {{model}} Objekt nicht speichern: 1 Fehler."
           other: "Konnte dieses {{model}} Objekt nicht speichern: {{count}} Fehler."
         body: "Bitte überprüfen Sie die folgenden Felder:"
- 
+
       messages:
         inclusion: "ist kein gültiger Wert"
         exclusion: "ist nicht verfügbar"

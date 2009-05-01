@@ -2,19 +2,13 @@ class GalleryController < ApplicationController
   
   add_breadcrumb 'Galerie', 'galleries_path'
   
-  CONTROLLER_ACCESS = COMPONENT_RIGHT_OWNER
-
-  ACTION_ACCESS_TYPES={
-    :index => PUBLIC,
-    :show => PUBLIC
-  }
-  
   def index
     @galleries = Gallery.paginate(:all, :include => :gallery_pics)
   end
   
   def show
     @gallery = Gallery.find_by_id params[:id], :include => :gallery_pics
+    @gallery_pics = @gallery.gallery_pics.pages :order => "gallery_pics.created_at ASC"
     add_breadcrumb @gallery.name
   end
   
@@ -35,14 +29,35 @@ class GalleryController < ApplicationController
   end
   
   def edit
-    
+    @gallery = Gallery.find params[:id]
+    add_breadcrumb "Gallerie bearbeiten"
   end
   
   def update
-    
+    @gallery = Gallery.find params[:id]
+    if @gallery.update_attributes params[:gallery]
+      flash[:notice] = "Galerie geändert"
+      redirect_to gallery_path(@gallery)
+    else
+      flash[:notice] = "Änderung gescheitert"
+      redirect_to gallery_path(@gallery)
+    end
   end
   
   def destroy
+    @gallery = Gallery.find params[:id]
+    @gallery_pics = @gallery.gallery_pics
+
+    @gallery_pics.each do |gallery_pic|
+      unless gallery_pic.destroy
+        flash[:notice] = "Galerie konnte nicht gelöscht werden"
+        redirect_to gallery_path(@gallery)
+      end
+    end
     
+    if @gallery.destroy
+      flash[:notice] = "Galerie erfolgreich gelöscht"
+      redirect_to root_path
+    end
   end
 end

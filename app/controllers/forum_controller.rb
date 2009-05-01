@@ -1,24 +1,23 @@
 class ForumController < ApplicationController
   
-  CONTROLLER_ACCESS = COMPONENT_RIGHT_OWNER
-
-  ACTION_ACCESS_TYPES={
-    :index => PUBLIC,
-    :show => PUBLIC
-  }
-  
   add_breadcrumb 'Forum', 'forums_path'
+  before_filter :authorize, :only => [:edit, :delete]
   
   def index
     @forums = Forum.find(:all)
   end
   
   def show
-    @forum = Forum.find :first, :conditions => { :id => params[:id]}
-    @threads = ForumThread.paginate :all, :conditions => {:forum_id => params[:id]}
-    add_breadcrumb @forum.title, ''
+    @anchor = Forum.find params[:id]
+    @threads = @anchor.forum_threads.pages :all
+    add_breadcrumb @anchor.title, @anchor
+    
+    respond_to do |format|
+      format.html { render :template => 'forum_thread/index' }
+      format.rss { render :layout => false }
+    end
   end
-  
+    
   def new
     @forum = Forum.new
     add_breadcrumb 'Forum erstellen'
@@ -53,5 +52,10 @@ class ForumController < ApplicationController
   def destroy
     Forum.find_by_id(params[:id]).destroy if flash[:notice] = "Forum gelöscht"
     redirect_to forums_path
+  end
+
+  private
+  def authorize
+    
   end
 end

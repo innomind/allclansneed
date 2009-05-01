@@ -1,1 +1,9 @@
+<h1>Boxen verwalten</h1>
+
+<div class="userlinks">
+	<%= access_link image_tag("page_copy.png") + "Eigene Seiten verwalten", pages_path %>
+</div>
+
+
 <%= render :partial => "template_area", :collection => @template_areas %>
+<div id="update_message"></div>

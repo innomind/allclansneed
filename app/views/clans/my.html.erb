@@ -1,0 +1,31 @@
+<h1>meine Clans</h1>
+<div class="userlinks">
+  <%= access_link image_tag("add.png") + "Clan gründen", new_clan_path %> 
+	<%= link_to_function image_tag("group_go.png") + "Clan beitreten" do |page|
+			page.visual_effect(:toggle_blind, "inquiry_form")
+	end	%>  
+</div>
+
+<div id="inquiry_form" class="embedded" style="display:none">
+<% error_handling_form_for ClanJoinInquiry.new, :url => clan_join_inquiry_index_path do |form| %>
+	<%= form.text_field :clan_uniq %>
+	<%= form.text_area :inquiry_text, :rows => 5, :cols => 25 %>
+	<%= form.submit "anfrage stellen" %>
+<% end %>
+</div>
+
+<br>
+<% unless @inquiries.empty?%>
+	<div class="embedded">
+	<h3>Meine Clan Anfragen:</h3>
+	<% @inquiries.each do |i| %>
+		<%= i.clan.name %> 
+		<%= access_link "zurückziehen", clan_join_inquiry_path(i, :from => :user), :method => :delete, :confirm => "Beitrittsanfrage wirklich zurückziehen?" %>
+		<br>
+	<% end %>
+</div>
+<% end %>
+
+<ul class="edit_list">
+	<%= render :partial => "clan", :collection => @clans %>
+</ul>

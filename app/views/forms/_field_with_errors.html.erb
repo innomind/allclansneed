@@ -3,7 +3,8 @@
     <%= label %>
   </span>
   <span class="form_field">
-    <%= element %><%= tooltip nil, :text => desc, :show_mode => "mouseover" if desc %>
+    <%= element %><%= tooltip nil, :text => desc, :show_mode => "mouseover" unless desc.empty? %>
+	<%= post_text %>
 	
     <span class="form_error_message">
       <%= error %> 

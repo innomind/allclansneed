@@ -1,0 +1,5 @@
+<%= tag('div', {:id => "tooltip_#{opts[:id]}", :class=> (opts[:class] || "tooltip"), :style => 'display:none'}, true) %>
+<%= "<div class='#{opts[:class] || "tooltip"}_close'>" + link_to_function(image_tag("cross.png"), "$('tooltip_#{opts[:id]}').hide()") + "</div>" unless opts[:show_mode] == "mouseover" %>
+<%= tag('div', {:id => "tooltip_content_#{opts[:id]}", :class=> (opts[:class] || "tooltip") + "_content"},true) %>
+<%= content %>
+</div></div>

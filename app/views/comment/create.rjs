@@ -1,8 +1,2 @@
-if @comment.new_record?
-  page.alert @comment.errors.full_messages.join("\n")
-else
-  page.insert_html :top, "comments", :partial => 'comment'
-  page.visual_effect :pulsate, "comment_#{@comment.id}"
-  page.form.reset "create_comment"
-  page.hide "add_comment"
-end
+page.form.reset "create_comment"
+page.reload

@@ -1,0 +1,10 @@
+  <tr>
+    <td><%= link_to ticket.subject, ticket %></td>
+    <td><%= username(ticket.author) %></td>
+    <td><% unless ticket.admin.nil? %><%= ticket.admin.login %><% end %></td>
+    <td><%= l ticket.created_at %></td>
+    <td><%= l ticket.updated_at %></td>
+<% supporter_area do %>
+    <td><%#= link_to 'bearbeiten', edit_ticket_path(ticket) %> <%= link_to 'löschen', ticket, :confirm => 'Are you sure?', :method => :delete %></td>
+<% end %>
+  </tr>

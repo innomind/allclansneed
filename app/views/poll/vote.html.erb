@@ -1,8 +1,6 @@
 <% error_handling_form_for @poll, :url => vote_poll_path(@poll), :html => {:method => :post} do |form| %>
-  <h1><%= @poll.title %></h1>
+  <h1>Voten für:<%= @poll.title %></h1>
   Beschreibung: <%= @poll.description %><br />
-  <ul id="poll">
     <%= render :partial => "poll_option", :collection => @poll.poll_options %>
-  </ul>
   <%= form.submit "voten" %>
 <% end %>

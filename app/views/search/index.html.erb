@@ -1,0 +1,34 @@
+<h1>Suchergebnisse</h1>
+<h2>Clans</h2>
+<table class="simple-table" style="width:100%">
+  <thead>
+    <tr> 
+      <th>Name</th>
+      <th>Clan-ID</th>
+      <th>erstellt am</th>
+	  <th>Squads</th>
+      <th>Mitglieder</th>
+      <th>Spiele</th>
+    </tr>
+  </thead>
+  <tbody>
+	<%= render :partial => "clans/clan_list", :collection => @clans %>
+  </tbody>
+</table>
+
+
+<h2>User</h2>
+
+<table class="simple-table" style="width:100%">
+  <thead>
+    <tr> 
+      <th>Name</th>
+      <th>User-ID</th>
+      <th>registriert am</th>
+      <th>Spiele</th>
+    </tr>
+  </thead>
+  <tbody>
+	<%= render :partial => "users/user", :collection => @users %>
+  </tbody>
+</table>

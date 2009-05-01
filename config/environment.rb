@@ -6,8 +6,8 @@
 
 # Specifies gem version of Rails to use when vendor/rails is not present
 
-#RAILS_GEM_VERSION = '2.1.1' unless defined? RAILS_GEM_VERSION
-RAILS_GEM_VERSION = '2.2.2' unless defined? RAILS_GEM_VERSION
+RAILS_GEM_VERSION = '2.3.2' unless defined? RAILS_GEM_VERSION
+#RAILS_GEM_VERSION = '2.2.2' unless defined? RAILS_GEM_VERSION
 
 # Bootstrap the Rails environment, frameworks, and default configuration
 require File.join(File.dirname(__FILE__), 'boot')
@@ -43,18 +43,24 @@ Rails::Initializer.run do |config|
   # Make Time.zone default to the specified zone, and make Active Record store time values
   # in the database in UTC, and return them converted to the specified local zone.
   # Run "rake -D time" for a list of tasks for finding time zone names. Comment line to use default local time.
-  config.time_zone = 'Europe/Berlin'
+  config.time_zone = 'Berlin'
 
   # Your secret key for verifying cookie session data integrity.
   # If you change this key, all old sessions will become invalid!
   # Make sure the secret is at least 30 characters and all random, 
   # no regular words or you'll be exposed to dictionary attacks.
-  config.action_controller.session = {
-    :session_key => '_acn_session',
-    :secret      => '4c050fbe9184a5354ad1b9b5bb90c86dee3f4322127d898dc236b8e54d47aa83caa4813e513b472c50d33c688d5b69b4428d83199e0c8eb6d7060a06244ba4be'
+  
+  config.action_controller.session = { 
+    :key => "_acn_session", 
+    :secret => "4c050fbe9184a5354ad1b9b5bb90c86dee3f4322127d898dc236b8e54d47aa83caa4813e513b472c50d33c688d5b69b4428d83199e0c8eb6d7060a06244ba4be" 
   }
+  
+#  config.action_controller.session = {
+#    :key => '_acn_session',
+#    :secret      => '4c050fbe9184a5354ad1b9b5bb90c86dee3f4322127d898dc236b8e54d47aa83caa4813e513b472c50d33c688d5b69b4428d83199e0c8eb6d7060a06244ba4be'
+#  }
 
-    config.action_controller.session_store = :p_store
+  #  config.action_controller.session_store = :p_store
   # Use the database for sessions instead of the cookie-based default,
   # which shouldn't be used to store highly confidential information
   # (create the session table with "rake db:sessions:create")
@@ -70,6 +76,8 @@ Rails::Initializer.run do |config|
   
 
 end
+
+Paperclip::options[:path] = "test"
 
 ActionMailer::Base.smtp_settings = {
   :address  => "mail.innomind.info",

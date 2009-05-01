@@ -1,0 +1,12 @@
+<% error_handling_form_for @squad_user, :url => user_path(@squad_user)  do |form| %>
+	
+	<% fields_for "component_list" do |cform| %>
+		<% @components.each do |c| %>
+			<%= cform.check_box c.id, :checked => (@user_components.include? c) %>
+			<%= c.name %>
+			<br />
+		<% end %>
+	<% end %>
+	
+ 	<%= form.submit 'speichern'  %>
+<%end%>

@@ -1,4 +1,5 @@
-<% error_handling_form_for @forum_thread, :url => forum_forum_threads_path(params[:forum_id]) do |f| %>
+<h1>Thread erstellen</h1>
+<% error_handling_form_for [@anchor, @forum_thread] do |f| %>
     <%= f.text_field 'title' %>
     
     <% fields_for "forum_thread[forum_message]" do |message_form| %>

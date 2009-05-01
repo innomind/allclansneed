@@ -16,13 +16,13 @@ class TemplateArea < ActiveRecord::Base
       :conditions => ["template_id = ? AND template_boxes.site_id = ?",site.template_id,site.id],
       :include => [ :template_boxes => 
                         [ :template_box_type, 
-                         {:navigations => :navigation_template} ]
+                         {:navigations => [:navigation_template, :page]} ]
                    ],
       :order => "template_areas.position, template_boxes.position, navigations.position"
   end
   
   #returns true if a box can be added to that area
   def is_addable?
-    self.multiple_boxes_allowed? ? true : self.template_boxes.empty?
+    self.multiple_boxes_allowed? ? true : (TemplateBox.find_all_by_template_area_id(self.id)).empty?
   end
 end

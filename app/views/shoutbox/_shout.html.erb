@@ -1,0 +1,4 @@
+<div id="shout_<%= shout.id %>" class="meta">
+  <h4>vor <%= time_ago_in_words shout.created_at %> von <%= username(shout.user) %></h4>
+  <div style="padding-left:5px"><%= shout.content  %></div>
+</div>

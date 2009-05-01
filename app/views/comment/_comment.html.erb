@@ -1,4 +1,8 @@
-<div id="comment_<%= comment.id %>">
-  am <%= l comment.created_at %> von <%= show_user(comment.user) %><br>
-  <%= comment.entry  %><br><br>
-</div>
+<tr>
+<td colspan="2" class="post-title">von <%= username(comment.user) %> am <%= l comment.created_at %></td>
+</tr>
+
+<tr>
+<td style="width:100px"><%= image_tag(comment.user.profile_pic.url(:thumb))%></td>
+<td><%= simple_format comment.entry  %></td>
+</tr>

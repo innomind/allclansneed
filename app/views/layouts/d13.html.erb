@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+	<title><%= @site.site_title %></title>
+
+		<%# bundle do %>
+		  <%= javascript_include_tag :defaults%>
+		  <%= stylesheet_link_tag "d13/layout" %>
+		  <%= stylesheet_link_tag "d13/style" %>
+		  <%= include_tiny_mce_if_needed %>
+		  <%= yield :header_tags %>
+		<%# end %>
+</head>
+
+<body>
+
+<div class="wrapper">
+
+
+    <div class="logo">
+
+      <div class="logo_text"><%= @site.page_title %></div>
+      <div class="logo_subtext"><%= @site.page_text_1 %></div>
+      <div class="logo_text2"><%= @site.page_text_2 %></div>
+      <div class="logo_cats">
+      	<div class="logo_cat_title"><%= get_boxes_for("leftside").first.name %></div>
+      	<div class="logo_cat_title2"><%= show_breadcrumb %></div>
+      	<div class="logo_cat_title3"><%= @site.page_text_3 %></div>
+      	<div class="logo_cat_title4"><%= get_boxes_for("rightside2").first.name %></div>
+      </div>
+    </div>
+
+    <div class="box">
+		<% get_boxes_for("leftside").each do |b| %>
+			<% unless get_boxes_for("leftside").first.id == b.id %>
+				<p class="box_start"></p>
+				<p class="box_cat"><span><%= b.name %></span></p>
+			<% end %>
+		    <%= create_box(b, ["<p class=\"box_list\"><span>", "</span></p>"], ["<div class=\"box_content\">", "</div>"]) %>
+			<p class="box_end"></p>
+		<% end %>
+    </div>
+
+    <div class="content">
+		
+		<%= show_notice_and_error %>
+		<%= yield %>
+			
+    </div>
+
+
+    <div class="box2">
+		<div style="padding:3px">
+		<% get_boxes_for("rightside1").each do |b| %>
+			<h3><%= b.name %></h3>
+		    <%= create_box(b) %>
+		<% end %>
+		</div>
+    </div>
+
+    
+    <div class="box3">
+	
+		<% get_boxes_for("rightside2").each do |b| %>
+			<% unless get_boxes_for("rightside2").first.id == b.id %>
+				<p class="box3_cat"><span><%= b.name %></span></p>
+			<% end %>
+		    <%= create_box(b, ["<p class=\"box3_list\"><span>", "</span></p>"], ["<div class=\"box3_content\">", "</div>"]) %>
+			<p class="box3_end"></p>
+			<p class="lap"></p>
+		<% end %>
+    </div>
+
+    <div class="footer"> 
+        <img src="/images/d13/11.gif" style="height: 35px; width: 176px; margin: 0px; float: left;" />
+        <img src="/images/d13/12.gif" style="height: 35px; width: 176px; margin: 0px; float: right;" />  
+    </div>
+    <div class="footer_end"></div>
+</div>
+
+</body>
+
+</html>

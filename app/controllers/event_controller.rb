@@ -1,12 +1,5 @@
 class EventController < ApplicationController
   
-  CONTROLLER_ACCESS = PUBLIC
-
-  ACTION_ACCESS_TYPES={
-    :new => COMPONENT_RIGHT_OWNER,
-    :create => COMPONENT_RIGHT_OWNER
-  }
-  
   add_breadcrumb 'Kalender', "events_path"
   
   def index
@@ -41,7 +34,7 @@ class EventController < ApplicationController
   def create
     add_breadcrumb "neuen Eintrag erstellen"
     @event = Event.new(params[:event])
-    
+    #@event.expire_at = Time.new(params[:event][:time])
     if @event.save
       flash[:notice] = "Kalendereintrag erstellt"
       redirect_to events_path

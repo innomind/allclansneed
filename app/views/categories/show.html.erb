@@ -1,11 +1,22 @@
-<ul id="categories">
+<h1>Kategorien</h1>
+<div class="userlinks">
+	<%= access_link image_tag("folder_add.png") + "Kategorie erstellen", :controller => :category, :action => :newcat, :path => newcat_category_path(@cat_name, @section_link) %>
+</div>
+
+<ul id="categories" class="edit_list">
 <% @categories.each do |cat| %>
 	<li id="<%=dom_id(cat)%>">
-		<%= cat.name %>
+		<span class="sortable_handle title">
+			<%= cat.name %>
+			<%= intern_pic cat %>
+		</span>
+		<span class="links">
 		<%= access_link image_tag("folder_edit.png"), edit_category_path(cat)%>
+		<%= access_link image_tag("folder_delete.png"), category_path(cat), :method => :delete, :confirm => "Kategorie wirklcih löschen?"%>
+		</span>
 	</li>
 <% end %>
 </ul>
-<%= access_link image_tag("folder_add.png") + " Kategorie erstellen", newcat_category_path(@cat_name) %>
 
-<%= sortable_element("categories", :url => update_positions_categories_path(:id => @cat_name)) %>
+<div id="update_message"></div>
+<%= sortable_element("categories", :url => update_positions_categories_path(:id => @cat_name), :handle => "sortable_handle") %>

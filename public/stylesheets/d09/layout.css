@@ -1,0 +1,78 @@
+body {
+	font-family: Tahoma, Arial, sans-serif;
+	font-size: 11px;
+	margin: 0px;
+	background-color: #000000;
+}
+.wrapper {
+	background-image: url(/images/d09/2.gif);
+	width: 954px;
+	margin: auto;
+}
+.logo {
+	background-image: url(/images/d09/1.gif);
+	height: 136px;
+}
+.logo span {
+	position: relative; top: 60px; left: 80px; color: #fff; font-size: 20px;
+}
+.img_1 {
+	float: left;
+	background-image: url(/images/d09/3.gif);
+	width: 53px;
+	height: 10px;
+}
+.img_2 {
+	float: left;
+	width: 163px;
+	background-image: url(/images/d09/7.gif);
+	background-repeat: no-repeat;
+	height: 38px;
+}
+.img_3 {
+	float: left;
+	width: 163px;
+	background-image: url(/images/d09/8.gif);
+	height: 36px;
+}
+.img_4 {
+	float: left;
+	background-image: url(/images/d09/5.gif);
+	width: 53px;
+	height: 117px;
+}
+.img_5 {
+	float: right;
+	background-image: url(/images/d09/6.gif);
+	width: 53px;
+	background-repeat: no-repeat;
+	height: 117px;
+}
+.box_left {
+	float: left;
+	width: 163px;
+	background-image: url(/images/d09/10.gif);
+}
+.padding {
+	padding: 6px;
+}
+.content {
+	float: left;
+	width: 522px;
+}
+.box_right {
+	float: left;
+	width: 163px;
+	background-image: url(/images/d09/11.gif);
+}
+.img_6 {
+	float: left;
+	background-image: url(/images/d09/4.gif);
+	width: 53px;
+	height: 11px;
+}
+.footer {
+	clear: left;
+	background-image: url(/images/d09/9.gif);
+	height: 127px;
+}

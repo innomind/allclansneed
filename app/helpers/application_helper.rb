@@ -1,7 +1,5 @@
-# Methods added to this helper will be available to all templates in the application.
 module ApplicationHelper
   
-  #some stuff for tag-clouding :)
   include TagsHelper
   
   def error_handling_form_for(record_or_name_or_array, *args, &proc)
@@ -22,21 +20,25 @@ module ApplicationHelper
     args
   end
   
-  def get_boxes_for internal_name
-    area = @template_areas.find{|a| a.internal_name == internal_name}
-    return(Array('')) if area.nil?
-    area.template_boxes
-  end
-  
-  def create_box box
-    render :partial => "boxes/#{box.template_box_type.internal_name}/show_loader", 
-           :locals => {:box => box}
-  end
-  
   def username(user)
-    link_to user.login, profile_path(user)
+    #out = link_to user.clans.first.clan_tag, clan_path(user.clans.first) unless user.clans.first.clan_tag.nil?
+    #out ||= ""
+    out = link_to(user.nick, profile_path(user))
+    #out = ajax_tooltip(user.nick, :update_url => infobox_profile_path(user), :class => "infobox")
   end
   
+  def entry_and_pagination model
+    out = "<div>"
+    out << will_paginate(model).to_s
+    out << "<div class='entries'>"
+    out << page_entries_info(model)
+    out << "</div>"
+    out << "</div>"
+    out << "<div style='clear:both'></div>"
+  end
+  
+  
+    
   def cloud(tags)
     return if tags.blank?
     output = ""
@@ -62,7 +64,6 @@ module ApplicationHelper
     end
     str
   end
-  
 
   def show_verbose_messages
     str = ''
@@ -73,11 +74,6 @@ module ApplicationHelper
       obj.errors.each {|i,j| j.each {|e| str << e}} #(error_messages_for obj.class, :object => obj)
     end
     str
-  end
- 
-  #TODO: use the code2block wiki-entry!
-  def div_encapsulate string, id=nil
-    "<div #{id.nil? ? "" : 'id="'+id.to_s+'"'}>"+string.to_s+'</div>'
   end
   
   #building popup calendar
@@ -112,7 +108,7 @@ module ApplicationHelper
     else
       opts[:show_mode] = "mouseover"
     end
-    tooltip name, opts, &proc
+    tooltip name, opts, &proc if opts[:text] = opts.delete(:alternate_text)
   end
   
   def ajax_loading_tag
@@ -128,5 +124,11 @@ module ApplicationHelper
 	  	end
 	  	output << @breadcrumbs.last.first 
 	  end
+  end
+  
+  def intern_pic(model)
+    if model.intern
+      tooltip image_tag("key.png"), :show_mode => "mouseover", :text => "Intern"
+    end
   end
 end

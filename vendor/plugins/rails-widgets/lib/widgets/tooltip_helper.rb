@@ -17,9 +17,9 @@ module Widgets
       result << tooltip_css
       
       if opts[:show_mode] == "ajax"
-        result << tooltip_link_ajax(opts[:id], name, opts[:update_url])
+        result << tooltip_link_ajax(opts[:id], name, opts[:update_url], opts[:link_class])
       else
-        result << tooltip_link(opts[:id],name)
+        result << tooltip_link(opts[:id],name, opts[:link_class])
       end
       
       if opts[:show_mode] == "mouseover"
@@ -39,6 +39,7 @@ module Widgets
     end
     
     def tooltip_css
+      return ''
       unless @_tooltip_css_done
         @_tooltip_css_done = true
         return render_css('tooltip')
@@ -54,12 +55,12 @@ module Widgets
       return image_tag("loading.gif") if opts[:show_mode] == "ajax"
     end
        
-    def tooltip_link(id, name)
-      link_to name, 'javascript:void(0)', :id => "tooltip_link_#{id}"
+    def tooltip_link(id, name, link_class = "")
+      link_to name, 'javascript:void(0)', :id => "tooltip_link_#{id}", :class => link_class
     end
     
-    def tooltip_link_ajax(id, name, update_url)
-      link_to_function name, "showAjaxTooltip('#{id}', '#{url_for(update_url)}')", :id => "tooltip_link_#{id}"
+    def tooltip_link_ajax(id, name, update_url, link_class = "")
+      link_to_function name, "showAjaxTooltip('#{id}', '#{url_for(update_url)}')", :id => "tooltip_link_#{id}", :class => link_class
     end
     
     def tooltip_link_function_klick(id)
@@ -72,12 +73,12 @@ module Widgets
     end
 
     def close_tooltip_link(id, message = 'close')
-      message ||= 'close' # if nil is passed I'll force it
+      message ||= 'close'
       link_to_function message, "$('tooltip_#{id}').hide()"
     end
     
     def render_tooltip(name, content, opts)
-      render :partial => "boxes/layouts/standard", :locals => { :opts => opts,
+      render :partial => "boxes/tooltip/standard", :locals => { :opts => opts,
                                                                 :content => content,
                                                                 :name => name }
     end

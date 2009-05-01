@@ -1,41 +1,74 @@
 class ProfileController < ApplicationController
-  before_filter :get_profile, :only => [:show]
+  before_filter :get_profile, :only => [:show, :infobox]
+  before_filter :init_clan, :only => [:index]
+  comment_mce_for
+  add_breadcrumb "User", "profiles_path"
   
   #TODO: Userliste
   def index
-    
+    @squads = @clan.squads.find(:all, :include => :users)
   end
   
   def show
-    @current_user = current_user
-    
-    if @profile.user != current_user
-      #if there is a direct connection between the current_user and the profile which is currently viewed
-    
-    #todo
-      
-     if (@profile.user.is_friends_with? @current_user)
-       @connection = "direct"
-     elsif ((@profile.user.friends & @current_user.friends).length > 0)
-       @connection = "indirect"
-       #wenn beide mehrere freunde gemeinsam haben wird einer zufällig ausgewählt
-       @friends_of_both = (@profile.user.friends & @current_user.friends)
-       @friend_of_both = @friends_of_both[rand(@friends_of_both.length)]
-     else
-       @connection = "none"
-     end
+    add_breadcrumb @profile.user.nick
+  end
+  
+  def new
+    @new_user = User.new
+  end
+  
+  def create
+    @new_user = User.create params[:user]
+    if @new_user.save
+      Postoffice.deliver_email_activation(@new_user)
+      flash[:notice] = "Du hast dich erfolgreich registriert. Nachdem du deine Email adresse bestätigt hast kannst du dich einloggen. Einen Link zur Bestätigung haben wir dir per Email geschickt"
+      redirect_to :controller => "login"
+    else
+      @new_user.password = ""
+      render :action => "new"
+    end
+  end
+  
+  def email_activation
+    user = User.find_by_email_activation_key params[:k]
+    if user.nil? || params[:k].nil?
+      flash[:error] = "Der Email Aktivierungs Code ist leider Falsch. Bitte wende dich bei Problemen an support@allclansneed.de"
+    else
+      user.update_attribute("email_activation_key", nil)
+      flash[:notice] = "Dein Account wurde Aktiviert, du kannst dich jetzt einloggen."
+    end
+    redirect_to :controller => "login"
+  end
+  
+  def edit_pic
+    add_breadcrumb current_user.nick, "profile_path(#{current_user.id})"
+    add_breadcrumb "bearbeiten"
+  end
+  
+  def update_pic
+    current_user.update_attributes(params[:user])
+    if current_user.save
+      redirect_to profile_path(current_user.id)
+    else
+      render :action => "edit_pic"
     end
   end
   
   def edit
     @profile = current_user.profile
+    add_breadcrumb @profile.user.nick, "profile_path(#{@profile.user.id})"
+    add_breadcrumb "bearbeiten"
   end
   
   def update
     @profile = current_user.profile
+    add_breadcrumb @profile.user.nick, "profiles_path(@profile.user.id)"
+    add_breadcrumb "bearbeiten"
+    @profile.user.update_attributes(params[:profile].delete(:user))
     @profile.update_attributes(params[:profile])
     if @profile.save
-       redirect_to profile_path(@profile.user_id)
+      #flash[:notice] = "Profil erfolgreich geändert"
+      redirect_to profile_path(@profile.user_id)
     else
       render :action => "edit"
     end
@@ -49,21 +82,35 @@ class ProfileController < ApplicationController
     @pending_groupmemberships = Groupmembership.find :all, :conditions => ["status = ? AND group_id IN (?)", "pending", current_user.groupfounderships]
   end
   
+  def infobox
+    render :layout => false
+  end
+  
   protected
   
+  def init_clan
+    @clan = current_site.clan
+  end
+  
   def get_profile
-    if is_portal?
-      @profile = Profile.find_by_user_id(params[:id])
-    else
-      #TODO nur user für diese Seite anzeigen      
-      #geht nicht:
-      user = User.find :first, 
-                       :conditions => ["users.id=? AND user_rights.site_id = ?",params[:id],current_site.id],
-                       :joins => [:sites, :profile]
-      if user.nil?
-        redirect_to profile_path(params[:id], :subdomain => false) 
+
+    @profile = Profile.find params[:id], :include => [{:user => {:squads => :clan}}]
+    raise ActiveRecord::RecordNotFound if @profile.nil?
+    
+    unless current_site.is_portal?
+      redirect_to profile_path(params[:id], :subdomain => false) and return unless @profile.user.belongs_to_site?(current_site)
+    end
+    
+    @current_user = current_user
+    if @profile.user != current_user && @current_session.logged_in?
+      @friends_of_both = (@profile.user.friends & @current_user.friends)
+      if (@profile.user.is_friends_with? @current_user)
+         @connection = "direct"
+      elsif ((@profile.user.friends & @current_user.friends).length > 0)
+         @connection = "indirect"
+         @friend_of_both = @friends_of_both[rand(@friends_of_both.length)]
       else
-        @profile = user.profile
+         @connection = "none"
       end
     end
   end

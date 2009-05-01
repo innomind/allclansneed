@@ -1,3 +1,5 @@
-Name: <%= @event.name %><br />
-Datum: <%= l @event.expire_at %><br />
-Beschreibung: <%= @event.description %><br />
+<h1>Kalendereintrag anzeigen</h1>
+<dl>
+<dt>Name</dt><dd><%= @event.name %></dd>
+<dt>Datum</dt><dd><%= l @event.expire_at %></dd>
+<dt>Beschreibung</dt><dd><%= @event.description %></dd>

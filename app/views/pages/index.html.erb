@@ -1,0 +1,18 @@
+<h1>Eigene Seiten verwalten</h1>
+<div class="userlinks">
+	<%= access_link image_tag("page_add.png") + "Seite hinzufügen", new_page_path %>
+</div>
+
+<ul id="pages" class="edit_list">
+<% @pages.each do |p| %>
+  <li>
+    
+    <span class="title"><%= link_to p.title, page_path(p) -%><%= intern_pic p %></span>
+	<span class="links">
+    <%= access_link image_tag("page_edit.png"), edit_page_path(p), :class => "first" %>
+    <%= access_link image_tag("page_delete.png"), page_path(p.id), :method => "delete", :confirm => "Wirklich löschen?" %>
+    </span>
+  </li>
+<% end %>
+
+</ul>

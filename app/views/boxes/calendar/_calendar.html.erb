@@ -1,0 +1,13 @@
+
+<%= calendar({:year => @year, :month => @month, :first_day_of_week => 1, :table_class => "box_calendar"}) do |d|
+      #cell_text = link_to(d.mday, showDay_events_path(:date => d)) + "<br />"
+      cell_text = d.mday
+      cell_attrs = {:class => 'day', :width => 20, :height => 20}
+      @events.each do |e|
+        if e.expire_at.to_date == d
+          cell_text = link_to(d.mday, showDay_events_path(:date => d))  << "<br />"
+          cell_attrs[:class] = 'specialDay'
+        end
+      end
+      [cell_text, cell_attrs]
+    end %>

@@ -1,15 +1,14 @@
-<div id="clanwar_<%= clanwar.id %>">
-	Squad: <%= clanwar.squad.name %> <br />
-	Gegner: <%= clanwar.opponent %> <br />
-	<% if clanwar.score > clanwar.score_opponent %>
-	  <font color="green">Ergebnis: <%= clanwar.score %> : <%= clanwar.score_opponent %> </font><br />
+<tr>
+<td> <%= link_to clanwar.opponent, clanwar_path(clanwar) %></td>
+<td>	
+<% if (clanwar.score > clanwar.score_opponent) %>
+	  <font color="green"><%= clanwar.score %> : <%= clanwar.score_opponent %> </font><br />
   <% elsif clanwar.score < clanwar.score_opponent%>
-    <font color="red">Ergebnis: <%= clanwar.score %> : <%= clanwar.score_opponent %> </font><br />
+    <font color="red"><%= clanwar.score %> : <%= clanwar.score_opponent %> </font><br />
   <% else %>
-    <font color="yellow">Ergebnis: <%= clanwar.score %> : <%= clanwar.score_opponent %> </font><br />
+    <font color="yellow"><%= clanwar.score %> : <%= clanwar.score_opponent %> </font><br />
   <% end %>
-  gespielt am: <%= l clanwar.played_at %> <br />
-  <%= link_to "details anzeigen", clanwar_path(clanwar) %><br />
- <%= access_link "bearbeiten", edit_clanwar_path(clanwar) %>
-	<br /><br />
-</div>
+</td>
+<td><%= l clanwar.played_at, :format => "short" %> </td>
+<td> <%= access_link image_tag("pencil.png"), edit_clanwar_path(clanwar) %> </td>
+</tr>

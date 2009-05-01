@@ -1,0 +1,8 @@
+Hallo <%= @user.nick %>,
+
+wir berüßen dich bei Allclansneed.
+Um deine Email Adresse zu aktivieren musst du einfach auf folgenden Link klicken:
+<%= url_for(:host => "allclansneed.com", :controller => "profile", :action => "email_activation", :k => @user.email_activation_key) %>
+
+Grüße,
+dein Allclansneed Team

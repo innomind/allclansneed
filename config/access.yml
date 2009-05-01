@@ -1,0 +1,98 @@
+# restful: true #=> [index, show] -> public; [new, create, edit, update, destroy] -> right
+
+# Verfügbare rechte:
+# public - jeder hat zugriff
+# member - Allclansneed Mitglieder
+# site   - Mitglied auf der Seite
+# right  - Man muss das Recht auf der Seite besitzen
+
+article:
+  restful: true
+clanwar:
+  restful: true
+clanwar_screenshots:
+  default: site
+clans:
+  index: public
+  show: public
+  default: member
+classifieds:
+  restful: true
+comments:
+    default: member
+event:
+  restful: true
+  showDay: public
+forum:
+  restful: true
+forum_message:
+  default: member
+forum_thread:
+  restful: true
+  new: member
+  create: member
+friends:
+  default: member
+  index: public
+  show: public
+gallery:
+  restful: true
+gallery_pic:
+  restful: true
+groups: 
+  default: member
+  index: public
+  show: member
+guestbook:
+  default: public
+  destroy: right
+  add_comment: site
+login:
+  default: public
+messages:
+  default: member
+navigation:
+  default: right
+news:
+  restful: true
+  default: right
+pages:
+  restful: true
+  index: right
+poll:
+  restful: true
+  show: member
+  vote: member
+  close: right
+  open: right
+profile:
+  restful: true
+  email_activation: public
+  start: member
+  new: public
+  create: public
+  edit: member
+  update: member
+  infobox: public
+rating:
+  default: member
+shoutbox:
+  restful: true
+site:
+  restful: true
+  new: member
+squad:
+  default: member
+squad_user:
+  default: member
+template_boxes:
+  default: right
+templates:
+  default: right
+ticket_message:
+  default: member
+tickets:
+  default: member
+  destroy: right
+users:
+  default: public

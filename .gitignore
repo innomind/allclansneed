@@ -1,9 +1,13 @@
 .DS_Store
 log/*.log
 tmp/**/*
-config/database.yml
 db/*.sqlite3
+config/database.yml
 public/pics/**/*
+public/profile_pics/**/*
+public/screenshots/**/*
+public/clan_pics/**/*
+public/group_pics/**/*
 nbproject/**/*
 nbproject/build-impl.xml
 nbproject/genfiles.properties
@@ -25,3 +29,5 @@ models.pdf
 acn_development
 acn_production
 acn_test
+log/domain.rb.pid
+log/domain.rb_monitor.pid

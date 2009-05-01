@@ -1,6 +1,6 @@
 class AddOpenToPoll < ActiveRecord::Migration
   def self.up
-    add_column :polls, :open, :boolean, :default => 1
+    add_column :polls, :open, :boolean, :default => true
   end
 
   def self.down

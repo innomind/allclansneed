@@ -1,5 +1,12 @@
-<% init_progress_bar %>
+<h1>Poll: <%= @poll.title %></h1>
+
+<table class="simple-table">
 <% for option in @poll.poll_options %>
-	<%= option.name %> votes: <%= option.vote_count.to_s %><br />
-	<%= progress_bar %>
+	<tr>
+		<td style="width:30%" class="dark"><%= option.name %></td>
+		<td><%= progressbar ((option.vote_count.to_f/@poll.vote_count.to_f)*100).to_i %>(<%= option.vote_count.to_s %>)</td>
+	</tr>
 <% end %>
+</table>
+<br>
+<%= show_comments @poll %>

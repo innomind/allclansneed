@@ -45,3 +45,19 @@ Spec::Runner.configure do |config|
   # 
   # For more information take a look at Spec::Example::Configuration and Spec::Runner
 end
+
+def rand_upper
+  (0x41+rand(26)).chr
+end
+
+def rand_lower
+  rand_upper.downcase!
+end
+
+def random_string length
+  (1..length).inject(""){|m, o| m += ((rand 2) == 1)? rand_upper : rand_lower}
+end
+
+def model_mocks klass, array, attribute
+  array.inject([]){|m, o| m << (mock_model(klass, attribute => o))}
+end

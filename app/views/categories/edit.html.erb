@@ -1,4 +1,6 @@
+<h1>Kategorie bearbeiten</h1>
 <% error_handling_form_for @category do |f| %>
 	<%= f.text_field :name %>
+	<%= f.check_box :intern %>
 	<%= f.submit "ändern" %>
 <% end %>

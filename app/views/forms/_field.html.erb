@@ -4,6 +4,7 @@
   </span>
   <span class="form_field">
     <%= element %>
-	<%= tooltip nil, :text => desc, :show_mode => "mouseover" if desc %>
+	<%= tooltip nil, :text => desc, :show_mode => "mouseover" unless desc.empty? %>
+	<%= post_text %>
   </span>
 </p>

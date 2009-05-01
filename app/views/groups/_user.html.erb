@@ -1,1 +1,2 @@
-<%= show_user user.user %><br />
+  <li><%= image_tag(user.user.profile_pic.url(:thumb), :width => 30, :height => 30) + username(user.user) %>
+<div>seit <%= time_ago_in_words user.created_at %></div></li>

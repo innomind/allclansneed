@@ -1,5 +1,20 @@
 <h1>Gruppenübersicht</h1>
-<%= render :partial => 'group', :collection => @groups%>
+<div class="userlinks">
+	<%= access_link image_tag("folder_add.png") + "neue Gruppe anlegen", new_group_path %>
+</div>
+<%= entry_and_pagination @groups %>
 
-<br />
-<%= access_link "neue Gruppe anlegen", new_group_path %>
+<table class="simple-table" style="width:100%">
+  <thead>
+    <tr> 
+      <th></th>
+      <th>Name</th>
+      <th>Mitglieder</th>
+      <th>Themen</th>
+	  <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= render :partial => 'group', :collection => @groups%>
+  </tbody>
+</table>

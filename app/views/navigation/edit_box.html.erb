@@ -1,13 +1,16 @@
-<%= ajax_tooltip_if NavigationTemplate.templates_free?, image_tag("application_add.png") + " Navigationspunkt erstellen", 
+<h1>Navigation bearbeiten</h1>
+<div class="userlinks">
+<%= ajax_tooltip_if (NavigationTemplate.templates_free? || Page.pages_free?), image_tag("application_add.png") + "Navigationspunkt erstellen", 
             :update_url => new_navigation_path(:template_box_id => params[:template_box_id]), 
             :id => "new_navigation",
- 			:text => "es gibt momentan keine freien Navigationspunkte" %>
-
+ 			:alternate_text => "es gibt momentan keine freien Navigationspunkte" %>
+</div>
 
 <ul id="navigations">
 <% @navigations.each do |nav| %>
 	<li id="<%= dom_id(nav) %>">
-		<%= "#{nav.name} (#{nav.navigation_template.name})"%>
+		<span class="sortable_handle"></span>
+		<%= "#{nav.name} (" + (nav.navigation_template.nil? ? "eigene Seite" : nav.navigation_template.name) + ")"%>
 		<%= ajax_tooltip image_tag("textfield_rename.png"), 
 	                :update_url => edit_navigation_path(nav), 
 	                :id => dom_id(nav, :edit) %>
@@ -21,5 +24,6 @@
 	</li>
 <% end %>
 </ul>
-
-<%= sortable_element("navigations", :url => update_positions_navigations_path(:template_box_id => params[:template_box_id])) %>
+<div id="update_message"></div>
+<%= sortable_element("navigations", :url => update_positions_navigations_path(:template_box_id => params[:template_box_id]),
+:handle => "sortable_handle") %>

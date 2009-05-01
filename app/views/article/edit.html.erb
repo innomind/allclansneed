@@ -1,5 +1,7 @@
+<h1>Artikel bearbeiten</h1>
 <% error_handling_form_for @article do |form| %>
 	<%= form.text_field :title %>
 	<%= form.text_area :content, :rows => 5, :cols => 30 %>
+	<%= form.check_box :intern %>
 	<%= form.submit "Artikel bearbeiten"%>
 <% end %>

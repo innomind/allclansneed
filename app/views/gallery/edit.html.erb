@@ -1,0 +1,7 @@
+<h1>Gallerie bearbeiten</h1>
+<% error_handling_form_for @gallery, :url => gallery_path(@gallery), :html => { :method => "put" } do |form| %>
+      <%= form.text_field :name %>
+      <%= form.text_area :description, :rows => 5, :cols => 30%>
+	  <%= form.check_box :intern %>
+      <%= form.submit "bearbeiten" %>
+<% end %>

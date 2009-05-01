@@ -1,0 +1,9 @@
+<tr>
+<td><%= link_to article.title, article_path(article) -%></td>
+<td><%= username(article.user) %></td>
+<td><%= l article.created_at, :format => "long2rows" %>
+<td>
+<%= access_link image_tag("folder_edit.png"), edit_article_path(article) %>
+<%= access_link image_tag("folder_delete.png"), article_path(article.id), :method => "delete", :confirm => "Wirklich löschen?" %>
+</td>
+</tr>

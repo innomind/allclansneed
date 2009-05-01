@@ -1,26 +1,26 @@
 class ClanwarController < ApplicationController
   
-  CONTROLLER_ACCESS = COMPONENT_RIGHT_OWNER
-
-  ACTION_ACCESS_TYPES={
-    :index => PUBLIC,
-    :show => PUBLIC
-  }
-
   add_breadcrumb 'Clanwars', "clanwars_path"
+  comment_mce_for
   
   def index
-    @clanwars  = Clanwar.paginate :all
+    if params[:squad_id].nil?
+      @squads = current_site.clan.squads
+    else
+      @squad = current_site.clan.squads.find params[:squad_id]
+      @clanwars = @squad.clanwars.pages
+      render "clanwar/index_clanwars"
+    end
   end
   
   def show
-    @clanwar = Clanwar.find_by_id(params[:id])
+    @clanwar = Clanwar.find_by_id(params[:id], :include => :clanwar_screenshots)
     add_breadcrumb "gegen "+@clanwar.opponent
   end
   
   def new
     @clanwar = Clanwar.new
-    @squads = Clan.find(:first).squads
+    @squads = current_site.clan.squads
     2.times { @clanwar.clanwar_maps.build }
     add_breadcrumb 'Clanwar hinzufügen'
   end
@@ -32,6 +32,7 @@ class ClanwarController < ApplicationController
       flash[:notice] = "Clanwar erfolgreich erstellt"
       redirect_to clanwars_path
     else
+      @squads = Clan.find(:first).squads
       render :action => "new"
     end
   end

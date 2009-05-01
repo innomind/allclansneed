@@ -1,0 +1,173 @@
+body {
+	background-color: #0A2833;
+	margin:0;
+	padding:0;
+	font-family: Tahoma, Arial, sans-serif;
+	font-size: 11px;
+}
+.wrapper {
+	width: 980px;
+	background-image: url(/images/d02/3.gif);
+	margin:auto;
+}
+.top {
+	background-image: url(/images/d02/1.gif);
+	height: 24px;
+}
+.navi_left {
+	float: left;
+	width: 180px;
+}
+.content {
+	float: left;
+	width: 441px;
+	position: relative;
+}
+.navi_cat {
+	background-image: url(/images/d02/m_1.gif);
+	height: 24px;
+	text-align: center;
+	color: #FFFFFF;
+	padding-top: 18px;
+	margin: 0px;
+}
+.navi_list {
+	background-image: url(/images/d02/m_2.gif);
+	height: 22px;
+	padding-left: 40px;
+	padding-top: 5px;
+	margin: 0px;
+}
+.navi_list a {
+	color: white;
+}
+
+.navi_list a:hover {
+	color: white;
+}
+
+.top_left {
+	float:left;
+	position: relative;
+	top: 10px;
+	left: 5px;
+	margin: 0px;
+	width: 400px;
+}
+.top_center {
+	float: left;
+	background-color: #000000;
+	width: 300px;
+	height: 20px;
+	text-align: center;
+}
+
+.top_center span
+{
+	position: relative; top: 2px; color: #ffffff;
+}
+.top_right {
+	float: left;
+}
+
+.top_right span {
+	position: relative; top: 5px; left: 15px;
+}
+.logo {
+	background-image: url(/images/d02/2.gif);
+	height: 165px;
+	text-align: center;
+}
+
+.logo span {
+	font-size: 32px; 
+	color: #fff; 
+	position: relative; 
+	top: 50px;
+}
+.clear_left {
+	clear: left;
+}
+.news_banner {
+	background-image: url(/images/d02/newsbanner.gif);
+	height: 62px;
+	margin: 0px;
+}
+.news_banner_text {
+	color: #ffffff;
+	position: relative;
+	left: 10px;
+	top: 2px;
+}
+.news_banner_text_two {
+	float: right;
+	color: #ffffff;
+	position: relative;
+	top: 20px;
+	right: 10px;
+	font-size: 18px;
+}
+
+.news_title_left {
+	float:left;
+	position: relative;
+	left: 5px;
+	top: 2px;
+	font-weight: bold;
+	color: #ffffff;
+}
+.news_title_right {
+	float:right;
+	position: relative;
+	right: 5px;
+	top: 2px;
+	color: #ffffff;
+}
+.padding {
+	padding: 5px;
+}
+.box_entry {
+	padding: 5px;
+}
+.content_link_button {
+	background-image: url(/images/d02/button.gif);
+	width: 67px;
+	text-decoration: none;
+	height: 16px;
+	text-align: center;
+	color: #FFFFFF;
+	cursor: pointer;
+	float: left;
+	margin-left: 5px;
+}
+.content_copyright {
+	clear: left;
+	width: 439px;
+	background-image: url(/images/d02/4.gif);
+	height: 23px;
+	margin-left: 1px;
+}
+.content_copyright_left {
+	color: #ffffff;
+	position: relative;
+	left: 5px;
+	font-size: 10px;
+	float: left;
+}
+.content_copyright_right {
+	float: right;
+	color: #ffffff;
+	position: relative;
+	right: 5px;
+	top: 2px;
+}
+.navi_two {
+	float: left;
+	width: 177px;
+	padding-left:1px;
+}
+.navi_right {
+	float: left;
+	width: 179px;
+	padding-left:2px;
+}

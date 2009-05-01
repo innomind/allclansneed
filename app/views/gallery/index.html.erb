@@ -1,6 +1,12 @@
-<% unless @galleries.nil? %>
-  <%= render :partial => "gallery", :collection => @galleries %><br>
-<% end %>
-<br>
-<%= will_paginate @galleries %><br  />
-<%= access_link "Gallerie hinzufügen", new_gallery_path %>
+<h1>Gallerie</h1>
+
+<div class="userlinks">
+	<%= access_link image_tag("folder_add.png")+ "Galerie hinzufügen", new_gallery_path %>
+</div>
+
+<%= entry_and_pagination @galleries %>
+<table class="simple-table" style="width:100%">
+  <tbody>
+  <%= render :partial => "gallery", :collection => @galleries %>
+</tbody>
+</table>

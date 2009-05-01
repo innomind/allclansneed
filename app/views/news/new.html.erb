@@ -1,8 +1,9 @@
 <h1>News erstellen</h1>
 <% error_handling_form_for @news do |f| %>
-	<%= f.text_field 'title' %>
-	<%= f.text_area 'subtext' %>
-	<%= f.text_area 'news' %>
+	<%= f.text_field :title %>
+	<%= f.text_area :subtext, :class => "mceEditor" %>
+	<%= f.text_area :news, :class => "mceEditor" %>
+	<%= f.check_box :intern %>
 	<%= f.select :category_id, Category.for_select("News")%>
 	tags: <%= text_field_with_auto_complete :news, :tags,
 	                                  { :value  => '',

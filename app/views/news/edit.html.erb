@@ -2,14 +2,16 @@
 <% error_handling_form_for @news, :url => onenews_path(@news) do |f| %>
 
 	<%= f.text_field :title %>
-	<%= f.text_field :subtext %>
-	<%= f.text_field :news %>
-	
+	<%= f.text_area :subtext, :class => "mceEditor" %>
+	<%= f.text_area :news, :class => "mceEditor" %>
+	<%= f.check_box :intern %>
+	<%= f.select :category_id, Category.for_select("News")%>
 	<%= text_field_with_auto_complete :news,
 	                                  :tags,
-	                                  { :size  => '20', 
-	                                    :tokens => ','},
-	                                  :indicator => 'status-indicator' %>
+	                                  { :value  => @news.tags.join(", "),
+	                                    :size  => '20'},
+	                                  {:indicator => 'status-indicator',
+		 								:tokens => ','}%>
                     <span id="status-indicator" style="display: none"><%= image_tag("loading.gif", :border  => "0") %></span>
 	<br /><br />
 	vorhandene Tags:<br />

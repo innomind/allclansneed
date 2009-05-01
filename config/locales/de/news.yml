@@ -1,7 +1,0 @@
-de:
-  activerecord:
-    attributes:
-      news:
-        title: "Titellll"
-  news:
-    welcome: "News übersicht"

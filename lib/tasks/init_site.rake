@@ -4,147 +4,120 @@ namespace :init do
     sh "rake db:drop:all"
     sh "rake db:create:all"
     sh "rake db:migrate"
-    sh "rake init:site"
-    2.upto(5) { |i| sh "rake init:one_site site_id=#{i}" }
+    #init
+    puts "Init"
+    #init
+    init_components
+    init_box_types
+    init_navigations
+    init_ticket_categories
+    init_templates
+    1.upto(4) { |i| puts "Create Site #{i}"; one_site i }
   end
   
-  desc "Populates for site_id(1): template, template_areas, template_boxes, template_box_types, navigation_template, navigation"
-  task :site => :environment do
-    site = Site.find_by_id 1
-    site.template = Template.create(:name => "DNP", :internal_name => "dnp")
+  def create_sites
     
-    t_area = Hash.new
-    t_area[:topnav] = TemplateArea.create(:name => "topnav", 
-                                        :internal_name => "topnav", 
-                                        :position => 1, 
-                                        :multiple_boxes_allowed => false)
-                                        
-    t_area[:linke_seite] = TemplateArea.create(:name => "linke Seite", 
-                                            :internal_name => "linke_seite", 
-                                            :position => 2)
-                                            
-    t_area[:rechte_seite] = TemplateArea.create(:name => "rechte Seite", 
-                                              :internal_name => "rechte_seite", 
-                                              :position => 3)
-                                            
-    site.template.template_areas = t_area.values
-    site.save
-    Nav = Hash.new
-    ["News", "Forum", "Event", "Gallery", "Clanwar", "Poll", "Guestbook", "Articles"].each {|n|
-      tpl = NavigationTemplate.create(:name => n, :controller => n, :action => "index")
-      Nav[n.to_s] = Navigation.create(:name => n, :navigation_template => tpl)
+  end
+  
+  def init_components
+    Component.create(:name => "Artikel", :controller => "article")
+    Component.create(:name => "Clanwar", :controller => "clanwar_map", :parent_id => Component.create(:name => "Clanwar", :controller => "clanwar").id)
+    Component.create(:name => "Kalender", :controller => "event")
+    forum = Component.create(:name => "Forum", :controller => "forum")
+    Component.create(:name => "Forum Thread", :controller => "forum_thread", :parent_id => forum.id)
+    Component.create(:name => "Forum Message", :controller => "forum_message", :parent_id => forum.id)
+    gallery = Component.create(:name => "Galerie", :controller => "gallery")
+    Component.create(:name => "Gallery Pic", :controller => "gallery_pic", :parent_id => gallery.id)
+    Component.create(:name => "Gästebuch", :controller => "guestbook")
+    Component.create(:name => "News", :controller => "news")
+    Component.create(:name => "Poll", :controller => "poll")
+    Component.create(:name => "Shoutbox", :controller => "shoutbox")
+  end
+  
+  def init_navigations
+    [["News", "news_path"], ["User", "profiles_path"], ["Forum", "forums_path"], ["Kalender", "events_path"], ["Galerie", "galleries_path"], ["Clanwars", "clanwars_path"], ["Poll", "polls_path"], ["Gästebuch", "guestbooks_path"], ["Artikel", "articles_path"]].each {|n|
+      NavigationTemplate.create(:name => n[0], :link_path => n[1])
     }
-
-    #Navi1
-    tb = TemplateBox.create(:name => "topNavi", :position => 1)
+  end
+  
+  def init_box_types
+    TemplateBoxType.create(:name => "Login", :internal_name => "login", :editable => false)
+    TemplateBoxType.create(:name => "Navigation", :internal_name => "navigation", :editable => true, :multiple_allowed => true, :edit_in_new_window => true, :link_list => true)
+    TemplateBoxType.create(:name => "Forum", :internal_name => "forum")
+    TemplateBoxType.create(:name => "Galerie", :internal_name => "gallery_pic")
+    TemplateBoxType.create(:name => "Poll", :internal_name => "poll")
+    TemplateBoxType.create(:name => "Clanwars", :internal_name => "clanwar")
+    TemplateBoxType.create(:name => "Kalender", :internal_name => "calendar")
+    TemplateBoxType.create(:name => "Shoutbox", :internal_name => "shoutbox")
+  end
+  
+  def init_templates
+    puts "template init"
+    template = Template.create(:name => "d08", :internal_name => "d08", :page_text_1 => "oben links", :page_text_2 => "oben rechts", :page_text_3 => "unten links", :page_text_4 => "unten rechts")
+    template.template_areas << TemplateArea.create(:name => "links oben", 
+                        :internal_name => "topleft", 
+                        :position => 1, 
+                        :multiple_boxes_allowed => false,
+                        :prefered_box_type_id => TemplateBoxType.find_by_name("Navigation").id,
+                        :max_list_items => 4)
+    template.template_areas << TemplateArea.create(:name => "linke Seite", 
+                        :internal_name => "leftside", 
+                        :position => 2)
+    template.template_areas << TemplateArea.create(:name => "rechte Seite", 
+                        :internal_name => "rightside", 
+                        :position => 3)
+                        
+    template = Template.create(:name => "portal", :internal_name => "portal", :account_type => "")
+    template.template_areas << TemplateArea.create(:name => "rechte_leiste", :internal_name => "rechte_leiste")
+  end
+  
+  def init_ticket_categories
+    Category.create(:name => "offen", :controller => "Ticket", :section => "status")
+    Category.create(:name => "Fragen offen", :controller => "Ticket", :section => "status")
+    Category.create(:name => "in Bearbeitung", :controller => "Ticket", :section => "status")
+    Category.create(:name => "geschlossen", :controller => "Ticket", :section => "status")
     
-    navBoxType = TemplateBoxType.create(:name => "Navigation", 
-                                                  :internal_name => "navigation", 
-                                                  :editable => true, 
-                                                  :multiple_allowed => true)
+    Category.create(:name => "Fehler", :controller => "Ticket")
+    Category.create(:name => "Funktion gewünscht", :controller => "Ticket")
+    Category.create(:name => "Feedback", :controller => "Ticket")
+    Category.create(:name => "sonstiges", :controller => "Ticket")
     
-    tb.template_box_type = navBoxType
-                                                  
-    tb.navigations << Nav["News"]
-    tb.navigations << Nav["Forum"]
-    tb.navigations << Nav["Event"]
-    tb.navigations << Nav["Gallery"]
-    tb.navigations << Nav["Articles"]
-    
-    tb.site = site
-    t_area[:topnav].template_boxes << tb
-    tb.save
-    
-    #Navi2
-    tb = TemplateBox.create(:name => "ClanNavi", :position => 1)
-    
-    tb.template_box_type = navBoxType
-                                                  
-    tb.navigations << Nav["Clanwar"]
-    tb.navigations << Nav["Poll"]
-    tb.navigations << Nav["Guestbook"]
-       
-    tb.site = site
-    t_area[:linke_seite].template_boxes << tb
-    tb.save
-    
-    #Login
-    tb = TemplateBox.create(:name => "login", :position => 1)
-    tb.template_box_type = TemplateBoxType.create(:name => "Login", 
-                                                  :internal_name => "login", 
-                                                  :editable => false)
-                                                  
-    tb.site = site
-    t_area[:rechte_seite].template_boxes << tb
-    
-    #Forum
-    tb = TemplateBox.create(:name => "forum", :position => 2)
-    tb.template_box_type = TemplateBoxType.create(:name => "Forum", 
-                                                  :internal_name => "forum", 
-                                                  :editable => true)
-    tb.site = site
-    t_area[:linke_seite].template_boxes << tb
-    tb.save
+    Category.all.each{|c| c.site_id = 1; c.save}
+  end
+  
+  def dev_users
+    [
+      {:login  => "philipp", :password => "test", :email => "pw@allclansneed.de"},
+      {:login  => "ben", :password  => "test",    :email => "ben@test.de"},
+      {:login  => "valentin", :password => "test",:email => "valentin.schulte@gmx.de"},
+      {:login => "philippm", :password => "test", :email => "philippm@test.de"}
+    ]
+  end
+  
+  def init
+    init_components
+    init_box_types
+    init_navigations
+    init_ticket_categories
+  end
+  
+  desc "Basic initial settings"
+  task :site => :environment do
+    init
+  end
+  
+  def one_site id
+    site_id = id
+    user = User.create(dev_users[site_id-1])
+    uniq = (site_id == 1 ? "portal" : "clan#{site_id}")
+    clan = Clan.create(:name => uniq, :uniq => uniq, :owner_id => user.id)
+    clan.save
+    site = Site.create(:owner_id => user.id, :sub_domain => uniq)
+    clan.site = site
+    clan.save
   end
   
   task :one_site => :environment do
-    site = Site.find_by_id ENV['site_id']
-    site.template = Template.find_by_internal_name "dnp"
-    site.save
-    
-    t_area = Hash.new
-    t_area[:topnav] = TemplateArea.find_by_name "topnav"
-    t_area[:linke_seite] = TemplateArea.find_by_name "linke Seite"
-    t_area[:rechte_seite] = TemplateArea.find_by_name "rechte Seite"
-                                            
-    Nav = Hash.new
-    ["News", "Forum", "Event", "Gallery", "Clanwar", "Poll", "Guestbook"].each {|n|
-      tpl = NavigationTemplate.find_by_name n
-      Nav[n.to_s] = Navigation.create(:name => n, :navigation_template => tpl)
-    }
-
-    #Navi1
-    tb = TemplateBox.create(:name => "topNavi", :position => 1)
-    
-    navBoxType = TemplateBoxType.find_by_name "Navigation"
-    
-    tb.template_box_type = navBoxType
-    
-    tb.navigations << Nav["News"]
-    tb.navigations << Nav["Forum"]
-    tb.navigations << Nav["Event"]
-    tb.navigations << Nav["Gallery"]
-    
-    tb.site = site
-    t_area[:topnav].template_boxes << tb
-    tb.save
-    
-    #Navi2
-    tb = TemplateBox.create(:name => "ClanNavi", :position => 1)
-    
-    tb.template_box_type = navBoxType
-                                                  
-    tb.navigations << Nav["Clanwar"]
-    tb.navigations << Nav["Poll"]
-    tb.navigations << Nav["Guestbook"]
-       
-    tb.site = site
-    t_area[:linke_seite].template_boxes << tb
-    tb.save
-    
-    #Login
-    tb = TemplateBox.create(:name => "login", :position => 1)
-    tb.template_box_type = TemplateBoxType.find_by_name "Login"
-                                                      
-    tb.site = site
-    t_area[:rechte_seite].template_boxes << tb
-    tb.save
-    
-    #Forum
-    tb = TemplateBox.create(:name => "forum", :position => 2)
-    tb.template_box_type = TemplateBoxType.find_by_name "Forum"
-    tb.site = site
-    t_area[:linke_seite].template_boxes << tb
-    tb.save
+    one_site ENV['site_id'].to_i
   end
 end

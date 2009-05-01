@@ -1,21 +1,20 @@
-<% if @articles.blank? %>
-  <p>Bisher noch keine Artikel.</p>
-<% else %>
-  <p>Alle Artikel dieser Seite:</p>
+<h1>Artikel</h1>
 
-<ul id="articles">
+<div class="userlinks">
+<%= access_link image_tag("folder_add.png") + " Artikel hinzufügen", new_article_path %>
+</div>
 
-<% @articles.each do |a| %>
-  <li>
-    
-    <%= link_to a.title, article_path(a) -%>
-    von <%= a.user.nick %>
-    <%= access_link image_tag("folder_edit.png"), edit_article_path(a) %>
-    <%= access_link image_tag("folder_delete.png"), article_path(a.id), :method => "delete", :confirm => "Wirklich löschen?" %>
-    
-  </li>
-<% end %>
-
-</ul>
-<% end %>
-<p><%= access_link image_tag("folder_add.png") + "Artikel hinzufügen", new_article_path %></p>
+<%= entry_and_pagination @articles %>
+<table class="simple-table" style="width:100%">
+  <thead>
+    <tr> 
+      <th>Artikel</th>
+      <th>Autor</th>
+      <th>erstellt am</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= render :partial => "article", :collection => @articles %>
+  </tbody>
+</table>

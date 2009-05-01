@@ -1,16 +1,8 @@
 class PollController < ApplicationController
   add_breadcrumb 'Polls', "polls_path"
-    
-  CONTROLLER_ACCESS = COMPONENT_RIGHT_OWNER
-
-  ACTION_ACCESS_TYPES={
-    :index => PUBLIC,
-    :show => PUBLIC,
-    :vote => PUBLIC
-  }  
-    
+  comment_mce_for
   def index
-    @polls = Poll.find(:all, :order => "created_at DESC")
+    @polls = Poll.paginate(:all, :order => "created_at DESC")
   end
   
   def show

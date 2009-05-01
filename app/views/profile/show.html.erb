@@ -1,40 +1,60 @@
-<h3>Verbindung</h3>
-<% if @profile.user == @current_user %>
-  <p>Dies bist du selber</p>
-<% end %>
-<% if @connection == "direct" %>
-  <%= show_user @profile.user %> -> <%= show_user @current_user %>
-<% elsif @connection == "indirect" %>
-  <%= become_friends_link @profile.user %> <br />
-  <%= show_user @profile.user %> -> <%= show_user @friend_of_both %> -> <%= show_user @current_user %>
-<% elsif @connection == "none" %>
-  <%= become_friends_link @profile.user %> <br />
-  Keine Verbindung
-<% end %>
+<div class="profile">
+<div class="avatar">
+        <%= image_tag @profile.user.profile_pic.url(:thumb) %><br />		
+        <%= access_link "Nachricht schreiben", new_message_path(:receiver_id => @profile.user.id)%>
+		<%= become_friends_link @profile.user%>
+		<%= link_to "alle Freunde", friend_path(@profile.user)%>
+</div>
 
-<br />
-<br />
-Vorname: <%= @profile.firstname %> <br />
-Nachname: <%= @profile.lastname %> <br />
+	<h1 class="name">
+		<%= "#{@profile.firstname} '#{@profile.user.nick}' #{@profile.lastname}" %>
+	</h1>
+    <dl>
+		<%= show_profile_prop("motto")%>
+		<%= show_profile_prop("bday", "l")%>
+		<%=	show_profile_prop("icq")%>
+		<%=	show_profile_prop("msn")%>
+		<%=	show_profile_prop("skype")%>
+		<%=	show_profile_prop("interests")%>
+		<%=	show_profile_prop("hardware")%>
+		<%=	show_profile_prop("created_at", "time_ago_in_words")%>
+    </dl>
 
-<h3>Squads</h3>
-<% @profile.user.squads.each do  |s| %>
-  <%= s.name %>
-<% end %>
-<br />
-
-<h3>Gruppen</h3>
-<% @profile.user.groups.each do  |g| %>
-  <%= show_group g %> 
-<% end %>  
-<br>
+    <h3>Verbindung</h3>
+    <%= show_connection%>
 
 
+    <h3>Clans</h3>
+    <ul class="simple-list">
+		<% @profile.user.clans.each do  |c| %>
+		  <li><%= link_to image_tag(c.clan_pic.url(:thumb), :width => 30, :height => 30) + c.name, clan_path(c, :subdomain => false) %>
+			<div>Squads: <% @profile.user.squads_in_clan(c).each do |s| %> <%= s.name %> <% end %></div></li>
+		<% end %>
+    </ul>
 
-<h3>Freunde</h3>
-<% @profile.user.friends.each do  |f| %>
-  <%= show_user f %> 
-<% end %>  
-<br />
-<br />
+    <h3>Gruppen</h3>
+    <ul class="simple-list">
+		<% @profile.user.groups.each do  |g| %>
+		  <li><%= link_to image_tag(g.group_pic.url(:thumb), :width => 30, :height => 30) + g.name, :controller => "groups", :action => "show", :id => g.id %>
+			<div><%= g.groupmemberships_count %> Member - dabei seit <%#= time_ago_in_words g.created_at %></div></li>
+		<% end %>
+    </ul>
+
+    <h3>Freunde</h3>
+    <ul class="simple-list">
+		<% @profile.user.friends.each do  |f| %>
+		  <li><%= image_tag(f.profile_pic.url(:thumb), :width => 30, :height => 30) + username(f) %>
+		<div><!-- befreundet seit <%#= time_ago_in_words f.friendship(@current_user).created_at %> --></div></li>
+		<% end %>
+    </ul>
+    
+    <h3>Gemeinsame Freunde</h3>
+    <ul class="simple-list">
+		<% (@friends_of_both || []).each do  |f| %>
+		  <li><%= image_tag(f.profile_pic.url(:thumb), :width => 30, :height => 30) + username(f) %>
+			<div><!-- befreundet seit <%#= time_ago_in_words f.friendship(@current_user).created_at %> --></div></li>
+		<% end %>
+    </ul>
+</div>
+<div style="clear:both"></div>
 <%= show_comments @profile %>

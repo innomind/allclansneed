@@ -1,3 +1,4 @@
+<h1>Post erstellen</h1>
 <% error_handling_form_for @forum_message, :url => forum_thread_forum_messages_path(params[:forum_thread_id]) do |f| %>
       <%= f.text_area 'message', :rows => 10, :cols => 40 %>
       <%= f.submit "eintragen" %>

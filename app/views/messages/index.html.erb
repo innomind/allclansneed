@@ -1,4 +1,26 @@
-<h1>Nachrichtenliste</h1>
+<% if params[:folder].nil? %>
+	<h1>Posteingang <small>(<%= link_to "zum Postausgang", messages_path(:folder => "out")%>)</small></h1>
+	
+<% else %>
+	<h1>Postausgang <small>(<%= link_to "zum Posteingang", messages_path %>)</small></h1>
+<% end %>
+
+<div class="userlinks">
+	<%= access_link_unless @user.friends.empty?, image_tag("email_add.png") + "Nachricht versenden", new_message_path, :alternate_text => "du hast keine Freunde, denen du eine Nachricht schreiben könntest" %>
+</div>
+
+<%= entry_and_pagination @messages %>
+
+<table class="simple-table" style="width:100%">
+  <thead>
+    <tr> 
+      <th></th>
+      <th>Betreff</th>
+      <th><%= params[:folder].nil? ? "Von" : "An"%></th>
+      <th>Datum / Uhrzeit</th>
+    </tr>
+  </thead>
+  <tbody>
 <%= render :partial => "message", :collection => @messages %>
-<br />
-<%= link_to "Nachricht versenden", new_message_path %>
+</tbody>
+</table>

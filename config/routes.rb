@@ -1,11 +1,16 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :administration
+  
+  map.resources :tickets
+  
+  map.resources :ticket_messages, :controller => "TicketMessage"
 
   map.root :controller => 'news'
   
   map.resources :news, :singular => "onenews"
   
   map.resources :forums, :controller => "forum", :shallow => true do |forum|
-    forum.resources :forum_threads, :controller => "forum_thread", :shallow => true, :except => [:index], :as => "threads" do |thread|
+    forum.resources :forum_threads, :controller => "forum_thread", :shallow => true, :as => "threads" do |thread|
       thread.resources :forum_messages, :controller => "forum_message", :shallow => true, :as => "posts"
     end
   end
@@ -20,7 +25,8 @@ ActionController::Routing::Routes.draw do |map|
                             :except => [:new, :update, :edit],
                             :member => {:add_comment => :post}
   
-  map.resources :profiles, :controller => "profile", :collection => {:start => :get}
+  map.resources :profiles, :controller => "profile", :collection => {:start => :get}, 
+                                                     :member => {:infobox => :get, :edit_pic => :get, :update_pic => :put}
 
   map.resources :articles, :controller => "article"
   
@@ -40,20 +46,49 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :messages, :member => { :create => :post, :answer => :get }
   
   map.resources :messages
-
+  
+  map.resources :pages
+  
   map.resources :categories, :member => {:newcat => :get, :createcat => :post}, :except => :new,
                              :collection => {:update_positions => :post}
   
   map.resources :classifieds, :as => "kleinanzeigen"
   
-  map.resources :friends, :only => [:index, :destroy],
+  map.resources :friends, :only => [:show, :index, :destroy],
                           :member => [:accept, :reject, :become]
 
-  map.resources :groups, :member => [:join, :leave, :administrate, :activate, :kick]
-  
-  map.resources :clanwars, :controller => "clanwar"
+  map.resources :groups, :member => [:leave, :join, :administrate, :activate, :kick], :shallow => true do |group|
+    group.resources :forum_threads, :controller => "forum_thread", :as => "threads" do |thread|
+      thread.resources :forum_messages, :controller => "forum_message", :shallow => true, :as => "posts"
+    end
+  end
+
+  map.resources :clanwars, :controller => "clanwar" do |clanwar|
+    clanwar.resources :clanwar_screenshots, :controller => "clanwar_screenshot"
+  end
   
   map.resources :events, :controller => "event", :collection => {:showDay => :get}
+
+  map.resources :squads, :controller => 'squad', :member => {:confirm_users => :get, :confirm_users_save => :put}, :shallow => true do |squad|
+    squad.resources :users, :controller => 'squad_user', :member => {:role => :get, :update_role => :put, :copy => :get, :do_copy => :post, :move => :get, :do_move => :post, :destroy_form => :get}
+  end
+  
+  map.resources :search, :only => [:index]
+
+  map.resources :clans, :collection => {:my => :get, :search => :get, :do_search => :post}, :member => {:leave => :delete} do |clan|
+    clan.resource :site, :controller => "site", :only => [:new, :create]
+    clan.resources :squads, :controller => "squad", :member => {:confirm_users => :get, :confirm_users_save => :put} do |squad|
+      squad.resources :users, :controller => 'squad_user', :member => {:role => :get, :update_role => :put, :copy => :get, :do_copy => :post, :move => :get, :do_move => :post, :destroy_form => :get}
+    end
+  end
+  
+  map.resources :users, :only => [:index]
+  
+  map.resources :sites, :controller => "site", :only => [:update, :index], :collection => {:toggle_header => :get}
+
+  map.resources :clan_join_inquiry
+
+  map.resources :moderators, :controller => "moderator"
 
   #map.users 'register', :controller => 'login', :action => 'create'
   #map.login 'login', :controller => 'login', :action => 'login'

@@ -1,0 +1,8 @@
+<tr>
+<td colspan="2" class="post-title">von <%= username(message.user)  %> am <%= l message.created_at %></td>
+</tr>
+
+<tr>
+<td style="width:100px"><%= image_tag(message.user.profile_pic.url(:thumb))%></td>
+<td><%= message.message %></td>
+</tr>

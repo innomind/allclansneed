@@ -1,0 +1,137 @@
+body {
+	margin: 0px;
+	font-family: Tahoma, Arial, sans-serif;
+	font-size: 11px;
+}
+.wrapper {
+	background-image: url(/images/d14/1.gif);
+	width: 957px;
+	margin: auto;
+}
+.top {
+	background-image: url(/images/d14/2.gif);
+	height: 51px;
+	width: 943px;
+	margin: auto;
+}
+.top_left {
+	float:left;
+	width:240px;
+	height:41px;
+	text-align:center;
+	color:#fff;
+	padding:5px;
+}
+.top_middle {
+	float:left;
+	width:445px;
+	height:51px;
+}
+.top_middle_text {
+	position:relative;
+	left:25px;
+	top:2px;
+	font-weight:bold;
+	color:#fff;
+}
+.top_middle_text2 {
+	position:relative;
+	left:30px;
+	top:5px;
+	width:400px;
+	height:25px;
+	text-align:center;
+	color:#fff;
+}
+.top_right {
+	float:left;
+	width:235px;
+	height:41px;
+	color:#fff;
+	padding:5px;
+}
+.logo {
+	background-image: url(/images/d14/3.gif);
+	height: 146px;
+	width: 943px;
+	margin: auto;
+	text-align:center;
+	font-size:20px;
+	color:#fff;
+}
+.logo span {
+	position:relative; top:50px; height:50px;
+}
+.box {
+	float: left;
+	width: 215px;
+	position: relative;
+	left: 8px;
+}
+.box_cat {
+	background-image: url(/images/d14/4.gif);
+	height: 27px;
+	margin: 0px;
+}
+.box_cat span {
+	position: relative; left: 17px; top: 5px; font-weight: bold; color: #CCCCCC;
+}
+.box_list {
+	background-image: url(/images/d14/5.gif);
+	height: 16px;
+	margin: 0px;
+}
+.box_list span {
+	position: relative; left: 10px; top: 1px;
+}
+.box_content {
+	background-image: url(/images/d14/6.gif);
+	padding: 5px;
+}
+.content {
+	float: left;
+	width: 513px;
+}
+.subnavi {
+	position: relative;
+	left: 14px;
+}
+.subnavi_text {
+	background-image: url(/images/d14/button.gif);
+	height: 25px;
+	width: 100px;
+	float: left;
+	text-align: center;
+	margin:0px;
+}
+.subnavi_text span {
+	position: relative; top: 10px; font-weight: bold; color: #FFFFFF
+}
+.content_box {
+	clear:left;
+	padding: 10px;
+	text-align: center;
+	background-color: #FFFFFF;
+	margin-left: 15px;
+}
+.img {
+	background-image: url(/images/d14/newspicture.gif);
+	width: 480px;
+	height: 65px;
+}
+.content_box_content {
+	text-align: left;
+	padding: 5px;
+}
+.box_content2 {
+	background-image: url(/images/d14/6.gif);
+	padding: 5px;
+}
+.footer {
+	clear:left;
+	margin: auto;
+	background-color: #FFFFFF;
+	width: 940px;
+	text-align: center;
+	font-weight: bold;
+}

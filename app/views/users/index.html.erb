@@ -1,0 +1,17 @@
+<h1>Benutzerliste</h1>
+
+<%= entry_and_pagination @users %>
+
+<table class="simple-table" style="width:100%">
+  <thead>
+    <tr> 
+      <th>Nick</th>
+      <th>User-ID</th>
+      <th>registriert am</th>
+      <th>Spiele</th>
+    </tr>
+  </thead>
+  <tbody>
+	<%= render :partial => "user", :collection => @users %>
+  </tbody>
+</table>

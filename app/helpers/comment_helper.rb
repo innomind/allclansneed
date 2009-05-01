@@ -5,6 +5,6 @@ module CommentHelper
   end
   
   def get_comments model  
-    model.comments.pages :all
+    model.comments.pages :all, :include => :user
   end
 end

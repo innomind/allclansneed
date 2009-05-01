@@ -1,8 +1,15 @@
-  <% error_handling_form_for :login, :url => {:controller => "login", :action => "login"} do |f| %>
-    <%= f.text_field 'nick', :size => 10 %>
+  <% error_handling_form_for User.new, :url => {:controller => "login", :action => "login"} do |f| %>
+    <%= f.text_field 'login', :size => 10 %>
     <%= f.password_field 'password', :size => 10 %>
     <%= f.submit 'log in' %>
   <%end%>
-
+<%= link_to 'Passwort vergessen', :controller => "login", :action => "request_password"%>
   <br/>
-  <%= link_to 'account erstellen', :controller => 'login',  :action => 'create' %>
+<h1 class="info_title">Account erstellen</h1>
+<% error_handling_form_for User.new, :url => profiles_path do |form| %>
+	<%= form.text_field :login, :size => 10 %>
+	<%= form.text_field :nickname, :size => 10 %>
+	<%= form.password_field :password, :size => 10 %>
+	<%= form.text_field :email, :size => 10 %>
+	<%= form.submit "registrieren" %>
+<% end %>

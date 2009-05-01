@@ -1,0 +1,147 @@
+body {
+	background-color: #3E3E3E;
+	font-family: Tahoma, Arial, sans-serif;
+	font-size: 11px;
+	margin: 0px;
+}
+.wrapper {
+	background-image: url(/images/d07/2.gif);
+	width: 990px;
+	margin: auto;
+}
+.logo {
+	background-image: url(/images/d07/1.gif);
+	height: 168px;
+}
+.logo_top {
+	position: relative;
+	top: 9px;
+	left: 13px;
+	color: #FFFFFF;
+}
+.logo_text {
+	position: relative;
+	top: 50px;
+	left: 50px;
+	float: left;
+	font-size: 30px;
+	color: white;
+}
+.logo_smalltext {
+	position: relative;
+	top: 39px;
+	left: 200px;
+	float: left;
+	color: #FFFFFF;
+}
+.logo_subtext {
+	position: relative;
+	top: 85px;
+	left: -10px;
+	color: #FFFFFF;
+}
+.breadcrumb {
+	position: relative;
+	top: 102px;
+	left: -101px;
+	color: #FFFFFF;
+}
+.box {
+	float: left;
+	width: 183px;
+}
+.box_format {
+	margin: 0px;
+	position: relative;
+	left: 10px;
+}
+.box_cat {
+	background-image: url(/images/d07/3.gif);
+	width: 169px;
+	height: 23px;
+	margin: 0px;
+	color: black;
+}
+.box_cat span {
+	position: relative; left: 10px; top: 5px;
+}
+.box_content {
+	background-image: url(/images/d07/4.gif);
+	width: 159px;
+	margin: 0px;
+	padding: 5px;
+}
+.box_end {
+	background-image: url(/images/d07/5.gif);
+	width: 169px;
+	height: 6px;
+	margin: 0px;
+}
+.content {
+	float: left;
+	width: 449px;
+	padding: 5px;
+}
+.box2 {
+	float: left;
+	width: 164px;
+}
+.box2_format {
+	position: relative;
+	left: 2px;
+}
+.box2_cat {
+	background-image: url(/images/d07/6.gif);
+	width: 160px;
+	height: 21px;
+	margin: 0px;
+}
+.box2_cat span {
+	position: relative; left: 10px; top: 3px; color: #FFFFFF;
+}
+.box2_content {
+	background-image: url(/images/d07/7.gif);
+	width: 150px;
+	margin: 0px;
+	padding: 5px;
+}
+.box2_end {
+	background-image: url(/images/d07/8.gif);
+	width: 160px;
+	height: 7px;
+	margin: 0px;
+}
+.box3 {
+	float: left;
+	width: 184px;
+}
+.box3_format {
+	position: relative;
+	left: 2px;
+}
+.box3_cat {
+	background-image: url(/images/d07/9.gif);
+	width: 170px;
+	height: 22px;
+	margin: 0px;
+}
+.box3_cat span {
+	position: relative; left: 10px; top: 3px; color: #FFFFFF;
+}
+.box3_content {
+	background-image: url(/images/d07/10.gif);
+	width: 160px;
+	margin: 0px;
+	padding:5px;
+}
+.box3_end {
+	background-image: url(/images/d07/11.gif);
+	width: 170px;
+	height: 4px;
+	margin: 0px;
+}
+.footer {
+	clear: left;
+	background-image: url(/images/d07/12.gif);
+	height: 23px;
+}

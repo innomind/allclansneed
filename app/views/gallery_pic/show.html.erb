@@ -1,13 +1,25 @@
-<%= @gallery_pic.name %><br>
-
-<%= link_to image_tag(@gallery_pic.pic.url(:medium)), @gallery_pic.pic.url(:original) %><br>
-Beschreibung: <%= @gallery_pic.description %><br>
-Hochgeladen von:<%= username(@gallery_pic.user) %><br>
-Hochgeladen am: <%= l @gallery_pic.created_at %>
-
-<div id="star-ratings-block">
-    <%= render :partial => "rating/rating", :locals => { :asset => @gallery_pic } %>
+<h1><%= @gallery_pic.name %></h1>
+<div class="userlinks">
+	<%= access_link image_tag("picture_delete.png") + "löschen", pic_path(@gallery_pic), :controller => "gallery_pic", :method => "delete", :confirm => "Wirklich löschen?" %>
+	<%= access_link image_tag("picture_edit.png") + "bearbeiten", edit_pic_path(@gallery_pic)%><br>
 </div>
 
-<br>
+<div>
+	<div style="float:left"><%= link_to_unless @prev_pic.nil?, "zurück", pic_path(@prev_pic || 1) %></div>
+	<div style="float:right"><%= link_to_unless @next_pic.nil?, "vor", pic_path(@next_pic || 1) %></div>
+</div>
+
+<div class="gallery_pic">
+	<%= gallery_pic_link_for(@gallery_pic) %>
+</div>
+
+<dl class="meta">
+	<dt>Beschreibung</dt><dd><%= @gallery_pic.description %></dd>
+	<dt>von</dt><dd><%= username(@gallery_pic.user) %></dd>
+	<dt>am</dt><dd><%= l @gallery_pic.created_at %></dd>
+	<dt>Rating</dt><dd><%= rating_for @gallery_pic %></dd>
+</dl>
+
+<div style="height:25px"></div>
+
 <%= show_comments @gallery_pic %>

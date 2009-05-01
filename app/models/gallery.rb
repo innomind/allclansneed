@@ -9,8 +9,20 @@ class Gallery < ActiveRecord::Base
   
   def category_pic
     return_pic = self.gallery_pics.first
-    unless return_pic.nil?
-      return_pic.pic
+    return return_pic.pic unless return_pic.nil?
+  end
+  
+  def before_update
+    g = Gallery.find(id, :include => {:gallery_pics => :comments})
+    if g.intern != intern
+      g.gallery_pics.each do |p| 
+        p.intern = intern
+        p.save
+        p.comments.each do |c|
+          c.intern = intern
+          c.save
+        end
+      end
     end
   end
 end

@@ -1,17 +1,27 @@
-Hallo <%= @user.nick %> 
-<% unless @user_belongs_to_site %>
+<div style="padding-right: 15px">
+Hallo <b><%= @user.nick %></b>
+<% unless @current_session.belongs_to_current_site? %>
 	(gast auf dieser Seite)
 <% end %>
 
 <br>
-<%= link_to image_tag("door_in.png") + " meine Startseite", start_profiles_path %><br>
-<%= link_to image_tag("user_go.png") + " mein Profil", profile_path(@user) %>
-<%= link_to image_tag("pencil.png"), edit_profile_path(@user) %><br>
-<%= link_to image_tag("email.png") + " Nachrichten", messages_path %><br><br>
-  
-<%= access_link image_tag("group_edit.png") + " Clan verwalten", :controller => "clan_management" %><br>
-<%= access_link image_tag("user_edit.png") + " User verwalten", :controller => "rights_management" %><br>
-<%= link_to image_tag("monitor_edit.png") + " Seite bearbeiten", :controller => "template_boxes" %><br>
-<%= access_link "Template verwalten", templates_path%><br />
-
-<%= link_to image_tag("door_out.png") + " logout", :controller => "login", :action => "logout" %>
+<ul class="link_list">
+	<li><%= link_to image_tag("door_in.png") + "meine Startseite", start_profiles_path %></li>
+	<li><%= link_to image_tag("user_go.png") + "mein Profil", profile_path(@user) %> <%= link_to image_tag("pencil.png"), edit_profile_path(@user) %></li>
+	
+	
+	<% unless @user.new_messages > 0 %>
+		<li><%= link_to image_tag("email.png") + "Nachrichten", messages_path %></li>
+	<% else %>
+		<li><%= link_to image_tag("email_open.png") + "Nachrichten", messages_path %><%= " <b>(#{@user.new_messages})</b>" %></li>
+	<% end %>
+	<li><%= link_to image_tag("group.png") + "meine Clans", my_clans_path(:subdomain => false) %></li>
+	<li><%= link_to image_tag("user.png") + "meine Freunde", friend_path(@user.id) %></li>
+	<li><%= link_to image_tag("help.png") + "Hilfe (Tickets)", tickets_path() %></li>
+	
+	<%= link_to "<li>" + image_tag("user_edit.png") + "User verwalten</li>", :controller => "squads" if @user.owns_current_site?%>
+	<%= access_link "<li>" + image_tag("monitor_edit.png") + "Seite bearbeiten</li>", :controller => "template_boxes" %>
+	<%= access_link "<li>" + image_tag("page_world.png") + "Template verwalten</li>", templates_path%>
+	<li><%= link_to image_tag("door_out.png") + "Logout", :controller => "login", :action => "logout" %></li>
+</ul>
+</div>
