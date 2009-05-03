@@ -44,7 +44,7 @@ namespace :maintenance do
     time_now = Time.now
     
     stat = Array.new
-    stat << ["Aktive Mitglieder", User.find(:all, :conditions => ["last_activity_at > ?", time_past]).size, User.find(:all, :conditions => ["last_activity_at > ? AND last_activity_at < ?", time_past, time_past_reference]).size]
+    stat << ["Aktive Mitglieder", User.find(:all, :conditions => ["last_activity_at > ?", time_past]).size, User.find(:all, :conditions => ["last_activity_at > ? AND last_activity_at < ?", time_past_reference, time_past]).size]
     [User, Clan, Site, Message, Friendship].each do |klass|
       count = klass.find(:all, :conditions => ["created_at > ?", time_past]).size
       count_reference = klass.find(:all, :conditions => ["created_at > ? AND created_at < ?", time_past_reference, time_past]).size
