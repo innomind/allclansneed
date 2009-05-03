@@ -1,4 +1,4 @@
-Given /^the news with title "([^\"]*)"$/ do |title|
+Given /^I create a news with title "([^\"]*)"$/ do |title|
   visit new_onenews_path
   fill_in "news_title", :with => title
   fill_in "news_news", :with => "dies ist nur eine testnews"

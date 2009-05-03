@@ -44,11 +44,18 @@ namespace :maintenance do
     time_now = Time.now
     
     stat = Array.new
-    stat << ["Aktive Mitglieder", User.find(:all, :conditions => ["last_activity_at > ?", time_past]).size, "-"]
-    [User, Clan, Site, Message, Friendship, News, ForumThread, ForumMessage, Poll, Clanwar, Page, Gallery, GalleryPic, Event].each do |klass|
+    stat << ["Aktive Mitglieder", User.find(:all, :conditions => ["last_activity_at > ?", time_past], :select => "count(*)").size, User.find(:all, :conditions => ["last_activity_at > ? AND last_activity_at < ?", time_past, time_past_reference], :select => "count(*)").size]
+    [User, Clan, Site, Message, Friendship].each do |klass|
       count = klass.find(:all, :conditions => ["created_at > ?", time_past]).size
       count_reference = klass.find(:all, :conditions => ["created_at > ? AND created_at < ?", time_past_reference, time_past]).size
-      stat << [klass.human_name(:count => 2), count, count_reference]
+      count_all = klass.find(:all).size
+      stat << [klass.human_name(:count => 2), count, count_reference, count_all]
+    end
+    [News, ForumThread, ForumMessage, Poll, Clanwar, Page, Gallery, GalleryPic, Event].each do |klass|
+      count = klass.find(:all, :global => true, :conditions => ["created_at > ?", time_past]).size
+      count_reference = klass.find(:all, :global => true, :conditions => ["created_at > ? AND created_at < ?", time_past_reference, time_past]).size
+      count_all = klass.find(:all, :global => true).size
+      stat << [klass.human_name(:count => 2), count, count_reference, count_all]
     end
     Postoffice.deliver_reporting(stat, intervall)
   end
