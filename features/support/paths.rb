@@ -10,7 +10,8 @@ module NavigationHelpers
     
     when /the homepage/
       '/'
-      
+    when /_path/
+      eval(page_name)
     when /last news/
       onenews_path(News.first)
     when /new news/

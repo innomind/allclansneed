@@ -15,6 +15,17 @@ When /^I log out$/ do
   click_link "Logout"
 end
 
+Then /^I should not have right for (.*)$/ do |link|
+  response.should_not have_selector("a", :href => path_to(link))
+  visit path_to(link)
+  response.should contain("Du hast nicht das nötige Recht") || contain("Du musst eingeloggt sein")
+end
+
+Then /^I should not have right$/ do
+  response.should contain("Du hast nicht das nötige Recht") || contain("Du musst eingeloggt sein")
+end
+
+
 def init
   init_components
   init_box_types

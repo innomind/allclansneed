@@ -6,6 +6,3 @@ Given /^the news with title "([^\"]*)"$/ do |title|
   click_button "News erstellen"
   response.should contain("News erstellt")
 end
-
-Then /^I should see the news for the site$/ do
-end
