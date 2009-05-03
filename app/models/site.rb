@@ -27,7 +27,7 @@ class Site < ActiveRecord::Base
   PORTAL_NAME = "A * C * N - Portalseite"
   
   def after_create
-    Postoffice.deliver_example("neue seite")
+    Postoffice.deliver_example("neue seite") if Rails.env == "production"
     self.categories << Category.create(:name => "Allgemein", :controller => "News")
     self.categories << Category.create(:name => "Clan", :controller => "News")
     self.categories << Category.create(:name => "Intern", :controller => "News", :intern => true)

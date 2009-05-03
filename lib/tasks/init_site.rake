@@ -99,6 +99,7 @@ namespace :init do
     init_box_types
     init_navigations
     init_ticket_categories
+    init_templates
   end
   
   desc "Basic initial settings"

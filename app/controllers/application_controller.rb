@@ -127,11 +127,10 @@ class ApplicationController < ActionController::Base
     return if @current_session.can_access? check
     if Rights.lookup_class(check[:controller], check[:action]) == "member"
       flash[:error] = "Du musst eingeloggt sein um diese Seite sehen zu können"
-      redirect_to :controller => "login"
+      redirect_to(:controller => "login")
     else
       flash[:error] = "Du hast nicht das nötige Recht um diese Seite sehen zu können"
-      redirect_to "/"
-      #render :template => "errors/Access"
+      redirect_to("/")
     end
   end
   
@@ -144,14 +143,18 @@ class ApplicationController < ActionController::Base
   end
 
   def catch_exceptions
-    begin
+    unless Rails.env == "test"
+      begin
+        yield
+      rescue ActiveRecord::RecordNotFound
+        render :template => "errors/RecordNotFound"
+      rescue Exceptions::Access
+        render :template => "errors/Access", :layout => !request.xhr?
+      #rescue
+      #  render :template => "errors/general", :locals => {:error => "ups. Irgendetwas ging da schief. Bitte wende dich an den Support."}
+      end
+    else
       yield
-    rescue ActiveRecord::RecordNotFound
-      render :template => "errors/RecordNotFound"
-    rescue Exceptions::Access
-      render :template => "errors/Access", :layout => !request.xhr?
-    #rescue
-    #  render :template => "errors/general", :locals => {:error => "ups. Irgendetwas ging da schief. Bitte wende dich an den Support."}
     end
   end
 end
