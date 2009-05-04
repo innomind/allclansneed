@@ -27,6 +27,22 @@ namespace :maintenance do
   task :hourly => :environment do
     init
   end
+  
+  task :fix_user_sites => :environment do
+    User.find(:all).each do |user|
+      user.clans.each do |usr_clan|
+        unless usr_clan.site.nil?
+          unless user.sites.include? usr_clan.site
+            unless ENV["debug"].nil?
+              puts "missing site #{usr_clan.site.id} for user #{user.id}"
+            else
+              user.sites << usr_clan.site
+            end
+          end
+        end
+      end
+    end
+  end
 
   def welcome_site_mailing
     Site.find(:all, :include => :owner, :conditions => ["created_at < ? and welcome_mailing = ? ", 2.day.ago, false]).each do |current_site|
