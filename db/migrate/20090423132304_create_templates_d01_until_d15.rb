@@ -25,11 +25,22 @@ class CreateTemplatesD01UntilD15 < ActiveRecord::Migration
       tpl.save
     end
     
+    unless Template.find_by_internal_name "d06"
+      tpl = Template.create(:name => "d06", :internal_name => "d06", :page_text_1 => "Untertietel", :page_text_2 => "über Inhalt")
+      tpl.template_areas << TemplateArea.create(:name => "Top Navigation", :internal_name => "top_nav", :position => 0, 
+                                                :multiple_boxes_allowed => false, 
+                                                :prefered_box_type_id => TemplateBoxType.find_by_name("Navigation").id,
+                                                :max_list_items => 7)
+      tpl.template_areas << TemplateArea.create(:name => "1. rechte Leiste", :internal_name => "rightside1", :position => 1)
+      tpl.template_areas << TemplateArea.create(:name => "2. rechte Leiste", :internal_name => "rightside2", :position => 2)
+      tpl.save
+    end
+    
     unless Template.find_by_internal_name "d07"
       tpl = Template.create(:name => "d07", :internal_name => "d07", :page_text_1 => "oben links", :page_text_2 => "Header mitte", :page_text_3 => "kleiner Titel")
       tpl.template_areas << TemplateArea.create(:name => "linke Seite", :internal_name => "leftside", :position => 0)
-      tpl.template_areas << TemplateArea.create(:name => "1. rechte Seite", :internal_name => "rightside1", :position => 1)
-      tpl.template_areas << TemplateArea.create(:name => "2. rechte Seite", :internal_name => "rightside2", :position => 2)
+      tpl.template_areas << TemplateArea.create(:name => "1. rechte Leiste", :internal_name => "rightside1", :position => 1)
+      tpl.template_areas << TemplateArea.create(:name => "2. rechte Leiste", :internal_name => "rightside2", :position => 2)
       tpl.save
     end
     

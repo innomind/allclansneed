@@ -76,7 +76,7 @@ body {
 	float: right;
 }
 .content {
-	clear:right;
+/*	clear:right;*/
 	float: left;
 	width: 519px;
 	padding: 1px;

@@ -33,7 +33,15 @@ d05:
   bordercolor: "#a4e05b"
   bottomborder: "#888"
 d06:
-  main: ""
+  link: "#068ed6"
+  linkhover: "black"
+  defaultcolor: "#eee"
+  dark: "white"
+  light: "#ccc"
+  verylight: "#aaa"
+  lightbackground: "#777"
+  bordercolor: "#068ed6"
+  bottomborder: "#888"
 d07:
   link: "#540404"
   linkhover: "black"

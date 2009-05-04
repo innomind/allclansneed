@@ -20,59 +20,41 @@
 
 <div class="wrapper">
     <div class="logo">
-        <div class="logo_text">Mein Clan</div>
-        <div class="logo_subtext">sub clan</div>
+        <div class="logo_text"><%= @site.page_title %></div>
+        <div class="logo_subtext"><%= @site.page_text_1 %></div>
     </div>
     <div class="navi">
      <div class="float_left"><img src="images/3.gif"; /></div>
      <div class="float_left">
-            <li class="navi_nor">
-            <div class="navi_nor_text">News o?</div><div class="navi_nor_subtext">subtitel bla</div></li>
-            <li class="navi_nor">
-            <div class="navi_nor_text">News o?</div><div class="navi_nor_subtext">subtitel bla</div></li>
-            <li class="navi_act">
-            <div class="navi_act_text">News o?</div><div class="navi_act_subtext">subtitel bla</div></li>
-            <li class="navi_nor">
-            <div class="navi_nor_text">News o?</div><div class="navi_nor_subtext">subtitel bla</div></li>
-            <li class="navi_nor">
-            <div class="navi_nor_text">News o?</div><div class="navi_nor_subtext">subtitel bla</div></li>
-            <li class="navi_nor">
-            <div class="navi_nor_text">News o?</div><div class="navi_nor_subtext">subtitel bla</div></li>
-            <li class="navi_nor">
-            <div class="navi_nor_text">News o?</div><div class="navi_nor_subtext">subtitel bla</div></li>
+			<% get_boxes_for("top_nav").each do |b| %>
+				<%= create_box(b,["<li class=\"navi_nor\"><div class=\"navi_nor_text\">","</div><div class=\"navi_nor_subtext\">&nbsp;</div></li>"]) %>
+			<% end %>
      </div>
      <div class="float_right"><img src="images/4.gif"; /></div>
     </div>
     <div class="content">
-        <p class="content_title"><span class="content_title_text">cio<span class="content_title_subtext">hallo?</span></span></p>
-        <div class="padding">Drücken Sie die STRG-Taste beim Klicken auf Links (oder verwenden Sie die mittlere Maustaste).
-Klicken Sie mit der mittleren Maustaste auf eine Registerkarte, um sie zu schließen.
-Drücken Sie ALT+Eingabe in der Adressleiste oder im Suchfeld, um ein Ergebnis in einer neuen Registerkarte zu öffnen. 
-	</div>
-    <p class="content_title"><span class="content_title_text">cio<span class="content_title_subtext">hallo?</span></span></p>
-        <div style="padding: 5px;">Drücken Sie die STRG-Taste beim Klicken auf Links (oder verwenden Sie die mittlere Maustaste).
-Klicken Sie mit der mittleren Maustaste auf eine Registerkarte, um sie zu schließen.
-Drücken Sie ALT+Eingabe in der Adressleiste oder im Suchfeld, um ein Ergebnis in einer neuen Registerkarte zu öffnen.
-    </div>
+        <p class="content_title"><span class="content_title_text"><%= @site.page_text_2 %><span class="content_title_subtext"></span></span></p>
+        <div class="padding">
+        	<%= yield %>
+        </div>
     </div>
     <div class="box_left">
-      <p class="box_left_cat"><span class="box_left_text">News<span class="box_left_subtext">hallo?</span></span></p>
-        <div class="padding">Drücken Sie die STRG-Taste beim Klicken auf Links (oder verwenden Sie die mittlere Maustaste).
-Klicken Sie mit der mittleren Maustaste auf eine Registerkarte, um sie zu schließen.
-Drücken Sie ALT+Eingabe in der Adressleiste oder im Suchfeld, um ein Ergebnis in einer neuen Registerkarte zu öffnen. </div>
-
-      <p class="box_left_cat"><span class="box_left_text">News<span class="box_left_subtext">hallo?</span></span></p>
-        <div class="padding">Drücken Sie die STRG-Taste beim Klicken auf Links (oder verwenden Sie die mittlere Maustaste).
-Klicken Sie mit der mittleren Maustaste auf eine Registerkarte, um sie zu schließen.
-Drücken Sie ALT+Eingabe in der Adressleiste oder im Suchfeld, um ein Ergebnis in einer neuen Registerkarte zu öffnen. </div>
-
+		<% get_boxes_for("rightside1").each do |b| %>
+			<p class="box_left_cat"><span class="box_left_text"><%= b.name %><span class="box_left_subtext">&nbsp;</span></span></p>
+			<div class="padding">
+				<%= create_box(b) %>
+			</div>
+		<% end %>
     </div>
     <div class="box_right">
-      <p class="box_right_cat"><span class="box_right_text">News<span class="box_right_subtext">hallo?</span></span></p>
-        <div class="padding">Drücken Sie die STRG-Taste beim Klicken auf Links (oder verwenden Sie die mittlere Maustaste).
-Klicken Sie mit der mittleren Maustaste auf eine Registerkarte, um sie zu schließen.
-Drücken Sie ALT+Eingabe in der Adressleiste oder im Suchfeld, um ein Ergebnis in einer neuen Registerkarte zu öffnen. </div
-    ></div>
+		<% get_boxes_for("rightside2").each do |b| %>
+			<p class="box_right_cat"><span class="box_right_text"><%= b.name %><span class="box_right_subtext">&nbsp;</span></span></p>
+			<div class="padding">
+				<%= create_box(b) %>
+			</div>
+		<% end %>
+	</div>
+
 </div>
 
 </body>
