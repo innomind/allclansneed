@@ -67,7 +67,7 @@ namespace :maintenance do
       count_all = klass.find(:all).size
       stat << [klass.human_name(:count => 2), count, count_reference, count_all]
     end
-    [News, ForumThread, ForumMessage, Poll, Clanwar, Page, Gallery, GalleryPic, Event].each do |klass|
+    [News, ForumThread, ForumMessage, Poll, Clanwar, Page, Gallery, GalleryPic, Event, Guestbook, Comment, Shoutbox].each do |klass|
       count = klass.find(:all, :global => true, :conditions => ["created_at > ?", time_past]).size
       count_reference = klass.find(:all, :global => true, :conditions => ["created_at > ? AND created_at < ?", time_past_reference, time_past]).size
       count_all = klass.find(:all, :global => true).size
