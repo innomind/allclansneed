@@ -10,6 +10,7 @@
 		<%= "#{@profile.firstname} '#{@profile.user.nick}' #{@profile.lastname}" %>
 	</h1>
     <dl>
+		<dt>Status</dt><dd><%= show_status(@profile.user) %></dd>
 		<%= show_profile_prop("motto")%>
 		<%= show_profile_prop("bday", "l")%>
 		<%=	show_profile_prop("icq")%>

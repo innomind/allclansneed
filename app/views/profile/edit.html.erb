@@ -5,6 +5,7 @@
 <% error_handling_form_for @profile do |f|%>
 	<% f.fields_for @profile.user do |uf| %>
 		<%= uf.text_field :nickname %>
+		<%= uf.text_area :signature, :rows => 5 %>
 	<% end %>
 	
 	<%= f.text_field :firstname %>
@@ -13,8 +14,8 @@
 	<%= f.text_field :icq %>
 	<%= f.text_field :skype %>
 	<%= f.text_field :msn %>
-	<%= f.text_area :motto %>
-	<%= f.text_area :hardware %>
-	<%= f.text_area :interests %>
+	<%= f.text_area :motto, :rows => 5  %>
+	<%= f.text_area :hardware, :rows => 5  %>
+	<%= f.text_area :interests, :rows => 5  %>
     <%= f.submit "Änderungen übernehmen" %>
 <% end %>

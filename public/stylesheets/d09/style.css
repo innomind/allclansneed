@@ -93,6 +93,10 @@ textarea {
 }
 
 
+.signature {
+	border-top: 1px solid #bbb;
+}
+
 /* ALT
 .tooltip {
   position: absolute;

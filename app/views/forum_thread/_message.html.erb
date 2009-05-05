@@ -4,5 +4,5 @@
 
 <tr>
 <td style="width:100px"><%= image_tag(message.user.profile_pic.url(:thumb))%></td>
-<td><%= simple_format message.message %></td>
+<td><%= simple_format message.message %><%= show_signature(message.user)%></td>
 </tr>

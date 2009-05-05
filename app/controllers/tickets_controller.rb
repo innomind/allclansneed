@@ -7,7 +7,7 @@ class TicketsController < ApplicationController
   
   def index
     #debugger
-    @tickets = Ticket.paginate :page => params[:page], :per_page => 15, :conditions => @conditions
+    @tickets = Ticket.paginate :page => params[:page], :per_page => 15, :conditions => @conditions, :order => "updated_at DESC"
   end
 
   def show

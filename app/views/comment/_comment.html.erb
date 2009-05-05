@@ -4,5 +4,5 @@
 
 <tr>
 <td style="width:100px"><%= image_tag(comment.user.profile_pic.url(:thumb))%></td>
-<td><%= simple_format comment.entry  %></td>
+<td><%= simple_format comment.entry  %><%= show_signature(comment.user)%></td>
 </tr>

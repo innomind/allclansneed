@@ -66,6 +66,10 @@ class User < ActiveRecord::Base
     self[:password] = pw.nil? ? "" : (encrypt pw)
   end
   
+  def is_online?
+    !(last_activity_at < (Time.now - 7.minutes))
+  end
+  
   def generate_password_reset_key
     self.update_attribute("password_reset_key", encrypt("fahsdf9023ioasf" + Time.now.to_s))
   end

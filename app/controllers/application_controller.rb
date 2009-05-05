@@ -72,6 +72,9 @@ class ApplicationController < ActionController::Base
   end
 
   def init
+    #bugfix for IE7 IFrame Cookie bug (Iframes are used for free subdomains like de.ms)
+    response.headers['P3P'] = "CP=\"CAO PSA OUR\""
+
     init_site
     init_stylesheets
     init_user

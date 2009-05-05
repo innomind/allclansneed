@@ -231,4 +231,6 @@ de:
         login_desc: Die User-ID identifiziert jeden User und ist <b>einmalig</b>
         password: Passwort
         nickname: Nickname
-        nickname_desc: dieser Name wird anderen Usern angezeigt  
+        nickname_desc: dieser Name wird anderen Usern angezeigt
+        signature: Signatur
+        signature_desc: Die Signatur wird bei Kommentaren und im Forum angezeigt
