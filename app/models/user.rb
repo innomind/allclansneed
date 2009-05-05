@@ -67,6 +67,7 @@ class User < ActiveRecord::Base
   end
   
   def is_online?
+    return false if last_activity_at.nil?
     !(last_activity_at < (Time.now - 7.minutes))
   end
   
