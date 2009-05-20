@@ -7,7 +7,7 @@ class Clan < ActiveRecord::Base
   belongs_to :owner, :class_name => "User", :foreign_key => "owner_id"
   has_many :comments, :as => :commentable
   
-  validates_format_of :uniq, :with => /\A[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\Z/i, :on => :save
+  validates_format_of :uniq, :with => /\A[a-z0-9]+([\-]{1}[a-z0-9]+)*\Z/i, :on => :save
   validates_length_of :uniq, :in => 3..14
   validates_uniqueness_of :uniq  
   validates_presence_of :owner_id
