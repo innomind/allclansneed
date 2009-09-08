@@ -12,6 +12,7 @@ module TemplateBoxesHelper
   
   def create_box box, link_style = nil, entry_style = nil
     return "&nbsp;" if box.nil?
+    #return Rails.cache.read(box.cache_key) if Rails.cache.exist?(box.cache_key)
     if (box.template_box_type.link_list)
       around = ["<div class='box_entry'><ul class=\"link_list\">","</ul></div>"] if link_style.nil?
       around ||= ["",""]
@@ -30,9 +31,11 @@ module TemplateBoxesHelper
       out << around[1]
     else
       entry_style ||= ["<div class='box_entry'>", "</div>"]
-      ret = entry_style[0]
-      ret << render(:partial => "boxes/#{box.template_box_type.internal_name}/show_loader", :locals => {:box => box})
-      ret << entry_style[1]
+      out = entry_style[0]
+      out << render(:partial => "boxes/#{box.template_box_type.internal_name}/show_loader", :locals => {:box => box})
+      out << entry_style[1]
     end
+    #Rails.cache.write(box.cache_key, out)
+    out
   end
 end

@@ -14,6 +14,8 @@ class ApplicationController < ActionController::Base
   def init_areas force = false
     if not request.xhr? or force
       @template_areas = TemplateArea.get_areas_for_site current_site
+      #current_site.template.template_areas.each{|ta| @ta[ta.internal_name.to_sym] = ta.internal_name}
+      #@template_areas = Rails.cache.fetch("template_areas-#{current_site.id}") {TemplateArea.get_areas_for_site current_site}
     end
   end
 

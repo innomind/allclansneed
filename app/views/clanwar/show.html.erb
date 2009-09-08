@@ -1,30 +1,31 @@
 <h1>Clanwar</h1>
 
-<dl>
-	<dt>Squad</dt><dd><%= @clanwar.squad.name unless @clanwar.squad.nil? %></dd>
-	<dt>Gegner</dt><dd><%= @clanwar.opponent %></dd>
-	<dt>Ergebnis</dt>
-	<dd>
-		<%= show_score (@clanwar.score, @clanwar.score_opponent) %>
-	</dd>
-	<dt>gespielt am</dt><dd><%= l @clanwar.played_at %></dd>
-</dl>
-  <h3>Maps</h3>
-
-<% if @clanwar.clanwar_maps.empty? %>
-	keine Maps eingetragen
-<% else %>
-  <%= render :partial => "map", :collection => @clanwar.clanwar_maps %>
+<% cache @clanwar do %>
+	<dl>
+		<dt>Squad</dt><dd><%= @clanwar.squad.name unless @clanwar.squad.nil? %></dd>
+		<dt>Gegner</dt><dd><%= @clanwar.opponent %></dd>
+		<dt>Ergebnis</dt>
+		<dd>
+			<%= show_score (@clanwar.score, @clanwar.score_opponent) %>
+		</dd>
+		<dt>gespielt am</dt><dd><%= l @clanwar.played_at %></dd>
+	</dl>
+	  <h3>Maps</h3>
+	
+	<% if @clanwar.clanwar_maps.empty? %>
+		keine Maps eingetragen
+	<% else %>
+	  <%= render :partial => "map", :collection => @clanwar.clanwar_maps %>
+	<% end %>
+	
+	<h3>Screenshots</h3>
+	<% @clanwar.clanwar_screenshots.each do |screenshot| %>
+		<%= link_to image_tag(screenshot.screenshot.url(:thumb)), screenshot.screenshot.url(:large) %>
+	<% end %>
+	
+	<div class="userlinks">
+	<%= access_ajax_tooltip image_tag("picture_add.png") + "Screenshot hochladen", :update_url => new_clanwar_clanwar_screenshot_path(@clanwar) %>
+	</div>
 <% end %>
-
-<h3>Screenshots</h3>
-<% @clanwar.clanwar_screenshots.each do |screenshot| %>
-	<%= link_to image_tag(screenshot.screenshot.url(:thumb)), screenshot.screenshot.url(:large) %>
-<% end %>
-
-<div class="userlinks">
-<%= access_ajax_tooltip image_tag("picture_add.png") + "Screenshot hochladen", :update_url => new_clanwar_clanwar_screenshot_path(@clanwar) %>
-</div>
-
 
 <%= show_comments @clanwar %>
