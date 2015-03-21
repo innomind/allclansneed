@@ -22,13 +22,13 @@ Rails::Initializer.run do |config|
   # you must remove the Active Record framework.
   # config.frameworks -= [ :active_record, :active_resource, :action_mailer ]
 
-  # Specify gems that this application depends on. 
+  # Specify gems that this application depends on.
   # They can then be installed with "rake gems:install" on new installations.
   # config.gem "bj"
   # config.gem "hpricot", :version => '0.6', :source => "http://code.whytheluckystiff.net"
   # config.gem "aws-s3", :lib => "aws/s3"
 
-  # Only load the plugins named here, in the order given. By default, all plugins 
+  # Only load the plugins named here, in the order given. By default, all plugins
   # in vendor/plugins are loaded in alphabetical order.
   # :all can be used as a placeholder for all plugins not explicitly named
   # config.plugins = [ :exception_notification, :ssl_requirement, :all ]
@@ -47,14 +47,14 @@ Rails::Initializer.run do |config|
 
   # Your secret key for verifying cookie session data integrity.
   # If you change this key, all old sessions will become invalid!
-  # Make sure the secret is at least 30 characters and all random, 
+  # Make sure the secret is at least 30 characters and all random,
   # no regular words or you'll be exposed to dictionary attacks.
-  
-  config.action_controller.session = { 
-    :key => "_acn_session", 
-    :secret => "4c050fbe9184a5354ad1b9b5bb90c86dee3f4322127d898dc236b8e54d47aa83caa4813e513b472c50d33c688d5b69b4428d83199e0c8eb6d7060a06244ba4be" 
+
+  config.action_controller.session = {
+    :key => "_acn_session",
+    :secret => "4c050fbe9184a5354ad1b9b5bb90c86dee3f4322127d898dc236b8e54d47aa83caa4813e513b472c50d33c688d5b69b4428d83199e0c8eb6d7060a06244ba4be"
   }
-  
+
 #  config.action_controller.session = {
 #    :key => '_acn_session',
 #    :secret      => '4c050fbe9184a5354ad1b9b5bb90c86dee3f4322127d898dc236b8e54d47aa83caa4813e513b472c50d33c688d5b69b4428d83199e0c8eb6d7060a06244ba4be'
@@ -73,17 +73,8 @@ Rails::Initializer.run do |config|
 
   # Activate observers that should always be running
   # config.active_record.observers = :cacher, :garbage_collector
-  
+
 
 end
 
 Paperclip::options[:path] = "test"
-
-ActionMailer::Base.smtp_settings = {
-  :address  => "mail.innomind.info",
-  :port => "25",
-  :domain  => "dev.innomind.info",
-  :user_name  => "rails@innomind.info",
-  :password => "rallclansneed",
-  :authentication  => :login
-}
