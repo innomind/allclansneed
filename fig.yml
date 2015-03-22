@@ -1,0 +1,7 @@
+web:
+  build: .
+  command: script/server -b0.0.0.0
+  volumes:
+    - .:/allclansneed
+  ports:
+    - "3000:3000"
