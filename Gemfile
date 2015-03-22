@@ -2,6 +2,7 @@
 source "https://rubygems.org"
 
 gem "rails", "~> 2.3"
+gem 'pg', "~> 0.10.0"
 
 # gem 'acts_as_delegatable', github: "innomind/acts_as_delegatable"
 gem 'acts_as_rateable'
@@ -21,7 +22,11 @@ gem 'subdomain-fu'
 gem 'tiny_mce'
 # gem 'white_list'
 gem 'will_paginate'
+gem 'nokogiri', '< 1.6'
 
 group :test do
   gem 'rspec', '~> 2.0'
+  gem 'rspec-rails', '>= 1.2.2'
+  gem 'webrat', '>= 0.4.3'
+  gem 'cucumber', '>= 0.3.0'
 end
