@@ -162,10 +162,10 @@ namespace :init do
 
   def dev_users
     [
-      {:login  => "philipp", :password => "test", :email => "pw@allclansneed.de"},
-      {:login  => "ben", :password  => "test",    :email => "ben@test.de"},
-      {:login  => "valentin", :password => "test",:email => "valentin.schulte@gmx.de"},
-      {:login => "philippm", :password => "test", :email => "philippm@test.de"}
+      {:login  => "test1", :password => "test", :email => "test1@example.de"},
+      {:login  => "test2", :password  => "test", :email => "test2@example.de"},
+      {:login  => "test3", :password => "test",:email => "test3@example.de"},
+      {:login => "test4", :password => "test", :email => "test4@example.de"}
     ]
   end
 

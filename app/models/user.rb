@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  
+
   has_many_friends
 
   has_many :forum_threads
@@ -16,21 +16,21 @@ class User < ActiveRecord::Base
   has_many :polls
   has_many :poll_results
   has_many :classifieds
-  
+
   has_one :profile
-  
+
   has_many :groupmemberships
   has_many :groups, :through => :groupmemberships
   has_many :groupfounderships, :class_name => "Group", :foreign_key => :founder_id
-  
+
   has_many :squad_users
   has_many :squads, :through => :squad_users
-  
+
   has_many :clan_ownerships, :class_name => "Clan", :foreign_key => :owner_id
   has_many :site_ownerships, :class_name => "Site", :foreign_key => :owner_id
-  
+
   has_many :clan_join_inquiries
-  
+
   has_many :user_rights, :dependent => :destroy
   has_many :sites, :through => :user_rights
   has_many :components, :through => :user_rights
@@ -43,54 +43,54 @@ class User < ActiveRecord::Base
   validates_length_of :login, :in => 3..14
   validates_uniqueness_of :email
   validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i, :on => :save
-   
+
   has_attached_file :profile_pic,
     :styles => {
       :thumb => "100x100#" }
-   
+
   def before_validation
     self.email = self.email.downcase unless self.email.nil?
     self.login = self.login.downcase unless self.login.nil?
-  end 
-   
+  end
+
   def after_create
     self.profile = Profile.create
   end
-  
+
   def before_create
     self[:password] = encrypt self[:password]
     self[:email_activation_key] = encrypt("fahsdf9023ioasf" + Time.now.to_s)
   end
-  
+
   def set_password pw
     self[:password] = pw.nil? ? "" : (encrypt pw)
   end
-  
+
   def is_online?
     return false if last_activity_at.nil?
     !(last_activity_at < (Time.now - 7.minutes))
   end
-  
+
   def generate_password_reset_key
     self.update_attribute("password_reset_key", encrypt("fahsdf9023ioasf" + Time.now.to_s))
   end
-  
+
   def encrypt str
     (Digest::SHA256.new << str).hexdigest!
   end
-  
+
   def nick= nickname
     self[:nickname] = nickname
   end
-  
+
   def nick
     self[:nickname] || self[:login]
   end
-  
+
 #  def password= pw
 #    self[:password] = encrypt pw
 #  end
-  
+
   def check_pw pw
     (encrypt pw) == (self[:password])
   end
@@ -99,7 +99,7 @@ class User < ActiveRecord::Base
     @my_clans ||= squads.collect{|s| s.clan}.compact.uniq
     #@my_clans ||= squads.all(:include => :clan).collect{|s| s.clan}.compact.uniq
   end
-  
+
 #  def sites
 #    self.sites.uniq
 #  end
@@ -107,7 +107,7 @@ class User < ActiveRecord::Base
   def clans_with_site
     (sites.collect {|s| s.clan}).compact
   end
-  
+
   #alle squads, in denen der user in DIESEM clan ist
   def squads_in_clan c
     squads.select{|s| s.clan == c}
@@ -115,46 +115,46 @@ class User < ActiveRecord::Base
   end
 
   ### Rechte
-  
+
   def owns_clan? clan
     @my_owns_clan ||= Hash.new
     @my_owns_clan[clan.id] ||= clan_ownerships.include? clan
   end
-  
+
   def owns_site? site
     @my_owns_site ||= Hash.new
     @my_owns_site[site.id] ||= site_ownerships.include? site
   end
-  
+
   def owns_current_site?
     owns_site? @current_site
   end
-  
+
   def owns_current_clan?
     owns_clan? @current_site.clan
   end
-  
+
   #deprecated
 #  def has_component? c
 #    !!(user_rights.find :first, :conditions => {:site_id => $site_id, :component_id => c})
 #  end
-  
+
   # TODO cache
   def components
     @component_list ||= Component.find :all, :joins => :user_rights, :conditions => ["user_rights.site_id = ? AND user_id = ?",$site_id, self.id]
   end
-  
+
   def has_right_for? controller
     return true if self.owns_current_site?
     !components.select{|c| c.controller == controller}.empty?
   end
-  
+
   def can_access? check
   #  debugger
     check[:action] ||= "index"
     right = Rights.lookup_class(check[:controller], check[:action])
     return true if owns_current_site?
-    
+
     case right
       when "public"
         true
@@ -167,42 +167,42 @@ class User < ActiveRecord::Base
       else
         true
     end
-    
+
   end
-  
+
   ## Session
-  
+
   def logged_in?
     @logged_in
   end
-  
+
   def logged_in= status
     @logged_in = status
   end
-  
+
   def belongs_to_current_site?
     belongs_to_site? @current_site
   end
-  
+
   def belongs_to_site? site
     @belongs_to_site ||= Hash.new
     @belongs_to_site[site.id] ||= sites.include? site
   end
-  
+
   def belongs_to_clan? clan
     clans.include? clan
   end
-  
+
   def is_guest?
     !belongs_to_site?
   end
-  
+
   def current_site= site
     @current_site = site
   end
-  
+
   ### Gruppen
-  
+
   def membership group
     mship = Groupmembership.find(:first, :conditions => {:group_id  => group.id, :user_id => self[:id]})
     if mship.nil?
@@ -211,13 +211,13 @@ class User < ActiveRecord::Base
     end
       mship
   end
-  
+
   def status_for_group group
     (membership group).status
   end
-  
+
   ### Tickets
-  
+
   def is_supporter?
     support_status?
   end
@@ -225,18 +225,18 @@ class User < ActiveRecord::Base
   def self.get_supporter_for_select
     find(:all, :conditions => {:support_status => 1}).collect{|u| [u.login, u.id]}
   end
-  
+
   ### Nachrichten
-  
+
   def new_messages
     self.incoming_messages.count :conditions => {:read => false}
   end
-  
+
   ### remove Functions
-  
+
   def leave_clan leave_clan
     self.squads -= leave_clan.squads
     UserRight.destroy_all :site_id => leave_clan.site.id
   end
-  
+
 end
